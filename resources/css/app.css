@@ -1,0 +1,220 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base{
+    html{
+        font-family: 'Montserrat';
+    }
+}
+
+@layer components{
+
+    /* Base layout Component */
+    .cedea-title{
+        @apply text-2xl lg:text-4xl font-extrabold;
+    }
+
+    .cedea-badge{
+        @apply absolute top-4 -left-2 bg-cedea-red px-2 py-1 text-white;
+    }
+
+    /* HTML: <div class="ribbon">Your text content</div> */
+    .ribbon {
+        @apply font-bold text-base text-white;
+    }
+    .ribbon {
+        --f: .8em; /* control the folded part*/
+        --r: 1em; /* control the ribbon shape */
+
+        position: absolute;
+        top: 20px;
+        left: calc(-1*var(--f));
+        padding-inline: 1rem;
+        line-height: 1.8;
+        border-bottom: var(--f) solid #0005;
+        border-right: var(--r) solid #0000;
+        clip-path:
+        polygon(0 0,0 calc(100% - var(--f)),var(--f) 100%,
+            var(--f) calc(100% - var(--f)),100% calc(100% - var(--f)),
+            calc(150% - var(--r)) calc(50% - var(--f)/2),100% 0);
+        @apply bg-cedea-red;
+    }
+
+    .cedea-badge::after{
+        content: " ";
+        @apply absolute top-4 -left-2 bg-cedea-red px-2 py-1 text-white w-3 h-6;
+    }
+
+    .cedea-badge.badge-berita{
+
+    }
+
+    /* Navigation */
+    .burger-icon-wrapper{
+        @apply h-7 w-7 absolute top-4 right-4 block lg:hidden;
+    }
+
+
+    .burger-icon-wrapper .burger-icon{
+        @apply h-0.5 w-7 absolute top-[14px] bg-white transition-all duration-700;
+    }
+
+    .burger-icon-wrapper.open .burger-icon{
+        @apply duration-100 -rotate-180;
+    }
+
+    .burger-icon-wrapper .burger-icon:after{
+        content: " ";
+        @apply h-0.5 w-7 absolute -bottom-[8px] bg-white;
+    }
+
+    .burger-icon-wrapper .burger-icon:before{
+        content: " ";
+        @apply h-0.5 w-7 absolute -top-[8px] bg-white;
+    }
+
+    .burger-icon-wrapper.open .burger-icon:after{
+        @apply rotate-45 scale-75 -translate-x-2 -translate-y-px;
+    }
+
+    .burger-icon-wrapper.open .burger-icon:before{
+        @apply -rotate-45 scale-75 -translate-x-2 translate-y-px;
+    }
+
+    /* Footer */
+
+    /* Social links */
+    .social-link{
+        @apply w-10;
+    }
+
+    .social-link > svg{
+        @apply fill-white w-full transform ease-in-out duration-700 scale-100;
+    }
+
+    .social-link:hover > svg {
+        @apply scale-105;
+    }
+
+    /* About */
+
+    /* visi misi */
+
+    .box-visi-misi{
+        @apply rounded-lg shadow-lg w-10/12 sm:w-8/12 border-cedea-red p-4 border-2 relative overflow-hidden transform z-10 bg-white transition-all ease-in duration-200;
+    }
+
+    .box-visi-misi.in-back.visi{
+        @apply -translate-x-32;
+    }
+
+    .box-visi-misi.in-back.misi{
+        @apply translate-x-32;
+    }
+
+    .box-visi-misi::after{
+        @apply backdrop-blur-none transition-all ease-in-out duration-700;
+    }
+
+    .box-visi-misi.in-back{
+        @apply absolute z-0 scale-[.8];
+    }
+
+    .box-visi-misi.in-back::after{
+        content: " ";
+        @apply h-full absolute inset-0 backdrop-blur-md bg-white/40 block z-0;
+    }
+
+    .box-visi-misi .notation{
+        @apply hidden;
+    }
+
+    .box-visi-misi.visi.in-back .notation{
+        @apply block lg:hidden rotate-90 absolute z-30 text-cedea-red font-bold -translate-y-36 left-20 sm:left-10 text-xl;
+    }
+
+    .box-visi-misi.misi.in-back .notation{
+        @apply block lg:hidden -rotate-90 absolute z-30 text-cedea-red font-bold -translate-y-36 right-20 sm:right-10 text-xl;
+    }
+
+    @media screen(md){
+
+        .box-visi-misi{
+            @apply p-6 relative bg-transparent w-full;
+        }
+
+        .box-visi-misi.in-back{
+            @apply relative;
+        }
+
+        .box-visi-misi.in-back::after{
+            @apply hidden;
+        }
+
+        .box-visi-misi.in-back.visi{
+            @apply -translate-x-0 scale-100;
+        }
+
+        .box-visi-misi.in-back.misi{
+            @apply translate-x-0 scale-100;
+        }
+
+        .box-visi-misi.visi{
+            @apply translate-x-0;
+        }
+
+        .box-visi-misi.misi{
+            @apply -translate-x-0;
+        }
+    }
+
+    /* Product */
+
+    .category-item{
+        @apply w-1/2 lg:w-2/5 bg-white rounded-xl shadow-2xl shadow-black/20 hover:shadow-black/35 p-2 aspect-square hover:scale-105 hover:-translate-y-3 transform transition-all duration-500 border-white hover:border cursor-pointer;
+    }
+
+    .category-item.active{
+        @apply shadow-black/35 scale-105 -translate-y-3 border border-cedea-red;
+    }
+
+
+    .category-box{
+        @apply h-full w-full flex items-center justify-center group-hover:scale-125 transition-all transform duration-300 group-hover:translate-y-5;
+    }
+
+    .category-item.active .category-box, .category-item:hover .category-box{
+        @apply scale-125 translate-y-5;
+    }
+
+    .tag-link{
+        @apply rounded-full border-black border-2 text-black px-4 py-2 text-base uppercase transition-all duration-500 bg-transparent hover:bg-cedea-red hover:text-white hover:border-cedea-red cursor-pointer;
+    }
+
+    .tag-link.active{
+        @apply bg-cedea-red text-white border-cedea-red font-semibold;
+    }
+}
+
+@layer utilities{
+    .article-thumbnail-wrapper{
+        @apply relative;
+    }
+
+    .article-thumbnail-wrapper::before{
+        display: block;
+        content: "";
+        width: 100%;
+        padding-top: calc((637 / 603) * 100%);
+    }
+
+    .article-thumbnail-wrapper>.inner{
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+    }
+}
+
