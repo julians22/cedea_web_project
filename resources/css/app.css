@@ -11,6 +11,51 @@
 @layer components{
 
     /* Base layout Component */
+
+    .menu-wrapper{
+        @apply flex space-y-4 lg:space-y-0 flex-col lg:flex-row lg:space-x-8 lg:items-center items-start pt-4 lg:pt-0 text-xl lg:text-base;
+    }
+
+    .menu-wrapper.open{
+        @apply hidden lg:flex;
+    }
+
+    .menu-wrapper .menu{
+        @apply flex flex-col lg:flex-row space-x-0 lg:space-x-12 justify-between space-y-2 lg:space-y-0 mt-4 lg:mt-0;
+    }
+
+    .menu-wrapper .menu .menu-item{
+        @apply lg:font-normal relative flex justify-start lg:justify-center items-start lg:items-center flex-col font-bold;
+    }
+
+    .menu-wrapper .menu .menu-item::after{
+        content: " ";
+        @apply absolute bg-cedea-red h-px lg:h-1 -bottom-1 inset-x-0 w-full transition-all duration-500 block;
+    }
+
+    .menu-wrapper .menu .menu-item:hover::after{
+        @apply bg-white;
+    }
+
+    .menu-wrapper .menu .menu-item .sub-menu{
+        @apply relative inset-x-auto top-auto z-0 mt-2 flex h-0 w-full max-w-full opacity-0 transform flex-col divide-y bg-cedea-red px-0 shadow-none duration-500 lg:absolute lg:inset-x-1/2 lg:top-full lg:mt-6 lg:h-auto lg:w-max lg:max-w-56 lg:-translate-x-1/2 lg:-translate-y-80 lg:divide-y-2 lg:px-4 lg:text-center lg:shadow;
+    }
+
+    .menu-wrapper .menu .menu-item:hover .sub-menu{
+        @apply z-10 h-auto opacity-100 -translate-y-0;
+    }
+
+    .menu-wrapper .menu .menu-item .sub-menu.open{
+        @apply z-10 h-auto opacity-100 -translate-y-0;
+    }
+
+    .menu-wrapper .menu .menu-item .sub-menu .menu-item{
+        @apply flex py-px px-0 lg:items-center lg:py-2 lg:px-3 lg:justify-center font-normal;
+    }
+    .menu-wrapper .menu .menu-item .sub-menu .menu-item::after{
+        @apply hidden;
+    }
+
     .cedea-title{
         @apply text-2xl lg:text-4xl font-extrabold;
     }
@@ -43,7 +88,7 @@
 
     .cedea-badge::after{
         content: " ";
-        @apply absolute top-4 -left-2 bg-cedea-red px-2 py-1 text-white w-3 h-6;
+        @apply absolute top-4 -left-2 bg-cedea-reddark px-2 py-1 text-white w-3 h-6;
     }
 
     .cedea-badge.badge-berita{
@@ -102,7 +147,7 @@
     /* visi misi */
 
     .box-visi-misi{
-        @apply rounded-lg shadow-lg w-10/12 sm:w-8/12 border-cedea-red p-4 border-2 relative overflow-hidden transform z-10 bg-white transition-all ease-in duration-200;
+        @apply rounded-lg shadow-lg w-10/12 sm:w-8/12 border-cedea-red border-2 relative overflow-hidden transform z-10 bg-white transition-all ease-in duration-200;
     }
 
     .box-visi-misi.in-back.visi{
@@ -141,7 +186,7 @@
     @media screen(md){
 
         .box-visi-misi{
-            @apply p-6 relative bg-transparent w-full;
+            @apply p-0 relative bg-transparent w-full;
         }
 
         .box-visi-misi.in-back{
@@ -172,7 +217,7 @@
     /* Product */
 
     .category-item{
-        @apply w-1/2 lg:w-2/5 bg-white rounded-xl shadow-2xl shadow-black/20 hover:shadow-black/35 p-2 aspect-square hover:scale-105 hover:-translate-y-3 transform transition-all duration-500 border-white hover:border cursor-pointer;
+        @apply w-full md:w-1/2 lg:w-2/5 bg-white rounded-xl shadow-2xl shadow-black/20 hover:shadow-black/35 p-2 aspect-square hover:scale-105 hover:-translate-y-3 transform transition-all duration-500 border-white hover:border cursor-pointer;
     }
 
     .category-item.active{
@@ -189,11 +234,15 @@
     }
 
     .tag-link{
-        @apply rounded-full border-black border-2 text-black px-4 py-2 text-base uppercase transition-all duration-500 bg-transparent hover:bg-cedea-red hover:text-white hover:border-cedea-red cursor-pointer;
+        @apply rounded-full border-black border-2 text-xs sm:text-sm md:text-base text-black px-4 py-2 uppercase transition-all duration-500 bg-transparent hover:bg-cedea-red hover:text-white hover:border-cedea-red cursor-pointer;
     }
 
     .tag-link.active{
         @apply bg-cedea-red text-white border-cedea-red font-semibold;
+    }
+
+    .tag-link.loading{
+        @apply bg-gray-50 text-black border-0;
     }
 }
 
@@ -216,5 +265,61 @@
         bottom: 0;
         left: 0;
     }
+
+    .centered-bottom{
+        text-align-last: center;
+    }
+
+    .wave-img{
+
+        &.wave-left-layout{
+            background-position-x: left;
+            background-position-y: center;
+            @apply z-0 absolute bg-no-repeat inset-x-0 top-0 -bottom-1/4 lg:bottom-1/4 bg-contain w-1/2 md:w-2/6 lg:w-1/5;
+            &.aos-animate.move-float{
+                &.wave-1{
+                    @apply animate-[float_5s_ease-in-out_infinite];
+                }
+                &.wave-2{
+                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
+                }
+                &.wave-3{
+                    @apply animate-[float_4s_ease-in-out_infinite];
+                }
+                &.wave-4{
+                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
+                }
+                &.wave-5{
+                    @apply animate-[float_5s_ease-in-out_infinite];
+                }
+            }
+        }
+
+        &.wave-right-layout{
+            background-position-x: left;
+            background-position-y: center;
+            @apply z-0 absolute bg-no-repeat right-0 left-auto top-0 -bottom-1/4 lg:bottom-1/4 bg-contain w-1/2 md:w-2/6 lg:w-1/5;
+
+            &.aos-animate.move-float{
+                &.wave-1{
+                    @apply animate-[float_5s_ease-in-out_infinite];
+                }
+                &.wave-2{
+                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
+                }
+                &.wave-3{
+                    @apply animate-[float_4s_ease-in-out_infinite];
+                }
+                &.wave-4{
+                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
+                }
+                &.wave-5{
+                    @apply animate-[float_5s_ease-in-out_infinite];
+                }
+            }
+        }
+    }
+
+
 }
 

@@ -7,7 +7,8 @@ export default defineConfig({
             input: [
                 'resources/css/app.css',
                 'resources/js/app.js',
-                'resources/js/vendor/swiper-home.js'
+                'resources/js/vendor/swiper-home.js',
+                'resources/js/vendor/aos-home.js',
             ],
             refresh: true,
         }),

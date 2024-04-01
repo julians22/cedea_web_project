@@ -8,10 +8,16 @@ export default {
     theme: {
         extend: {
 
+            //animation
+            animation: {
+                float: 'float 1s ease-in-out infinite'
+            },
+
             // colors
             colors: {
                 'cedea': {
-                    'red': '#b22a2e',
+                    //'red': '#b22a2e',
+                    'red': '#d02028',
                     'reddark': '#991a1d',
                     'yellow-1': '#F3B91A',
                     'yellow-2': '#F8DA04'
@@ -27,6 +33,15 @@ export default {
                     xl: '1024px',
                     '2xl': '1200px',
                 },
+            },
+
+            // keyframes
+
+            keyframes: {
+                float: {
+                  '0%, 100%': { transform: 'translatey(0px)' },
+                  '50%': { transform: 'translatey(-20px)' },
+                }
             },
         },
     },

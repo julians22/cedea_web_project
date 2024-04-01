@@ -17,6 +17,7 @@
 
         @stack('plugin-scripts')
 
+        <livewire:styles />
     </head>
 
     <body class="antialiased">
@@ -26,6 +27,9 @@
         </div>
 
         @include('includes.footer')
+
+
+        @livewireScripts
 
         @stack('after-scripts')
 
