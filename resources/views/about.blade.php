@@ -40,7 +40,7 @@
 <section class="bg-left-top bg-repeat py-8 xl:py-10" style="background-size: 50%; background-image: url({{asset('img/pattern-visi-misi.webp')}})" id="visi-misi">
     <div class="container relative overflow-hidden">
         <div class="text-cedea-red cedea-title text-center mb-8">Visi & Misi Kami</div>
-        <div class="flex space-x-0 lg:space-x-4 justify-center lg:justify-normal flex-nowrap" x-data="{ open: 'visi' }">
+        <div class="flex space-x-0 lg:space-x-4 items-baseline justify-center lg:justify-normal flex-nowrap" x-data="{ open: 'visi' }">
             <article class="box-visi-misi visi"
                 @click="open = 'visi'"
                 x-bind:class="open === 'misi' ? 'in-back' : ''">
@@ -51,12 +51,12 @@
                     </p>
                 </div>
                 <div class="p-6 flex items-center flex-col space-y-6">
-                    <div class="px-2 py-1 font-bold bg-cedea-red text-white rounded-full">Menjadi Pemain Unggul di Indonesia</div>
+                    <div class="px-2 py-2 lg:py-1 font-bold bg-cedea-red text-white rounded-full text-center">Menjadi Pemain Unggul di Indonesia</div>
                     <p class="text-justify centered-bottom">
                         Kita harus lari lebih cepat mencapai pertumbuhan yang lebih tinggi dan diakui sebagai pemenan dibandingkan dengan pesaing dengan bisnis yang sejenis untuk wilayah Indonesia
                     </p>
 
-                    <div class="px-2 py-1 font-bold bg-cedea-red text-white rounded-full">Menjadi Pilihan Utama di Pasar Global Tertentu</div>
+                    <div class="px-2 py-2 lg:py-1 font-bold bg-cedea-red text-white rounded-full text-center">Menjadi Pilihan Utama di Pasar Global Tertentu</div>
 
                     <p class="text-justify centered-bottom">Kita harus mampu dan handal untuk menjadi bagian dari pemain global dengan mampu melalui mengeksport produk produk Cedea strategi pemasaran dan perencanaan yang cermat melalui penetrasi pasar global tertentu sehingga tercapai target bahwa produk CEDEA menjadi pilihan utama bagi masyarakat di daerah tersebut</p>
                 </div>
@@ -74,12 +74,12 @@
                     </p>
                 </div>
                 <div class="p-6 flex items-center flex-col space-y-6">
-                    <div class="px-2 py-1 font-bold bg-cedea-red text-white rounded-full">AKTIF</div>
-                    <div class="px-2 py-1 font-bold border-2 border-cedea-red rounded-full">GIGIH, GIAT, GESIT, proaktif dan gerak cepat</div>
+                    <div class="px-2 py-2 lg:py-1 font-bold bg-cedea-red text-white rounded-full text-center">AKTIF</div>
+                    <div class="px-2 py-2 lg:py-1 font-bold border-2 border-cedea-red rounded-full text-center">GIGIH, GIAT, GESIT, proaktif dan gerak cepat</div>
 
                     <p class="text-justify centered-bottom">Aktif berperan dengan menghasilkan produk yang bergizi, aman dan "ONE TEAM" bukan hanya tanggung jawab bagian produksi saja tetapi semua bagian/departemen terlibat, sejauh mana raw material dipilih dengan kualitas yang baik, bagaimana bagian OC meningkatkan kualitas, bagaimana bagian Warehouse menyimpan dengan baik sehingga tidak terjadi kerusakan, PPIC, HRD, Fin & Acc, dst. Semua terlibat dan memiliki kontribusi masing-masing.</p>
 
-                    <div class="px-2 py-1 font-bold bg-cedea-red text-white rounded-full">Inovasi dan Teknologi</div>
+                    <div class="px-2 py-2 lg:py-1 font-bold bg-cedea-red text-white rounded-full text-center">Inovasi dan Teknologi</div>
 
                     <p class="text-justify centered-bottom">Kita harus selalu mengikuti perkembangan pasar maupun teknologi, memiliki ide-ide baru untuk perbaikan, pembaharuan produk dan corrective action dalam perbaikan proses yang dijalankan</p>
                 </div>
