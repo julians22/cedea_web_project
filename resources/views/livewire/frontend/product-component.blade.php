@@ -19,18 +19,49 @@
     </div>
 
 
-    <div class="relative w-full">
+    <div class="relative w-full pb-20">
 
         @if ($products)
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
+        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-8">
             @foreach ($products as $item)
-                <div>
-                    <div class="aspect-square hover:-rotate-12 transform">
-                        <img src="{{$item->media[0]->original_url}}" alt="{{ $item->media[0]->name }}" class="h-full w-auto mx-auto filter drop-shadow-[2px_2px_6px_black] ">
+                <div class="product-card"
+                    x-data="{showDescription: false}"
+                    x-effect="$el.showDescription = showDescription"
+                    x-on:mouseover="showDescription=true" x-on:mouseleave="showDescription=false">
+                    <div class="product-image">
+                        <img src="{{$item->media[0]->original_url}}" alt="{{ $item->media[0]->name }}">
+                        <div x-show="showDescription"
+                            class="product-title"
+                            x-transition
+                            x-transition:enter.duration.500ms
+                            x-transition:leave.duration.400ms
+                            >
+                            <div class="grid grid-cols-6 gap-2">
+                                <div class="col-span-2">
+                                    <img src="{{$item->category->media[0]->original_url}}" alt="" class="w-full">
+                                </div>
+                                <div class="col-span-3 flex items-center text-cedea-red">
+                                    {!! $item->name !!}
+                                </div>
+
+                                <div class="col-span-1 flex items-center text-cedea-red text-2xl">
+                                    <span class="cursor-pointer">
+                                        <svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83" class="h-8">
+                                            <g>
+                                              <g style="fill: none; filter: url(#d);">
+                                                <polyline points="1.36 .75 16.72 16.11 .75 32.07" class="stroke-cedea-red fill-none" style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;"/>
+                                              </g>
+                                            </g>
+                                        </svg>
+                                    </span>
+                                </div>
+                            </div>
+                        </div>
                     </div>
+
                 </div>
             @endforeach
-        </div>
+            </div>
 
         @else
 
