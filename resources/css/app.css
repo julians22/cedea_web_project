@@ -13,11 +13,11 @@
     /* Base layout Component */
 
     .menu-wrapper{
-        @apply flex space-y-4 lg:space-y-0 flex-col lg:flex-row lg:space-x-8 lg:items-center items-start pt-4 lg:pt-0 text-xl lg:text-base;
+        @apply hidden lg:flex space-y-4 lg:space-y-0 flex-col lg:flex-row lg:space-x-8 lg:items-center items-start pt-4 lg:pt-0 text-xl lg:text-base;
     }
 
     .menu-wrapper.open{
-        @apply hidden lg:flex;
+        @apply flex animate-slideBottom;
     }
 
     .menu-wrapper .menu{
