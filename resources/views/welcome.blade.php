@@ -11,13 +11,16 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             <div class="swiper-slide">
-                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full">
+                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full hidden sm:block">
+                <img src="{{ asset('img/banner-mobile-2.jpg') }}" class="w-full block sm:hidden">
             </div>
             <div class="swiper-slide">
-                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full">
+                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full hidden sm:block">
+                <img src="{{ asset('img/banner-mobile-2.jpg') }}" class="w-full block sm:hidden">
             </div>
             <div class="swiper-slide">
-                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full">
+                <img src="{{ asset('img/banner-2.jpg') }}" class="w-full hidden sm:block">
+                <img src="{{ asset('img/banner-mobile-2.jpg') }}" class="w-full block sm:hidden">
             </div>
         </div>
         <!-- If we need pagination -->

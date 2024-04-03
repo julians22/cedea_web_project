@@ -4,7 +4,7 @@
 
 @layer base{
     html{
-        font-family: 'Montserrat';
+        font-family: 'Open Sans', sans-serif;
     }
 }
 
@@ -57,7 +57,7 @@
     }
 
     .cedea-title{
-        @apply text-2xl lg:text-4xl font-extrabold;
+        @apply text-2xl lg:text-4xl font-medium;
     }
 
     .cedea-badge{
@@ -254,7 +254,7 @@
     }
 
     .product-card .product-image{
-        @apply aspect-square relative;
+        @apply aspect-square relative h-52;
     }
 
     .product-card .product-image > img{

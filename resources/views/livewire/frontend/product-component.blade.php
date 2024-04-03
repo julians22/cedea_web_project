@@ -19,12 +19,12 @@
     </div>
 
 
-    <div class="relative w-full pb-20">
+    <div class="relative w-full pb-20 pt-10">
 
         @if ($products)
-        <div class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-6 gap-x-8">
+        <div class="grid grid-cols-2 md:grid-cols-6 gap-y-6 md:gap-x-8">
             @foreach ($products as $item)
-                <div class="product-card"
+                <div class="product-card col-span-2"
                     x-data="{showDescription: false}"
                     x-effect="$el.showDescription = showDescription"
                     x-on:mouseover="showDescription=true" x-on:mouseleave="showDescription=false">
@@ -38,7 +38,7 @@
                             >
                             <div class="grid grid-cols-6 gap-2">
                                 <div class="col-span-2">
-                                    <img src="{{$item->category->media[0]->original_url}}" alt="" class="w-full">
+                                    <img src="{{$item->category->media[0]->original_url}}" alt="" class="max-w-full">
                                 </div>
                                 <div class="col-span-3 flex items-center text-cedea-red">
                                     {!! $item->name !!}
