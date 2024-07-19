@@ -24,4 +24,8 @@ class HomeController extends Controller
 
         return view('product', compact('categories', 'tags'));
     }
+
+    function contact() {
+        return view('contact');
+    }
 }

@@ -11,7 +11,9 @@
             </div>
             <div class="w-full lg:w-1/2 p-4">
                 <h1 class="cedea-title text-cedea-red mb-4">Pelopor Ikan Olahan Bermutu</h1>
-                <p><strong>PT. CitraDimensi Arthali</strong> merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Jakarta Utara.</p>
+                <div class="text-justify">
+                    <p>PT. CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Jakarta Utara.</p>
+                </div>
             </div>
         </div>
     </div>
@@ -20,11 +22,13 @@
 {{-- About 2 --}}
 <section class="bg-cedea-red xl:py-10 relative overflow-hidden md:h-[400px] lg:h-[500px] flex items-center justify-start flex-wrap lg:flex-nowrap" id="sejarah">
     <div class="container">
-        <div class="w-full lg:w-1/2 p-4">
+        <div class="w-full lg:w-1/2 py-4 pl-4 pr-10">
             <h2 class="cedea-title text-white mb-4">Komitmen <br> Sejak ‘95</h2>
-            <p class="text-white mb-4">
-                Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang mutakhir, PT Citra Dimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil laut yang dipasarkan di berbagai pasar di Indonesia.
-            </p>
+            <div class="text-justify">
+                <p class="text-white mb-4">
+                    Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang mutakhir, PT Citra Dimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil laut yang dipasarkan di berbagai pasar di Indonesia.
+                </p>
+            </div>
             <a href="#" class="rounded-full px-4 py-2 bg-cedea-red text-white font-medium lg:font-semibold text-base lg:text-xl inline-flex self-center border border-white">
                 Lihat Perjalanan Kami
             </a>

@@ -27,14 +27,15 @@
                 <div class="product-card col-span-2"
                     x-data="{showDescription: false}"
                     x-effect="$el.showDescription = showDescription"
-                    x-on:mouseover="showDescription=true" x-on:mouseleave="showDescription=false">
+                    x-on:mouseleave="showDescription=false">
                     <div class="product-image">
-                        <img src="{{$item->media[0]->original_url}}" alt="{{ $item->media[0]->name }}">
-                        <div x-show="showDescription"
+                        <img src="{{$item->media[0]->original_url}}" alt="{{ $item->media[0]->name }}" x-on:mouseover="showDescription=true">
+                        <div x-cloak x-show="showDescription"
                             class="product-title"
                             x-transition
                             x-transition:enter.duration.500ms
                             x-transition:leave.duration.400ms
+                            x-on:mouseleave="showDescription=false"
                             >
                             <div class="grid grid-cols-6 gap-2">
                                 <div class="col-span-2">

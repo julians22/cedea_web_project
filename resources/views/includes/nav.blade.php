@@ -42,8 +42,8 @@
 
         <div class="menu-wrapper" :class="{ 'open' : openNav }">
             <div class="menu">
-                <div class="menu-item">
-                    <a href="{{ route('about') }}" @click.once="hoverPosition = 'about'" @focus="hoverPosition = 'about'" @mouseenter="hoverPosition = 'about'">Perusahaan</a>
+                <div class="menu-item {{ Route::is('about') ? 'active' : '' }}">
+                    <a class="active" href="{{ route('about') }}" @click.once="hoverPosition = 'about'" @focus="hoverPosition = 'about'" @mouseenter="hoverPosition = 'about'">Perusahaan</a>
                     <ul class="sub-menu" :class="('about' == hoverPosition) ? 'open' : '' " @click.outside="hoverPosition=null" @mouseleave="hoverPosition=null">
                         <li class="menu-item">
                             <a href="{{ route('about') }}#tentang-cedea">Tentang Cedea</a>
@@ -59,7 +59,7 @@
                         </li>
                     </ul>
                 </div>
-                <div class="menu-item">
+                <div class="menu-item {{ Route::is('product') ? 'active' : '' }}">
                     <a href="{{ route('product') }}" @click.once="hoverPosition = 'product'" @focus="hoverPosition = 'product'" @mouseenter="hoverPosition = 'product'">Produk</a>
                     <ul class="sub-menu" :class="('product' == hoverPosition) ? 'open' : '' " @click.outside="hoverPosition=null" @mouseleave="hoverPosition=null">
                         <li class="menu-item">
@@ -83,7 +83,7 @@
                     <a href="#" @click.once="hoverPosition = 'socials'" @focus="hoverPosition = 'socials'" @mouseenter="hoverPosition = 'socials'">Tanggung Jawab Sosial</a>
                     <ul class="sub-menu" :class="('socials' == hoverPosition) ? 'open' : '' " @click.outside="hoverPosition=null" @mouseleave="hoverPosition=null">
                         <li class="menu-item">
-                            <a href="#">Kegiatan Social</a>
+                            <a href="#">Kegiatan Sosial</a>
                         </li>
                         <li class="menu-item">
                             <a href="#">Lingkungan Hidup</a>
@@ -107,8 +107,8 @@
                         </li>
                     </ul>
                 </div>
-                <div class="menu-item" @click.once="hoverPosition = 'contact'" @focus="hoverPosition = 'contact'" @mouseenter="hoverPosition = 'contact'">
-                    <a href="#">Hubungi Kami</a>
+                <div class="menu-item {{ Route::is('contact') ? 'active' : '' }}" @click.once="hoverPosition = 'contact'" @focus="hoverPosition = 'contact'" @mouseenter="hoverPosition = 'contact'">
+                    <a href="{{ route('contact') }}">Hubungi Kami</a>
                 </div>
             </div>
 

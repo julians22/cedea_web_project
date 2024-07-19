@@ -37,6 +37,10 @@
         @apply bg-white;
     }
 
+    .menu-wrapper .menu .menu-item.active::after{
+        @apply bg-white;
+    }
+
     .menu-wrapper .menu .menu-item .sub-menu{
         @apply relative inset-x-auto top-auto z-0 mt-2 flex h-0 w-full max-w-full opacity-0 transform flex-col divide-y bg-cedea-red px-0 shadow-none duration-500 lg:absolute lg:inset-x-1/2 lg:top-full lg:mt-6 lg:h-auto lg:w-max lg:max-w-56 lg:-translate-x-1/2 lg:-translate-y-80 lg:divide-y-2 lg:px-4 lg:text-center lg:shadow;
     }
@@ -57,7 +61,7 @@
     }
 
     .cedea-title{
-        @apply text-2xl lg:text-4xl font-medium;
+        @apply text-2xl lg:text-4xl xl:text-5xl font-medium;
     }
 
     .cedea-badge{
@@ -99,7 +103,6 @@
     .burger-icon-wrapper{
         @apply h-7 w-7 absolute top-4 right-4 block lg:hidden;
     }
-
 
     .burger-icon-wrapper .burger-icon{
         @apply h-0.5 w-7 absolute top-[14px] bg-white transition-all duration-700;

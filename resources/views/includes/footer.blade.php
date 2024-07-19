@@ -1,4 +1,4 @@
-<footer class="bg-cedea-red">
+<footer class="bg-cedea-red lg:pb-6 pb-2">
 
     <div class="container">
         <div class="grid grid-cols-12 gap-y-8 lg:gap-y-0 gap-x-0 lg:gap-x-8 text-white px-4 lg:px-0">
