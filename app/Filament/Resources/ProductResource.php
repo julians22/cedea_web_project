@@ -29,7 +29,8 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getNavigationGroup() : ?string {
+    public static function getNavigationGroup(): ?string
+    {
         return __('Products');
     }
 
@@ -37,10 +38,10 @@ class ProductResource extends Resource
     {
         $tags = Tag::where('type', 'product_tags')->get('name');
 
-        $sugestions = [];
+        $suggestions = [];
 
         foreach ($tags as $key => $value) {
-            $sugestions[] = $value->name;
+            $suggestions[] = $value->name;
         }
 
         return $form
@@ -49,12 +50,12 @@ class ProductResource extends Resource
                     ->label(__('Name'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                 SpatieMediaLibraryFileUpload::make('image')
-                ->collection('products'),
+                    ->collection('products'),
                 RichEditor::make('description')
-                ->label(__('Description'))
-                ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                    ->label(__('Description'))
+                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                 SpatieTagsInput::make('tags')
-                    ->suggestions($sugestions)
+                    ->suggestions($suggestions)
                     ->type('product_tags'),
                 Select::make('category_id')
                     ->label(__('Category'))

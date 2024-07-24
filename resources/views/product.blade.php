@@ -1,21 +1,17 @@
-@extends('layouts.app')
+<x-layouts.app>
 
-@section('content')
+    <section class="relative bg-left-top bg-repeat py-10"
+        style="background-image: url('{{ asset('img/bata-pattern.png') }}'); background-size: 50%;">
 
+        <div class="container space-y-8">
 
-<section class="bg-repeat bg-left-top py-10 relative" style="background-image: url('{{asset('img/bata-pattern.png')}}'); background-size: 50%;">
-
-    <div class="container space-y-8">
-
-        <h1 class="text-center text-cedea-red cedea-title">Produk</h1>
+            <h1 class="cedea-title text-center text-cedea-red">Produk</h1>
 
 
-        <livewire:frontend.product-component :tags="$tags" :categories="$categories"/>
+            <livewire:frontend.products :tags="$tags" :categories="$categories" />
 
 
-    </div>
+        </div>
 
-</section>
-
-
-@endsection
+    </section>
+</x-layouts.app>

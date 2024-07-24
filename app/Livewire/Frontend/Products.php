@@ -8,7 +8,7 @@ use Livewire\Attributes\Url;
 use Livewire\Component;
 use Spatie\Tags\Tag;
 
-class ProductComponent extends Component
+class Products extends Component
 {
     public $categories;
     public $tags;
@@ -20,7 +20,8 @@ class ProductComponent extends Component
 
     public $products;
 
-    public function mount($categories, $tags) {
+    public function mount($categories, $tags)
+    {
         $this->categories = $categories;
         $this->tags = $tags;
     }
@@ -28,19 +29,22 @@ class ProductComponent extends Component
     public function render()
     {
         $this->getProducts();
-        return view('livewire.frontend.product-component');
+        return view('livewire.frontend.products');
     }
 
-    public function toggleActiveCategory($slug) {
+    public function toggleActiveCategory($slug)
+    {
         $this->activeCategory = $slug;
         $this->activeTags = null;
     }
 
-    public function toggleActiveTag($slug) {
+    public function toggleActiveTag($slug)
+    {
         $this->activeTags = $slug;
     }
 
-    public function getProducts() {
+    public function getProducts()
+    {
         $query = Product::query();
         if (!empty($this->activeCategory)) {
             $category = Category::where('slug', $this->activeCategory)->first();
@@ -54,6 +58,6 @@ class ProductComponent extends Component
             $query = $query->withAnyTags([$tag]);
         }
 
-        $this->products = $query->get();
+        $this->products = $query->with('myMediaRelation')->get();
     }
 }

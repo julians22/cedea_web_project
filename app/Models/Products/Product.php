@@ -26,7 +26,7 @@ class Product extends Model implements HasMedia
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('name')
@@ -36,5 +36,10 @@ class Product extends Model implements HasMedia
     public function category()
     {
         return $this->belongsTo(Category::class, 'category_id', 'id');
+    }
+
+    public function myMediaRelation()
+    {
+        return $this->media()->where('collection_name', 'products');
     }
 }

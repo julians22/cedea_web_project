@@ -26,10 +26,15 @@ class Category extends Model implements HasMedia
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
+    }
+
+    public function myMediaRelation()
+    {
+        return $this->media()->where('collection_name', 'products');
     }
 }

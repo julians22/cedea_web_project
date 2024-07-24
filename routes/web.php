@@ -20,7 +20,7 @@ Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('about', function () {
     return view('about');
 })
-->name('about');
+    ->name('about');
 
 Route::get('product', [HomeController::class, 'product'])->name('product');
 
