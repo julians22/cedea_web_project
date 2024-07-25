@@ -70,9 +70,9 @@
                     <div class="flex flex-col gap-y-4 bg-white p-4">
                         <p>08 Mei 2024 | Berita</p>
                         <h2 class="~text-lg/xl">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar</h2>
-                        <button class="rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red">
+                        <a class="w-fit rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red" href="#">
                             Baca Beritanya
-                        </button>
+                        </a>
                     </div>
                 </div>
 
