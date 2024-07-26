@@ -2,7 +2,6 @@
 
     {{-- About 1 --}}
     <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
-
         <x-slot:desc>
             <p>
                 PT. CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
@@ -10,13 +9,11 @@
                 Utara.
             </p>
         </x-slot>
-
     </x-section-banner>
 
     {{-- About 2 --}}
     <x-section-banner class="from-cedea-red via-cedea-red max-md:bg-cedea-red" class:title="text-white"
         class:desc="text-white" :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
-
         <x-slot:desc>
             <p>
                 Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis
@@ -27,8 +24,7 @@
         </x-slot>
 
         <x-slot:button>
-            <x-modal class="bg-cedea-red sm:rounded-2xl">
-
+            <x-modal class="rounded-2xl bg-cedea-red">
 
                 <x-slot:trigger>
                     <button class="rounded-full bg-white px-4 py-2 text-cedea-red" type="button" @click="modalOpen=true">
@@ -36,23 +32,35 @@
                 </x-slot:trigger>
 
                 <x-slot:content>
-                    <div class="flex justify-center text-white">
-                        <ul>
-                            @for ($i = 0; $i < 4; $i++)
-                                <li class="relative flex items-baseline gap-6 pb-5">
-                                    <div
-                                        class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
-                                        <svg class="bi bi-circle-fill fill-white" xmlns="http://www.w3.org/2000/svg"
-                                            width="12" height="12" viewBox="0 0 16 16">
-                                            <circle cx="8" cy="8" r="8" />
-                                        </svg>
-                                    </div>
-                                    <div>
-                                        <p class="font-great-vibes">Berdiri Sejak</p>
-                                        <p class="mt-2 text-sm">Lorem ipsum dolor sit amet,
-                                            consectetur
-                                            adipisicing elit. Maiores incidunt blanditiis dignissimos, enim earum
-                                            mollitia.</p>
+                    <button
+                        class="absolute right-0 top-0 z-1 mr-5 mt-5 flex h-8 w-8 items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
+                        @click="modalOpen=false">
+                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                            stroke-width="1.5" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                        </svg>
+                    </button>
+
+                    <div class="justify-center pr-2 text-white">
+                        <ul class="max-h-[80vh] max-w-[70vw] overflow-auto md:mt-8 md:max-h-[85vh] md:max-w-[90vw]">
+                            @for ($i = 0; $i < 22; $i++)
+                                <li class="flex gap-2 [&:last-child>div>div]:before:hidden">
+                                    <p>1995</p>
+                                    <div class="relative flex gap-6 pb-5">
+                                        <div
+                                            class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
+                                            <svg class="bi bi-circle-fill fill-white" xmlns="http://www.w3.org/2000/svg"
+                                                width="12" height="12" viewBox="0 0 16 16">
+                                                <circle cx="8" cy="8" r="8" />
+                                            </svg>
+                                        </div>
+                                        <div>
+                                            <p class="font-great-vibes ~text-sm/base">Berdiri Sejak</p>
+                                            <p class="mt-1 text-xs">Lorem ipsum dolor sit amet,
+                                                consectetur
+                                                adipisicing elit. Maiores incidunt blanditiis dignissimos, enim earum
+                                                mollitia.</p>
+                                        </div>
                                     </div>
                                 </li>
                             @endfor
@@ -60,18 +68,17 @@
                     </div>
                 </x-slot:content>
             </x-modal>
-            {{-- <button class="rounded-full bg-white px-4 py-2 text-cedea-red">
-                Lihat Perjalanan Kami
-            </button> --}}
+
         </x-slot>
     </x-section-banner>
 
     {{-- About 3 --}}
     {{-- Visi Misi --}}
     <section class="grid grid-cols-1 items-center justify-center text-justify text-cedea-red md:grid-cols-2">
+        {{-- visi --}}
         <div
-            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pr-0 ~md:~px-8/32 md:h-80">
-            <div class="container md:w-3/5">
+            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pr-0 ~px-4/28 md:h-80">
+            <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Visi</h2>
                 <p class="text-last-center">Menjadi pemain unggul di bisnis makanan siap masak di
                     indonesia dan menjadi
@@ -79,9 +86,11 @@
                     global tertentu.</p>
             </div>
         </div>
+
+        {{-- misi --}}
         <div
-            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pl-0 ~px-16/32 md:h-80">
-            <div class="container md:w-3/5">
+            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pl-0 ~px-4/28 md:h-80">
+            <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Misi</h2>
                 <p class="text-last-center">Aktif berperan dalam menyehatkan bangsa
                     dengan membuat produk makanan bergizi,
@@ -95,23 +104,29 @@
     {{-- Value section --}}
     <section class="my-16">
         <div class="container">
+
             @php
-                $giat = ['Giat', 'Iman', 'Gesit', 'Inovasi', 'Handal'];
+                $words = ['Giat', 'Iman', 'Gesit', 'Inovasi', 'Handal'];
             @endphp
 
             <h2 class="mb-10 font-great-vibes text-cedea-red ~text-2xl/5xl">Nilai-nilai Perusahaan</h2>
 
-            <div class="container flex justify-center gap-x-12 max-md:flex-col">
-                @foreach ($giat as $index => $letter)
-                    <div class="before:size-[4.6rem] befor relative flex w-min flex-col items-center justify-center text-center shadow-black drop-shadow-2xl before:absolute before:left-[14.7rem] before:top-[6.7rem] before:rotate-45 before:rounded-lg before:border-8 before:border-white before:bg-cedea-red after:absolute after:left-20 after:top-[6rem] after:h-[6.1rem] after:w-48 after:border-y-8 after:border-white after:bg-cedea-red before:[&:last-child]:hidden after:[&:last-child]:hidden"
-                        style="z-index: {{ count($giat) - $index }}">
-                        <x-lucide-bike
-                            class="-z-1 -mb-4 h-28 w-1/2 rounded-t-full border-8 border-white bg-cedea-red px-2 text-white shadow-black drop-shadow-xl" />
+            <div class="container flex items-center justify-center gap-y-6 ~gap-x-2/12">
+                @foreach ($words as $index => $letter)
+                    <div class="gyatt-ribbon relative flex flex-col items-center justify-center text-center shadow-black drop-shadow-2xl"
+                        style="z-index: {{ count($words) - $index }}">
+
                         <div
-                            class="gradientto z-1 grid items-center justify-center rounded-xl border-8 border-white bg-gradient-to-br from-cedea-red from-0% via-cedea-red via-50% to-cedea-red-400 to-50% uppercase text-white ~text-6xl/9xl ~h-28/60 ~w-20/52">
+                            class="-z-1 w-3/4 rounded-t-full border-8 border-white bg-cedea-red p-2 text-white shadow-black drop-shadow-xl ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
+                            <x-lucide-bike />
+                        </div>
+
+                        <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-gradient-to-br from-cedea-red from-0% via-cedea-red via-50% to-cedea-red-400 to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
+                            {{-- sm:h-60 sm:w-52 --}}>
                             {{ $letter[0] }}
                         </div>
-                        <div class="w-3/5 rounded-b-xl bg-white p-1 text-center capitalize ~text-xl/2xl">
+                        <div
+                            class="w-4/5 rounded-b-xl bg-white p-1 text-center capitalize ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
                             {{ $letter }}
                         </div>
                     </div>
@@ -222,7 +237,7 @@
                     ],
                 ];
             @endphp
-            <div class="my-8 grid gap-8 md:grid-cols-2">
+            <div class="mt-8 grid gap-8 md:grid-cols-2">
                 @foreach ($addresses as $address)
                     <div
                         class="grid grid-cols-[0.4rem_1fr] gap-x-4 rounded-2xl bg-gradient-to-r from-[#EDEDED] to-[#CCCCCC] px-2 py-4">

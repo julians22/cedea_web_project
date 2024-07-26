@@ -4,7 +4,6 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
     <title>{{ config('app.name') }}</title>
 
@@ -17,6 +16,7 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+    @vite(['resources/css/app.css', 'resources/js/app.js'])
 
 
     @stack('plugin-scripts')
@@ -25,7 +25,7 @@
 
 <body class="font-poppins antialiased">
 
-    <x-nav />
+    <x-header />
     {{ $slot }}
     <x-footer />
 

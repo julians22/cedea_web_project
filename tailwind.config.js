@@ -15,6 +15,9 @@ export default {
         screens,
         fontSize,
         extend: {
+            fontSize: {
+                xxs: "0.5rem",
+            },
             fontFamily: {
                 poppins: "Poppins",
                 ...defaultTheme.fontFamily.sans,

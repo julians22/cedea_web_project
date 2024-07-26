@@ -26,6 +26,8 @@ Route::get('product', [HomeController::class, 'product'])->name('product');
 
 Route::get('contact', [HomeController::class, 'contact'])->name('contact');
 
+Route::view('merek', 'merek');
+
 Route::get('video_get', function () {
     $video = Youtube::getVideoInfo('W9cAe7SUTyo');
 

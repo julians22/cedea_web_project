@@ -3,356 +3,38 @@
 @tailwind utilities;
 
 @layer base {
-    html {
-        font-family: "Open Sans", sans-serif;
+    [x-cloak] {
+        display: none !important;
     }
 }
 
 @layer components {
     /* Base layout Component */
+    .gyatt-ribbon {
+        @apply after:absolute before:border-white before:bg-cedea-red after:border-y-2 before:border-2 before:rotate-45 before:rounded-md  after:border-white after:bg-cedea-red before:[&:last-child]:hidden after:[&:last-child]:hidden
 
-    .menu-wrapper {
-        @apply hidden lg:flex space-y-4 lg:space-y-0 flex-col lg:flex-row lg:space-x-8 lg:items-center items-start pt-8 lg:pt-0 text-xl lg:text-base;
+        before:~min-[20rem]/sm:~size-[0.9rem]/[2.4rem] before:absolute before:~min-[20rem]/sm:~left-[3rem]/[6.2rem] before:~min-[20rem]/sm:~top-[1.8rem]/[4.3rem]
+
+        after:~min-[20rem]/sm:~left-6/20 after:~min-[20rem]/sm:~top-7/16 after:~min-[20rem]/sm:~h-4/[3rem] after:~min-[20rem]/sm:~w-8/10;
     }
 
-    .menu-wrapper.open {
-        @apply flex animate-slideBottom;
+    @media screen(sm) {
+        .gyatt-ribbon {
+            @apply after:border-y-8 before:border-8 before:rounded-lg
+
+            before:sm:~size-10/[4.6rem] before:absolute before:sm:~left-[5.7rem]/[14.7rem] before:sm:~top-[2.8rem]/[6.7rem]
+
+            after:sm:~left-14/20 after:sm:~top-10/24 after:sm:~h-12/[6.1rem] after:sm:~w-14/48;
+        }
     }
 
-    .menu-wrapper .menu {
-        @apply flex flex-col lg:flex-row space-x-0 lg:space-x-12 justify-between space-y-2 lg:space-y-0 mt-4 lg:mt-0;
-    }
-
-    .menu-wrapper .menu .menu-item {
-        @apply lg:font-normal relative flex justify-start lg:justify-center items-start lg:items-center flex-col font-bold;
-    }
-
-    .menu-wrapper .menu .menu-item::after {
-        content: " ";
-        @apply absolute bg-cedea-red h-px lg:h-1 -bottom-1 inset-x-0 w-full transition-all duration-500 block;
-    }
-
-    .menu-wrapper .menu .menu-item:hover::after {
-        @apply bg-white;
-    }
-
-    .menu-wrapper .menu .menu-item.active::after {
-        @apply bg-white;
-    }
-
-    .menu-wrapper .menu .menu-item .sub-menu {
-        @apply relative inset-x-auto top-auto z-0 mt-2 flex h-0 w-full max-w-full opacity-0 transform flex-col divide-y bg-cedea-red px-0 shadow-none duration-500 lg:absolute lg:inset-x-1/2 lg:top-full lg:mt-6 lg:h-auto lg:w-max lg:max-w-56 lg:-translate-x-1/2 lg:-translate-y-80 lg:divide-y-2 lg:px-4 lg:text-center lg:shadow;
-    }
-
-    .menu-wrapper .menu .menu-item:hover .sub-menu {
-        @apply z-10 h-auto opacity-100 -translate-y-0;
-    }
-
-    .menu-wrapper .menu .menu-item .sub-menu.open {
-        @apply z-10 h-auto opacity-100 -translate-y-0;
-    }
-
-    .menu-wrapper .menu .menu-item .sub-menu .menu-item {
-        @apply flex py-px px-0 lg:items-center lg:py-2 lg:px-3 lg:justify-center font-normal;
-    }
-    .menu-wrapper .menu .menu-item .sub-menu .menu-item::after {
-        @apply hidden;
-    }
-
-    .cedea-title {
+    .section-title {
         @apply text-2xl lg:text-4xl xl:text-5xl font-medium;
-    }
-
-    .cedea-badge {
-        @apply absolute top-4 -left-2 bg-cedea-red px-2 py-1 text-white;
-    }
-
-    /* HTML: <div class="ribbon">Your text content</div> */
-    .ribbon {
-        @apply font-bold text-base text-white;
-    }
-    .ribbon {
-        --f: 0.8em; /* control the folded part*/
-        --r: 1em; /* control the ribbon shape */
-
-        position: absolute;
-        top: 20px;
-        left: calc(-1 * var(--f));
-        padding-inline: 1rem;
-        line-height: 1.8;
-        border-bottom: var(--f) solid #0005;
-        border-right: var(--r) solid #0000;
-        clip-path: polygon(
-            0 0,
-            0 calc(100% - var(--f)),
-            var(--f) 100%,
-            var(--f) calc(100% - var(--f)),
-            100% calc(100% - var(--f)),
-            calc(150% - var(--r)) calc(50% - var(--f) / 2),
-            100% 0
-        );
-        @apply bg-cedea-red;
-    }
-
-    .cedea-badge::after {
-        content: " ";
-        @apply absolute top-4 -left-2 bg-cedea-reddark px-2 py-1 text-white w-3 h-6;
-    }
-
-    .cedea-badge.badge-berita {
-    }
-
-    /* Navigation */
-    .burger-icon-wrapper {
-        @apply h-7 w-7 block lg:hidden;
-    }
-
-    .burger-icon-wrapper .burger-icon {
-        @apply h-0.5 w-7 absolute top-[14px] bg-white transition-all duration-700;
-    }
-
-    .burger-icon-wrapper.open .burger-icon {
-        @apply duration-100 -rotate-180;
-    }
-
-    .burger-icon-wrapper .burger-icon:after {
-        content: " ";
-        @apply h-0.5 w-7 absolute -bottom-[8px] bg-white;
-    }
-
-    .burger-icon-wrapper .burger-icon:before {
-        content: " ";
-        @apply h-0.5 w-7 absolute -top-[8px] bg-white;
-    }
-
-    .burger-icon-wrapper.open .burger-icon:after {
-        @apply rotate-45 scale-75 -translate-x-2 -translate-y-px;
-    }
-
-    .burger-icon-wrapper.open .burger-icon:before {
-        @apply -rotate-45 scale-75 -translate-x-2 translate-y-px;
-    }
-
-    /* Footer */
-
-    /* Social links */
-    .social-link {
-        @apply w-10;
-    }
-
-    .social-link > svg {
-        @apply fill-white w-full transform ease-in-out duration-700 scale-100;
-    }
-
-    .social-link:hover > svg {
-        @apply scale-105;
-    }
-
-    /* About */
-
-    /* visi misi */
-
-    .box-visi-misi {
-        @apply rounded-lg shadow-lg w-10/12 sm:w-8/12 border-cedea-red border-2 relative overflow-hidden transform z-10 bg-white transition-all ease-in duration-200;
-    }
-
-    .box-visi-misi.in-back.visi {
-        @apply -translate-x-32;
-    }
-
-    .box-visi-misi.in-back.misi {
-        @apply translate-x-32;
-    }
-
-    .box-visi-misi::after {
-        @apply backdrop-blur-none transition-all ease-in-out duration-700;
-    }
-
-    .box-visi-misi.in-back {
-        @apply absolute z-0 scale-[.8];
-    }
-
-    .box-visi-misi.in-back::after {
-        content: " ";
-        @apply h-full absolute inset-0 backdrop-blur-md bg-white/40 block z-0;
-    }
-
-    .box-visi-misi .notation {
-        @apply hidden;
-    }
-
-    .box-visi-misi.visi.in-back .notation {
-        @apply block lg:hidden rotate-90 absolute z-30 text-cedea-red font-bold -translate-y-36 left-20 sm:left-10 text-xl;
-    }
-
-    .box-visi-misi.misi.in-back .notation {
-        @apply block lg:hidden -rotate-90 absolute z-30 text-cedea-red font-bold -translate-y-36 right-20 sm:right-10 text-xl;
-    }
-
-    @media screen(md) {
-        .box-visi-misi {
-            @apply p-0 relative bg-transparent w-full;
-        }
-
-        .box-visi-misi.in-back {
-            @apply relative;
-        }
-
-        .box-visi-misi.in-back::after {
-            @apply hidden;
-        }
-
-        .box-visi-misi.in-back.visi {
-            @apply -translate-x-0 scale-100;
-        }
-
-        .box-visi-misi.in-back.misi {
-            @apply translate-x-0 scale-100;
-        }
-
-        .box-visi-misi.visi {
-            @apply translate-x-0;
-        }
-
-        .box-visi-misi.misi {
-            @apply -translate-x-0;
-        }
-    }
-
-    /* Product */
-
-    /* Filter Button */
-
-    .category-item {
-        @apply w-full md:w-1/2 lg:w-2/5 bg-white rounded-xl shadow-2xl shadow-black/20 hover:shadow-black/35 p-2 aspect-square hover:scale-105 hover:-translate-y-3 transform transition-all duration-500 border-white hover:border cursor-pointer;
-    }
-
-    .category-item.active {
-        @apply shadow-black/35 scale-105 -translate-y-3 border border-cedea-red;
-    }
-
-    .category-box {
-        @apply h-full w-full flex items-center justify-center group-hover:scale-125 transition-all transform duration-300 group-hover:translate-y-5;
-    }
-
-    .category-item.active .category-box,
-    .category-item:hover .category-box {
-        @apply scale-125 translate-y-5;
-    }
-
-    .tag-link {
-        @apply rounded-full border-black border-2 text-xs sm:text-sm md:text-base text-black px-4 py-2 uppercase transition-all duration-500 bg-transparent hover:bg-cedea-red hover:text-white hover:border-cedea-red cursor-pointer;
-    }
-
-    .tag-link.active {
-        @apply bg-cedea-red text-white border-cedea-red font-semibold;
-    }
-
-    .tag-link.loading {
-        @apply bg-gray-50 text-black border-0;
-    }
-
-    /* Product Card */
-
-    .product-card {
-        @apply flex flex-col items-center;
-    }
-
-    .product-card .product-image {
-        @apply aspect-square relative h-52;
-    }
-
-    .product-card .product-image > img {
-        @apply h-full w-auto mx-auto filter drop-shadow-[2px_2px_6px_black];
-    }
-    .product-card .product-image:hover > img {
-        @apply hover:-rotate-12 transform;
-    }
-
-    .product-card .product-title {
-        @apply absolute z-10 bg-gray-200 border border-gray-300 drop-shadow-lg px-3 py-2 top-full rounded-xl text-lg font-semibold;
-    }
-
-    .product-card .product-title::before {
-        content: " ";
-        @apply border-l border-t border-gray-300 bg-gray-200 z-20 absolute w-6 h-6 left-1/2 top-0 transform -translate-x-1/2 -translate-y-1/2 rotate-45;
     }
 }
 
 @layer utilities {
     .text-last-center {
         text-align-last: center;
-    }
-
-    .article-thumbnail-wrapper {
-        @apply relative;
-    }
-
-    .article-thumbnail-wrapper::before {
-        display: block;
-        content: "";
-        width: 100%;
-        padding-top: calc((637 / 603) * 100%);
-    }
-
-    .article-thumbnail-wrapper > .inner {
-        position: absolute;
-        top: 0;
-        right: 0;
-        bottom: 0;
-        left: 0;
-    }
-
-    .centered-bottom {
-        text-align-last: center;
-    }
-
-    .wave-img {
-        &.wave-left-layout {
-            background-position-x: left;
-            background-position-y: center;
-            @apply z-0 absolute bg-no-repeat inset-x-0 top-0 -bottom-1/4 lg:bottom-1/4 bg-contain w-1/2 md:w-2/6 lg:w-1/5;
-            &.aos-animate.move-float {
-                &.wave-1 {
-                    @apply animate-[float_5s_ease-in-out_infinite];
-                }
-                &.wave-2 {
-                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
-                }
-                &.wave-3 {
-                    @apply animate-[float_4s_ease-in-out_infinite];
-                }
-                &.wave-4 {
-                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
-                }
-                &.wave-5 {
-                    @apply animate-[float_5s_ease-in-out_infinite];
-                }
-            }
-        }
-
-        &.wave-right-layout {
-            background-position-x: left;
-            background-position-y: center;
-            @apply z-0 absolute bg-no-repeat right-0 left-auto top-0 -bottom-1/4 lg:bottom-1/4 bg-contain w-1/2 md:w-2/6 lg:w-1/5;
-
-            &.aos-animate.move-float {
-                &.wave-1 {
-                    @apply animate-[float_5s_ease-in-out_infinite];
-                }
-                &.wave-2 {
-                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
-                }
-                &.wave-3 {
-                    @apply animate-[float_4s_ease-in-out_infinite];
-                }
-                &.wave-4 {
-                    @apply animate-[float_3s_ease-in-out_infinite] delay-100;
-                }
-                &.wave-5 {
-                    @apply animate-[float_5s_ease-in-out_infinite];
-                }
-            }
-        }
     }
 }
