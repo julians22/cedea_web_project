@@ -1,0 +1,31 @@
+{
+  "resources/css/app.css": {
+    "file": "assets/app-CLcizyAV.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-BxtnSOOQ.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/vendor/aos-home.js": {
+    "file": "assets/aos-home-CvEjVGou.js",
+    "name": "aos-home",
+    "src": "resources/js/vendor/aos-home.js",
+    "isEntry": true,
+    "css": [
+      "assets/aos-home-Bxn43R6l.css"
+    ]
+  },
+  "resources/js/vendor/swiper-home.js": {
+    "file": "assets/swiper-home-Bv1ldBuN.js",
+    "name": "swiper-home",
+    "src": "resources/js/vendor/swiper-home.js",
+    "isEntry": true,
+    "css": [
+      "assets/swiper-home-BswZJUt7.css"
+    ]
+  }
+}
