@@ -4,7 +4,7 @@
         {{ $attributes->withoutTwMergeClasses()->twMerge(
                 'grid h-full items-center justify-center max-md:order-1',
                 $gradient
-                    ? 'from-[#ededed] via-[#ededed] max-md:pt-4 via-80% to-100% md:absolute md:left-0 bg-gradient-to-t md:top-0 md:z-1 md:w-2/3 md:bg-gradient-to-r'
+                    ? 'from-[#ededed] via-[#ededed] max-md:pt-4 via-80% to-100% md:absolute md:left-0 bg-gradient-to-t md:top-0 md:z-1 md:w-3/5 md:bg-gradient-to-r'
                     : 'md:order-2',
             ) }}>
 
