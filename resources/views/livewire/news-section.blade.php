@@ -28,7 +28,7 @@
             <div
                 class="col-span-1 row-span-1 overflow-hidden rounded-xl md:col-span-2 md:row-span-1 lg:row-span-3 2xl:[&:not(:only-child)]:mr-8">
                 <img class="w-full object-cover" src="{{ asset('img/featured-news-thumb-demo.jpg') }}" alt="">
-                <div class="flex h-full w-full flex-col gap-y-4 bg-white p-4 font-semibold">
+                <div class="flex h-full w-full flex-col gap-y-4 bg-white font-semibold ~p-4/8">
                     <p class="text-[#919497]">08 Mei 2024 | Berita</p>
                     <h2 class="line-clamp-3 ~text-lg/2xl">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar</h2>
                     <a class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red">
