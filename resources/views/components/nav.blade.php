@@ -76,7 +76,7 @@
                                     @foreach ($item['submenu'] as $item_submenu)
                                         @if (array_key_exists('submenu', $item_submenu) && count($item_submenu['submenu']))
                                             <div class="group relative w-full">
-                                                <a class="group-hover:after flex cursor-pointer select-none items-center justify-center rounded py-3 group-hover:shadow-xl"
+                                                <a class="group-hover:after flex cursor-pointer select-none items-center justify-center rounded py-3 group-hover:shadow-nav"
                                                     href="{{ $item_submenu['route'] }}" @click="navigationMenuClose()">
                                                     <span
                                                         class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
@@ -92,9 +92,9 @@
                                                 <div class="invisible absolute -right-1 top-1/2 mr-1 -translate-y-1/2 translate-x-full opacity-0 duration-200 ease-out group-hover:visible group-hover:mr-0 group-hover:opacity-100"
                                                     data-submenu="">
                                                     <div
-                                                        class="animate-in slide-in-from-left-1 z-50 w-52 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red p-1 text-center shadow-md">
+                                                        class="animate-in slide-in-from-left-1 z-50 w-52 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red text-center shadow-md">
                                                         @foreach ($item_submenu['submenu'] as $sub_submenu)
-                                                            <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-3 outline-none hover:shadow-xl data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                                            <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-3 outline-none hover:shadow-nav data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                                                 href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
                                                             <div class="mx-auto h-px w-2/6 bg-neutral-200 last:hidden">
                                                             </div>
@@ -103,7 +103,7 @@
                                                 </div>
                                             </div>
                                         @else
-                                            <a class="block cursor-pointer rounded px-3.5 py-3 hover:shadow-xl"
+                                            <a class="block cursor-pointer rounded px-3.5 py-3 hover:shadow-nav"
                                                 href="{{ $item_submenu['route'] }}" @click="navigationMenuClose()">
                                                 <span
                                                     class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>

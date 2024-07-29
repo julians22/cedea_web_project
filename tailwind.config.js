@@ -15,6 +15,12 @@ export default {
         screens,
         fontSize,
         extend: {
+            // dropShadow: {
+            //     nav: "1px 1px 21px 1px rgba(0,0,0,0.75);",
+            // },
+            boxShadow: {
+                nav: "0px 0px 18px 1px rgba(0,0,0,0.50);",
+            },
             fontSize: {
                 xxs: "0.5rem",
             },
