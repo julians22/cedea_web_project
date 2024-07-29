@@ -94,7 +94,7 @@
                                                     <div
                                                         class="animate-in slide-in-from-left-1 z-50 w-52 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red p-1 text-center shadow-md">
                                                         @foreach ($item_submenu['submenu'] as $sub_submenu)
-                                                            <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-1.5 outline-none hover:shadow-xl data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                                            <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-3 outline-none hover:shadow-xl data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                                                 href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
                                                             <div class="mx-auto h-px w-2/6 bg-neutral-200 last:hidden">
                                                             </div>

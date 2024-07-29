@@ -72,7 +72,7 @@ class Nav extends Component
                         'submenu' => []
                     ],
                     [
-                        'label' => 'kreasi resep',
+                        'label' => 'Kreasi Resep',
                         'route' => '#',
                         'submenu' => [
                             [

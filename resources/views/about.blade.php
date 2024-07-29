@@ -245,7 +245,9 @@
                     <div class="grid grid-cols-1 gap-x-4 md:grid-cols-[3rem_1fr]">
                         <p
                             class="size-10 rounded-full bg-cedea-red p-2 text-center text-xl font-semibold text-white max-md:hidden">
-                            {{ $index + 1 }}</p>
+                            {{ $index + 1 }}
+                        </p>
+
                         <div>
                             <div class="flex-wrap items-center gap-2 gap-y-2 ~mb-2/4 max-md:flex">
                                 <p
