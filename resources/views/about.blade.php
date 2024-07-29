@@ -106,8 +106,8 @@
                             @endphp
 
                             @foreach ($timeline as $item)
-                                <li class="flex gap-2 [&:last-child>div>div]:before:hidden">
-                                    <p>{{ $item['date'] }}</p>
+                                <li class="grid grid-cols-[10%_1fr] gap-2 [&:last-child>div>div]:before:hidden">
+                                    <p class="~text-sm/base">{{ $item['date'] }}</p>
                                     <div class="relative flex gap-6 pb-5 pr-2">
                                         <div
                                             class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
