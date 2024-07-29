@@ -20,6 +20,7 @@ class Products extends Component
 
     public $products;
     public $activeProduct = null;
+    public $popUpOpen = null;
 
     public function mount($categories, $tags)
     {

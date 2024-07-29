@@ -17,7 +17,6 @@ example @click="modalOpen=false"
             ) }}
             @click="modalOpen=true">Open</button>
     @endif
-    {{ $slot }}
     <template x-teleport="body">
         <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
             x-cloak>
@@ -53,8 +52,6 @@ example @click="modalOpen=false"
                         <p>This is placeholder text. Replace it with your own content.</p>
                     </div>
                 @endif
-
-
             </div>
         </div>
     </template>

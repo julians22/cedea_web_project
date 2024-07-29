@@ -4,15 +4,15 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-2.jpg') }}">
+            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
             <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
         </div>
         <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-2.jpg') }}">
+            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
             <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
         </div>
         <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-2.jpg') }}">
+            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
             <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
         </div>
     </div>
