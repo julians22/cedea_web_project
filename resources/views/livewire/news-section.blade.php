@@ -27,7 +27,7 @@
             {{-- featured news --}}
             <div
                 class="col-span-1 row-span-1 overflow-hidden rounded-xl md:col-span-2 md:row-span-1 lg:row-span-3 2xl:[&:not(:only-child)]:mr-8">
-                <img src="{{ asset('img/mutu.jpg') }}" alt="">
+                <img class="w-full object-cover" src="{{ asset('img/featured-news-thumb-demo.jpg') }}" alt="">
                 <div class="flex h-full w-full flex-col gap-y-4 bg-white p-4 font-semibold">
                     <p class="text-[#919497]">08 Mei 2024 | Berita</p>
                     <h2 class="line-clamp-3 ~text-lg/2xl">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar</h2>
