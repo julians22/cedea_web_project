@@ -37,7 +37,7 @@
 
         <x-slot:button>
             <button class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white">
-                Lihat Product
+                Lihat Produk
             </button>
         </x-slot>
     </x-section-banner>
@@ -49,39 +49,39 @@
     {{-- Marketplace Section --}}
     <div class="container my-12 flex justify-center gap-8 px-4 lg:px-0">
 
-        <div class="basis-80 max-md:hidden">
+        <div class="basis-96 max-md:hidden">
             <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}" alt="">
         </div>
 
         <div class="col-span-5 lg:col-span-3">
             <div class="flex h-full flex-col justify-center">
-                <h2 class="text-center font-great-vibes text-cedea-red ~text-2xl/6xl">
+                <h2 class="text-center font-great-vibes text-cedea-red ~text-xl/5xl">
                     Nggak Ada
                     Waktu Belanja? Pesan Online Solusinya!
                 </h2>
 
                 <div class="mt-4 flex flex-wrap items-end justify-center ~gap-x-2/8 lg:mt-8">
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/shopee.png') }}" alt="">
                     </div>
 
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/tokopedia.png') }}" alt="">
                     </div>
 
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/grabmart.png') }}" alt="">
                     </div>
 
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/blibli.png') }}" alt="">
                     </div>
 
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/indomaret.png') }}" alt="">
                     </div>
 
-                    <div class="~size-20/32 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
                         <img src="{{ asset('img/Marketplace/sayurbox.png') }}" alt="">
                     </div>
                 </div>

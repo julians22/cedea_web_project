@@ -1,9 +1,9 @@
 <footer class="bg-cedea-red pb-2 lg:pb-6">
 
     <div class="container">
-        <div class="grid grid-cols-1 gap-8 px-4 text-white md:grid-cols-[25%_1fr] lg:px-0">
+        <div class="grid grid-cols-1 gap-8 px-4 text-white md:grid-cols-[15%_1fr] lg:px-0">
 
-            <div class="md:max-w-52 h-fit shadow-2xl shadow-black/25 drop-shadow-xl md:ml-auto">
+            <div class="md:max-w-52 h-fit shadow-2xl shadow-black/25 drop-shadow-xl">
                 <x-logo />
             </div>
 
