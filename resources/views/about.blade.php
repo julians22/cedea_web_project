@@ -143,12 +143,12 @@
                         style="z-index: {{ count($words) - $index }}">
 
                         <div
-                            class="-z-1 w-4/5 rounded-t-full border-8 border-white bg-cedea-red text-white shadow-black drop-shadow-xl ~p-1/5 ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
+                            class="-z-1 w-4/5 rounded-t-full border-8 border-white bg-[#b5202b] text-white shadow-black drop-shadow-xl ~p-1/5 ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
                             <img class="size-full object-contain object-center" src="{{ $word['icon'] }}"
                                 alt="{{ $word['text'] }} icon">
                         </div>
 
-                        <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-gradient-to-br from-cedea-red from-0% via-cedea-red via-50% to-cedea-red-400 to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
+                        <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-gradient-to-br from-[#b5202b] from-0% via-[#b5202b] via-50% to-[#d21b2a] to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
                             {{-- sm:h-60 sm:w-52 --}}>
                             {{ $word['text'][0] }}
                         </div>
