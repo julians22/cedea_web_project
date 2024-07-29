@@ -28,7 +28,6 @@ export default {
                 lobster: ["Lobster", ...defaultTheme.fontFamily.serif],
                 "open-sans": ["Open Sans", ...defaultTheme.fontFamily.sans],
             },
-
             zIndex: {
                 1: 1,
             },

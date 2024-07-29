@@ -6,7 +6,7 @@ example @click="modalOpen=false"
 
 @props(['trigger' => null, 'content' => null])
 
-<div class="relative z-50 h-auto w-auto" x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false">
+<div class="relative h-auto w-auto" x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false">
     @if ($trigger)
         {{ $trigger }}
     @else
@@ -17,7 +17,7 @@ example @click="modalOpen=false"
             ) }}
             @click="modalOpen=true">Open</button>
     @endif
-
+    {{ $slot }}
     <template x-teleport="body">
         <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
             x-cloak>
@@ -26,8 +26,9 @@ example @click="modalOpen=false"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
                 x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
             </div>
-            <div {{ $attributes->withoutTwMergeClasses()->twMerge('relative bg-white px-4 py-3 px-7 py-6 sm:max-w-lg sm:rounded-lg') }}
-                x-show="modalOpen" x-trap.inert.noscroll="modalOpen" x-transition:enter="ease-out duration-300"
+            <div {{ $attributes->withoutTwMergeClasses()->twMerge('relative bg-white px-4 py-3 px-7 py-6 sm:max-w-lg rounded-lg bg-cedea-red sm:rounded-3xl') }}
+                x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
+                x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
                 x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
                 x-transition:leave="ease-in duration-200"

@@ -2,9 +2,9 @@
 <section class="relative grid grid-cols-1 md:grid-cols-2">
     <div
         {{ $attributes->withoutTwMergeClasses()->twMerge(
-                'grid h-full items-center justify-center',
+                'grid h-full items-center justify-center max-md:order-1',
                 $gradient
-                    ? 'from-white via-white via-80% to-100% md:absolute md:left-0 md:top-0 md:z-1 md:w-2/3 md:bg-gradient-to-r'
+                    ? 'from-white via-white max-md:pt-4 via-80% to-100% md:absolute md:left-0 bg-gradient-to-t md:top-0 md:z-1 md:w-2/3 md:bg-gradient-to-r'
                     : 'md:order-2',
             ) }}>
 
@@ -24,8 +24,8 @@
 
     </div>
 
-    <div @class(['md:col-start-2' => $gradient])>
-        <img src="{{ $imageUrl }}" alt="">
-    </div>
+    <img @class([
+        'md:col-start-2 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
+    ]) src="{{ $imageUrl }}" alt="">
 
 </section>

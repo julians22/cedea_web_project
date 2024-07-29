@@ -12,8 +12,8 @@
     </x-section-banner>
 
     {{-- About 2 --}}
-    <x-section-banner class="from-cedea-red via-cedea-red max-md:bg-cedea-red" class:title="text-white"
-        class:desc="text-white" :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
+    <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white"
+        :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
         <x-slot:desc>
             <p>
                 Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis
@@ -24,7 +24,7 @@
         </x-slot>
 
         <x-slot:button>
-            <x-modal class="rounded-2xl bg-cedea-red">
+            <x-modal>
 
                 <x-slot:trigger>
                     <button class="rounded-full bg-white px-4 py-2 text-cedea-red" type="button" @click="modalOpen=true">
@@ -74,10 +74,10 @@
 
     {{-- About 3 --}}
     {{-- Visi Misi --}}
-    <section class="grid grid-cols-1 items-center justify-center text-justify text-cedea-red md:grid-cols-2">
+    <section class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:grid-cols-2">
         {{-- visi --}}
         <div
-            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pr-0 ~px-4/28 md:h-80">
+            class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pr-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Visi</h2>
                 <p class="text-last-center">Menjadi pemain unggul di bisnis makanan siap masak di
@@ -89,7 +89,7 @@
 
         {{-- misi --}}
         <div
-            class="flex w-full flex-col items-center justify-center bg-gradient-to-r from-white to-[#E6E7E8] py-10 pl-0 ~px-4/28 md:h-80">
+            class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pl-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Misi</h2>
                 <p class="text-last-center">Aktif berperan dalam menyehatkan bangsa
@@ -106,28 +106,54 @@
         <div class="container">
 
             @php
-                $words = ['Giat', 'Iman', 'Gesit', 'Inovasi', 'Handal'];
+                $words = [
+                    [
+                        'text' => 'Giat',
+                        'icon' => asset('img/icons/idea.svg'),
+                    ],
+
+                    [
+                        'text' => 'Iman',
+                        'icon' => asset('img/icons/pray.svg'),
+                    ],
+
+                    [
+                        'text' => 'Gesit',
+                        'icon' => asset('img/icons/run.svg'),
+                    ],
+
+                    [
+                        'text' => 'Inovasi',
+                        'icon' => asset('img/icons/bulp.svg'),
+                    ],
+
+                    [
+                        'text' => 'Handal',
+                        'icon' => asset('img/icons/shield.svg'),
+                    ],
+                ];
             @endphp
 
-            <h2 class="mb-10 font-great-vibes text-cedea-red ~text-2xl/5xl">Nilai-nilai Perusahaan</h2>
+            <h2 class="section-title mb-10">Nilai-nilai Perusahaan</h2>
 
             <div class="container flex items-center justify-center gap-y-6 ~gap-x-2/12">
-                @foreach ($words as $index => $letter)
+                @foreach ($words as $index => $word)
                     <div class="gyatt-ribbon relative flex flex-col items-center justify-center text-center shadow-black drop-shadow-2xl"
                         style="z-index: {{ count($words) - $index }}">
 
                         <div
-                            class="-z-1 w-3/4 rounded-t-full border-8 border-white bg-cedea-red p-2 text-white shadow-black drop-shadow-xl ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
-                            <x-lucide-bike />
+                            class="-z-1 w-4/5 rounded-t-full border-8 border-white bg-cedea-red text-white shadow-black drop-shadow-xl ~p-1/5 ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
+                            <img class="size-full object-contain object-center" src="{{ $word['icon'] }}"
+                                alt="{{ $word['text'] }} icon">
                         </div>
 
                         <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-gradient-to-br from-cedea-red from-0% via-cedea-red via-50% to-cedea-red-400 to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
                             {{-- sm:h-60 sm:w-52 --}}>
-                            {{ $letter[0] }}
+                            {{ $word['text'][0] }}
                         </div>
                         <div
                             class="w-4/5 rounded-b-xl bg-white p-1 text-center capitalize ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
-                            {{ $letter }}
+                            {{ $word['text'] }}
                         </div>
                     </div>
                 @endforeach
@@ -156,16 +182,20 @@
 
             <div class="container my-10 flex flex-col gap-y-8">
                 @foreach ($value_list as $index => $item)
-                    <div class="grid grid-cols-[3rem_1fr] gap-x-4">
-                        <div
-                            class="size-10 flext relative items-center justify-center rounded-full bg-cedea-red p-2 text-white">
-                            <p class="text-center text-xl font-semibold">
-                                {{ $index + 1 }}</p>
-                        </div>
+                    <div class="grid grid-cols-1 gap-x-4 md:grid-cols-[3rem_1fr]">
+                        <p
+                            class="size-10 rounded-full bg-cedea-red p-2 text-center text-xl font-semibold text-white max-md:hidden">
+                            {{ $index + 1 }}</p>
                         <div>
-                            <h3 class="mb-4 w-fit rounded-full bg-cedea-red px-4 py-2 text-white">{{ $item['title'] }}
-                            </h3>
-                            <p class="ml-4">{{ $item['content'] }}</p>
+                            <div class="flex-wrap items-center gap-2 max-md:flex">
+                                <p
+                                    class="size-10 rounded-full bg-cedea-red p-2 text-center text-xl font-semibold text-white md:hidden">
+                                    {{ $index + 1 }}</p>
+                                <h3 class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white md:mb-4">
+                                    {{ $item['title'] }}
+                                </h3>
+                            </div>
+                            <p class="md:ml-4">{{ $item['content'] }}</p>
                         </div>
                     </div>
                 @endforeach
@@ -178,7 +208,7 @@
     <section class="container my-16 grid grid-cols-1 gap-x-8 md:grid-cols-2">
 
         <div>
-            <h2 class="mb-10 font-great-vibes text-cedea-red ~text-2xl/5xl">Mutu yang Tetap Terjaga</h2>
+            <h2 class="section-title mb-10">Mutu yang Tetap Terjaga</h2>
             <p class="~text-xs/base">CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang
                 berkomitmen untuk terus menghasilkan makanan beku dari ikan
                 olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM,
@@ -206,7 +236,7 @@
 
     {{-- Map --}}
     <section class="container my-16">
-        <h2 class="mb-10 font-great-vibes text-cedea-red ~text-2xl/5xl">Wilayah Kerja</h2>
+        <h2 class="section-title mb-10">Wilayah Kerja</h2>
         <div class="mx-auto w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>

@@ -29,7 +29,7 @@
     }
 
     .section-title {
-        @apply text-2xl lg:text-4xl xl:text-5xl font-medium;
+        @apply font-great-vibes text-cedea-red ~text-2xl/5xl;
     }
 }
 

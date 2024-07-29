@@ -12,13 +12,14 @@ class Products extends Component
 {
     public $categories;
     public $tags;
+    public $activeTags = null;
 
     #[Url(as: 'category', history: true)]
     public ?string $activeCategory = null;
 
-    public $activeTags = null;
 
     public $products;
+    public $activeProduct = null;
 
     public function mount($categories, $tags)
     {
@@ -32,15 +33,20 @@ class Products extends Component
         return view('livewire.frontend.products');
     }
 
-    public function toggleActiveCategory($slug)
+    public function handleChangeCategory($slug)
     {
         $this->activeCategory = $slug;
         $this->activeTags = null;
     }
 
-    public function toggleActiveTag($slug)
+    public function handleChangeActiveTag($slug)
     {
         $this->activeTags = $slug;
+    }
+
+    public function handleChangeActiveProduct($slug)
+    {
+        $this->activeProduct = $slug;
     }
 
     public function getProducts()

@@ -1,9 +1,12 @@
 import focus from "@alpinejs/focus";
-import Alpine from "alpinejs";
+import resize from "@alpinejs/resize";
+import {
+    Alpine,
+    Livewire,
+} from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
 
-window.Alpine = Alpine;
-
 Alpine.plugin(focus);
+Alpine.plugin(resize);
 
-Alpine.start();
+Livewire.start();

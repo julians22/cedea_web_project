@@ -24,7 +24,7 @@ class HomeController extends Controller
         $categories = Category::with('myMediaRelation')->get();
         $tags = Tag::all();
 
-        return view('product', compact('categories', 'tags'));
+        return view('merek', compact('categories', 'tags'));
     }
 
     function contact()

@@ -137,7 +137,7 @@ class Nav extends Component
             ],
             [
                 'label' => 'Berita',
-                'route' => route('about'),
+                'route' => '#',
                 'submenu' => [
                     [
                         'label' => 'Kegiatan',
