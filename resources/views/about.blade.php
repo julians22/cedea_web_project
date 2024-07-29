@@ -247,11 +247,11 @@
                             class="size-10 rounded-full bg-cedea-red p-2 text-center text-xl font-semibold text-white max-md:hidden">
                             {{ $index + 1 }}</p>
                         <div>
-                            <div class="flex-wrap items-center gap-2 gap-y-2 max-md:flex">
+                            <div class="flex-wrap items-center gap-2 gap-y-2 ~mb-2/4 max-md:flex">
                                 <p
                                     class="size-10 rounded-full bg-cedea-red p-2 text-center text-xl font-semibold text-white md:hidden">
                                     {{ $index + 1 }}</p>
-                                <h3 class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white ~mb-2/4">
+                                <h3 class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white">
                                     {{ $item['title'] }}
                                 </h3>
                             </div>
