@@ -41,7 +41,7 @@
             {{-- <div class="grid grid-cols-2 gap-4"> --}}
             @for ($i = 0; $i < 6; $i++)
                 <div class="flex overflow-hidden rounded-xl">
-                    <img class="h-full w-40 object-cover" src="{{ asset('img/mutu.jpg') }}" alt="">
+                    <img class="h-full w-40 object-cover" src="{{ asset('img/news-thumb-demo.jpg') }}" alt="">
                     <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white p-4 font-semibold">
                         <p class="cursor-pointer text-[#919497] ~text-xs/sm">8 Mei 2024 | Berita</p>
                         <h2 class="line-clamp-3 ~text-sm/base">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar

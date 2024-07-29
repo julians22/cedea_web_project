@@ -24,8 +24,10 @@
 
     </div>
 
-    <img @class([
-        'md:col-start-2 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
-    ]) src="{{ $imageUrl }}" alt="">
+    <div @class([
+        'md:col-start-2 min-h-72 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
+    ])>
+        <img src="{{ $imageUrl }}" alt="">
+    </div>
 
 </section>
