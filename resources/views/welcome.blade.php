@@ -47,7 +47,7 @@
 
 
     {{-- Marketplace Section --}}
-    <div class="container my-12 flex justify-center gap-8 px-4 lg:px-0">
+    <div class="container my-12 flex justify-center gap-2 px-4 lg:px-0">
 
         <div class="basis-96 max-md:hidden">
             <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}" alt="">

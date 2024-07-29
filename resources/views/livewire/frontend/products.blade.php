@@ -91,7 +91,7 @@
                         @mouseleave="hoverCardLeave()" wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
 
                         {{-- hover trigger --}}
-                        <div class="hover relative z-0 transition-transform duration-700 hover:-rotate-12">
+                        <div class="hover relative z-0 transition-transform hover:-rotate-12">
                             <img class="" src="{{ $item->getFirstMediaUrl('products') }}"
                                 alt="{{ $item->getFirstMedia('products')->name }}"
                                 x-on:mouseover="showDescription=true">

@@ -1,4 +1,4 @@
-<section class="relative bg-cedea-red bg-left-top bg-repeat bg-blend-multiply ~py-10/12"
+<section class="relative bg-cedea-red bg-left-top bg-repeat bg-blend-multiply ~pt-12/14 ~pb-16/20"
     style="background-size: 10%; background-image: url({{ asset('img/home-pattern.png') }})">
 
     <div class="container">

@@ -10,6 +10,7 @@
 
         <div @class([
             'ml-0 text-justify flex flex-col ~gap-y-2/4 ~md:~p-4/20',
+            // '~md:~ml-4/48 ~md:~pl-0/1 md:w-3/5' => $gradient,
             '~md:~ml-4/48 ~md:~pl-0/1 md:w-3/5' => $gradient,
             '~md:~mr-4/48 ~md:~pr-0/1' => !$gradient,
         ])>
@@ -17,7 +18,7 @@
                 {{ $title }}
             </h2>
 
-            <div {{ $attributes->twMergeFor('desc', '~text-sm/base') }}>{{ $desc }}</div>
+            <div {{ $attributes->twMergeFor('desc', '~text-xs/base lg:w-[70%] h-full') }}>{{ $desc }}</div>
 
             {{ $button }}
         </div>

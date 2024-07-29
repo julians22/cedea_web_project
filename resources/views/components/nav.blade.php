@@ -76,7 +76,7 @@
                                     @foreach ($item['submenu'] as $item_submenu)
                                         @if (array_key_exists('submenu', $item_submenu) && count($item_submenu['submenu']))
                                             <div class="group relative w-full">
-                                                <a class="group-hover:after flex cursor-pointer select-none items-center justify-center rounded py-3 group-hover:shadow-nav"
+                                                <a class="after:animate-in after:slide-in-from-left-1 flex cursor-pointer select-none items-center justify-center rounded py-3 ease-out after:absolute after:-right-1 after:origin-left after:-translate-x-full after:bg-cedea-red after:opacity-0 after:duration-100 group-hover:shadow-nav group-hover:after:visible group-hover:after:h-full group-hover:after:w-2 group-hover:after:translate-x-0 group-hover:after:opacity-100"
                                                     href="{{ $item_submenu['route'] }}" @click="navigationMenuClose()">
                                                     <span
                                                         class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
@@ -92,7 +92,7 @@
                                                 <div class="invisible absolute -right-1 top-1/2 mr-1 -translate-y-1/2 translate-x-full opacity-0 duration-200 ease-out group-hover:visible group-hover:mr-0 group-hover:opacity-100"
                                                     data-submenu="">
                                                     <div
-                                                        class="animate-in slide-in-from-left-1 z-50 w-52 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red text-center shadow-md">
+                                                        class="animate-in slide-in-from-left-1 z-50 w-52 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red text-center">
                                                         @foreach ($item_submenu['submenu'] as $sub_submenu)
                                                             <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-3 outline-none hover:shadow-nav data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                                                 href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
@@ -118,7 +118,6 @@
                 </div>
             </div>
         </div>
-
     </nav>
 
     <div class="flex justify-start gap-4 lg:flex-row lg:justify-end lg:gap-x-6 lg:gap-y-0">

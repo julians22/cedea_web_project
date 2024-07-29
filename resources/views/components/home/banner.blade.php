@@ -1,24 +1,21 @@
 <!-- Slider main container -->
-<div class="swiper home-swiper">
+<div class="" x-data="{ width: 0, height: 0, headerHeight: 0, header: document.querySelector('header') }"
+    x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height']; homeSwiper.update()"
+    :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px': 'auto'});`">
     <!-- Additional required wrapper -->
-    <div class="swiper-wrapper">
-        <!-- Slides -->
-        <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
-            <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
+    <div class="swiper home-swiper h-full">
+        <div class="swiper-wrapper">
+            <!-- Slides -->
+            @for ($i = 0; $i < 3; $i++)
+                <div class="swiper-slide">
+                    <img class="hidden h-full w-full object-cover lg:block" src="{{ asset('img/banner-3.jpg') }}">
+                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
+                </div>
+            @endfor
         </div>
-        <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
-            <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
-        </div>
-        <div class="swiper-slide">
-            <img class="hidden w-full sm:block" src="{{ asset('img/banner-3.jpg') }}">
-            <img class="block w-full sm:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
-        </div>
+        <!-- If we need pagination -->
+        <div class="swiper-pagination"></div>
     </div>
-
-    <!-- If we need pagination -->
-    <div class="swiper-pagination"></div>
 </div>
 
 
