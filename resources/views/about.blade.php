@@ -27,7 +27,8 @@
             <x-modal>
 
                 <x-slot:trigger>
-                    <button class="rounded-full bg-white px-4 py-2 text-cedea-red" type="button" @click="modalOpen=true">
+                    <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red" type="button"
+                        @click="modalOpen=true">
                         Lihat Perjalanan Kami </button>
                 </x-slot:trigger>
 
@@ -136,7 +137,7 @@
 
             <h2 class="section-title mb-10">Nilai-nilai Perusahaan</h2>
 
-            <div class="container flex items-center justify-center gap-y-6 ~gap-x-2/12">
+            <div class="flex items-center justify-center gap-y-6 ~gap-x-2/12">
                 @foreach ($words as $index => $word)
                     <div class="gyatt-ribbon relative flex flex-col items-center justify-center text-center shadow-black drop-shadow-2xl"
                         style="z-index: {{ count($words) - $index }}">

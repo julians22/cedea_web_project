@@ -9,7 +9,7 @@
             ) }}>
 
         <div @class([
-            'ml-0 text-justify ~space-y-2/8 ~md:~p-4/20',
+            'ml-0 text-justify flex flex-col ~gap-y-2/4 ~md:~p-4/20',
             '~md:~pl-4/44 md:w-9/12' => $gradient,
             '~md:~pr-4/44' => !$gradient,
         ])>

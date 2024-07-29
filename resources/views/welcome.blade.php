@@ -17,9 +17,9 @@
         </x-slot>
 
         <x-slot:button>
-            <button class="rounded-full bg-cedea-red px-4 py-2 text-white">
+            <a class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white" href="{{ route('about') }}">
                 Baca Selengkapnya
-            </button>
+            </a>
         </x-slot>
     </x-section-banner>
 
@@ -36,7 +36,7 @@
 
 
         <x-slot:button>
-            <button class="rounded-full bg-cedea-red px-4 py-2 text-white">
+            <button class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white">
                 Lihat Product
             </button>
         </x-slot>

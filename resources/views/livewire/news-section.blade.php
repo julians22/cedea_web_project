@@ -17,7 +17,7 @@
                         {{ $type }}</p>
                 @endforeach
             </div>
-            <a class="rounded-full bg-white px-2 py-1 text-cedea-red">
+            <a class="cursor-pointer rounded-full bg-white px-2 py-1 font-semibold text-cedea-red">
                 Semua Berita
             </a>
         </div>
@@ -31,7 +31,7 @@
                 <div class="flex h-full w-full flex-col gap-y-4 bg-white p-4 font-semibold">
                     <p class="text-[#919497]">08 Mei 2024 | Berita</p>
                     <h2 class="line-clamp-3 ~text-lg/2xl">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar</h2>
-                    <a class="w-fit rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red" href="#">
+                    <a class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red">
                         Baca Beritanya
                     </a>
                 </div>
@@ -43,7 +43,7 @@
                 <div class="flex overflow-hidden rounded-xl">
                     <img class="h-full w-40 object-cover" src="{{ asset('img/mutu.jpg') }}" alt="">
                     <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white p-4 font-semibold">
-                        <p class="text-[#919497] ~text-xs/sm">8 Mei 2024 | Berita</p>
+                        <p class="cursor-pointer text-[#919497] ~text-xs/sm">8 Mei 2024 | Berita</p>
                         <h2 class="line-clamp-3 ~text-sm/base">CEDEA Goes to School Edukasi Makan Ikan Jadi Anak Pintar
                         </h2>
                     </div>

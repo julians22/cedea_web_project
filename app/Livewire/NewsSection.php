@@ -6,7 +6,7 @@ use Livewire\Component;
 
 class NewsSection extends Component
 {
-    public $types = ['berita', 'kreasi terkini'];
+    public $types = ['Berita', 'Kreasi Resep'];
     public $currentType;
 
     public function handleChangeType($type): void
