@@ -18,9 +18,26 @@
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
     @livewireStyles
 
+
+
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
+    @production
+        <!-- Google tag (gtag.js) -->
+        <script async src="https://www.googletagmanager.com/gtag/js?id=G-57ZD2ZE0ME"></script>
+        <script>
+            window.dataLayer = window.dataLayer || [];
+
+            function gtag() {
+                dataLayer.push(arguments);
+            }
+            gtag('js', new Date());
+            gtag('config', 'G-57ZD2ZE0ME');
+        </script>
+    @endproduction
+
     @stack('plugin-scripts')
+
 
 </head>
 

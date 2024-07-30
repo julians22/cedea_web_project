@@ -13,7 +13,7 @@ class HomeController extends Controller
 {
     function index()
     {
-        $categories = Category::all();
+        $categories = Category::orderBy('order_column')->get();
         $articles = PostNews::with('media')->where('is_publish', true)->take(2)->get();
         $recipes = PostRecipes::with('media')->where('is_publish', true)->take(2)->get();
         return view('welcome', compact('articles', 'recipes', 'categories'));
@@ -21,7 +21,7 @@ class HomeController extends Controller
 
     function product()
     {
-        $categories = Category::with('myMediaRelation')->get();
+        $categories = Category::orderBy('order_column')->with('myMediaRelation')->get();
         $tags = Tag::all();
 
         return view('merek', compact('categories', 'tags'));

@@ -6,7 +6,10 @@ example @click="modalOpen=false"
 
 @props(['trigger' => null, 'content' => null])
 
-<div class="relative h-auto w-auto" x-data="{ modalOpen: false }" @keydown.escape.window="modalOpen = false">
+<div class="${modalOpen ? 'relative w-auto' : '' } h-auto" x-data="{ modalOpen: false }"
+    @keydown.escape.window="modalOpen = false">
+    {{ $slot }}
+
     @if ($trigger)
         {{ $trigger }}
     @else
@@ -17,6 +20,7 @@ example @click="modalOpen=false"
             ) }}
             @click="modalOpen=true">Open</button>
     @endif
+
     <template x-teleport="body">
         <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
             x-cloak>

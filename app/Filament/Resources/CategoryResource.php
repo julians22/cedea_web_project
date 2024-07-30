@@ -23,7 +23,8 @@ class CategoryResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getNavigationGroup() : ?string {
+    public static function getNavigationGroup(): ?string
+    {
         return __('Products');
     }
 
@@ -54,6 +55,8 @@ class CategoryResource extends Resource
                 SpatieMediaLibraryImageColumn::make('image')
                     ->collection('products')
             ])
+            ->reorderable('order_column')
+            ->defaultSort('order_column')
             ->filters([
                 //
             ])

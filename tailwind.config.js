@@ -20,6 +20,14 @@ export default {
             // },
             boxShadow: {
                 nav: "0px 0px 18px 1px rgba(0,0,0,0.50);",
+                top: "0px 0px 15px 1px rgba(0,0,0,0.35);",
+                "top-hover": "0px 0px 20px 1px rgba(0,0,0,0.25);",
+            },
+            dropShadow: {
+                top: [
+                    "0 0 15px rgb(0 0 0 / 0.04)",
+                    "0 0 10px rgb(0 0 0 / 0.1)",
+                ],
             },
             fontSize: {
                 xxs: "0.5rem",

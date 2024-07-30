@@ -3,8 +3,8 @@
         document.addEventListener('alpine:init', () => {
             Alpine.data('hover', () => ({
                 hoverCardHovered: false,
-                hoverCardDelay: 300,
-                hoverCardLeaveDelay: 400,
+                hoverCardDelay: 100,
+                hoverCardLeaveDelay: 200,
                 hoverCardTimeout: null,
                 hoverCardLeaveTimeout: null,
                 hoverCardEnter() {
@@ -30,7 +30,7 @@
 
 <div class="space-y-8">
 
-    <section class="bg-products relative object-contain">
+    <section class="bg-products relative object-contain transition-all">
         {{-- slider --}}
         <img draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
 
@@ -43,10 +43,10 @@
 
                 <div class="my-4 grid grid-cols-3 gap-x-8">
                     @foreach ($categories as $category)
-                        <div class="{{ $activeCategory == $category->slug ? 'active' : '' }} aspect-square rounded-3xl border-cedea-red bg-white p-4 shadow-lg"
+                        <div class="{{ $activeCategory == $category->slug ? 'active' : '' }} flex aspect-square items-center justify-center rounded-3xl border-cedea-red bg-white p-8 shadow-lg"
                             wire:key='{{ $category->slug }}'
                             wire:click="$wire.handleChangeCategory('{{ $category->slug }}')">
-                            <img class="" src="{{ $category->getFirstMediaUrl('products') }}" alt="">
+                            <img class="size-full" src="{{ $category->getFirstMediaUrl('products') }}" alt="">
                         </div>
                     @endforeach
                 </div>
@@ -58,20 +58,19 @@
     <section class="container grid grid-cols-[25%_1fr] gap-20 py-8">
 
         {{-- category side nav --}}
-        <div class="sticky top-0 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] p-8" wire:loading.class="loading">
+        <div class="sticky top-4 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] p-8" wire:loading.class="loading">
 
             {{-- search form --}}
             <div class="mt-4">
-                <label class="sr-only mb-2 text-sm font-medium text-gray-900" for="default-search">Search</label>
+                <label class="sr-only mb-2 text-sm font-medium" for="default-search">Search</label>
                 <div class="relative">
                     <div class="pointer-events-none absolute inset-y-0 start-0 flex items-center ps-3">
-                        <x-lucide-search class="size-6 text-gray-300" />
+                        <x-lucide-search class="size-6 text-black" />
                     </div>
 
                     <input
-                        class="block w-full rounded-full border border-gray-300 bg-gray-50 p-4 ps-10 text-sm text-gray-900 focus:border-blue-500 focus:ring-blue-500"
+                        class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
                         id="default-search" type="search" placeholder="Cari produk di sini" required />
-
                 </div>
             </div>
 
@@ -85,37 +84,36 @@
 
         {{-- product grid --}}
         @if ($products)
-            <div class="grid grid-cols-3 gap-20 md:grid-cols-3">
+            <div class="grid grid-cols-3 items-start gap-20 md:grid-cols-3">
                 @foreach ($products as $item)
-                    <div class="drop-shadow-xl" x-data="hover" @mouseover="hoverCardEnter()"
+                    <div class="relative drop-shadow-xl" x-data="hover" @mouseover="hoverCardEnter()"
                         @mouseleave="hoverCardLeave()" wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
 
                         {{-- hover trigger --}}
-                        <div class="hover relative z-0 transition-transform hover:-rotate-12">
+                        <div class="transition-transform hover:-rotate-6">
                             <img class="" src="{{ $item->getFirstMediaUrl('products') }}"
-                                alt="{{ $item->getFirstMedia('products')->name }}"
-                                x-on:mouseover="showDescription=true">
+                                alt="{{ $item->getFirstMedia('products')->name }}">
                         </div>
 
-                        <x-modal>
+                        <x-modal class="max-w-[75vw] lg:w-[80vw] lg:max-w-screen-xl">
                             <x-slot:trigger>
                                 {{-- hover content --}}
-                                <div class="absolute left-1/2 top-0 z-30 mt-5 w-[365px] max-w-lg -translate-x-1/2 translate-y-3"
+                                <div class='before:size-12 relative mt-5 rounded-3xl drop-shadow-top before:absolute before:-top-1/2 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-1/2 before:rotate-45 before:rounded-lg before:bg-white'
                                     x-show="hoverCardHovered" x-cloak>
-                                    <div class="grid h-auto w-full grid-cols-3 items-center space-x-3 rounded-md border border-neutral-200/70 bg-white p-5"
-                                        x-show="hoverCardHovered" x-transition>
-                                        <div class="col-span-1">
+                                    <div class="mt-10 grid h-auto w-full grid-cols-[15%_1fr_15%] items-center space-x-3 rounded-3xl bg-white p-5"
+                                        x-transition>
+
+                                        <div class="">
                                             <img class="max-w-full"
                                                 src="{{ $item->category->getFirstMediaUrl('products') }}"
                                                 alt="">
                                         </div>
 
-                                        <div class="col-span-1 flex items-center text-cedea-red">
-                                            {!! $item->name !!}
+                                        <div class="flex items-center text-cedea-red">
+                                            {{ $item->name }}
                                         </div>
 
-                                        <div class="col-span-1 flex items-center text-2xl text-cedea-red"
-                                            @click="modalOpen=true">
+                                        <div class="flex items-center text-2xl text-cedea-red" @click="modalOpen=true">
                                             <span class="cursor-pointer">
                                                 <svg class="h-8" xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -143,11 +141,36 @@
                                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
                                     </svg>
                                 </button>
+                                <div class="space-y-4 pr-2 text-white">
+                                    <p class="uppercase ~text-lg/xl">{{ $item->name }}</p>
+                                    <h2 class="uppercase ~text-3xl/5xl">{{ $item->name }}</h2>
 
-                                <div class="justify-center pr-2 text-white">
-                                    <div
-                                        class="max-h-[80vh] max-w-[70vw] overflow-auto md:mt-8 md:max-h-[85vh] md:max-w-[90vw]">
-                                        <h1>{{ $item->name }}</h1>
+                                    <div class="flex gap-x-6">
+                                        <div class="flex basis-1/6 flex-col items-center justify-center">
+                                            <img src="{{ $item->getFirstMediaUrl('products') }}" alt="">
+                                            <button
+                                                class="w-fit rounded-full bg-white px-8 py-1 uppercase text-black">Beli
+                                                sekarang</button>
+                                        </div>
+
+                                        <div class="text-lg/xl basis-3/6 text-justify">
+                                            {!! $item->description !!}
+                                        </div>
+
+                                        <div class="flex basis-2/6 flex-col">
+                                            <div class="relative">
+                                                <img class="h-full w-full object-center"
+                                                    src="{{ asset('img/video-thumb-small-placeholder.jpg') }}"
+                                                    alt="">
+                                                <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                                                    src="{{ asset('img/icons/play.svg') }}" alt="">
+                                            </div>
+
+                                            <a class="w-fit rounded-full bg-white px-4 py-2 uppercase text-cedea-red"
+                                                href="#">
+                                                Tonton Videonya
+                                            </a>
+                                        </div>
                                     </div>
                                 </div>
                             </x-slot:content>

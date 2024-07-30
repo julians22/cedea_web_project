@@ -2,17 +2,19 @@
 
 namespace App\Models\Products;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
+use Spatie\MediaLibrary\HasMedia;
 use Spatie\Sluggable\SlugOptions;
+use Spatie\EloquentSortable\Sortable;
+use Illuminate\Database\Eloquent\Model;
 use Spatie\Translatable\HasTranslations;
+use Spatie\EloquentSortable\SortableTrait;
+use Spatie\MediaLibrary\InteractsWithMedia;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 
-class Category extends Model implements HasMedia
+class Category extends Model implements HasMedia, Sortable
 {
-    use HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
+    use SortableTrait, HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
 
     public $translatable = ['title'];
 
