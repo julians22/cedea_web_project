@@ -4,7 +4,7 @@
     <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
         <x-slot:desc>
             <p>
-                PT. CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
+                PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
                 hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Jakarta
                 Utara.
             </p>
@@ -212,7 +212,7 @@
                             {{ $word['text'][0] }}
                         </div>
                         <div
-                            class="w-4/5 rounded-b-xl bg-white p-1 text-center capitalize ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
+                            class="w-4/5 rounded-b-xl bg-white p-1 text-center font-bold capitalize ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
                             {{ $word['text'] }}
                         </div>
                     </div>

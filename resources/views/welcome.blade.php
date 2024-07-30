@@ -61,29 +61,36 @@
                 </h2>
 
                 <div class="mt-4 flex flex-wrap items-end justify-center ~gap-x-2/8 lg:mt-8">
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://shopee.co.id/cedeaofficialjakarta" target="_blank">
                         <img src="{{ asset('img/Marketplace/shopee.png') }}" alt="">
-                    </div>
+                    </a>
 
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://www.tokopedia.com/cedeaofficial" target="_blank">
                         <img src="{{ asset('img/Marketplace/tokopedia.png') }}" alt="">
-                    </div>
+                    </a>
 
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://mart.grab.com/id/id/search?keyword=Cedea" target="_blank">
                         <img src="{{ asset('img/Marketplace/grabmart.png') }}" alt="">
-                    </div>
+                    </a>
 
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://www.blibli.com/merchant/cedea-jakarta-pusat-official-store/CEJ-60045?utm_campaign=merchant%20share&utm_medium=share&utm_source=web&pickupPointCode=PP-3272245&fbbActivated=false"
+                        target="_blank">
                         <img src="{{ asset('img/Marketplace/blibli.png') }}" alt="">
-                    </div>
+                    </a>
 
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://www.klikindomaret.com/search/?key=Cedea" target="_blank">
                         <img src="{{ asset('img/Marketplace/indomaret.png') }}" alt="">
-                    </div>
+                    </a>
 
-                    <div class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg">
+                    <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-lg"
+                        href="https://www.sayurbox.com/search?q=cedea" target="_blank">
                         <img src="{{ asset('img/Marketplace/sayurbox.png') }}" alt="">
-                    </div>
+                    </a>
                 </div>
             </div>
         </div>
