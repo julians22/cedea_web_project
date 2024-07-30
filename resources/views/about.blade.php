@@ -152,7 +152,7 @@
             class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pl-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Misi</h2>
-                <p class="text-last-center">Aktif berperan dalam menyehatkan bangsa
+                <p class="text-center">Aktif berperan dalam menyehatkan bangsa
                     dengan membuat produk makanan bergizi,
                     aman dan bermanfaat untuk seluruh lapisan
                     masyarakat melalui pendekatan inovasi dan
