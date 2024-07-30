@@ -60,7 +60,7 @@
                     Waktu Belanja? Pesan Online Solusinya!
                 </h2>
 
-                <div class="mt-4 flex flex-wrap items-end justify-center ~gap-x-2/8 lg:mt-8">
+                <div class="mt-4 flex flex-wrap items-end justify-center ~gap-2/8 lg:mt-8">
                     @php
                         $marketplaces = [
                             [
@@ -98,7 +98,7 @@
                     @endphp
 
                     @foreach ($marketplaces as $marketplace)
-                        <a class="~size-16/28 flex items-center justify-center rounded-xl p-4 text-center shadow-top transition duration-700 ease-in-out hover:scale-110 hover:shadow-top-hover"
+                        <a class="~size-16/28 flex items-center justify-center rounded-xl bg-white p-4 text-center shadow-top-hover transition duration-700 ease-in-out hover:scale-110 hover:shadow-lg md:shadow-top md:hover:shadow-top-hover"
                             href="{{ $marketplace['url'] }}" target="_blank">
                             <img src="{{ $marketplace['logo'] }}" alt="{{ $marketplace['name'] }} logo">
                         </a>

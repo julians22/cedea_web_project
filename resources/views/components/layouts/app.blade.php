@@ -16,9 +16,8 @@
 
     <!-- Favicon -->
     <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+
     @livewireStyles
-
-
 
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 
@@ -37,8 +36,6 @@
     @endproduction
 
     @stack('plugin-scripts')
-
-
 </head>
 
 <body class="font-poppins antialiased">
