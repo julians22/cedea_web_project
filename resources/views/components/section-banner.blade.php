@@ -18,7 +18,8 @@
                 {{ $title }}
             </h2>
 
-            <div {{ $attributes->twMergeFor('desc', '~text-xs/base lg:w-[70%] h-full') }}>{{ $desc }}</div>
+            <div {{ $attributes->twMergeFor('desc', '~text-xs/base lg:w-[70%] h-full leading-relaxed') }}>
+                {{ $desc }}</div>
 
             {{ $button }}
         </div>

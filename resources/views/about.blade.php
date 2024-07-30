@@ -29,7 +29,7 @@
                 <x-slot:trigger>
                     <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red" type="button"
                         @click="modalOpen=true">
-                        Lihat Perjalanan Kami </button>
+                        Informasi Lebih Lanjut </button>
                 </x-slot:trigger>
 
                 <x-slot:content>
@@ -140,7 +140,7 @@
             class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pr-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Visi</h2>
-                <p class="text-last-center">Menjadi pemain unggul di bisnis makanan siap masak di
+                <p class="text-center">Menjadi pemain unggul di bisnis makanan siap masak di
                     indonesia dan menjadi
                     pilihan utama di pasar
                     global tertentu.</p>
