@@ -1,5 +1,5 @@
 <section class="relative bg-cedea-red bg-left-top bg-repeat bg-blend-multiply ~pt-12/14 ~pb-16/20"
-    style="background-size: 10%; background-image: url({{ asset('img/home-pattern.png') }})">
+    style="background-size: 11%; background-image: url({{ asset('img/home-pattern.png') }})">
 
     <div class="container">
         <h2 class="section-title text-white">
