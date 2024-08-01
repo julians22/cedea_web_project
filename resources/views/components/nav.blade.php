@@ -38,7 +38,7 @@
     <nav class="relative z-10 w-auto bg-cedea-red text-white" x-data="navigation">
 
         {{-- Desktop nav --}}
-        <div class="relative ~md:~text-xs/base max-lg:hidden">
+        <div class="relative ~lg:~text-xs/base max-lg:hidden">
             {{-- main nav --}}
             <div class="relative">
                 <ul class="flex flex-1 list-none items-center justify-center">
@@ -52,7 +52,8 @@
                                 'after:bg-transparent after:w-0 ': navigationMenu!='home'
                             }"
                             href="{{ route('home') }}">
-                            <x-lucide-house class="size-4" />
+                            Beranda
+                            {{-- <x-lucide-house class="size-4" /> --}}
                         </a>
 
                     </li>
