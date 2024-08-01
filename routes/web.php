@@ -2,6 +2,7 @@
 
 use Alaouy\Youtube\Facades\Youtube;
 use App\Http\Controllers\Pages\HomeController;
+use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -18,6 +19,8 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::get('about', function () {
+    Meta::prependTitle('TENTANG CEDEA');
+
     return view('about');
 })
     ->name('about');

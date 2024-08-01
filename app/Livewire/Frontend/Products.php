@@ -4,6 +4,7 @@ namespace App\Livewire\Frontend;
 
 use App\Models\Products\Category;
 use App\Models\Products\Product;
+use Illuminate\Database\Eloquent\Relations\MorphMany;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Spatie\Tags\Tag;
@@ -16,7 +17,6 @@ class Products extends Component
 
     #[Url(as: 'category', history: true)]
     public ?string $activeCategory = null;
-
 
     public $products;
     public $activeProduct = null;
@@ -38,16 +38,18 @@ class Products extends Component
     {
         $this->activeCategory = $slug;
         $this->activeTags = null;
+        $this->reset('activeProduct');
     }
 
     public function handleChangeActiveTag($slug)
     {
         $this->activeTags = $slug;
+        $this->reset('activeProduct');
     }
 
     public function handleChangeActiveProduct($slug)
     {
-        $this->activeProduct = $slug;
+        $this->activeProduct = Product::findBySlug($slug);
     }
 
     public function getProducts()
@@ -65,6 +67,6 @@ class Products extends Component
             $query = $query->withAnyTags([$tag]);
         }
 
-        $this->products = $query->with('myMediaRelation')->get();
+        $this->products = $query->with(['media', 'category'])->get();
     }
 }

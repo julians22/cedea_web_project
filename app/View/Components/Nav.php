@@ -30,28 +30,29 @@ class Nav extends Component
         //* ][]
 
         $this->nav_items = [
+
             [
                 'label' => 'Perusahaan',
                 'route' => route('about'),
                 'submenu' => [
                     [
                         'label' => 'Sekilas perusahaan',
-                        'route' => '#',
+                        'route' => route('about', ['#sekilas-perusahaan']),
                         'submenu' => []
                     ],
                     [
                         'label' => 'Sejarah',
-                        'route' => '#',
+                        'route' => route('about', ['#sejarah']),
                         'submenu' => []
                     ],
                     [
                         'label' => 'Visi, Misi & Nilai Perusahaan',
-                        'route' => '#',
+                        'route' =>  route('about', ['#visi-misi']),
                         'submenu' => []
                     ],
                     [
                         'label' => 'Wilayah Kerja',
-                        'route' => '#',
+                        'route' => route('about', ['#wilayah']),
                         'submenu' => []
                     ],
                 ]

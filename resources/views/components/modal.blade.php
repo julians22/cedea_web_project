@@ -8,6 +8,7 @@ example @click="modalOpen=false"
 
 <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" x-data="{ modalOpen: false }"
     @keydown.escape.window="modalOpen = false">
+
     {{ $slot }}
 
     @if ($trigger)

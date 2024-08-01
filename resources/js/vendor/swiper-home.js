@@ -3,15 +3,15 @@ import "swiper/css";
 import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 
-let vh = Math.max(
-    document.documentElement.clientHeight || 0,
-    window.innerHeight || 0
-);
-let headerHeight = document.querySelector("header").getBoundingClientRect()[
-    "height"
-];
+// let vh = Math.max(
+//     document.documentElement.clientHeight || 0,
+//     window.innerHeight || 0
+// );
+// let headerHeight = document.querySelector("header").getBoundingClientRect()[
+//     "height"
+// ];
 
-window.homeSwiper = new Swiper(".home-swiper", {
+const homeSwiper = new Swiper(".home-swiper", {
     modules: [Pagination, Autoplay],
 
     // Optional parameters

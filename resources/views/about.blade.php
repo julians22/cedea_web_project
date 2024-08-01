@@ -1,7 +1,7 @@
 <x-layouts.app>
 
     {{-- About 1 --}}
-    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
+    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
         <x-slot:desc>
             <p>
                 PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
@@ -11,8 +11,8 @@
         </x-slot>
     </x-section-banner>
 
-    {{-- About 2 --}}
-    <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white"
+    {{-- sejarah --}}
+    <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white" id="sejarah"
         :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
         <x-slot:desc>
             <p>
@@ -117,7 +117,7 @@
                                             </svg>
                                         </div>
                                         <div>
-                                            <p class="font-great-vibes ~text-sm/base">{{ $item['title'] }}</p>
+                                            <p class="font-androgyne ~text-sm/base">{{ $item['title'] }}</p>
                                             <p class="mt-1 text-justify text-xs">{{ $item['desc'] }}</p>
                                         </div>
                                     </div>
@@ -134,16 +134,15 @@
 
     {{-- About 3 --}}
     {{-- Visi Misi --}}
-    <section class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:grid-cols-2">
+    <section class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:grid-cols-2"
+        id="visi-misi">
         {{-- visi --}}
         <div
             class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pr-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
-                <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Visi</h2>
-                <p class="text-center">Menjadi pemain unggul di bisnis makanan siap masak di
-                    indonesia dan menjadi
-                    pilihan utama di pasar
-                    global tertentu.</p>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
+                <p class="text-center">Menjadi pemain unggul di bisnis makanan siap masak di Indonesia dan menjadi
+                    pilihan utama di pasar global tertentu.</p>
             </div>
         </div>
 
@@ -151,18 +150,16 @@
         <div
             class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pl-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
-                <h2 class="mb-4 text-center font-great-vibes ~text-2xl/5xl">Misi</h2>
-                <p class="text-center">Aktif berperan dalam menyehatkan bangsa
-                    dengan membuat produk makanan bergizi,
-                    aman dan bermanfaat untuk seluruh lapisan
-                    masyarakat melalui pendekatan inovasi dan
-                    teknologi serta perbaikan berkesinambungan.</p>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Misi</h2>
+                <p class="text-center">Aktif berperan dalam menyehatkan bangsa dengan membuat produk makanan bergizi,
+                    aman dan bermanfaat untuk seluruh lapisan masyarakat melalui pendekatan inovasi dan teknologi serta
+                    perbaikan berkesinambungan.</p>
             </div>
         </div>
     </section>
 
     {{-- Value section --}}
-    <section class="my-16">
+    <section class="my-16" id="nilai-nilai-perusahaan">
         <div class="container">
 
             @php
@@ -183,7 +180,7 @@
                     ],
 
                     [
-                        'text' => 'Inovasi',
+                        'text' => 'Inovatif',
                         'icon' => asset('img/icons/bulp.svg'),
                     ],
 
@@ -194,7 +191,7 @@
                 ];
             @endphp
 
-            <h2 class="section-title mb-10">Nilai-nilai Perusahaan</h2>
+            <h2 class="section-title">Nilai-nilai Perusahaan</h2>
 
             <div class="flex items-center justify-center gap-y-6 ~gap-x-2/12">
                 @foreach ($words as $index => $word)
@@ -207,12 +204,12 @@
                                 alt="{{ $word['text'] }} icon">
                         </div>
 
-                        <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-gradient-to-br from-[#b5202b] from-0% via-[#b5202b] via-50% to-[#d21b2a] to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
+                        <div class="z-1 grid items-center justify-center rounded-md border-4 border-white bg-[linear-gradient(160deg,var(--tw-gradient-stops))] from-[#b5202b] from-0% via-[#b5202b] via-50% to-[#d21b2a] to-50% uppercase text-white ~min-[20rem]/sm:~text-4xl/7xl ~min-[20rem]/sm:~h-14/28 ~min-[20rem]/sm:~w-12/24 sm:rounded-xl sm:border-8 sm:~text-6xl/9xl sm:~h-28/60 sm:~w-24/52"
                             {{-- sm:h-60 sm:w-52 --}}>
                             {{ $word['text'][0] }}
                         </div>
                         <div
-                            class="w-4/5 rounded-b-xl bg-white p-1 text-center font-bold capitalize ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
+                            class="w-4/5 bg-white p-1 text-center font-bold capitalize ~rounded-b-md/xl ~min-[20rem]/sm:~text-xxs/xs sm:w-3/5 sm:~text-sm/2xl">
                             {{ $word['text'] }}
                         </div>
                     </div>
@@ -270,7 +267,7 @@
     <section class="container my-16 grid grid-cols-1 gap-x-8 md:grid-cols-2">
 
         <div>
-            <h2 class="section-title mb-10">Mutu yang Tetap Terjaga</h2>
+            <h2 class="section-title">Mutu yang Tetap Terjaga</h2>
             <p class="~text-xs/base">CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang
                 berkomitmen untuk terus menghasilkan makanan beku dari ikan
                 olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM,
@@ -297,8 +294,8 @@
     </section>
 
     {{-- Map --}}
-    <section class="container my-16">
-        <h2 class="section-title mb-10">Wilayah Kerja</h2>
+    <section class="container my-16" id="wilayah">
+        <h2 class="section-title">Wilayah Kerja</h2>
         <div class="mx-auto w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>

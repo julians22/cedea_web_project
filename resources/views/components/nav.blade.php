@@ -38,10 +38,25 @@
     <nav class="relative z-10 w-auto bg-cedea-red text-white" x-data="navigation">
 
         {{-- Desktop nav --}}
-        <div class="relative max-lg:hidden">
+        <div class="relative ~md:~text-xs/base max-lg:hidden">
             {{-- main nav --}}
             <div class="relative">
                 <ul class="flex flex-1 list-none items-center justify-center">
+                    {{-- home --}}
+                    <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
+                        @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='home'"
+                        @mouseleave="navigationMenuLeave()">
+                        <a class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                            :class="{
+                                'after:bg-white after:w-1/2': navigationMenu=='home',
+                                'after:bg-transparent after:w-0 ': navigationMenu!='home'
+                            }"
+                            href="{{ route('home') }}">
+                            <x-lucide-house class="size-4" />
+                        </a>
+
+                    </li>
+
                     @foreach ($nav_items as $item)
                         <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
                             @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='{{ Str::kebab($item['label']) }}'"
@@ -169,7 +184,13 @@
         }">
 
         {{-- nav items --}}
-        <ul class="container flex w-full list-none flex-col justify-center bg-cedea-red pb-16 pt-10 lg:hidden">
+        <ul class="container flex w-full list-none flex-col justify-center gap-y-8 bg-cedea-red pb-16 pt-10 lg:hidden">
+            <li>
+                <a class="relative inline-flex cursor-pointer flex-col rounded-md font-medium transition-colors"
+                    href="{{ route('home') }}">
+                    Beranda
+                </a>
+            </li>
             @foreach ($nav_items as $item)
                 <li class="focus:outline-none">
                     <a class="relative inline-flex cursor-pointer flex-col rounded-md font-medium transition-colors"

@@ -40,6 +40,6 @@ class Product extends Model implements HasMedia
 
     public function myMediaRelation()
     {
-        return $this->media()->where('collection_name', 'products');
+        return $this->media()->where('collection_name', 'products')->getEager();
     }
 }

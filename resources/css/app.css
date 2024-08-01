@@ -1,3 +1,5 @@
+@import "font.css";
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -5,6 +7,10 @@
 @layer base {
     [x-cloak] {
         display: none !important;
+    }
+
+    html {
+        scroll-behavior: smooth;
     }
 }
 
@@ -18,6 +24,10 @@
         after:~min-[20rem]/sm:~left-6/20 after:~min-[20rem]/sm:~top-7/16 after:~min-[20rem]/sm:~h-4/[3rem] after:~min-[20rem]/sm:~w-8/10;
     }
 
+    .slider-item-desktop {
+        @apply mx-auto hidden h-full w-full object-cover object-top lg:block;
+    }
+
     @media screen(sm) {
         .gyatt-ribbon {
             @apply after:border-y-8 before:border-8 before:rounded-lg
@@ -29,7 +39,7 @@
     }
 
     .section-title {
-        @apply font-great-vibes text-cedea-red ~text-2xl/5xl;
+        @apply font-androgyne text-cedea-red ~text-2xl/5xl ~mb-2/10;
     }
 }
 

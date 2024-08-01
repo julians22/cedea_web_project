@@ -9,4 +9,8 @@ import "./bootstrap";
 Alpine.plugin(focus);
 Alpine.plugin(resize);
 
+document.addEventListener("alpine:init", () => {
+    Alpine.data("modal", () => ({ modalOpen: false }));
+});
+
 Livewire.start();

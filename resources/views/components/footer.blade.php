@@ -12,8 +12,8 @@
                     <p><strong>PT CitraDimensi Arthali</strong></p>
                     <p>Perum Prasarana Perikanan Samudera Blok N, No 12, Muara Baru Jakarta Utara, 14440, Indonesia </p>
                     <ul>
-                        <li>P. +6221 660 2092</li>
-                        <li>E. info@cedeaseafood.com</li>
+                        <li><a href="tel:+62216602092">P. +6221 660 2092</a></li>
+                        <li><a href="mailto:info@cedeaseafood.com">E. info@cedeaseafood.com</a></li>
                     </ul>
                 </div>
 

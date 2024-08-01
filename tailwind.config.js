@@ -18,6 +18,10 @@ export default {
             // dropShadow: {
             //     nav: "1px 1px 21px 1px rgba(0,0,0,0.75);",
             // },
+
+            backgroundImage: {
+                "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
+            },
             boxShadow: {
                 nav: "0px 0px 18px 1px rgba(0,0,0,0.50);",
                 top: "0px 0px 15px 1px rgba(0,0,0,0.35);",
@@ -33,6 +37,9 @@ export default {
                 xxs: "0.5rem",
             },
             fontFamily: {
+                androgyne: "Androgyne",
+                montserrat: "Montserrat",
+                ...defaultTheme.fontFamily.sans,
                 poppins: "Poppins",
                 ...defaultTheme.fontFamily.sans,
                 "great-vibes": [

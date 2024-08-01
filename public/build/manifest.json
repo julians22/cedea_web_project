@@ -1,11 +1,19 @@
 {
+  "resources/assets/fonts/AndrogyneMedium.woff": {
+    "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
+    "src": "resources/assets/fonts/AndrogyneMedium.woff"
+  },
+  "resources/assets/fonts/AndrogyneMedium.woff2": {
+    "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
+    "src": "resources/assets/fonts/AndrogyneMedium.woff2"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-CbFR4FE0.css",
+    "file": "assets/app-DcSfUKDQ.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-BxtnSOOQ.js",
+    "file": "assets/app-Cme85j2v.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
@@ -20,7 +28,7 @@
     ]
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-FIEdTazc.js",
+    "file": "assets/swiper-home-D6mDFwlZ.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
     "isEntry": true,

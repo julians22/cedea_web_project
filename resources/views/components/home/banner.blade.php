@@ -1,14 +1,14 @@
 <!-- Slider main container -->
 <div class="" x-data="{ width: 0, height: 0, headerHeight: 0, header: document.querySelector('header') }"
-    x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height']; homeSwiper.update()"
-    :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px': 'auto'});`">
+    x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height'];"
+    :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px)': 'auto'};`">
     <!-- Additional required wrapper -->
-    <div class="swiper home-swiper h-full">
+    <div class="swiper home-swiper h-full bg-cedea-red-500">
         <div class="swiper-wrapper">
             <!-- Slides -->
             @for ($i = 0; $i < 3; $i++)
                 <div class="swiper-slide">
-                    <img class="hidden h-full w-full object-cover lg:block" src="{{ asset('img/banner-3.jpg') }}">
+                    <img class="slider-item-desktop" src="{{ asset('img/banner-3.jpg') }}">
                     <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-2.jpg') }}">
                 </div>
             @endfor
