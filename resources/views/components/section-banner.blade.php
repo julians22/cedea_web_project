@@ -19,10 +19,10 @@
                 'md:~pl-0/1' => $gradient,
                 'md:~pr-0/1 md:col-start-2' => !$gradient,
             ])>
-                <h2 {{ $attributes->twMergeFor('title', 'font-androgyne text-cedea-red ~text-2xl/5xl') }}>
+                <h2 {{ $attributes->twMergeFor('title', 'font-great-vibes text-cedea-red ~text-2xl/5xl') }}>
                     {{ $title }}
                 </h2>
-                <div {{ $attributes->twMergeFor('desc', '~text-sm/base lg:w-[70%] leading-relaxed') }}>
+                <div {{ $attributes->twMergeFor('desc', '~text-sm/base 2xl:w-[73%] leading-relaxed') }}>
                     {{ $desc }}</div>
                 {{ $button }}
             </div>
@@ -54,7 +54,7 @@
             '~md:~ml-4/48 ~md:~pl-0/1 md:w-3/5' => $gradient,
             '~md:~mr-4/48 ~md:~pr-0/1' => !$gradient,
         ])>
-            <h2 {{ $attributes->twMergeFor('title', 'font-androgyne text-cedea-red ~text-2xl/5xl') }}>
+            <h2 {{ $attributes->twMergeFor('title', 'font-great-vibes text-cedea-red ~text-2xl/5xl') }}>
                 {{ $title }}
             </h2>
 
