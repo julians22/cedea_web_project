@@ -112,7 +112,7 @@
                                                         @foreach ($item_submenu['submenu'] as $sub_submenu)
                                                             <a class="relative flex cursor-pointer select-none items-center justify-center rounded px-2 py-3 outline-none hover:shadow-nav data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                                                                 href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
-                                                            <div class="mx-auto h-px w-2/6 bg-neutral-200 last:hidden">
+                                                            <div class="mx-auto h-0.5 w-2/6 bg-neutral-200 last:hidden">
                                                             </div>
                                                         @endforeach
                                                     </div>
@@ -125,7 +125,7 @@
                                                     class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
                                             </a>
                                         @endif
-                                        <div class="mx-auto h-px w-2/6 bg-neutral-200 last:hidden"></div>
+                                        <div class="mx-auto h-0.5 w-2/6 bg-neutral-200 last:hidden"></div>
                                     @endforeach
                                 </div>
                             </div>
@@ -137,6 +137,7 @@
     </nav>
 
     <div class="flex justify-start gap-4 lg:flex-row lg:justify-end lg:gap-x-6 lg:gap-y-0">
+        {{-- search icon --}}
         <button class="text-xl">
             <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.42 36.41">
                 <g>
@@ -146,19 +147,8 @@
             </svg>
         </button>
 
-        <button class="flex flex-row items-center space-x-2" type="button">
-            <span>
-                ID
-            </span>
-            <span class="inline">
-                <svg class="inline w-3" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14.96 11.07">
-                    <g>
-                        <polyline points="1.5 1.5 7.62 9.57 13.46 1.87"
-                            style="fill: none; stroke: #fff; stroke-linecap: round; stroke-linejoin: round; stroke-width: 3px;" />
-                    </g>
-                </svg>
-            </span>
-        </button>
+        {{-- Locale Toggle --}}
+        <x-locale-toggler />
 
         {{-- burger menu --}}
         <label class="flex h-10 w-9 cursor-pointer flex-col items-center justify-center lg:hidden">

@@ -1,5 +1,6 @@
 import focus from "@alpinejs/focus";
 import resize from "@alpinejs/resize";
+
 import {
     Alpine,
     Livewire,

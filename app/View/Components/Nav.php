@@ -4,17 +4,21 @@ namespace App\View\Components;
 
 use Closure;
 use Illuminate\Contracts\View\View;
+use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
 
 class Nav extends Component
 {
 
     public $nav_items;
+    public $locale;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
+
+        $this->locale = App::currentLocale();
 
         //* TYPE DOC
         //* [label : string
@@ -28,9 +32,7 @@ class Nav extends Component
         //*         ][]
         //*     ][]
         //* ][]
-
         $this->nav_items = [
-
             [
                 'label' => 'Perusahaan',
                 'route' => route('about'),

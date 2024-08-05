@@ -11,8 +11,12 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->bigInteger('order_column');
+        Schema::create('brands', function (Blueprint $table) {
+            $table->id();
+            $table->json('name');
+            $table->string('slug');
+            $table->integer('order_column')->nullable();
+            $table->timestamps();
         });
     }
 
@@ -21,8 +25,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('categories', function (Blueprint $table) {
-            $table->removeColumn('order_column');
-        });
+        Schema::dropIfExists('categories');
     }
 };

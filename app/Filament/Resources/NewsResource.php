@@ -23,13 +23,13 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsResource extends Resource
 {
-    use Translatable;
 
     protected static ?string $model = PostNews::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getNavigationGroup() : ?string {
+    public static function getNavigationGroup(): ?string
+    {
         return __('Posts');
     }
 

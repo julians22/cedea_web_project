@@ -2,21 +2,20 @@
 
 namespace App\Models\Products;
 
-use Spatie\Sluggable\HasSlug;
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\Sluggable\SlugOptions;
-use Spatie\EloquentSortable\Sortable;
-use Illuminate\Database\Eloquent\Model;
-use Spatie\Translatable\HasTranslations;
-use Spatie\EloquentSortable\SortableTrait;
-use Spatie\MediaLibrary\InteractsWithMedia;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasManyThrough;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\HasTranslatableSlug;
+use Spatie\Sluggable\SlugOptions;
+use Spatie\Translatable\HasTranslations;
 
-class Category extends Model implements HasMedia, Sortable
+class Category extends Model
 {
-    use SortableTrait, HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
+    use HasFactory, HasTranslations, HasSlug;
 
-    public $translatable = ['title'];
+    public $translatable = ['name'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -31,12 +30,15 @@ class Category extends Model implements HasMedia, Sortable
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 
-    public function myMediaRelation()
+    /**
+     * The products that belong to the category.
+     */
+    public function products(): BelongsToMany
     {
-        return $this->media()->where('collection_name', 'products');
+        return $this->belongsToMany(Product::class);
     }
 }

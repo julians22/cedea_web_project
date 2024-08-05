@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Products\Brand;
+use App\Models\Products\Category;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -13,10 +15,10 @@ return new class extends Migration
     {
         Schema::create('products', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 225);
-            $table->text('slug');
-            $table->bigInteger('category_id');
-            $table->text('description');
+            $table->json('name', 225);
+            $table->string('slug');
+            $table->foreignIdFor(Brand::class);
+            $table->json('description');
             $table->boolean('has_youtube')->default(false);
             $table->string('youtube_id')->nullable();
             $table->timestamps();

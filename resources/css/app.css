@@ -47,4 +47,8 @@
     .text-last-center {
         text-align-last: center;
     }
+
+    .h-calc-auto {
+        height: calc-size(auto);
+    }
 }

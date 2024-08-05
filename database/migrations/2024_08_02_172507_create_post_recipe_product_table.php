@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\PostRecipes;
+use App\Models\Products\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,10 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('categories', function (Blueprint $table) {
+        Schema::create('post_recipe_product', function (Blueprint $table) {
             $table->id();
-            $table->string('title', 125);
-            $table->text('slug');
+            $table->foreignIdFor(PostRecipes::class);
+            $table->foreignIdFor(Product::class);
             $table->timestamps();
         });
     }
@@ -24,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('categories');
+        Schema::dropIfExists('post_recipe_product');
     }
 };

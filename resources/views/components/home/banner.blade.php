@@ -1,5 +1,5 @@
 <!-- Slider main container -->
-<div class="" x-data="{ width: 0, height: 0, headerHeight: 0, header: document.querySelector('header') }"
+<div x-data="{ width: 0, height: 0, headerHeight: 0, header: document.querySelector('header') }"
     x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height'];"
     :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px)': 'auto'};`">
     <!-- Additional required wrapper -->
@@ -21,7 +21,6 @@
 
 @push('plugin-scripts')
     @vite(['resources/js/vendor/swiper-home.js'])
-    @vite(['resources/js/vendor/aos-home.js'])
 
     <style>
         :root {

@@ -4,6 +4,7 @@ namespace App\Models\Products;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sluggable\HasSlug;
@@ -12,7 +13,7 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
-    use HasSlug, InteractsWithMedia, HasFactory, HasTranslations, \Spatie\Tags\HasTags;
+    use HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
 
     public $translatable = ['name', 'description'];
 
@@ -33,13 +34,18 @@ class Product extends Model implements HasMedia
             ->saveSlugsTo('slug');
     }
 
-    public function category()
+    public function brand()
     {
-        return $this->belongsTo(Category::class, 'category_id', 'id');
+        return $this->belongsTo(Brand::class);
     }
 
-    public function myMediaRelation()
+    /**
+     * The category that belong to the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function categories(): BelongsToMany
     {
-        return $this->media()->where('collection_name', 'products')->getEager();
+        return $this->belongsToMany(Category::class);
     }
 }

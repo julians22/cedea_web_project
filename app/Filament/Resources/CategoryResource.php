@@ -6,16 +6,15 @@ use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Products\Category;
 use Filament\Forms;
-use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
+use Spatie\Tags\Tag;
 
 class CategoryResource extends Resource
 {
@@ -32,18 +31,8 @@ class CategoryResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->label(__('Title'))
+                TextInput::make('name')
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('products')
-                    ->image()
-                    ->imageEditor()
-                    ->imageEditorAspectRatios([
-                        null,
-                        '1:1',
-                    ])
-                    ->imageEditorEmptyFillColor('#fff')
             ]);
     }
 
@@ -51,18 +40,15 @@ class CategoryResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('title'),
-                SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('products')
+                TextColumn::make('name'),
+                TextColumn::make('slug')
             ])
-            ->reorderable('order_column')
-            ->defaultSort('order_column')
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make(),
+                Tables\Actions\DeleteAction::make()
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

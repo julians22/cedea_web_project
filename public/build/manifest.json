@@ -8,7 +8,7 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CbWNfL9m.css",
+    "file": "assets/app-DqcXO2Jt.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -17,15 +17,6 @@
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
-  },
-  "resources/js/vendor/aos-home.js": {
-    "file": "assets/aos-home-CvEjVGou.js",
-    "name": "aos-home",
-    "src": "resources/js/vendor/aos-home.js",
-    "isEntry": true,
-    "css": [
-      "assets/aos-home-Bxn43R6l.css"
-    ]
   },
   "resources/js/vendor/swiper-home.js": {
     "file": "assets/swiper-home-D6mDFwlZ.js",

@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('post_news', function (Blueprint $table) {
             $table->id();
-            $table->text('title');
-            $table->text('slug');
-            $table->text('content');
+            $table->json('title');
+            $table->json('slug');
+            $table->json('content');
             $table->boolean('is_publish');
             $table->softDeletes();
             $table->timestamps();

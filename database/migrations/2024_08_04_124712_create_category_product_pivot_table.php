@@ -1,5 +1,7 @@
 <?php
 
+use App\Models\Products\Category;
+use App\Models\Products\Product;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -11,13 +13,10 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_recipes', function (Blueprint $table) {
+        Schema::create('category_product', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
-            $table->json('slug');
-            $table->json('content');
-            $table->boolean('is_publish');
-            $table->softDeletes();
+            $table->foreignIdFor(Product::class);
+            $table->foreignIdFor(Category::class);
             $table->timestamps();
         });
     }
@@ -27,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_recipes');
+        Schema::dropIfExists('category_product');
     }
 };

@@ -3,25 +3,21 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
-use App\Filament\Resources\ProductResource\RelationManagers;
-use App\Http\Resources\Utils\TagToolResource;
-use App\Models\Products\Category;
 use App\Models\Products\Product;
-use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
-use Filament\Forms\Components\SpatieTagsInput;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
+use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Spatie\Tags\Tag;
+
 
 class ProductResource extends Resource
 {
@@ -36,32 +32,43 @@ class ProductResource extends Resource
 
     public static function form(Form $form): Form
     {
-        $tags = Tag::where('type', 'product_tags')->get('name');
-
-        $suggestions = [];
-
-        foreach ($tags as $key => $value) {
-            $suggestions[] = $value->name;
-        }
-
         return $form
-            ->schema([
-                TextInput::make('name')
-                    ->label(__('Name'))
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('products'),
-                RichEditor::make('description')
-                    ->label(__('Description'))
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                SpatieTagsInput::make('tags')
-                    ->suggestions($suggestions)
-                    ->type('product_tags'),
-                Select::make('category_id')
-                    ->label(__('Category'))
-                    ->relationship(name: 'category', titleAttribute: 'title.id')
-                    ->getOptionLabelFromRecordUsing(fn (Category $record) => $record->title)
-            ]);
+            ->schema(
+                [Split::make(
+                    [
+                        Section::make([
+                            SpatieMediaLibraryFileUpload::make('image')
+                                ->collection('products')
+                                ->image(),
+                            TextInput::make('name')
+                                ->label(__('Name'))
+                                ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                            RichEditor::make('description')
+                                ->label(__('Description'))
+                                ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                        ]),
+
+                        Section::make([
+                            Select::make('category_id')
+                                ->relationship(
+                                    name: 'categories',
+                                    titleAttribute: 'name',
+                                )
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', App::currentLocale()))
+
+                                // ->options(Category::all()->pluck('name', 'id'))
+                                ->label(__('category_id'))
+                                ->multiple()->translatable(false)
+                                ->searchable(['name'])
+                                ->preload(),
+                            Select::make('brand_id')
+                                ->label(__('brand'))
+                                ->relationship(name: 'brand', titleAttribute: 'name')
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', App::currentLocale()))
+                        ])->grow(false),
+                    ],
+                )->from('xl')]
+            )->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -70,7 +77,12 @@ class ProductResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 TextColumn::make('slug'),
-                TextColumn::make('category.title'),
+                TextColumn::make('brand.name'),
+                TextColumn::make('categories.name')
+                    ->label('Categories')
+                    ->listWithLineBreaks()
+                    ->limitList(2)
+                    ->expandableLimitedList(),
 
             ])
             ->filters([
