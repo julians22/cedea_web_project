@@ -141,8 +141,10 @@
             class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pr-0 ~md:~px-4/28 ~md:~py-8/10">
             <div class="md:w-9/12">
                 <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
-                <p class="text-center">Menjadi pemain unggul di bisnis makanan siap masak di Indonesia dan menjadi
-                    pilihan utama di pasar global tertentu.</p>
+                <p class="text-center">
+                    Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi pilihan
+                    utama di pasar global tertentu.
+                </p>
             </div>
         </div>
 
@@ -297,7 +299,7 @@
     <section class="container my-16" id="wilayah">
         <h2 class="section-title">Wilayah Kerja</h2>
         <div class="mx-auto w-3/4">
-            <img src="{{ asset('img/map.svg') }}" alt="">
+            <img src="{{ asset('img/map.png') }}" alt="">
         </div>
 
         <div>
