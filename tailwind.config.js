@@ -14,7 +14,7 @@ export default {
     theme: {
         screens: {
             ...screens,
-            "footer-small": "22rem",
+            "footer-small": "25rem",
         },
         fontSize,
         extend: {
