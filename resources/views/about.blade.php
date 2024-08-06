@@ -202,7 +202,7 @@
                         style="z-index: {{ count($words) - $index }}">
 
                         <div
-                            class="-z-1 w-4/5 rounded-t-full border-white bg-[#b5202b] text-white shadow-black drop-shadow-xl ~border-4/8 ~p-1/5 ~min-[20rem]/sm:~-mb-4/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28">
+                            class="-z-1 w-4/5 rounded-t-full border-4 border-white bg-[#b5202b] text-white shadow-black drop-shadow-xl ~p-1/5 ~min-[20rem]/sm:~-mb-2/1 ~min-[20rem]/sm:~h-11/16 sm:w-1/2 sm:~-mb-5/4 sm:~h-14/28 md:border-8">
                             <img class="size-full object-contain object-center" src="{{ $word['icon'] }}"
                                 alt="{{ $word['text'] }} icon">
                         </div>
