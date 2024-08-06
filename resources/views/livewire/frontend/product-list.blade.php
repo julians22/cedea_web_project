@@ -30,7 +30,7 @@
 
 <section class="space-y-8" x-data="{ modalOpen: false, }">
     {{-- Brand --}}
-    <div class="bg-products relative object-contain transition-all">
+    <div class="bg-products relative object-contain transition-all max-md:my-4">
         <img class="max-md:hidden" draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
 
         <div class="container">
@@ -42,8 +42,8 @@
 
                 <button class="my-4 grid grid-cols-3 ~gap-x-3/8" type="button">
                     @foreach ($brands as $brand)
-                        <div class="{{ $activeBrand == $brand->slug ? 'scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
-                            wire:key='{{ $brand->slug }}' wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
+                        <div class="{{ in_array($brand->slug, $activeBrands) ? 'scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                            wire:key='{{ $brand->slug }}' wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">
                             <img class="size-full" src="{{ $brand->media[0]->original_url }}" alt="">
                         </div>
                     @endforeach
@@ -52,11 +52,10 @@
         </div>
     </div>
 
-    <div class="container flex grid-cols-[25%_1fr] flex-col gap-20 py-8 lg:grid">
+    <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~gap-8/20 lg:grid">
 
         {{-- category side nav --}}
         <div class="top-4 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] ~p-4/8 lg:sticky">
-
             {{-- search form --}}
             <div class="lg:mt-4">
                 <label class="sr-only mb-2 text-sm font-medium" for="default-search">Search</label>
@@ -72,30 +71,34 @@
                 </div>
             </div>
 
-            <div class="flex flex-wrap gap-2">
+            @if ($keyword)
+                keyword : {{ $keyword }}
+            @endif
 
-
-                @foreach ($activeCategoriesName as $category)
-                    <div class="rounded-full bg-red-300 px-2 py-3 text-black" wire:key='{{ $category->slug }}'
-                        wire:click="handleChangeActiveCategories('{{ $category->slug }}')">
-                        {{ $category->name }}
-                    </div>
-                @endforeach
-            </div>
+            @if (count($this->activeCategoriesName))
+                <div class="flex flex-wrap gap-2">
+                    @foreach ($this->activeCategoriesName as $category)
+                        <div class="rounded-full bg-red-300 px-3 py-2 text-black" wire:key='{{ $category->slug }}'>
+                            {{ $category->name }}
+                            <x-lucide-x class="size-4 inline-block cursor-pointer"
+                                wire:click="handleChangeActiveCategories('{{ $category->slug }}')" />
+                        </div>
+                    @endforeach
+                </div>
+            @endif
 
             <div class="flex flex-col gap-y-4 uppercase">
-
                 @foreach ($this->brandWithUniqueCategories as $brand)
                     <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
-                        <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')" @class([
+                        <p wire:click="handleChangeActiveBrands('{{ $brand->slug }}')" @class([
                             '~text-lg/2xl',
-                            'text-cedea-red' => $activeBrand == $brand->slug,
+                            'text-cedea-red' => in_array($brand->slug, $activeBrands),
                         ])>
                             {{ $brand->name }}</p>
                         <div @class([
                             'flex flex-col gap-1 overflow-auto transition-all duration-1000',
-                            ' max-h-40 mt-2' => $activeBrand == $brand->slug,
-                            ' max-h-0' => $activeBrand != $brand->slug,
+                            ' max-h-40 mt-2' => in_array($brand->slug, $activeBrands),
+                            ' max-h-0' => !in_array($brand->slug, $activeBrands),
                         ])>
                             @foreach ($brand->uniqueCategories as $category)
                                 <div @class([
@@ -115,21 +118,20 @@
                     </div>
                     <div class="mx-auto h-0.5 w-full bg-black last:hidden"></div>
                 @endforeach
-
             </div>
-
         </div>
 
         {{-- product grid --}}
-        <div class="grid grid-cols-3 items-start ~gap-8/20 md:grid-cols-3" wire:loading.remove
-            wire:target='handleChangeActiveCategories, handleChangeActiveBrand'>
+        <div class="grid grid-cols-3 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.remove
+            wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
             @foreach ($products as $item)
                 {{-- hover trigger --}}
-                <div class="relative h-full drop-shadow-xl transition hover:drop-shadow-lg" x-data="hover"
-                    @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()" wire:key='{{ $item->slug }}'
-                    wire:key='{{ $item->slug }}'>
+                <div class="group relative h-full drop-shadow-xl transition hover:drop-shadow-lg"
+                    x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
+                    wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
 
-                    <div class="transition-transform duration-500 ease-in-out hover:-rotate-6 hover:scale-105">
+                    <div
+                        class="transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                         <img class="" src="{{ $item->media[0]->original_url }}"
                             alt="{{ $item->media[0]->name }}">
                     </div>
@@ -174,7 +176,7 @@
             @endforeach
         </div>
 
-        <div wire:loading wire:target='handleChangeActiveCategories, handleChangeActiveBrand'>
+        <div wire:loading wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
             <x-product-list-skeleton />
         </div>
 

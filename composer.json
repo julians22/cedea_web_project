@@ -9,9 +9,9 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
-        "alaouy/youtube": "^2.2",
         "bezhansalleh/filament-language-switch": "^3.1",
         "butschster/meta-tags": "^3.1",
+        "embed/embed": "^4.4",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "gehrisandro/tailwind-merge-laravel": "^1.2",

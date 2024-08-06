@@ -299,8 +299,8 @@
     {{-- Map --}}
     <section class="container my-16" id="wilayah">
         <h2 class="section-title">Wilayah Kerja</h2>
-        <div class="mx-auto w-3/4">
-            <img src="{{ asset('img/map.png') }}" alt="">
+        <div class="md:mx-auto md:w-3/4">
+            <img src="{{ asset('img/map.svg') }}" alt="">
         </div>
 
         <div>

@@ -17,19 +17,26 @@ class ProductList extends Component
     public $brands;
     public $allCategories;
     public $categories = [];
+    public $activeProduct = null;
 
-    #[Url(as: 'brand', history: false, except: '')]
-    public ?string $activeBrand = null;
+    #[Url(as: 'brand', except: [])]
+    public array $activeBrands = [];
 
-    #[Url(as: 'categories', history: false, except: [])]
+    #[Url(as: 'categories', except: [])]
     public array $activeCategories = [];
 
-    #[Url(as: 'keyword', history: false, except: '')]
-    public ?string $keyword = null;
+    #[Url(except: '')]
+    public string $keyword = '';
 
-    public $activeCategoriesName = [];
 
-    public $activeProduct = null;
+    private function handleArrayDiffing($value, &$array)
+    {
+        if (!in_array($value, $array)) {
+            array_push($array, $value);
+        } else {
+            $array  = array_diff($array, [$value]);
+        }
+    }
 
     public function mount()
     {
@@ -37,33 +44,28 @@ class ProductList extends Component
         $this->allCategories = Category::all();
     }
 
-    public function handleChangeActiveBrand($slug)
+    public function handleChangeActiveBrands($slug)
     {
-        if ($this->activeBrand === $slug) {
-            $this->reset('activeBrand');
-            $this->reset('activeCategories');
-            $this->reset('activeCategoriesName');
-        } else {
-            $this->activeBrand = $slug;
-        }
+        $this->handleArrayDiffing($slug, $this->activeBrands);
 
         $this->reset('activeProduct');
     }
 
     public function handleChangeActiveCategories($slug)
     {
-
-        if (!in_array($slug, $this->activeCategories)) {
-            array_push($this->activeCategories, $slug);
-        } else {
-            $this->activeCategories  = array_diff($this->activeCategories, [$slug]);
-        }
-
-        $this->activeCategoriesName = $this->allCategories->filter(function ($item) {
-            return in_array($item->slug, $this->activeCategories);
-        });
+        $this->handleArrayDiffing($slug, $this->activeCategories);
 
         $this->reset('activeProduct');
+    }
+
+    #[Computed]
+    public function activeCategoriesName()
+    {
+        $categoriesName = [];
+        $categoriesName = $this->allCategories->filter(function ($item) {
+            return in_array($item->slug, $this->activeCategories);
+        });
+        return $categoriesName;
     }
 
     public function handleChangeActiveProduct($slug)
@@ -91,9 +93,12 @@ class ProductList extends Component
         return view('livewire.frontend.product-list', [
             'products' => Product::query()
                 ->when(
-                    $this->activeBrand,
+                    count($this->activeBrands),
                     function ($q) {
-                        return $q->whereRelation('brand', 'slug', $this->activeBrand);
+                        return $q->whereHas('brand', function (Builder $query) {
+                            return $query->wherein('slug', $this->activeBrands);
+                        });
+                        // return $q->whereRelation('brand', 'slug', $this->activeBrands);
                     }
                 )
                 ->when(

@@ -1,9 +1,9 @@
 <?php
 
-use Alaouy\Youtube\Facades\Youtube;
-use App\Http\Controllers\Pages\HomeController;
+use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Pages\HomeController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,21 +16,40 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])->name('home');
+Route::get('/', [HomeController::class, 'index'])
+    ->name('home');
 
-Route::get('about', function () {
-    Meta::prependTitle('TENTANG CEDEA');
+Route::get(
+    'about',
+    function () {
+        Meta::prependTitle('TENTANG CEDEA');
 
-    return view('about');
-})
+        return view('about');
+    }
+)
     ->name('about');
 
-Route::get('product', [HomeController::class, 'product'])->name('product');
+Route::get('product', [HomeController::class, 'product'])
+    ->name('product');
 
-Route::get('contact', [HomeController::class, 'contact'])->name('contact');
+Route::get(
+    'recipe',
+    function () {
+        Meta::prependTitle('TENTANG CEDEA');
+
+        return view('about');
+    }
+)
+    ->name('recipe');
+
+Route::get('contact', [HomeController::class, 'contact'])
+    ->name('contact');
 
 Route::get('video_get', function () {
-    $video = Youtube::getVideoInfo('W9cAe7SUTyo');
+    $embed = new Embed();
 
-    dd($video);
+    //Load any url:
+    $info = $embed->get('https://www.youtube.com/watch?v=W9cAe7SUTyo');
+    // return $info->image;
+    dd($info);
 });
