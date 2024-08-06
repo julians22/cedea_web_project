@@ -26,13 +26,9 @@ class HomeController extends Controller
 
     function product()
     {
-
         Meta::prependTitle('PRODUCT');
 
-        $brands = Brand::orderBy('order_column')->with('media')->get();
-        $categories = Category::all();
-
-        return view('merek', compact('categories', 'brands'));
+        return view('merek');
     }
 
     function contact()

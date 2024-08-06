@@ -67,8 +67,20 @@
 
                     <input
                         class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
-                        id="default-search" type="search" placeholder="Cari produk di sini" required />
+                        id="default-search" wire:model.live='keyword' type="search" placeholder="Cari produk di sini"
+                        required />
                 </div>
+            </div>
+
+            <div class="flex flex-wrap gap-2">
+
+
+                @foreach ($activeCategoriesName as $category)
+                    <div class="rounded-full bg-red-300 px-2 py-3 text-black" wire:key='{{ $category->slug }}'
+                        wire:click="handleChangeActiveCategories('{{ $category->slug }}')">
+                        {{ $category->name }}
+                    </div>
+                @endforeach
             </div>
 
             <div class="flex flex-col gap-y-4 uppercase">

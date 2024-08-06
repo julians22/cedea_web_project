@@ -18,34 +18,40 @@ class ProductList extends Component
     public $allCategories;
     public $categories = [];
 
-    #[Url(as: 'brand', history: true, except: '')]
+    #[Url(as: 'brand', history: false, except: '')]
     public ?string $activeBrand = null;
 
-    #[Url(as: 'category', history: true, except: '')]
+    #[Url(as: 'categories', history: false, except: [])]
     public array $activeCategories = [];
 
-    public $products;
+    #[Url(as: 'keyword', history: false, except: '')]
+    public ?string $keyword = null;
+
+    public $activeCategoriesName = [];
 
     public $activeProduct = null;
 
-    public function mount($brands, $categories)
+    public function mount()
     {
-        $this->brands = $brands;
-        $this->allCategories = $categories;
-        $this->getProducts();
+        $this->brands = Brand::orderBy('order_column')->with('media')->get();
+        $this->allCategories = Category::all();
     }
 
     public function handleChangeActiveBrand($slug)
     {
-        $this->activeBrand = $slug;
-        // $this->activeCategories = null;
+        if ($this->activeBrand === $slug) {
+            $this->reset('activeBrand');
+            $this->reset('activeCategories');
+            $this->reset('activeCategoriesName');
+        } else {
+            $this->activeBrand = $slug;
+        }
+
         $this->reset('activeProduct');
-        $this->getProducts();
     }
 
     public function handleChangeActiveCategories($slug)
     {
-        // $this->activeCategories = $slug;
 
         if (!in_array($slug, $this->activeCategories)) {
             array_push($this->activeCategories, $slug);
@@ -53,8 +59,11 @@ class ProductList extends Component
             $this->activeCategories  = array_diff($this->activeCategories, [$slug]);
         }
 
+        $this->activeCategoriesName = $this->allCategories->filter(function ($item) {
+            return in_array($item->slug, $this->activeCategories);
+        });
+
         $this->reset('activeProduct');
-        $this->getProducts();
     }
 
     public function handleChangeActiveProduct($slug)
@@ -77,31 +86,32 @@ class ProductList extends Component
         return $this->brands;
     }
 
-    public function getProducts()
-    {
-        $this->products = Product::query()
-            ->when(
-                $this->activeBrand,
-                function ($q) {
-                    return $q->whereRelation('brand', 'slug', $this->activeBrand);
-                }
-            )
-            ->when(
-                count($this->activeCategories),
-                function ($q) {
-                    return $q->whereHas('categories', function (Builder $query) {
-                        $query->whereIn('slug', $this->activeCategories);
-                    });
-                }
-            )
-            ->with(['media', 'brand', 'categories'])
-            ->get();
-    }
-
     public function render()
     {
         return view('livewire.frontend.product-list', [
-            'products' => $this->products,
+            'products' => Product::query()
+                ->when(
+                    $this->activeBrand,
+                    function ($q) {
+                        return $q->whereRelation('brand', 'slug', $this->activeBrand);
+                    }
+                )
+                ->when(
+                    count($this->activeCategories),
+                    function ($q) {
+                        return $q->whereHas('categories', function (Builder $query) {
+                            $query->whereIn('slug', $this->activeCategories);
+                        });
+                    }
+                )
+                ->when(
+                    $this->keyword,
+                    function ($q) {
+                        return $q->where('name', 'LIKE', '%' . $this->keyword . '%');
+                    }
+                )
+                ->with(['media', 'brand', 'categories'])
+                ->get(),
             'categories' => $this->categories,
         ]);
     }

@@ -1,7 +1,7 @@
 <x-layouts.app>
     <x-video-player />
 
-    <livewire:frontend.product-list :brands="$brands" :categories="$categories" />
+    <livewire:frontend.product-list />
 
     <section class="container mt-8" wire:ignore>
         <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
