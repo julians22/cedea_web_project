@@ -123,7 +123,7 @@ class ProductList extends Component
                     }
                 )
                 ->with(['media', 'brand', 'categories'])
-                ->simplePaginate(1),
+                ->simplePaginate(6),
             'categories' => $this->categories,
         ]);
     }

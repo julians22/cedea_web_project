@@ -216,7 +216,7 @@
                             <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
                             <h2 class="mt-2 uppercase ~text-2xl/4xl">{{ $activeProduct->name }}</h2>
 
-                            <div class="mt-8 flex gap-x-6">
+                            <div class="mt-8 flex gap-x-6 max-md:flex-col">
                                 <div class="flex basis-1/6 flex-col items-center justify-center gap-y-4">
                                     <img src="{{ $activeProduct->media[0]->original_url }}" alt="">
                                     <button
@@ -250,7 +250,7 @@
                         <x-text-skeleton />
                         <x-text-skeleton />
 
-                        <div class="grid grid-cols-3 items-center gap-x-6">
+                        <div class="grid grid-cols-1 items-center gap-x-6 md:grid-cols-3">
                             <x-image-skeleton />
 
                             <x-paragraph-skeleton />

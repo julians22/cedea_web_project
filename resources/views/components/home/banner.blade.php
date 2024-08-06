@@ -7,9 +7,9 @@
         <div class="swiper-wrapper">
             <!-- Slides -->
             @for ($i = 0; $i < 3; $i++)
-                <div class="swiper-slide">
+                <div class="swiper-slide cursor-grab">
                     <img class="slider-item-desktop" src="{{ asset('img/banner-3.jpg') }}">
-                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-6.jpg') }}">
+                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-7.jpg') }}">
                 </div>
             @endfor
         </div>
