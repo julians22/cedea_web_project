@@ -9,7 +9,7 @@
             @for ($i = 0; $i < 3; $i++)
                 <div class="swiper-slide">
                     <img class="slider-item-desktop" src="{{ asset('img/banner-3.jpg') }}">
-                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-5.jpg') }}">
+                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-6.jpg') }}">
                 </div>
             @endfor
         </div>
