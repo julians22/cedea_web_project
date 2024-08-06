@@ -12,7 +12,10 @@ export default {
         extract,
     },
     theme: {
-        screens,
+        screens: {
+            ...screens,
+            "footer-small": "22rem",
+        },
         fontSize,
         extend: {
             // dropShadow: {

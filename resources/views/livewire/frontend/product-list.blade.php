@@ -30,24 +30,24 @@
 
 <section class="space-y-8" x-data="{ modalOpen: false, }">
     {{-- Brand --}}
-    <div class="bg-products relative object-contain transition-all max-md:my-4">
+    <div class="bg-products relative object-contain transition-all max-md:mb-4">
         <img class="max-md:hidden" draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
+        <img class="md:hidden" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
 
-        <div class="container">
-            <div class="md:absolute md:left-[10%] md:top-1/2 md:w-1/3 md:-translate-y-1/2">
-                <h2 class="section-title">Produk</h2>
+        <div class="container absolute ~top-4/8 md:left-[10%] md:top-1/2 md:w-1/3 md:-translate-y-1/2">
+            <h2 class="section-title">Produk</h2>
 
-                <p>Jelajahi kekayaan laut dengan rangkaian
-                    produk terbaik dari Cedea Seafood!</p>
+            <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
+                produk terbaik dari Cedea Seafood!</p>
 
-                <button class="my-4 grid grid-cols-3 ~gap-x-3/8" type="button">
-                    @foreach ($brands as $brand)
-                        <div class="{{ in_array($brand->slug, $activeBrands) ? 'scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
-                            wire:key='{{ $brand->slug }}' wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">
-                            <img class="size-full" src="{{ $brand->media[0]->original_url }}" alt="">
-                        </div>
-                    @endforeach
-                </button>
+            <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
+                @foreach ($brands as $brand)
+                    <div class="{{ in_array($brand->slug, $activeBrands) ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                        type="button" wire:key='{{ $brand->slug }}'
+                        wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">
+                        <img class="lg:size-full" src="{{ $brand->media[0]->original_url }}" alt="">
+                    </div>
+                @endforeach
             </div>
         </div>
     </div>
@@ -122,11 +122,11 @@
         </div>
 
         {{-- product grid --}}
-        <div class="grid grid-cols-3 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.remove
+        <div class="grid grid-cols-2 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.remove
             wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
             @foreach ($products as $item)
                 {{-- hover trigger --}}
-                <div class="group relative h-full drop-shadow-xl transition hover:drop-shadow-lg"
+                <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                     x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
                     wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
 
@@ -137,7 +137,7 @@
                     </div>
 
                     {{-- hover content --}}
-                    <div class='before:size-12 absolute top-full rounded-3xl drop-shadow-top before:absolute before:-top-1/4 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700'
+                    <div class='before:size-12 top-full rounded-3xl drop-shadow-top before:absolute before:-top-1/4 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700'
                         x-show="hoverCardHovered" x-transition x-cloak>
                         <div
                             class="mt-10 grid h-auto w-full grid-cols-[15%_1fr_15%] items-center space-x-3 rounded-3xl bg-white p-5">

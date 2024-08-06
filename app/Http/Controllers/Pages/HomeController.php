@@ -28,7 +28,7 @@ class HomeController extends Controller
     {
         Meta::prependTitle('PRODUCT');
 
-        return view('merek');
+        return view('product');
     }
 
     function contact()
