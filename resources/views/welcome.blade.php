@@ -52,7 +52,7 @@
     <div class="container my-12 flex justify-center gap-2 px-4 lg:px-0">
 
         <div class="shrink basis-96 max-md:hidden">
-            <img class="w-full" src="{{ asset('img/marketplace-phone_2.png') }}" alt="">
+            <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}" alt="">
         </div>
 
         <div class="col-span-5 lg:col-span-3">
