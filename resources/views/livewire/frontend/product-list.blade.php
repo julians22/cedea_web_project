@@ -52,7 +52,7 @@
         </div>
     </div>
 
-    <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~gap-8/20 lg:grid">
+    <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~gap-8/20 lg:grid" id="product-list">
 
         {{-- category side nav --}}
         <div class="top-4 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] ~p-4/8 lg:sticky">
@@ -66,7 +66,7 @@
 
                     <input
                         class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
-                        id="default-search" wire:model.live='keyword' type="search" placeholder="Cari produk di sini"
+                        id="product-search" wire:model.live='keyword' type="search" placeholder="Cari produk di sini"
                         required />
                 </div>
             </div>
@@ -126,54 +126,53 @@
             wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
             @foreach ($products as $item)
                 {{-- hover trigger --}}
-                <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
-                    x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
-                    wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
-
-                    <div
-                        class="transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
-                        <img class="" src="{{ $item->media[0]->original_url }}"
-                            alt="{{ $item->media[0]->name }}">
-                    </div>
-
-                    {{-- hover content --}}
-                    <div class='before:size-12 top-full rounded-3xl drop-shadow-top before:absolute before:-top-1/4 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700'
-                        x-show="hoverCardHovered" x-transition x-cloak>
+                <div>
+                    <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
+                        x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
+                        wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
                         <div
-                            class="mt-10 grid h-auto w-full grid-cols-[15%_1fr_15%] items-center space-x-3 rounded-3xl bg-white p-5">
-
-                            <div class="">
-                                <img class="max-w-full" src="{{ $item->brand->media[0]->original_url }}"
-                                    alt="">
-                            </div>
-
-                            <div class="flex items-center text-cedea-red">
-                                {{ $item->name }}
-                            </div>
-
-                            <div class="flex items-center text-2xl text-cedea-red"
-                                @click="()=>{
-                                    modalOpen=true;
-                                    $wire.handleChangeActiveProduct('{{ $item->slug }}')
-                                    }">
-                                <span class="cursor-pointer">
-                                    <svg class="h-8" xmlns="http://www.w3.org/2000/svg"
-                                        xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
-                                        <g>
-                                            <g style="fill: none; filter: url(#d);">
-                                                <polyline class="fill-none stroke-cedea-red"
-                                                    points="1.36 .75 16.72 16.11 .75 32.07"
-                                                    style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
+                            class="transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
+                            <img class="" src="{{ $item->media[0]->original_url }}"
+                                alt="{{ $item->media[0]->name }}">
+                        </div>
+                        {{-- hover content --}}
+                        <div class='before:size-12 top-full rounded-3xl drop-shadow-top before:absolute before:-top-1/4 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700'
+                            x-show="hoverCardHovered" x-transition x-cloak>
+                            <div
+                                class="mt-10 grid h-auto w-full grid-cols-[15%_1fr_15%] items-center space-x-3 rounded-3xl bg-white p-5">
+                                <div class="">
+                                    <img class="max-w-full" src="{{ $item->brand->media[0]->original_url }}"
+                                        alt="">
+                                </div>
+                                <div class="flex items-center text-cedea-red">
+                                    {{ $item->name }}
+                                </div>
+                                <div class="flex items-center text-2xl text-cedea-red"
+                                    @click="()=>{
+                                        modalOpen=true;
+                                        $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                        }">
+                                    <span class="cursor-pointer">
+                                        <svg class="h-8" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
+                                            <g>
+                                                <g style="fill: none; filter: url(#d);">
+                                                    <polyline class="fill-none stroke-cedea-red"
+                                                        points="1.36 .75 16.72 16.11 .75 32.07"
+                                                        style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
+                                                </g>
                                             </g>
-                                        </g>
-                                    </svg>
-                                </span>
+                                        </svg>
+                                    </span>
+                                </div>
                             </div>
                         </div>
                     </div>
-
                 </div>
             @endforeach
+
+            {{ $products->links(data: ['scrollTo' => false]) }}
+
         </div>
 
         <div wire:loading wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>

@@ -1,4 +1,4 @@
-<header class="relative z-20 w-full bg-cedea-red text-white drop-shadow-lg">
+<header class="sticky top-0 z-20 w-full bg-cedea-red text-white drop-shadow-lg">
     <div class="container mx-auto grid grid-cols-2 justify-between gap-4 lg:flex">
 
         {{-- ? logo --}}

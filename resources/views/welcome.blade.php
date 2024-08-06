@@ -102,6 +102,7 @@
                                 ],
                             ];
                         @endphp
+
                         @foreach ($marketplaces as $marketplace)
                             <a class="~size-16/28 flex items-center justify-center rounded-xl bg-white text-center shadow-top-hover transition duration-700 ease-in-out ~p-2/4 hover:scale-110 hover:shadow-lg md:shadow-top md:hover:shadow-top-hover"
                                 href="{{ $marketplace['url'] }}" target="_blank">

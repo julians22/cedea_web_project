@@ -10,10 +10,12 @@ use App\Models\Products\Product;
 use App\Models\Products\Category;
 use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
-
+use Livewire\WithPagination;
 
 class ProductList extends Component
 {
+    use WithPagination;
+
     public $brands;
     public $allCategories;
     public $categories = [];
@@ -88,6 +90,11 @@ class ProductList extends Component
         return $this->brands;
     }
 
+    public function updating()
+    {
+        $this->resetPage();
+    }
+
     public function render()
     {
         return view('livewire.frontend.product-list', [
@@ -116,7 +123,7 @@ class ProductList extends Component
                     }
                 )
                 ->with(['media', 'brand', 'categories'])
-                ->get(),
+                ->simplePaginate(1),
             'categories' => $this->categories,
         ]);
     }
