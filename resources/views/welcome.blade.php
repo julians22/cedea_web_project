@@ -57,7 +57,7 @@
 
         <div class="col-span-5 lg:col-span-3">
             <div class="flex h-full flex-col justify-center">
-                <h2 class="section-title">
+                <h2 class="section-title text-center">
                     Nggak Ada
                     Waktu Belanja? Pesan Online Solusinya!
                 </h2>
