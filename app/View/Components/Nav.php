@@ -19,7 +19,6 @@ class Nav extends Component
     {
 
         $this->locale = App::currentLocale();
-
         //* TYPE DOC
         //* [label : string
         //*     route : string | route

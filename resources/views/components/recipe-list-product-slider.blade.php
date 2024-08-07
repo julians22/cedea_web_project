@@ -2,13 +2,15 @@
     id="recipe-swiper">
     <div class="swiper-wrapper">
         <!-- Slides -->
-        @foreach ($products as $product)
-            @for ($i = 0; $i < 5; $i++)
-                <div @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
-                    <img class="" src="{{ $product->media[0]->original_url }}">
-                </div>
-            @endfor
-        @endforeach
+        @if ($products)
+            @foreach ($products as $product)
+                @for ($i = 0; $i < 5; $i++)
+                    <div @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
+                        <img class="" src="{{ $product->media[0]->original_url }}">
+                    </div>
+                @endfor
+            @endforeach
+        @endif
     </div>
     <!-- Add Arrows -->
     <div class="swiper-button-next"></div>
