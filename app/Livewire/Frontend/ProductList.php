@@ -21,8 +21,8 @@ class ProductList extends Component
     public $categories = [];
     public $activeProduct = null;
 
-    #[Url(as: 'brand', except: [])]
-    public array $activeBrands = [];
+    #[Url(as: 'brand', except: null)]
+    public ?string $activeBrand = null;
 
     #[Url(as: 'categories', except: [])]
     public array $activeCategories = [];
@@ -43,14 +43,14 @@ class ProductList extends Component
 
     public function mount()
     {
-
         $this->allCategories = Category::all();
     }
 
-    public function handleChangeActiveBrands($slug)
+    public function handleChangeActiveBrand($slug)
     {
-        $this->handleArrayDiffing($slug, $this->activeBrands);
+        $this->activeBrand = $slug;
 
+        $this->reset('activeCategories');
         $this->reset('activeProduct');
     }
 
@@ -67,19 +67,9 @@ class ProductList extends Component
     }
 
     #[Computed]
-    public function activeCategoriesName()
-    {
-        $categoriesName = [];
-        $categoriesName = $this->allCategories->filter(function ($item) {
-            return in_array($item->slug, $this->activeCategories);
-        });
-        return $categoriesName;
-    }
-
-    #[Computed]
     public function brandWithUniqueCategories()
     {
-        $brands = Brand::orderBy('order_column')->get();
+        $brands = Brand::orderBy('order_column')->with('products.categories')->get();
 
         foreach ($brands as $brand) {
             // Flatten the categories collections and get unique categories
@@ -104,12 +94,9 @@ class ProductList extends Component
         return view('livewire.frontend.product-list', [
             'products' => Product::query()
                 ->when(
-                    count($this->activeBrands),
+                    $this->activeBrand,
                     function ($q) {
-                        return $q->whereHas('brand', function (Builder $query) {
-                            return $query->wherein('slug', $this->activeBrands);
-                        });
-                        // return $q->whereRelation('brand', 'slug', $this->activeBrands);
+                        return $q->whereRelation('brand', 'slug', $this->activeBrand);
                     }
                 )
                 ->when(

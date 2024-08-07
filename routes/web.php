@@ -39,7 +39,8 @@ Route::get(
 )
     ->name('recipe');
 
-Route::view('recipe/detail', 'recipe-detail');
+Route::view('recipe/detail', 'recipe-detail')
+    ->name('recipe.detail');
 
 Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact');

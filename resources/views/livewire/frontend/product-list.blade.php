@@ -42,9 +42,9 @@
 
             <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
                 @foreach ($this->brandWithUniqueCategories as $brand)
-                    <div class="{{ in_array($brand->slug, $activeBrands) ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                    <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                         type="button" wire:key='{{ $brand->slug }}'
-                        wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">
+                        wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                         <img class="lg:size-full" src="{{ $brand->media[0]->original_url }}" alt="">
                     </div>
                 @endforeach
@@ -71,34 +71,18 @@
                 </div>
             </div>
 
-            @if ($keyword)
-                keyword : {{ $keyword }}
-            @endif
-
-            @if (count($this->activeCategoriesName))
-                <div class="flex flex-wrap gap-2">
-                    @foreach ($this->activeCategoriesName as $category)
-                        <div class="rounded-full bg-red-300 px-3 py-2 text-black" wire:key='{{ $category->slug }}'>
-                            {{ $category->name }}
-                            <x-lucide-x class="size-4 inline-block cursor-pointer"
-                                wire:click="handleChangeActiveCategories('{{ $category->slug }}')" />
-                        </div>
-                    @endforeach
-                </div>
-            @endif
-
             <div class="flex flex-col gap-y-4 uppercase">
                 @foreach ($this->brandWithUniqueCategories as $brand)
                     <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
-                        <p wire:click="handleChangeActiveBrands('{{ $brand->slug }}')" @class([
+                        <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')" @class([
                             '~text-lg/2xl',
-                            'text-cedea-red' => in_array($brand->slug, $activeBrands),
+                            'text-cedea-red' => $brand->slug == $activeBrand,
                         ])>
                             {{ $brand->name }}</p>
                         <div @class([
                             'flex flex-col gap-1 overflow-auto transition-all duration-1000',
-                            ' max-h-40 mt-2' => in_array($brand->slug, $activeBrands),
-                            ' max-h-0' => !in_array($brand->slug, $activeBrands),
+                            'max-h-40 mt-2' => $brand->slug == $activeBrand,
+                            'max-h-0' => $brand->slug != $activeBrand,
                         ])>
                             @foreach ($brand->uniqueCategories as $category)
                                 <div @class([
