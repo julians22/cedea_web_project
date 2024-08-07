@@ -4,6 +4,7 @@ use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
+use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 
 /*
@@ -30,7 +31,10 @@ Route::get(
 )
     ->name('about');
 
-Route::get('product', [HomeController::class, 'product'])
+Route::get(
+    'product',
+    ProductList::class
+)
     ->name('product');
 
 Route::get(

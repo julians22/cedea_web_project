@@ -31,10 +31,6 @@
         after:~min-[20rem]/sm:~left-6/20 after:~min-[20rem]/sm:~top-9/16 after:~min-[20rem]/sm:~h-3/[3rem] after:~min-[20rem]/sm:~w-8/10;
     }
 
-    .slider-item-desktop {
-        @apply mx-auto hidden h-full w-full object-cover object-top lg:block;
-    }
-
     @media screen(sm) {
         .gyatt-ribbon {
             @apply after:border-y-8 before:border-8 before:rounded-lg
@@ -43,6 +39,10 @@
 
             after:sm:~left-14/20 after:sm:~top-10/24 after:sm:~h-12/[6.1rem] after:sm:~w-14/48;
         }
+    }
+
+    .slider-item-desktop {
+        @apply mx-auto hidden h-full w-full object-cover object-top lg:block;
     }
 
     .section-title {
@@ -72,10 +72,18 @@
 
         /* Navigation font end */
     }
+
+    .visi-misi-gradient {
+        @apply bg-gradient-to-r from-white to-[#E6E7E8];
+    }
 }
 
 @layer utilities {
     .text-last-center {
         text-align-last: center;
+    }
+
+    .header-padding-safe-area {
+        @apply ~pt-14/28;
     }
 }

@@ -41,4 +41,14 @@ class Category extends Model
     {
         return $this->belongsToMany(Product::class);
     }
+
+    /**
+     * Get all of the brands for the Category
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
+     */
+    public function brands(): HasManyThrough
+    {
+        return $this->hasManyThrough(Brand::class, Product::class);
+    }
 }

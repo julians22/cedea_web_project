@@ -18,7 +18,6 @@ class ProductList extends Component
 
     public $brands;
     public $allCategories;
-    public $categories = [];
     public $activeProduct = null;
 
     #[Url(as: 'brand', except: null)]
@@ -29,7 +28,6 @@ class ProductList extends Component
 
     #[Url(except: '')]
     public string $keyword = '';
-
 
     private function handleArrayDiffing(string $value, array &$array)
     {
@@ -44,6 +42,7 @@ class ProductList extends Component
     public function mount()
     {
         $this->allCategories = Category::all();
+        $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
     }
 
     public function handleChangeActiveBrand($slug)
@@ -66,12 +65,10 @@ class ProductList extends Component
         $this->activeProduct = Product::where('slug', $slug)->first();
     }
 
-    #[Computed]
+    #[Computed(persist: true, seconds: 120)]
     public function brandWithUniqueCategories()
     {
-        $brands = Brand::orderBy('order_column')->with('products.categories')->get();
-
-        foreach ($brands as $brand) {
+        foreach ($this->brands as $brand) {
             // Flatten the categories collections and get unique categories
             $uniqueCategories = $brand->products->pluck('categories')->flatten()->unique('id');
 
@@ -80,7 +77,7 @@ class ProductList extends Component
             $brand->uniqueCategories = $uniqueCategories;
         }
 
-        return $brands;
+        return $this->brands;
     }
 
     public function updating()
@@ -91,7 +88,7 @@ class ProductList extends Component
 
     public function render()
     {
-        return view('livewire.frontend.product-list', [
+        return view('livewire.product-list', [
             'products' => Product::query()
                 ->when(
                     $this->activeBrand,
@@ -113,9 +110,8 @@ class ProductList extends Component
                         return $q->where('name', 'LIKE', '%' . $this->keyword . '%');
                     }
                 )
-                ->with(['media', 'brand.media', 'categories'])
+                ->with(['media', 'brand', 'categories'])
                 ->simplePaginate(1),
-            'categories' => $this->categories,
         ]);
     }
 }

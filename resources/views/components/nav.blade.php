@@ -32,7 +32,7 @@
 
 {{-- ? Main Menu --}}
 <div class="flex items-center justify-end gap-4 lg:justify-center" data-mobile-nav-open
-    x-bind:data-mobile-nav-open="mobileNavOpen ? 'true' : 'false'" x-data="{ mobileNavOpen: false, hoverPosition: null }"
+    x-bind:data-mobile-nav-open="mobileNavOpen ? 'true' : 'false'" x-data="{ mobileNavOpen: false, hoverPosition: null, closeMobileNav() { this.mobileNavOpen = false } }"
     x-resize.document="if($width> 1024) mobileNavOpen=false;">
 
     <nav class="relative z-10 w-auto bg-cedea-red text-white" x-data="navigation">
@@ -185,14 +185,15 @@
             @foreach ($nav_items as $item)
                 <li class="focus:outline-none">
                     <a class="relative inline-flex cursor-pointer flex-col rounded-md font-medium transition-colors"
-                        href="{{ $item['route'] }}">
+                        @click="closeMobileNav()" href="{{ $item['route'] }}">
                         {{ $item['label'] }}
                     </a>
 
                     @if (array_key_exists('submenu', $item) && count($item['submenu']))
                         <ul class="px-3.5">
                             @foreach ($item['submenu'] as $item_submenu)
-                                <a class="flex cursor-pointer items-center py-3" href="{{ $item_submenu['route'] }}">
+                                <a class="flex cursor-pointer items-center py-3" @click="closeMobileNav()"
+                                    href="{{ $item_submenu['route'] }}">
                                     <span class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
                                     <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24"
                                         height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
@@ -209,6 +210,7 @@
                                             @foreach ($item_submenu['submenu'] as $sub_submenu)
                                                 <li class="relative cursor-pointer py-3 focus:outline-none">
                                                     <a class="data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                                        @click="closeMobileNav()"
                                                         href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
                                                 </li>
                                             @endforeach

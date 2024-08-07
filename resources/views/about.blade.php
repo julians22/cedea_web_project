@@ -134,34 +134,44 @@
 
     {{-- About 3 --}}
     {{-- Visi Misi --}}
-    <section class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:grid-cols-2"
-        id="visi-misi">
-        {{-- visi --}}
+    <section class="relative" id="visi-misi">
+        {{-- gradient bg with container hack --}}
         <div
-            class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pr-0 ~md:~px-4/28 ~md:~py-8/10">
-            <div class="md:w-9/12">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
-                <p class="text-center">
-                    Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi pilihan
-                    utama di pasar global tertentu.
-                </p>
+            class="absolute left-0 top-0 -z-1 grid h-full w-full grid-cols-1 items-start justify-center text-justify text-cedea-red max-md:hidden md:grid-cols-2">
+            <div class="visi-misi-gradient h-full w-full">
+            </div>
+            <div class="visi-misi-gradient h-full w-full">
             </div>
         </div>
 
-        {{-- misi --}}
         <div
-            class="flex h-full w-full flex-col items-center justify-start bg-gradient-to-r from-white to-[#E6E7E8] pl-0 ~md:~px-4/28 ~md:~py-8/10">
-            <div class="md:w-9/12">
+            class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red container md:grid-cols-2">
+            {{-- visi --}}
+            <div
+                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-0/10 md:bg-none">
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
+                <p class="text-last-center text-justify">
+                    Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi
+                    pilihan
+                    utama di pasar global tertentu.
+                </p>
+            </div>
+            {{-- misi --}}
+            <div
+                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-0/10 md:bg-none">
                 <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Misi</h2>
-                <p class="text-center">Aktif berperan dalam menyehatkan bangsa dengan membuat produk makanan bergizi,
-                    aman dan bermanfaat untuk seluruh lapisan masyarakat melalui pendekatan inovasi dan teknologi serta
+                <p class="text-last-center text-justify">Aktif berperan dalam menyehatkan bangsa dengan membuat produk
+                    makanan
+                    bergizi,
+                    aman dan bermanfaat untuk seluruh lapisan masyarakat melalui pendekatan inovasi dan teknologi
+                    serta
                     perbaikan berkesinambungan.</p>
             </div>
         </div>
     </section>
 
     {{-- Value section --}}
-    <section class="my-16" id="nilai-nilai-perusahaan">
+    <section class="header-padding-safe-area my-16" id="nilai-nilai-perusahaan">
         <div class="container">
 
             @php
@@ -297,7 +307,7 @@
     </section>
 
     {{-- Map --}}
-    <section class="container my-16" id="wilayah">
+    <section class="header-padding-safe-area container my-16" id="wilayah">
         <h2 class="section-title">Wilayah Kerja</h2>
         <div class="md:mx-auto md:w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
