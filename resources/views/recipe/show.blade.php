@@ -1,11 +1,10 @@
 <x-layouts.app>
-    <x-video-player />
 
     <section>
         <div class="grid grid-cols-[35%_1fr]">
             {{-- image --}}
             <div>
-                <img src="{{ }}" alt="">
+                <img src="#" alt="">
                 <button class="w-fit rounded-full bg-white px-8 py-1 text-sm font-semibold uppercase text-black">Beli
                     sekarang</button>
             </div>

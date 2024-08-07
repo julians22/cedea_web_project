@@ -8,7 +8,7 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BxRupuIM.css",
+    "file": "assets/app-BqfesHkm.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -19,7 +19,7 @@
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-D6mDFwlZ.js",
+    "file": "assets/swiper-home-C_Wvc5nn.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
     "isEntry": true,

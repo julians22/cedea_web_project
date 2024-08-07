@@ -42,7 +42,7 @@
 
             <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
                 @foreach ($brands as $brand)
-                    <div class="{{ in_array($brand->slug, $activeBrands) ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                    <div class="{{ in_array($brand->slug, $activeBrands) ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                         type="button" wire:key='{{ $brand->slug }}'
                         wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">
                         <img class="lg:size-full" src="{{ $brand->media[0]->original_url }}" alt="">
@@ -66,8 +66,8 @@
 
                     <input
                         class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
-                        id="product-search" wire:model.live='keyword' type="search" placeholder="Cari produk di sini"
-                        required />
+                        id="product-search" wire:model.live='keyword' type="search"
+                        placeholder="Cari produk di sini" />
                 </div>
             </div>
 
@@ -122,11 +122,12 @@
         </div>
 
         {{-- product grid --}}
-        <div class="grid grid-cols-2 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.remove
-            wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
+        {{-- TODO: exclude activeProductChange  --}}
+        <div class="grid grid-cols-2 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.delay.long.remove
+            wire:target.except="handleChangeActiveProduct">
             @foreach ($products as $item)
                 {{-- hover trigger --}}
-                <div>
+                <div class="flex flex-col gap-8">
                     <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                         x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
                         wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
@@ -168,14 +169,14 @@
                             </div>
                         </div>
                     </div>
+                    {{ $products->links(data: ['scrollTo' => false]) }}
                 </div>
             @endforeach
-
-            {{ $products->links(data: ['scrollTo' => false]) }}
-
         </div>
 
-        <div wire:loading wire:target='handleChangeActiveCategories, handleChangeActiveBrands'>
+
+        {{--  TODO: exclude activeProductChange --}}
+        <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
             <x-product-list-skeleton />
         </div>
 
@@ -211,7 +212,7 @@
                         </svg>
                     </button>
 
-                    <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
+                    <div class="pr-2 text-white" wire:loading.delay.long.remove wire:target='handleChangeActiveProduct'>
                         @if ($activeProduct)
                             <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
                             <h2 class="mt-2 uppercase ~text-2xl/4xl">{{ $activeProduct->name }}</h2>
@@ -245,7 +246,8 @@
                     </div>
 
                     {{-- skeleton --}}
-                    <div class="space-y-4 pr-2 text-white" wire:loading wire:target='handleChangeActiveProduct'>
+                    <div class="space-y-4 pr-2 text-white" wire:loading.delay.long
+                        wire:target='handleChangeActiveProduct'>
 
                         <x-text-skeleton />
                         <x-text-skeleton />

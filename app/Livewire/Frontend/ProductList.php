@@ -31,13 +31,14 @@ class ProductList extends Component
     public string $keyword = '';
 
 
-    private function handleArrayDiffing($value, &$array)
+    private function handleArrayDiffing(string $value, array &$array)
     {
         if (!in_array($value, $array)) {
-            array_push($array, $value);
+            $array = array_merge($array, [$value]);
         } else {
-            $array  = array_diff($array, [$value]);
+            $array = array_diff($array, [$value]);
         }
+        $this->resetPage();
     }
 
     public function mount()
@@ -60,6 +61,11 @@ class ProductList extends Component
         $this->reset('activeProduct');
     }
 
+    public function handleChangeActiveProduct($slug)
+    {
+        $this->activeProduct = Product::where('slug', $slug)->first();
+    }
+
     #[Computed]
     public function activeCategoriesName()
     {
@@ -68,11 +74,6 @@ class ProductList extends Component
             return in_array($item->slug, $this->activeCategories);
         });
         return $categoriesName;
-    }
-
-    public function handleChangeActiveProduct($slug)
-    {
-        $this->activeProduct = Product::where('slug', $slug)->first();
     }
 
     #[Computed]
@@ -92,6 +93,7 @@ class ProductList extends Component
 
     public function updating()
     {
+        // TODO: exclude activeProductChange
         $this->resetPage();
     }
 
@@ -123,7 +125,7 @@ class ProductList extends Component
                     }
                 )
                 ->with(['media', 'brand', 'categories'])
-                ->simplePaginate(6),
+                ->simplePaginate(1),
             'categories' => $this->categories,
         ]);
     }

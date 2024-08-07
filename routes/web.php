@@ -4,6 +4,7 @@ use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
+use App\Livewire\RecipeList;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,11 +35,7 @@ Route::get('product', [HomeController::class, 'product'])
 
 Route::get(
     'recipe',
-    function () {
-        Meta::prependTitle('TENTANG CEDEA');
-
-        return view('about');
-    }
+    RecipeList::class
 )
     ->name('recipe');
 

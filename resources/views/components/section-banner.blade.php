@@ -9,7 +9,7 @@
             ) }}>
 
         <div @class([
-            'container  top-0 h-full w-full md:absolute md:grid  md:grid-cols-2',
+            'container top-0 h-full w-full md:absolute md:grid  md:grid-cols-2',
             'left-1/2 md:-translate-x-1/2' => $gradient,
             'right-1/2 md:translate-x-1/2 ' => !$gradient,
         ])>
@@ -19,7 +19,7 @@
                 'md:~pl-0/1' => $gradient,
                 'md:~pr-0/1 md:col-start-2' => !$gradient,
             ])>
-                <h2 {{ $attributes->twMergeFor('title', 'font-great-vibes text-cedea-red ~text-2xl/5xl') }}>
+                <h2 {{ $attributes->twMergeFor('title', 'font-androgyne text-cedea-red ~text-2xl/5xl') }}>
                     {{ $title }}
                 </h2>
                 <div {{ $attributes->twMergeFor('desc', '~text-sm/base 2xl:w-[73%] leading-relaxed') }}>

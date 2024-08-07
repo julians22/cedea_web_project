@@ -20,8 +20,8 @@ const homeSwiper = new Swiper(".home-swiper", {
     // If we need pagination
     pagination: {
         el: ".swiper-pagination",
-        dynamicBullets: true,
-        dynamicMainBullets: 3,
+        // dynamicBullets: true,
+        // dynamicMainBullets: 3,
         enabled: true,
         clickable: true,
     },

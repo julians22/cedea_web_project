@@ -1,4 +1,4 @@
-@php
+{{-- @php
     if (! isset($scrollTo)) {
         $scrollTo = 'body';
     }
@@ -8,7 +8,7 @@
            (\$el.closest('{$scrollTo}') || document.querySelector('{$scrollTo}')).scrollIntoView()
         JS
         : '';
-@endphp
+@endphp --}}
 
 <div>
     @if ($paginator->hasPages())
@@ -130,6 +130,7 @@
                         @endforeach
 
                         <span>
+
                             {{-- Next Page Link --}}
                             @if ($paginator->hasMorePages())
                                 <button
