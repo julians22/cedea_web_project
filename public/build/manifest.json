@@ -3,6 +3,10 @@
     "file": "assets/autoplay-BGHAakiq.js",
     "name": "autoplay"
   },
+  "resources/assets/brick-pattern.webp": {
+    "file": "assets/brick-pattern-CdwqVlwB.webp",
+    "src": "resources/assets/brick-pattern.webp"
+  },
   "resources/assets/fonts/AndrogyneMedium.woff": {
     "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
     "src": "resources/assets/fonts/AndrogyneMedium.woff"
@@ -12,7 +16,7 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-D2VhDmnt.css",
+    "file": "assets/app-B75B8ATD.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
