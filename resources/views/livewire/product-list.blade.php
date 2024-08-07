@@ -111,8 +111,8 @@
 
             {{-- product grid --}}
             {{-- TODO: exclude activeProductChange  --}}
-            <div class="grid grid-cols-2 content-center items-start ~gap-8/20 md:grid-cols-3" wire:loading.delay.remove
-                wire:target.except="handleChangeActiveProduct">
+            <div class="grid grid-cols-2 content-center items-start ~gap-8/20 md:grid-cols-3"
+                wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
                 @foreach ($products as $item)
                     {{-- hover trigger --}}
                     <div class="flex flex-col gap-8">
@@ -164,7 +164,7 @@
 
 
             {{--  TODO: exclude activeProductChange --}}
-            <div wire:loading.delay wire:target.except="handleChangeActiveProduct">
+            <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
                 <x-product-list-skeleton />
             </div>
 
@@ -200,7 +200,8 @@
                             </svg>
                         </button>
 
-                        <div class="pr-2 text-white" wire:loading.delay.remove wire:target='handleChangeActiveProduct'>
+                        <div class="pr-2 text-white" wire:loading.delay.long.remove
+                            wire:target='handleChangeActiveProduct'>
                             @if ($activeProduct)
                                 <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
                                 <h2 class="mt-2 uppercase ~text-2xl/4xl">{{ $activeProduct->name }}</h2>
@@ -235,7 +236,8 @@
                         </div>
 
                         {{-- skeleton --}}
-                        <div class="space-y-4 pr-2 text-white" wire:loading.delay wire:target='handleChangeActiveProduct'>
+                        <div class="space-y-4 pr-2 text-white" wire:loading.delay.long
+                            wire:target='handleChangeActiveProduct'>
 
                             <x-text-skeleton />
                             <x-text-skeleton />
