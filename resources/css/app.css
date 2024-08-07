@@ -50,18 +50,24 @@
     }
 
     #recipe-swiper {
-        :root {
+        /* :root { */
+        /*
             --swiper-navigation-size: 22px;
-            /*
             --swiper-navigation-top-offset: 50%;
-            --swiper-navigation-sides-offset: 10px;
             --swiper-navigation-color: var(--swiper-theme-color);
-            */
             --swiper-navigation-color: #ffffff;
+            */
+        /* } */
+        .swiper-button-next {
+            --swiper-navigation-top-offset: 70%;
+            --swiper-navigation-sides-offset: 50px;
+            @apply bg-cedea-red text-white rounded-full after:content-['next'] after:~text-xl/4xl ~p-4/8 ~size-4/8 z-10;
         }
 
-        .swiper-button-next {
-            @apply bg-cedea-red text-white rounded-full after:content-['next'] after:~text-xs/base ~p-4/6 ~size-4/8 z-10;
+        @media screen(sm) {
+            .swiper-button-next {
+                --swiper-navigation-sides-offset: 150px;
+            }
         }
 
         /* Navigation font end */

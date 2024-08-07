@@ -12,7 +12,7 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-C2dEDivo.css",
+    "file": "assets/app-D2VhDmnt.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
@@ -32,7 +32,7 @@
     ]
   },
   "resources/js/vendor/swiper-recipe.js": {
-    "file": "assets/swiper-recipe-zLK0PMl9.js",
+    "file": "assets/swiper-recipe-DtGvb2Ul.js",
     "name": "swiper-recipe",
     "src": "resources/js/vendor/swiper-recipe.js",
     "isEntry": true,

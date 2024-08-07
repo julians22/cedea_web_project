@@ -13,7 +13,7 @@ const recipeSwiper = new Swiper("#recipe-swiper", {
         // prevEl: ".swiper-button-prev",
     },
     // Default parameters
-    slidesPerView: 3,
+    slidesPerView: 3.4,
     spaceBetween: 10,
     // Responsive breakpoints
     breakpoints: {
@@ -24,12 +24,12 @@ const recipeSwiper = new Swiper("#recipe-swiper", {
         // },
         // when window width is >= 480px
         768: {
-            slidesPerView: 5,
+            slidesPerView: 4.4,
             spaceBetween: 30,
         },
         // when window width is >= 640px
         1024: {
-            slidesPerView: 7,
+            slidesPerView: 6.4,
         },
     },
     updateOnWindowResize: true,

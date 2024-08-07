@@ -1,11 +1,11 @@
-<div class="space-y-8 ~py-20/40">
+<div class="space-y-8 bg-brick ~py-20/40">
     <section class="container">
         <div class="grid grid-cols-1 items-center justify-center ~mb-4/10 ~gap-4/8 md:grid-cols-[auto_1fr]">
             <h1 class="section-title m-0">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h1>
-            <div class="relative">
-                <x-lucide-search class="size-6 absolute left-2 top-1/2 -translate-y-1/2 md:left-8" />
+            <div class="relative ~pr-0/20">
+                <x-lucide-search class="size-6 absolute left-2 top-1/2 -translate-y-1/2 md:left-3" />
                 <input
-                    class="block w-full rounded-full border border-black px-1 py-3 ps-10 text-sm placeholder:text-black md:ml-6"
+                    class="block w-full rounded-full border border-black bg-transparent px-1 py-3 ps-10 text-sm placeholder:text-black"
                     id="recipe-search" wire:model.live='keyword' type="search"
                     placeholder="CARI RESEP MENARIK DI SINI" />
             </div>
@@ -23,34 +23,34 @@
                     'label' => 'Sarapan',
                     'icon' => asset('img/icons/time/sarapan.svg'),
                     'background' => asset('img/time/sarapan.jpg'),
-                    'selected' => true,
+                    'recipe_type' => 'sarapan',
                 ],
                 [
                     'label' => 'Makan Siang',
                     'icon' => asset('img/icons/time/makan_siang.svg'),
                     'background' => asset('img/time/makan_siang.jpg'),
-                    'selected' => false,
+                    'recipe_type' => 'makan_siang',
                 ],
                 [
                     'label' => 'Makan Malam',
                     'icon' => asset('img/icons/time/makan_malam.svg'),
                     'background' => asset('img/time/makan_malam.jpg'),
-                    'selected' => false,
+                    'recipe_type' => 'makan_malam',
                 ],
                 [
                     'label' => 'Snack',
                     'icon' => asset('img/icons/time/snack.svg'),
                     'background' => asset('img/time/snack.jpg'),
-                    'selected' => false,
+                    'recipe_type' => 'snack',
                 ],
             ];
         @endphp
 
         <x-meals-container>
             @foreach ($times as $time)
-                <div>
+                <div wire:click="handleChangeActiveRecipeType('{{ $time['recipe_type'] }}')">
                     <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']"
-                        :selected="$time['selected']" />
+                        :selected="$time['recipe_type'] === $activeRecipeType || $activeRecipeType == null" />
                 </div>
             @endforeach
         </x-meals-container>
@@ -80,11 +80,14 @@
         @endforeach
     </section>
 
-    <section class="container">
+    <section class="container relative overflow-visible font-medium" wire:ignore x-data="{ lengthFromLeft: 0 }"
+        x-resize.document="lengthFromLeft = $el.getBoundingClientRect().left">
         <h2 class="section-title">
             Intip Resep Dengan Produk ini Yuk
         </h2>
 
-        <x-recipe-list-product-slider />
+        <div :style="`margin-right: calc(-${lengthFromLeft}px - 1rem)`">
+            <x-recipe-list-product-slider />
+        </div>
     </section>
 </div>

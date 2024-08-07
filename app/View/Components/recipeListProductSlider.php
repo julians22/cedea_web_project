@@ -2,18 +2,21 @@
 
 namespace App\View\Components;
 
+use App\Models\Products\Product;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\View\Component;
 
 class recipeListProductSlider extends Component
 {
+
+    public $products;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        //
+        $this->products = Product::inRandomOrder()->limit(20)->with('media')->get();
     }
 
     /**

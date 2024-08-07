@@ -17,28 +17,34 @@
                         'label' => 'Sarapan',
                         'icon' => asset('img/icons/time/sarapan.svg'),
                         'background' => asset('img/time/sarapan.jpg'),
+                        'recipe_type' => 'sarapan',
                     ],
                     [
                         'label' => 'Makan Siang',
                         'icon' => asset('img/icons/time/makan_siang.svg'),
                         'background' => asset('img/time/makan_siang.jpg'),
+                        'recipe_type' => 'makan_siang',
                     ],
                     [
                         'label' => 'Makan Malam',
                         'icon' => asset('img/icons/time/makan_malam.svg'),
                         'background' => asset('img/time/makan_malam.jpg'),
+                        'recipe_type' => 'makan_malam',
                     ],
                     [
                         'label' => 'Snack',
                         'icon' => asset('img/icons/time/snack.svg'),
                         'background' => asset('img/time/snack.jpg'),
+                        'recipe_type' => 'snack',
                     ],
                 ];
             @endphp
 
             <x-meals-container>
                 @foreach ($times as $time)
-                    <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
+                    <a href="{{ route('recipe', ['recipe_type' => $time['recipe_type']]) }}">
+                        <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
+                    </a>
                 @endforeach
             </x-meals-container>
         </div>
