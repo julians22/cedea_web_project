@@ -3,7 +3,7 @@
     x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height'];"
     :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px)': 'auto'};`">
     <!-- Additional required wrapper -->
-    <div class="swiper home-swiper h-full bg-cedea-red-500">
+    <div class="swiper h-full bg-cedea-red-500" id="home-swiper">
         <div class="swiper-wrapper">
             <!-- Slides -->
             @for ($i = 0; $i < 3; $i++)

@@ -1,4 +1,7 @@
 @import "font.css";
+@import "swiper/css";
+@import "swiper/css/navigation";
+@import "swiper/css/pagination";
 
 @tailwind base;
 @tailwind components;
@@ -44,6 +47,24 @@
 
     .section-title {
         @apply font-androgyne text-cedea-red ~text-2xl/5xl ~mb-2/10;
+    }
+
+    #recipe-swiper {
+        :root {
+            --swiper-navigation-size: 22px;
+            /*
+            --swiper-navigation-top-offset: 50%;
+            --swiper-navigation-sides-offset: 10px;
+            --swiper-navigation-color: var(--swiper-theme-color);
+            */
+            --swiper-navigation-color: #ffffff;
+        }
+
+        .swiper-button-next {
+            @apply bg-cedea-red text-white rounded-full after:content-['next'] after:~text-xs/base ~p-4/6 ~size-4/8 z-10;
+        }
+
+        /* Navigation font end */
     }
 }
 

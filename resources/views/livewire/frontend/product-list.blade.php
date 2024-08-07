@@ -41,7 +41,7 @@
                 produk terbaik dari Cedea Seafood!</p>
 
             <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
-                @foreach ($brands as $brand)
+                @foreach ($this->brandWithUniqueCategories as $brand)
                     <div class="{{ in_array($brand->slug, $activeBrands) ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                         type="button" wire:key='{{ $brand->slug }}'
                         wire:click="handleChangeActiveBrands('{{ $brand->slug }}')">

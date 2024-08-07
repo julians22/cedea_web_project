@@ -1,12 +1,13 @@
-<div>
-    <section class="container ~mt-24/48">
-        <div class="grid grid-cols-[auto_1fr] items-center justify-center gap-8 ~mb-2/10">
+<div class="space-y-8 ~py-20/40">
+    <section class="container">
+        <div class="grid grid-cols-1 items-center justify-center ~mb-4/10 ~gap-4/8 md:grid-cols-[auto_1fr]">
             <h1 class="section-title m-0">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h1>
             <div class="relative">
-                <x-lucide-search class="size-6 absolute left-8 top-1/2 -translate-y-1/2" />
+                <x-lucide-search class="size-6 absolute left-2 top-1/2 -translate-y-1/2 md:left-8" />
                 <input
-                    class="ml-6 block w-full rounded-full border border-black px-1 py-3 ps-10 text-sm placeholder:text-black"
-                    id="recipe-search" wire:model.live='keyword' type="search" placeholder="CARI RESEP MENARIK DI SINI" />
+                    class="block w-full rounded-full border border-black px-1 py-3 ps-10 text-sm placeholder:text-black md:ml-6"
+                    id="recipe-search" wire:model.live='keyword' type="search"
+                    placeholder="CARI RESEP MENARIK DI SINI" />
             </div>
         </div>
 
@@ -54,7 +55,8 @@
             @endforeach
         </x-meals-container>
     </section>
-    <section class="container my-8 flex flex-col ~gap-8/16 ~px-4/60">
+
+    <section class="container flex flex-col ~gap-8/16 ~px-4/60">
         @php
             $recipes = [
                 [
@@ -76,5 +78,13 @@
         @foreach ($recipes as $recipe)
             <x-recipe-item :name="$recipe['name']" :product="$recipe['product']" :imagePath="$recipe['imagePath']" :description="$recipe['description']" />
         @endforeach
+    </section>
+
+    <section class="container">
+        <h2 class="section-title">
+            Intip Resep Dengan Produk ini Yuk
+        </h2>
+
+        <x-recipe-list-product-slider />
     </section>
 </div>

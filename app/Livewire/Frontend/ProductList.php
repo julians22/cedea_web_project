@@ -43,7 +43,7 @@ class ProductList extends Component
 
     public function mount()
     {
-        $this->brands = Brand::orderBy('order_column')->with('media')->get();
+
         $this->allCategories = Category::all();
     }
 
@@ -79,7 +79,9 @@ class ProductList extends Component
     #[Computed]
     public function brandWithUniqueCategories()
     {
-        foreach ($this->brands as $brand) {
+        $brands = Brand::orderBy('order_column')->get();
+
+        foreach ($brands as $brand) {
             // Flatten the categories collections and get unique categories
             $uniqueCategories = $brand->products->pluck('categories')->flatten()->unique('id');
 
@@ -88,7 +90,7 @@ class ProductList extends Component
             $brand->uniqueCategories = $uniqueCategories;
         }
 
-        return $this->brands;
+        return $brands;
     }
 
     public function updating()
@@ -124,7 +126,7 @@ class ProductList extends Component
                         return $q->where('name', 'LIKE', '%' . $this->keyword . '%');
                     }
                 )
-                ->with(['media', 'brand', 'categories'])
+                ->with(['media', 'brand.media', 'categories'])
                 ->simplePaginate(1),
             'categories' => $this->categories,
         ]);

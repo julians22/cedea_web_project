@@ -1,6 +1,4 @@
 import Swiper from "swiper";
-import "swiper/css";
-import "swiper/css/pagination";
 import { Autoplay, Pagination } from "swiper/modules";
 
 // let vh = Math.max(

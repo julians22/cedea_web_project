@@ -8,23 +8,20 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BqfesHkm.css",
+    "file": "assets/app-C2dEDivo.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-Cme85j2v.js",
+    "file": "assets/app-CGvvzMRB.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-C_Wvc5nn.js",
+    "file": "assets/swiper-home-BJ-7mlCq.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
-    "isEntry": true,
-    "css": [
-      "assets/swiper-home-BswZJUt7.css"
-    ]
+    "isEntry": true
   }
 }
