@@ -3,11 +3,9 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         @foreach ($products as $product)
-            @for ($i = 0; $i < 5; $i++)
-                <div @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
-                    <img class="" src="{{ $product->media[0]->original_url }}">
-                </div>
-            @endfor
+            <div @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
+                <img class="" src="{{ $product->media[0]->original_url }}">
+            </div>
         @endforeach
     </div>
     <!-- Add Arrows -->

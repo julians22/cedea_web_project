@@ -96,7 +96,7 @@
         <div class="grid grid-cols-1 gap-8 text-white lg:grid-cols-2">
             <div class="flex ~gap-4/12 max-md:justify-center max-footer-small:flex-col">
                 <div
-                    class="inline-block h-fit shrink-0 shadow-2xl shadow-black/25 drop-shadow-xl transition-transform duration-700 ~w-28/40 lg:w-auto">
+                    class="inline-block h-fit shrink-0 shadow-2xl shadow-black/25 drop-shadow-xl transition-transform duration-700 ~w-28/64">
                     <x-logo />
                 </div>
                 <div class="text-left ~py-2/10 lg:col-span-6">
