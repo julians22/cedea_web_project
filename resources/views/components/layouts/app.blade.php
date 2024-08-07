@@ -38,7 +38,7 @@
     @stack('plugin-scripts')
 </head>
 
-<body class="font-poppins font-medium antialiased">
+<body class="font-poppins antialiased">
 
     <x-header />
     {{ $slot }}
