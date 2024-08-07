@@ -17,6 +17,9 @@ class recipeListProductSlider extends Component
     public function __construct()
     {
         $this->products = Product::inRandomOrder()->limit(20)->with('media')->get();
+        if (!$this->products) {
+            $this->products == collect();
+        }
     }
 
     /**
