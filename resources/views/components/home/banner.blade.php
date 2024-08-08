@@ -14,7 +14,7 @@
                     ],
                     [
                         'desktop' => asset('placeholder/banner/banner-2-desktop.png'),
-                        'mobile' => asset('placeholder/banner/banner-2-desktop.png'),
+                        'mobile' => asset('placeholder/banner/banner-2-mobile.png'),
                     ],
                 ];
             @endphp
