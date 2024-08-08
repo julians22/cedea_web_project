@@ -59,25 +59,34 @@
                     </li>
 
                     @foreach ($nav_items as $item)
-                        <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
-                            @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='{{ Str::kebab($item['label']) }}'"
-                            @mouseleave="navigationMenuLeave()">
-                            <a class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
-                                :class="{
-                                    'after:bg-white after:w-1/2': navigationMenu=='{{ Str::kebab($item['label']) }}',
-                                    'after:bg-transparent after:w-0 ': navigationMenu!='{{ Str::kebab($item['label']) }}'
-                                }"
-                                href="{{ $item['route'] }}">
-                                {{ $item['label'] }}
-                            </a>
-
-                        </li>
+                        @if ($item['disable'])
+                            <li class="cursor-not-allowed gap-y-1 px-5 py-7 font-medium opacity-60 transition-colors"
+                                onclick="alert('Akan Hadir')">
+                                <div
+                                    class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50">
+                                    {{ $item['label'] }}
+                                </div>
+                            </li>
+                        @else
+                            <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
+                                @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='{{ Str::kebab($item['label']) }}'"
+                                @mouseleave="navigationMenuLeave()">
+                                <a class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                                    :class="{
+                                        'after:bg-white after:w-1/2': navigationMenu=='{{ Str::kebab($item['label']) }}',
+                                        'after:bg-transparent after:w-0 ': navigationMenu!='{{ Str::kebab($item['label']) }}'
+                                    }"
+                                    href="{{ $item['route'] }}">
+                                    {{ $item['label'] }}
+                                </a>
+                            </li>
+                        @endif
                     @endforeach
                 </ul>
             </div>
 
             {{-- submenu --}}
-            <div class="absolute top-20 -translate-x-1/2 text-center duration-200 ease-out" x-ref="navigationDropdown"
+            <div class="absolute top-full -translate-x-1/2 text-center duration-200 ease-out" x-ref="navigationDropdown"
                 x-show="navigationMenuOpen" x-transition:enter="transition ease-out duration-100"
                 x-transition:enter-start="opacity-0 -translate-y-4" x-transition:enter-end="opacity-100 translate-y-0"
                 x-transition:leave="transition ease-in duration-100" x-transition:leave-start="opacity-100 scale-100"
@@ -85,7 +94,7 @@
                 @mouseleave="navigationMenuLeave()" x-cloak>
                 <div class="flex h-auto w-auto justify-center bg-cedea-red shadow-sm">
                     @foreach ($nav_items as $item)
-                        @if (array_key_exists('submenu', $item) && count($item['submenu']))
+                        @if (array_key_exists('submenu', $item) && count($item['submenu']) && !$item['disable'])
                             <div class="flex w-full max-w-sm items-stretch justify-center gap-x-3"
                                 x-show="navigationMenu == '{{ Str::kebab($item['label']) }}'">
                                 <div class="w-52">
@@ -182,44 +191,55 @@
                     Beranda
                 </a>
             </li>
+
             @foreach ($nav_items as $item)
                 <li class="focus:outline-none">
-                    <a class="relative inline-flex cursor-pointer flex-col rounded-md font-medium transition-colors"
-                        @click="closeMobileNav()" href="{{ $item['route'] }}">
-                        {{ $item['label'] }}
-                    </a>
-
-                    @if (array_key_exists('submenu', $item) && count($item['submenu']))
-                        <ul class="px-3.5">
-                            @foreach ($item['submenu'] as $item_submenu)
-                                <a class="flex cursor-pointer items-center py-3" @click="closeMobileNav()"
-                                    href="{{ $item_submenu['route'] }}">
-                                    <span class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
-                                    <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24"
-                                        height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                        stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                                        <polyline points="9 18 15 12 9 6"></polyline>
-                                    </svg>
-                                </a>
-                                {{-- sub-submenu --}}
-
-                                @if (array_key_exists('submenu', $item_submenu) && count($item_submenu['submenu']))
-                                    <li class="relative w-full focus:outline-none">
-                                        <ul
-                                            class="animate-in slide-in-from-top-1 z-50 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red p-1 pl-6">
-                                            @foreach ($item_submenu['submenu'] as $sub_submenu)
-                                                <li class="relative cursor-pointer py-3 focus:outline-none">
-                                                    <a class="data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
-                                                        @click="closeMobileNav()"
-                                                        href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
-                                                </li>
-                                            @endforeach
-                                        </ul>
-                                    </li>
-                                @endif
-                            @endforeach
-                        </ul>
+                    @if (!$item['disable'])
+                        <a class="relative inline-flex cursor-pointer flex-col rounded-md font-medium transition-colors"
+                            @click="closeMobileNav()" href="{{ $item['route'] }}">
+                            {{ $item['label'] }}
+                        </a>
+                    @else
+                        <div class="relative inline-flex cursor-not-allowed flex-col rounded-md font-medium opacity-60 transition-colors"
+                            onclick="alert('Akan Hadir')">
+                            {{ $item['label'] }}
+                        </div>
                     @endif
+
+                    @if (!$item['disable'])
+                        @if (array_key_exists('submenu', $item) && count($item['submenu']))
+                            <ul class="px-3.5">
+                                @foreach ($item['submenu'] as $item_submenu)
+                                    <a class="flex cursor-pointer items-center py-3" @click="closeMobileNav()"
+                                        href="{{ $item_submenu['route'] }}">
+                                        <span class="mb-1 block font-medium">{{ $item_submenu['label'] }}</span>
+                                        <svg class="h-4 w-4" xmlns="http://www.w3.org/2000/svg" width="24"
+                                            height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                            stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                                            <polyline points="9 18 15 12 9 6"></polyline>
+                                        </svg>
+                                    </a>
+                                    {{-- sub-submenu --}}
+
+                                    @if (array_key_exists('submenu', $item_submenu) && count($item_submenu['submenu']))
+                                        <li class="relative w-full focus:outline-none">
+                                            <ul
+                                                class="animate-in slide-in-from-top-1 z-50 min-w-[8rem] max-w-sm overflow-hidden bg-cedea-red p-1 pl-6">
+                                                @foreach ($item_submenu['submenu'] as $sub_submenu)
+                                                    <li class="relative cursor-pointer py-3 focus:outline-none">
+                                                        <a class="data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
+                                                            @click="closeMobileNav()"
+                                                            href="{{ $sub_submenu['route'] }}">{{ $sub_submenu['label'] }}</a>
+                                                    </li>
+                                                @endforeach
+                                            </ul>
+                                        </li>
+                                    @endif
+                                @endforeach
+                            </ul>
+                        @endif
+                    @endif
+
                 </li>
             @endforeach
         </ul>

@@ -36,6 +36,7 @@ class Nav extends Component
             [
                 'label' => 'Perusahaan',
                 'route' => route('about'),
+                'disable' => false,
                 'submenu' => [
                     [
                         'label' => 'Sekilas perusahaan',
@@ -63,6 +64,7 @@ class Nav extends Component
                 'label' => 'Merek',
                 // 'route' => route('product'),
                 'route' => '#',
+                'disable' => true,
                 'submenu' => [
                     [
                         'label' => 'CEDEA',
@@ -116,6 +118,7 @@ class Nav extends Component
             [
                 'label' => 'Tanggung Jawab Sosial',
                 'route' => '#',
+                'disable' => true,
                 'submenu' => [
                     [
                         'label' => 'Kegiatan Sosial',
@@ -142,6 +145,7 @@ class Nav extends Component
             [
                 'label' => 'Berita',
                 'route' => '#',
+                'disable' => true,
                 'submenu' => [
                     [
                         'label' => 'Kegiatan',
@@ -158,6 +162,7 @@ class Nav extends Component
             [
                 'label' => 'Hubungi Kami',
                 'route' => '#',
+                'disable' => true,
                 'submenu' => []
             ]
         ];
