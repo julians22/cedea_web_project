@@ -3,7 +3,10 @@
     <div class="swiper-wrapper">
         <!-- Slides -->
         @foreach ($products as $product)
-            <div @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
+            <div :class="{
+                'hidden': activeProduct == '{{ $product->slug }}',
+            }"
+                @class(['swiper-slide cursor-pointer']) wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
                 <img class="" src="{{ $product->media[0]->original_url }}">
             </div>
         @endforeach

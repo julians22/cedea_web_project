@@ -5,12 +5,13 @@ namespace App\Livewire\Frontend;
 use Livewire\Component;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Url;
+use Livewire\WithPagination;
 use App\Models\Products\Brand;
 use App\Models\Products\Product;
 use App\Models\Products\Category;
+use Butschster\Head\Facades\Meta;
 use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
-use Livewire\WithPagination;
 
 class ProductList extends Component
 {
@@ -41,6 +42,8 @@ class ProductList extends Component
 
     public function mount()
     {
+        Meta::prependTitle('Products');
+
         $this->allCategories = Category::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
         $this->activeBrand = $this->brands->first()->slug;

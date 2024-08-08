@@ -2,8 +2,9 @@
 
 namespace App\Livewire;
 
-use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\Attributes\Url;
+use Butschster\Head\Facades\Meta;
 
 class RecipeList extends Component
 {
@@ -15,6 +16,11 @@ class RecipeList extends Component
 
     #[Url(as: 'product', except: '')]
     public string $activeProduct = '';
+
+    public function mount()
+    {
+        Meta::prependTitle('Recipe');
+    }
 
     function handleChangeActiveRecipeType(string $slug)
     {

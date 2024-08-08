@@ -1,4 +1,4 @@
-<div class="space-y-8 bg-brick ~py-20/40">
+<div class="space-y-8 bg-brick ~py-20/40" x-data="{ activeProduct: $wire.entangle('activeProduct') }">
     <section class="container">
         <div class="grid grid-cols-1 items-center justify-center ~mb-4/10 ~gap-4/8 md:grid-cols-[auto_1fr]">
             <h1 class="section-title m-0">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h1>
