@@ -162,7 +162,6 @@
                 @endforeach
             </div>
 
-
             {{--  TODO: exclude activeProductChange --}}
             <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
                 <x-product-list-skeleton />

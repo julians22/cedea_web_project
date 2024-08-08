@@ -20,7 +20,7 @@ class ProductList extends Component
     public $allCategories;
     public $activeProduct = null;
 
-    #[Url(as: 'brand', except: null)]
+    #[Url(as: 'brand', except: null, keep: true)]
     public ?string $activeBrand = null;
 
     #[Url(as: 'categories', except: [])]
@@ -43,6 +43,7 @@ class ProductList extends Component
     {
         $this->allCategories = Category::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
+        $this->activeBrand = $this->brands->first()->slug;
     }
 
     public function handleChangeActiveBrand($slug)
@@ -51,6 +52,7 @@ class ProductList extends Component
 
         $this->reset('activeCategories');
         $this->reset('activeProduct');
+        $this->resetPage();
     }
 
     public function handleChangeActiveCategories($slug)
@@ -80,16 +82,10 @@ class ProductList extends Component
         return $this->brands;
     }
 
-    public function updating()
-    {
-        // TODO: exclude activeProductChange
-        $this->resetPage();
-    }
-
     public function render()
     {
         return view('livewire.product-list', [
-            'products' => Product::query()
+            'products' => Product::with(['media', 'brand', 'categories'])
                 ->when(
                     $this->activeBrand,
                     function ($q) {
@@ -107,11 +103,10 @@ class ProductList extends Component
                 ->when(
                     $this->keyword,
                     function ($q) {
-                        return $q->where('name', 'LIKE', '%' . $this->keyword . '%');
+                        return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
                     }
                 )
-                ->with(['media', 'brand', 'categories'])
-                ->simplePaginate(1),
+                ->simplePaginate(6),
         ]);
     }
 }
