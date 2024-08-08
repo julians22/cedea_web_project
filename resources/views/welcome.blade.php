@@ -11,10 +11,9 @@
         <x-slot:desc>
             <p>
                 PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Jakarta
-                Utara. Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan
-                berbasis
-                hasil laut.
+                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru,
+                Majalengka, Medan & Semarang. Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor
+                industri makanan olahan berbasis hasil laut.
             </p>
         </x-slot>
 

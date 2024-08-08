@@ -86,4 +86,8 @@
     .header-padding-safe-area {
         @apply ~pt-14/28;
     }
+
+    .header-padding-safe-area-b {
+        @apply ~pb-14/28;
+    }
 }
