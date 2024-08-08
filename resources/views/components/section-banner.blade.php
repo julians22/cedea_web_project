@@ -23,7 +23,7 @@
                     {{ $title }}
                 </h2>
                 <div
-                    {{ $attributes->twMergeFor('desc', '~text-sm/base 2xl:w-[73%] leading-relaxed md:leading-snug lg:leading-relaxed') }}>
+                    {{ $attributes->twMergeFor('desc', '~text-sm/base 2xl:w-[85%] leading-relaxed md:leading-snug lg:leading-relaxed') }}>
                     {{ $desc }}</div>
                 {{ $button }}
             </div>

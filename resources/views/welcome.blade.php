@@ -58,9 +58,10 @@
 
         <div class="col-span-5 lg:col-span-3">
             <div class="flex h-full flex-col justify-center">
-                <h2 class="section-title text-center">
-                    Nggak Ada
-                    Waktu Belanja? Pesan Online Solusinya!
+                <h2 class="section-title text-center leading-[1.2]">
+                    <span>Nggak Ada Waktu Belanja?</span>
+                    <br>
+                    <span>Pesan Online Solusinya!</span>
                 </h2>
 
                 <div class="mt-4 flex items-center justify-center gap-4 max-sm:flex-wrap lg:mt-8">
