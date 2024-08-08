@@ -147,7 +147,7 @@
 
     <div class="flex justify-start gap-4 lg:flex-row lg:justify-end lg:gap-x-6 lg:gap-y-0">
         {{-- search icon --}}
-        <button class="text-xl">
+        <button class="cursor-not-allowed text-xl opacity-60" onclick="alert('Akan Hadir')" disabled>
             <svg class="w-5" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 36.42 36.41">
                 <g>
                     <path class="fill-current"

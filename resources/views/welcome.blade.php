@@ -38,9 +38,10 @@
 
 
         <x-slot:button>
-            <button class="w-fit rounded-full bg-cedea-red px-4 py-2 text-white">
+            <div class="w-fit cursor-not-allowed rounded-full bg-cedea-red px-4 py-2 text-white opacity-60"
+                onclick="alert('Akan Hadir')">
                 Lihat Produk
-            </button>
+            </div>
         </x-slot>
     </x-section-banner>
 

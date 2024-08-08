@@ -1,4 +1,5 @@
-<button class="flex flex-row items-center space-x-2" type="button">
+<button class="flex cursor-not-allowed flex-row items-center space-x-2 opacity-60" onclick="alert('Akan Hadir')"
+    type="button">
     <span>
         ID
     </span>
