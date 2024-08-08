@@ -6,13 +6,25 @@
     <div class="swiper h-full bg-cedea-red-500" id="home-swiper">
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @for ($i = 0; $i < 3; $i++)
+            @php
+                $banners = [
+                    [
+                        'desktop' => asset('placeholder/banner/banner-1-desktop.jpg'),
+                        'mobile' => asset('placeholder/banner/banner-1-mobile.jpg'),
+                    ],
+                    [
+                        'desktop' => asset('placeholder/banner/banner-2-desktop.png'),
+                        'mobile' => asset('placeholder/banner/banner-2-desktop.png'),
+                    ],
+                ];
+            @endphp
+
+            @foreach ($banners as $banner)
                 <div class="swiper-slide cursor-grab">
-                    <img class="slider-item-desktop" src="{{ asset('img/banner-3.jpg') }}">
-                    {{-- <img class="max-lg:hidden" src="{{ asset('img/banner-lg.jpg') }}"> --}}
-                    <img class="block w-full lg:hidden" src="{{ asset('img/banner-mobile-7.jpg') }}">
+                    <img class="slider-item-desktop" src="{{ $banner['desktop'] }}">
+                    <img class="block w-full lg:hidden" src="{{ $banner['mobile'] }}">
                 </div>
-            @endfor
+            @endforeach
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
