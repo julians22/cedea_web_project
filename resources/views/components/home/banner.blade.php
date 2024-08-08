@@ -13,8 +13,8 @@
                         'mobile' => asset('placeholder/banner/banner-1-mobile.jpg'),
                     ],
                     [
-                        'desktop' => asset('placeholder/banner/banner-2-desktop.png'),
-                        'mobile' => asset('placeholder/banner/banner-2-mobile.png'),
+                        'desktop' => asset('placeholder/banner/banner-2-desktop.jpg'),
+                        'mobile' => asset('placeholder/banner/banner-2-mobile.jpg'),
                     ],
                 ];
             @endphp

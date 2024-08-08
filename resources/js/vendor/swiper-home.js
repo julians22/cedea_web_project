@@ -27,7 +27,7 @@ const homeSwiper = new Swiper("#home-swiper", {
     // height: vh - headerHeight,
     // autoHeight: true,
     autoplay: {
-        delay: 5000,
+        delay: 10000,
         pauseOnMouseEnter: true,
     },
 });
