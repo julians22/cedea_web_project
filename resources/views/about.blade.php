@@ -145,10 +145,10 @@
         </div>
 
         <div
-            class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red container md:grid-cols-2">
+            class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:container md:grid-cols-2">
             {{-- visi --}}
             <div
-                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-0/10 md:bg-none">
+                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
                 <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
                 <p class="text-last-center text-justify">
                     Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi
@@ -158,7 +158,7 @@
             </div>
             {{-- misi --}}
             <div
-                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-0/10 md:bg-none">
+                class="visi-misi-gradient header-padding-safe-area flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
                 <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Misi</h2>
                 <p class="text-last-center text-justify">Aktif berperan dalam menyehatkan bangsa dengan membuat produk
                     makanan
