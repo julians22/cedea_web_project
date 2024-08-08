@@ -199,8 +199,7 @@
                             </svg>
                         </button>
 
-                        <div class="pr-2 text-white" wire:loading.delay.long.remove
-                            wire:target='handleChangeActiveProduct'>
+                        <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                             @if ($activeProduct)
                                 <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
                                 <h2 class="mt-2 uppercase ~text-2xl/4xl">{{ $activeProduct->name }}</h2>
@@ -235,8 +234,7 @@
                         </div>
 
                         {{-- skeleton --}}
-                        <div class="space-y-4 pr-2 text-white" wire:loading.delay.long
-                            wire:target='handleChangeActiveProduct'>
+                        <div class="space-y-4 pr-2 text-white" wire:loading wire:target='handleChangeActiveProduct'>
 
                             <x-text-skeleton />
                             <x-text-skeleton />
