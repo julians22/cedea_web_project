@@ -5,7 +5,7 @@ namespace App\Providers;
 use Spatie\Translatable\Facades\Translatable;
 use Illuminate\Support\ServiceProvider;
 
-class TranslateableServiceProvider extends ServiceProvider
+class TranslatableServiceProvider extends ServiceProvider
 {
     /**
      * Register services.

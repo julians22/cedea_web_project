@@ -2,13 +2,15 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\EloquentSortable\Sortable;
 use Illuminate\Database\Eloquent\Model;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Banner extends Model
+class Banner extends Model implements HasMedia, Sortable
 {
-    use InteractsWithMedia;
+    use SortableTrait, InteractsWithMedia;
 
     /**
      * The attributes that aren't mass assignable.
@@ -18,6 +20,17 @@ class Banner extends Model
     protected $guarded = ['id'];
 
     protected $casts = [
-        'published' => 'boolean',
+        'enable' => 'boolean',
     ];
+
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('banner_desktop')
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('banner_mobile')
+            ->singleFile();
+    }
 }

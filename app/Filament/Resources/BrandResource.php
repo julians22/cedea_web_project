@@ -33,10 +33,19 @@ class BrandResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->label(__('Name'))
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                    ->label(__('name'))
+                    ->translatable(
+                        true,
+                        null,
+                        [
+                            'en' => ['required', 'string', 'max:255'],
+                            'id' => ['nullable', 'string', 'max:255'],
+                        ]
+                    ),
                 SpatieMediaLibraryFileUpload::make('image')
-                    ->collection('products')
+                    ->required()
+                    ->collection('logo')
+                    ->maxFiles(1)
                     ->image()
                     ->imageEditor()
                     ->imageEditorAspectRatios([
@@ -53,7 +62,7 @@ class BrandResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('products')
+                    ->collection('logo')
             ])
             ->reorderable('order_column')
             ->defaultSort('order_column')

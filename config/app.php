@@ -157,6 +157,11 @@ return [
 
     'providers' => ServiceProvider::defaultProviders()->merge([
         /*
+        * Custom Service Providers...
+        */
+        App\Providers\TranslatableServiceProvider::class,
+
+        /*
          * Package Service Providers...
          */
         App\Providers\MetaTagsServiceProvider::class,

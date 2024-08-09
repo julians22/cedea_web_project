@@ -41,10 +41,6 @@
         }
     }
 
-    .slider-item-desktop {
-        @apply mx-auto hidden h-full w-full object-cover object-top lg:block;
-    }
-
     .section-title {
         @apply font-androgyne text-cedea-red ~text-2xl/5xl ~mb-2/10;
     }

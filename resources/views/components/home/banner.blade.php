@@ -6,27 +6,14 @@
     <div class="swiper h-full bg-cedea-red-500" id="home-swiper">
         <div class="swiper-wrapper">
             <!-- Slides -->
-            @php
-                $banners = [
-                    [
-                        'desktop' => asset('placeholder/banner/banner-1-desktop.jpg'),
-                        'mobile' => asset('placeholder/banner/banner-1-mobile.jpg'),
-                    ],
-                    [
-                        'desktop' => asset('placeholder/banner/banner-3-desktop.jpg'),
-                        'mobile' => asset('placeholder/banner/banner-3-mobile.jpg'),
-                    ],
-                    [
-                        'desktop' => asset('placeholder/banner/banner-2-desktop.jpg'),
-                        'mobile' => asset('placeholder/banner/banner-2-mobile.jpg'),
-                    ],
-                ];
-            @endphp
-
             @foreach ($banners as $banner)
                 <div class="swiper-slide cursor-grab">
-                    <img class="slider-item-desktop" src="{{ $banner['desktop'] }}">
-                    <img class="block w-full lg:hidden" src="{{ $banner['mobile'] }}">
+                    <picture>
+                        <source class="block w-full" srcset="{{ $banner->getFirstMediaUrl('banner_desktop') }}"
+                            media="(min-width: 1024px)" />
+                        <img class="mx-auto block h-full w-full object-cover object-top"
+                            src="{{ $banner->getFirstMediaUrl('banner_mobile') }}" alt="Baby Sleeping" />
+                    </picture>
                 </div>
             @endforeach
         </div>

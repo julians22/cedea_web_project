@@ -49,7 +49,7 @@
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
-                            <img class="lg:size-full" src="{{ $brand->media[0]->original_url }}" alt="">
+                            <img class="lg:size-full" src="{{ $brand->getFirstMediaUrl('logo') }}" alt="">
                         </div>
                     @endforeach
                 </div>
@@ -121,8 +121,8 @@
                             wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
                             <div
                                 class="transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
-                                <img class="" src="{{ $item->media[0]->original_url }}"
-                                    alt="{{ $item->media[0]->name }}">
+                                <img class="" src="{{ $item->getFirstMediaUrl('packaging') }}"
+                                    alt="{{ $item->getFirstMedia('packaging')->name }}">
                             </div>
                             {{-- hover content --}}
                             <div class='before:size-12 top-full rounded-3xl drop-shadow-top before:absolute before:-top-1/4 before:left-1/2 before:-z-1 before:-translate-x-1/2 before:translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700'
@@ -130,7 +130,7 @@
                                 <div
                                     class="mt-10 grid h-auto w-full grid-cols-[15%_1fr_15%] items-center space-x-3 rounded-3xl bg-white p-5">
                                     <div class="">
-                                        <img class="max-w-full" src="{{ $item->brand->media[0]->original_url }}"
+                                        <img class="max-w-full" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
                                             alt="">
                                     </div>
                                     <div class="flex items-center text-cedea-red">
@@ -206,7 +206,7 @@
 
                                 <div class="mt-8 flex gap-x-6 max-md:flex-col">
                                     <div class="flex basis-1/6 flex-col items-center justify-center gap-y-4">
-                                        <img src="{{ $activeProduct->media[0]->original_url }}" alt="">
+                                        <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
                                         <button
                                             class="w-fit rounded-full bg-white px-8 py-1 text-sm font-semibold uppercase text-black">Beli
                                             sekarang</button>

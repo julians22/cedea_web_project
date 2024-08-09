@@ -24,6 +24,13 @@ class Product extends Model implements HasMedia
      */
     protected $guarded = ['id'];
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('packaging')
+            ->singleFile();
+    }
+
     /**
      * Get the options for generating the slug.
      */

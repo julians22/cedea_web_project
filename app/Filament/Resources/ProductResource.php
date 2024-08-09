@@ -38,9 +38,12 @@ class ProductResource extends Resource
                     [
                         Section::make([
                             SpatieMediaLibraryFileUpload::make('image')
-                                ->collection('products')
-                                ->image(),
+                                ->required()
+                                ->maxFiles(1)
+                                ->image()
+                                ->collection('packaging'),
                             TextInput::make('name')
+                                ->required()
                                 ->label(__('Name'))
                                 ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                             RichEditor::make('description')
@@ -50,17 +53,24 @@ class ProductResource extends Resource
 
                         Section::make([
                             Select::make('category_id')
+                                ->required()
                                 ->relationship(
                                     name: 'categories',
                                     titleAttribute: 'name',
                                 )
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->required(),
+
+                                ])
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
                                 // ->options(Category::all()->pluck('name', 'id'))
-                                ->label(__('category_id'))
+                                ->label(__('category'))
                                 ->multiple()->translatable(false)
                                 ->searchable(['name'])
                                 ->preload(),
                             Select::make('brand_id')
+                                ->required()
                                 ->label(__('brand'))
                                 ->relationship(name: 'brand', titleAttribute: 'name')
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))

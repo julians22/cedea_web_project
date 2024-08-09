@@ -46,7 +46,9 @@ class ProductList extends Component
 
         $this->allCategories = Category::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
-        $this->activeBrand = $this->brands->first()->slug;
+        if ($this->brands->first()) {
+            $this->activeBrand = $this->brands->first()->slug;
+        }
     }
 
     public function handleChangeActiveBrand($slug)

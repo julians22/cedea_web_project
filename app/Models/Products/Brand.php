@@ -38,6 +38,13 @@ class Brand extends Model implements HasMedia, Sortable
             ->saveSlugsTo('slug');
     }
 
+    public function registerMediaCollections(): void
+    {
+        $this
+            ->addMediaCollection('logo')
+            ->singleFile();
+    }
+
     /**
      * Get all of the product for the Brand
      *

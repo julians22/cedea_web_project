@@ -36,16 +36,19 @@ class RecipeResource extends Resource
         return $form
             ->schema([
                 TextInput::make('title')
+                    ->required()
                     ->label(__('Title'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                 Toggle::make('published')
+                    ->default(true)
                     ->onColor('success')
                     ->offColor('danger'),
                 RichEditor::make('content')
                     ->label(__('Content'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                 SpatieMediaLibraryFileUpload::make('featured_image')
-                    ->collection('recipe')
+                    ->required()
+                    ->collection('featured_image')
             ]);
     }
 
