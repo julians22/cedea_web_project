@@ -1,7 +1,5 @@
 <!-- Slider main container -->
-<div x-data="{ width: 0, height: 0, headerHeight: 0, header: document.querySelector('header') }"
-    x-resize.document="width = $width; height = $height; headerHeight = header.getBoundingClientRect()['height'];"
-    :style="`height: ${width>1024 ? 'calc(100dvh - ' + Math.floor(headerHeight)+'px)': 'auto'};`">
+<div>
     <!-- Additional required wrapper -->
     <div class="swiper h-full bg-cedea-red-500" id="home-swiper">
         <div class="swiper-wrapper">
