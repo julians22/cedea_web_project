@@ -1,6 +1,4 @@
 <x-layouts.app>
-
-    {{-- About 1 --}}
     <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
         <x-slot:desc>
             <p>
@@ -132,9 +130,8 @@
         </x-slot>
     </x-section-banner>
 
-    {{-- About 3 --}}
     {{-- Visi Misi --}}
-    <section class="relative" id="visi-misi">
+    <section class="relative ~scroll-mt-12/20" id="visi-misi">
         {{-- gradient bg with container hack --}}
         <div
             class="absolute left-0 top-0 -z-1 grid h-full w-full grid-cols-1 items-start justify-center text-justify text-cedea-red max-md:hidden md:grid-cols-2">
@@ -171,7 +168,7 @@
     </section>
 
     {{-- Value section --}}
-    <section class="header-padding-safe-area my-16" id="nilai-nilai-perusahaan">
+    <section class="my-16" id="nilai-nilai-perusahaan">
         <div class="container">
 
             @php
@@ -278,7 +275,6 @@
 
     {{-- Achieve Section --}}
     <section class="container my-16 grid grid-cols-1 gap-x-8 md:grid-cols-2">
-
         <div>
             <h2 class="section-title">Mutu yang Tetap Terjaga</h2>
             <p class="~text-xs/base">CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang
@@ -307,8 +303,8 @@
     </section>
 
     {{-- Map --}}
-    <section class="header-padding-safe-area container my-16" id="wilayah">
-        <h2 class="section-title">Wilayah Kerja</h2>
+    <section class="group container my-16 ~scroll-mt-24/36" id="wilayah">
+        <h2 class="section-title transition-all">Wilayah Kerja</h2>
         <div class="md:mx-auto md:w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>
@@ -354,6 +350,5 @@
         </div>
 
     </section>
-
 
 </x-layouts.app>

@@ -1,5 +1,6 @@
 @props(['title', 'desc', 'imageUrl', 'id' => null, 'button' => null, 'gradient' => true])
-<section class="relative grid grid-cols-1 md:grid-cols-2" {{ $id ? 'id=' . $id : '' }}>
+<section class="relative grid grid-cols-1 ~scroll-mt-12/14 md:grid-cols-2 md:~scroll-mt-16/20 lg:~scroll-mt-12/20"
+    {{ $id ? 'id=' . $id : '' }}>
     <div
         {{ $attributes->withoutTwMergeClasses()->twMerge(
                 'grid h-full w-full items-center justify-center max-md:order-1',

@@ -1,6 +1,5 @@
 <x-layouts.app>
 
-
     {{-- Banner Section --}}
     <section>
         <x-home.banner />
