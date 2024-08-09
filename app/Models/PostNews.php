@@ -29,13 +29,13 @@ class PostNews extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        'is_publish' => 'boolean',
+        'published' => 'boolean',
     ];
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')

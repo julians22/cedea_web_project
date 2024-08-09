@@ -16,7 +16,7 @@ return new class extends Migration
             $table->json('title');
             $table->json('slug');
             $table->json('content');
-            $table->boolean('is_publish');
+            $table->boolean('published');
             $table->softDeletes();
             $table->timestamps();
         });

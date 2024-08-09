@@ -24,13 +24,13 @@ class PostRecipes extends Model implements HasMedia
     protected $guarded = ['id'];
 
     protected $casts = [
-        'is_publish' => 'boolean',
+        'published' => 'boolean',
     ];
 
     /**
      * Get the options for generating the slug.
      */
-    public function getSlugOptions() : SlugOptions
+    public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->generateSlugsFrom('title')

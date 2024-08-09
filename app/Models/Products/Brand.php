@@ -38,11 +38,6 @@ class Brand extends Model implements HasMedia, Sortable
             ->saveSlugsTo('slug');
     }
 
-    public function myMediaRelation()
-    {
-        return $this->media()->where('collection_name', 'products');
-    }
-
     /**
      * Get all of the product for the Brand
      *

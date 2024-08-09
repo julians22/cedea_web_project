@@ -11,13 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('post_recipes', function (Blueprint $table) {
+        Schema::create('banners', function (Blueprint $table) {
             $table->id();
-            $table->json('title');
-            $table->json('slug');
-            $table->json('content');
-            $table->boolean('published');
-            $table->softDeletes();
+            $table->string('desktop');
+            $table->string('mobile');
+            $table->string('link')->nullable();
+            $table->boolean('enable')->default(true);
+            $table->unsignedBigInteger('order_column')->nullable();
             $table->timestamps();
         });
     }
@@ -27,6 +27,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('post_recipes');
+        Schema::dropIfExists('banners');
     }
 };

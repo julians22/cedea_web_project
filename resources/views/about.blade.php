@@ -303,8 +303,8 @@
     </section>
 
     {{-- Map --}}
-    <section class="group container my-16 ~scroll-mt-24/36" id="wilayah">
-        <h2 class="section-title transition-all">Wilayah Kerja</h2>
+    <section class="group container my-16 pt-2 ~scroll-mt-24/36" id="wilayah">
+        <h2 class="section-title transition-all ~pt-0/4">Wilayah Kerja</h2>
         <div class="md:mx-auto md:w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>

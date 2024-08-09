@@ -13,6 +13,10 @@
                         'mobile' => asset('placeholder/banner/banner-1-mobile.jpg'),
                     ],
                     [
+                        'desktop' => asset('placeholder/banner/banner-3-desktop.jpg'),
+                        'mobile' => asset('placeholder/banner/banner-3-mobile.jpg'),
+                    ],
+                    [
                         'desktop' => asset('placeholder/banner/banner-2-desktop.jpg'),
                         'mobile' => asset('placeholder/banner/banner-2-mobile.jpg'),
                     ],

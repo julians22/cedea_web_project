@@ -54,8 +54,7 @@ class ProductResource extends Resource
                                     name: 'categories',
                                     titleAttribute: 'name',
                                 )
-                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', App::currentLocale()))
-
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
                                 // ->options(Category::all()->pluck('name', 'id'))
                                 ->label(__('category_id'))
                                 ->multiple()->translatable(false)
@@ -64,7 +63,7 @@ class ProductResource extends Resource
                             Select::make('brand_id')
                                 ->label(__('brand'))
                                 ->relationship(name: 'brand', titleAttribute: 'name')
-                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->getTranslation('name', App::currentLocale()))
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
                         ])->grow(false),
                     ],
                 )->from('xl')]

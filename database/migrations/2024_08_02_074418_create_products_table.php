@@ -19,8 +19,8 @@ return new class extends Migration
             $table->string('slug');
             $table->foreignIdFor(Brand::class);
             $table->json('description');
-            $table->boolean('has_youtube')->default(false);
-            $table->string('youtube_id')->nullable();
+            $table->boolean('have_video')->default(false);
+            $table->string('video_link')->nullable();
             $table->timestamps();
         });
     }

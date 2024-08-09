@@ -18,10 +18,10 @@ class HomeController extends Controller
     {
         Meta::prependTitle('Home');
 
-        $brands = Brand::orderBy('order_column')->get();
-        $articles = PostNews::with('media')->where('is_publish', true)->take(2)->get();
-        $recipes = PostRecipes::with('media')->where('is_publish', true)->take(2)->get();
-        return view('welcome', compact('articles', 'recipes', 'brands'));
+        // $brands = Brand::orderBy('order_column')->get();
+        // $articles = PostNews::with('media')->where('published', true)->take(2)->get();
+        // $recipes = PostRecipes::with('media')->where('published', true)->take(2)->get();
+        return view('welcome');
     }
 
     function product()

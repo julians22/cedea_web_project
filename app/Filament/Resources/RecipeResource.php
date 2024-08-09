@@ -26,7 +26,8 @@ class RecipeResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
-    public static function getNavigationGroup() : ?string {
+    public static function getNavigationGroup(): ?string
+    {
         return __('Posts');
     }
 
@@ -37,14 +38,14 @@ class RecipeResource extends Resource
                 TextInput::make('title')
                     ->label(__('Title'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                Toggle::make('is_publish')
+                Toggle::make('published')
                     ->onColor('success')
                     ->offColor('danger'),
                 RichEditor::make('content')
                     ->label(__('Content'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
                 SpatieMediaLibraryFileUpload::make('featured_image')
-                    ->collection('post_image')
+                    ->collection('recipe')
             ]);
     }
 
@@ -53,7 +54,7 @@ class RecipeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                ToggleColumn::make('is_publish')
+                ToggleColumn::make('published')
             ])
             ->filters([
                 //

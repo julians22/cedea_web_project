@@ -45,7 +45,7 @@ class NewsResource extends Resource
                 TextInput::make('title')
                     ->label(__('Title'))
                     ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                Toggle::make('is_publish')
+                Toggle::make('published')
                     ->onColor('success')
                     ->offColor('danger'),
                 RichEditor::make('content')
@@ -61,7 +61,7 @@ class NewsResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                ToggleColumn::make('is_publish')
+                ToggleColumn::make('published')
             ])
             ->filters([
                 //
