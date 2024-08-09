@@ -11,7 +11,7 @@
                     <picture>
                         <source class="block w-full" srcset="{{ $banner->getFirstMediaUrl('banner_desktop') }}"
                             media="(min-width: 1024px)" />
-                        <img class="mx-auto block h-full w-full object-cover object-top"
+                        <img class="mx-auto block h-full w-full object-cover"
                             src="{{ $banner->getFirstMediaUrl('banner_mobile') }}" alt="Baby Sleeping" />
                     </picture>
                 </div>
