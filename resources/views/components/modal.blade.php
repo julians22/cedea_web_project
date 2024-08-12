@@ -30,7 +30,7 @@ example @click="modalOpen=false"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
                 x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
             </div>
-            <div {{ $attributes->withoutTwMergeClasses()->twMerge('relative bg-white px-4 py-3 px-7 py-6 sm:max-w-lg rounded-lg bg-cedea-red sm:rounded-3xl') }}
+            <div {{ $attributes->withoutTwMergeClasses()->twMerge('relative bg-white px-4 py-4 sm:px-7 sm:py-6 sm:max-w-lg rounded-lg bg-cedea-red sm:rounded-3xl') }}
                 x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
                 x-transition:enter="ease-out duration-300"
                 x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"

@@ -3,8 +3,8 @@
         <x-slot:desc>
             <p>
                 PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Jakarta
-                Utara.
+                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi Muara Baru, Majalengka,
+                Medan & Semarang.
             </p>
         </x-slot>
     </x-section-banner>
@@ -32,7 +32,7 @@
 
                 <x-slot:content>
                     <button
-                        class="absolute right-0 top-0 z-1 mr-5 mt-5 flex h-8 w-8 items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
+                        class="absolute right-0 top-0 z-1 flex h-8 w-8 items-center justify-center rounded-full text-white ~mt-2/5 ~mr-2/5 hover:bg-gray-50 hover:text-gray-800"
                         @click="modalOpen=false">
                         <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                             stroke-width="1.5" stroke="currentColor">
@@ -40,8 +40,9 @@
                         </svg>
                     </button>
 
-                    <div class="justify-center pr-2 text-white">
-                        <ul class="max-h-[80vh] max-w-[70vw] overflow-auto md:mt-8 md:max-h-[85vh] md:max-w-[90vw]">
+                    <div class="justify-center text-white">
+                        <ul
+                            class="max-h-[80vh] max-w-[70vw] overflow-auto pr-2 md:mt-8 md:max-h-[85vh] md:max-w-[90vw]">
                             @php
                                 $timeline = [
                                     [
@@ -104,9 +105,9 @@
                             @endphp
 
                             @foreach ($timeline as $item)
-                                <li class="grid grid-cols-[10%_1fr] gap-2 [&:last-child>div>div]:before:hidden">
+                                <li class="grid grid-cols-[10%_1fr] ~gap-4/2 [&:last-child>div>div]:before:hidden">
                                     <p class="~text-sm/base">{{ $item['date'] }}</p>
-                                    <div class="relative flex gap-6 pb-5 pr-2">
+                                    <div class="relative flex pb-5 pr-2 ~gap-2/6">
                                         <div
                                             class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
                                             <svg class="bi bi-circle-fill fill-white" xmlns="http://www.w3.org/2000/svg"
