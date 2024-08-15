@@ -8,13 +8,16 @@ use App\Models\News;
 use App\Models\PostNews;
 use Filament\Forms;
 use Filament\Forms\Components\RichEditor;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
@@ -42,27 +45,46 @@ class NewsResource extends Resource
     {
         return $form
             ->schema([
-                TextInput::make('title')
-                    ->required()
-                    ->label(__('Title'))
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                Toggle::make('published')
-                    ->default(true)
-                    ->onColor('success')
-                    ->offColor('danger'),
-                RichEditor::make('content')
-                    ->label(__('Content'))
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
-                SpatieMediaLibraryFileUpload::make('featured_image')
-                    ->required()
-                    ->collection('featured_image')
-            ]);
+                Split::make(
+                    [
+                        Section::make(
+                            [
+                                TextInput::make('title')
+                                    ->required()
+                                    ->label(__('title'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                    ]),
+
+                                RichEditor::make('content')
+                                    ->label(__('content'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string',],
+                                        'en' => ['nullable', 'string',],
+                                    ]),
+                            ]
+                        ),
+                        Section::make([
+                            SpatieMediaLibraryFileUpload::make('featured_image')
+                                ->required()
+                                ->collection('featured_image'),
+
+                            Toggle::make('published')
+                                ->default(true)
+                                ->onColor('success')
+                                ->offColor('danger'),
+                        ]),
+                    ]
+                )
+            ])->columns(1);
     }
 
     public static function table(Table $table): Table
     {
         return $table
             ->columns([
+                SpatieMediaLibraryImageColumn::make('featured_image'),
                 TextColumn::make('title'),
                 ToggleColumn::make('published')
             ])

@@ -34,6 +34,7 @@ class Brand extends Model implements HasMedia, Sortable
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('id')
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }

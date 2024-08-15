@@ -29,13 +29,13 @@
                     'label' => 'Makan Siang',
                     'icon' => asset('img/icons/time/makan_siang.svg'),
                     'background' => asset('img/time/makan_siang.jpg'),
-                    'recipe_type' => 'makan_siang',
+                    'recipe_type' => 'makan-siang',
                 ],
                 [
                     'label' => 'Makan Malam',
                     'icon' => asset('img/icons/time/makan_malam.svg'),
                     'background' => asset('img/time/makan_malam.jpg'),
-                    'recipe_type' => 'makan_malam',
+                    'recipe_type' => 'makan-malam',
                 ],
                 [
                     'label' => 'Snack',

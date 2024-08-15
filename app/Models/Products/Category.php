@@ -30,6 +30,7 @@ class Category extends Model
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('id')
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }

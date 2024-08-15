@@ -115,5 +115,5 @@ export default {
             },
         },
     },
-    plugins: [fluid],
+    plugins: [require("@tailwindcss/typography"), fluid],
 };

@@ -45,12 +45,12 @@ class BannerResource extends Resource
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_mobile'),
+                            TextInput::make('title')
+                                ->helperText(__('optional')),
                             TextInput::make('link')
-                                ->helperText(__('link_input_helper')),
-
+                                ->helperText(__('optional')),
                         ]),
                         Section::make([
-
                             Toggle::make('enable')
                                 ->default(true)
                                 ->onColor('success')

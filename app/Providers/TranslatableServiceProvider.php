@@ -20,7 +20,6 @@ class TranslatableServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-
         Translatable::fallback(
             fallbackAny: true,
         );

@@ -10,12 +10,12 @@
             ) }}>
 
         <div @class([
-            'container top-0 h-full w-full md:absolute md:grid  md:grid-cols-2',
+            'container top-0 h-full w-full md:absolute md:grid md:grid-cols-2',
             'left-1/2 md:-translate-x-1/2' => $gradient,
             'right-1/2 md:translate-x-1/2 ' => !$gradient,
         ])>
             <div @class([
-                'ml-0 text-justify justify-center  flex flex-col ~gap-y-2/4 ~md:~p-2/20',
+                'ml-0 text-justify justify-center flex flex-col ~gap-y-2/4 ~md:~p-2/20',
                 // '~md:~ml-4/48 ~md:~pl-0/1 md:w-3/5' => $gradient,
                 'md:~pl-0/1' => $gradient,
                 'md:~pr-0/1 md:col-start-2' => !$gradient,
@@ -23,9 +23,12 @@
                 <h2 {{ $attributes->twMergeFor('title', 'font-androgyne text-left text-cedea-red ~text-xl/5xl') }}>
                     {{ $title }}
                 </h2>
+
                 <div
                     {{ $attributes->twMergeFor('desc', '~text-sm/base 2xl:w-[85%] xl:w-[95%] leading-relaxed md:leading-snug lg:leading-relaxed') }}>
-                    {{ $desc }}</div>
+                    {{ $desc }}
+                </div>
+
                 {{ $button }}
             </div>
         </div>
@@ -34,7 +37,7 @@
     <div @class([
         'md:col-start-2 min-h-72 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
     ])>
-        <img src="{{ $imageUrl }}" alt="">
+        <img class="w-full" src="{{ $imageUrl }}" alt="">
     </div>
 
 </section>

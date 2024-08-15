@@ -62,9 +62,9 @@ class Nav extends Component
             ],
             [
                 'label' => 'Merek',
-                // 'route' => route('product'),
-                'route' => '#',
-                'disable' => true,
+                'route' => route('product'),
+                // 'route' => '#',
+                'disable' => false,
                 'submenu' => [
                     [
                         'label' => 'CEDEA',

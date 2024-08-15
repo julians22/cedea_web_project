@@ -172,7 +172,6 @@
     {{-- Value section --}}
     <section class="my-16" id="nilai-nilai-perusahaan">
         <div class="container">
-
             @php
                 $words = [
                     [
@@ -312,7 +311,6 @@
         </div>
 
         <div>
-
             @php
                 $addresses = [
                     [

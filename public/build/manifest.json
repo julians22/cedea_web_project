@@ -16,8 +16,13 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-QvZZhEy6.css",
+    "file": "assets/app-D5O-CrjO.css",
     "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "assets/theme-kOWe-uzG.css",
+    "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
   "resources/js/app.js": {

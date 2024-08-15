@@ -55,11 +55,13 @@ class AdminPanelProvider extends PanelProvider
             ->authMiddleware([
                 Authenticate::class,
             ])
+            ->viteTheme('resources/css/filament/admin/theme.css')
             ->plugins([
                 FilamentTranslatableFieldsPlugin::make()
                     ->supportedLocales([
-                        'en' => 'English',
                         'id' => 'Indonesia',
+                        'en' => 'English',
+                        // 'kr' => 'Korean',
                     ]),
             ]);
     }

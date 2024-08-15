@@ -9,8 +9,10 @@
     "license": "MIT",
     "require": {
         "php": "^8.1",
+        "awcodes/filament-table-repeater": "^3.0",
         "bezhansalleh/filament-language-switch": "^3.1",
         "butschster/meta-tags": "^3.1",
+        "codezero/laravel-unique-translation": "^4.3",
         "embed/embed": "^4.4",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
@@ -21,7 +23,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mallardduck/blade-lucide-icons": "^1.23",
-        "outerweb/filament-translatable-fields": "^1.1",
+        "outerweb/filament-translatable-fields": "^2.0.0",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sluggable": "^3.6",
         "spatie/laravel-translatable": "*"
@@ -33,7 +35,9 @@
         "laravel/sail": "^1.18",
         "mockery/mockery": "^1.4.4",
         "nunomaduro/collision": "^7.0",
-        "phpunit/phpunit": "^10.1",
+        "pestphp/pest": "^2.35",
+        "pestphp/pest-plugin-laravel": "^2.4",
+        "pestphp/pest-plugin-livewire": "^2.1",
         "spatie/laravel-ignition": "^2.0"
     },
     "autoload": {

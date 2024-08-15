@@ -38,6 +38,7 @@ class PostNews extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('id')
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }

@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
+use App\Models\PostRecipes;
 
 /*
 |--------------------------------------------------------------------------
@@ -50,6 +51,10 @@ Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact');
 
 Route::get('video_get', function () {
+    $recipe = PostRecipes::first();
+
+    return $recipe->ingredients;
+
     $embed = new Embed();
 
     //Load any url:

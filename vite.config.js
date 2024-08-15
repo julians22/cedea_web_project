@@ -10,6 +10,7 @@ export default defineConfig({
                 "resources/js/vendor/swiper-home.js",
                 "resources/js/vendor/swiper-recipe.js",
                 // 'resources/js/vendor/aos-home.js',
+                "resources/css/filament/admin/theme.css",
             ],
             refresh: true,
         }),

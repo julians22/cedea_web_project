@@ -14,7 +14,7 @@ class PostRecipes extends Model implements HasMedia
 {
     use HasFactory, HasSlug, InteractsWithMedia, HasTranslations;
 
-    public $translatable = ['title', 'content'];
+    public $translatable = ['title', 'content', 'ingredients'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -33,6 +33,7 @@ class PostRecipes extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('id')
             ->generateSlugsFrom('title')
             ->saveSlugsTo('slug');
     }

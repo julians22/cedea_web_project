@@ -5,10 +5,12 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\BrandResource\Pages;
 use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Products\Brand;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -38,8 +40,18 @@ class BrandResource extends Resource
                         true,
                         null,
                         [
-                            'en' => ['required', 'string', 'max:255'],
-                            'id' => ['nullable', 'string', 'max:255'],
+                            'id' => [
+                                'required',
+                                fn(Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
+                                'string',
+                                'max:255'
+                            ],
+                            'en' => [
+                                'nullable',
+                                fn(Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
+                                'string',
+                                'max:255'
+                            ],
                         ]
                     ),
                 SpatieMediaLibraryFileUpload::make('image')

@@ -24,6 +24,16 @@ class Product extends Model implements HasMedia
      */
     protected $guarded = ['id'];
 
+    /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'ingredients' => 'array',
+        'have_video' => 'boolean',
+    ];
+
     public function registerMediaCollections(): void
     {
         $this
@@ -37,6 +47,7 @@ class Product extends Model implements HasMedia
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
+            ->usingLanguage('id')
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }

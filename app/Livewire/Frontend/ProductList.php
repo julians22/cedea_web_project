@@ -111,7 +111,7 @@ class ProductList extends Component
                         return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
                     }
                 )
-                ->simplePaginate(6),
+                ->paginate(6),
         ]);
     }
 }

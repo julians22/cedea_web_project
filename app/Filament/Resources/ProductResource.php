@@ -4,13 +4,16 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Products\Product;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -42,13 +45,24 @@ class ProductResource extends Resource
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('packaging'),
+
+                            Toggle::make('have_video')
+                                ->live(),
+                            TextInput::make('video_link')
+                                ->hidden(fn(Get $get): bool => ! $get('have_video')),
+
                             TextInput::make('name')
-                                ->required()
-                                ->label(__('Name'))
-                                ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                                ->label(__('name'))
+                                ->translatable(true, null, [
+                                    'id' => ['required', 'string', 'max:255'],
+                                    'en' => ['nullable', 'string', 'max:255'],
+                                ]),
                             RichEditor::make('description')
-                                ->label(__('Description'))
-                                ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                                ->label(__('description'))
+                                ->translatable(true, null, [
+                                    'id' => ['required', 'string'],
+                                    'en' => ['nullable', 'string'],
+                                ]),
                         ]),
 
                         Section::make([
@@ -60,8 +74,15 @@ class ProductResource extends Resource
                                 )
                                 ->createOptionForm([
                                     TextInput::make('name')
-                                        ->required(),
-
+                                        ->label(__('name'))
+                                        ->translatable(
+                                            true,
+                                            null,
+                                            [
+                                                'id' => ['required', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
+                                                'en' => ['nullable', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
+                                            ]
+                                        ),
                                 ])
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
                                 // ->options(Category::all()->pluck('name', 'id'))
@@ -85,7 +106,7 @@ class ProductResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('slug'),
+                // TextColumn::make('slug'),
                 TextColumn::make('brand.name'),
                 TextColumn::make('categories.name')
                     ->label('Categories')

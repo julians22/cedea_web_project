@@ -5,9 +5,11 @@ namespace App\Filament\Resources;
 use App\Filament\Resources\CategoryResource\Pages;
 use App\Filament\Resources\CategoryResource\RelationManagers;
 use App\Models\Products\Category;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -33,7 +35,20 @@ class CategoryResource extends Resource
             ->schema([
                 TextInput::make('name')
                     ->required()
-                    ->translatable(true, ['id' => __('Indonesia'), 'en' => __('English')]),
+                    ->translatable(true, null, [
+                        'id' => [
+                            'required',
+                            fn(Get $get) => UniqueTranslationRule::for('categories', 'name')->ignore($get('id')),
+                            'string',
+                            'max:255'
+                        ],
+                        'en' => [
+                            'nullable',
+                            fn(Get $get) => UniqueTranslationRule::for('categories', 'name')->ignore($get('id')),
+                            'string',
+                            'max:255'
+                        ],
+                    ]),
             ]);
     }
 
