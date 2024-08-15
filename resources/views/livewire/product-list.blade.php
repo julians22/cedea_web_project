@@ -30,14 +30,15 @@
 
 <div>
     <div wire:ignore>
-        <x-video-player />
+        <x-video-player url="{{ asset('video/product.mp4') }}" />
     </div>
 
     <section class="space-y-8" x-data="{ modalOpen: false, }">
         {{-- Brand --}}
         <div class="bg-products relative object-contain transition-all max-md:mb-4">
             <img class="max-md:hidden" draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
-            <img class="md:hidden" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
+            <img class="md:hidden" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}"
+                alt="">
 
             <div class="container absolute ~top-4/8 md:left-[10%] md:top-1/2 md:w-1/3 md:-translate-y-1/2">
                 <h2 class="section-title">Produk</h2>
