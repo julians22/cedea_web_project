@@ -9,6 +9,7 @@ use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Resource;
@@ -64,7 +65,8 @@ class BrandResource extends Resource
                         null,
                         '1:1',
                     ])
-                    ->imageEditorEmptyFillColor('#fff')
+                    ->imageEditorEmptyFillColor('#fff'),
+                Toggle::make('in_nav')
             ]);
     }
 

@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Models\Products\Brand;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
@@ -10,15 +11,34 @@ use Illuminate\View\Component;
 class Nav extends Component
 {
 
+
+
     public $nav_items;
     public $locale;
+    public $brands;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
 
+
+
         $this->locale = App::currentLocale();
+
+
+
+        $this->brands =
+            Brand::query()->inNav()->orderBy('order_column')->get()->map(function ($brand) {
+                return [
+                    'label' => $brand->name,
+                    'route' => route('product', [
+                        'brand' => $brand->slug
+                    ]),
+                    'submenu' => []
+                ];
+            })->toArray();
+
 
         //* TYPE DOC
         //* [label : string
@@ -66,53 +86,45 @@ class Nav extends Component
                 // 'route' => '#',
                 'disable' => false,
                 'submenu' => [
-                    [
-                        'label' => 'CEDEA',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Teman Laut',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Kreasi Resep',
-                        'route' => '#',
-                        'submenu' => [
-                            [
-                                'label' => 'Sarapan',
-                                'route' => '#',
-                            ],
-                            [
-                                'label' => 'Makan Siang',
-                                'route' => '#',
-                            ],
-                            [
-                                'label' => 'Makan Malam',
-                                'route' => '#',
-                            ],
-                            [
-                                'label' => 'Snack',
-                                'route' => '#',
-                            ],
-                        ]
-                    ],
-                    [
-                        'label' => 'Video',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Belanja',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Royalti Point',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
+                    ...$this->brands,
+
+                    // [
+                    //     'label' => 'Kreasi Resep',
+                    //     'route' => '#',
+                    //     'submenu' => [
+                    //         [
+                    //             'label' => 'Sarapan',
+                    //             'route' => '#',
+                    //         ],
+                    //         [
+                    //             'label' => 'Makan Siang',
+                    //             'route' => '#',
+                    //         ],
+                    //         [
+                    //             'label' => 'Makan Malam',
+                    //             'route' => '#',
+                    //         ],
+                    //         [
+                    //             'label' => 'Snack',
+                    //             'route' => '#',
+                    //         ],
+                    //     ]
+                    // ],
+                    // [
+                    //     'label' => 'Video',
+                    //     'route' => '#',
+                    //     'submenu' => []
+                    // ],
+                    // [
+                    //     'label' => 'Belanja',
+                    //     'route' => '#',
+                    //     'submenu' => []
+                    // ],
+                    // [
+                    //     'label' => 'Royalti Point',
+                    //     'route' => '#',
+                    //     'submenu' => []
+                    // ],
                 ]
             ],
             [

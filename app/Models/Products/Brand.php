@@ -29,6 +29,15 @@ class Brand extends Model implements HasMedia, Sortable
     protected $guarded = ['id'];
 
     /**
+     * The attributes that should be cast to native types.
+     *
+     * @var array
+     */
+    protected $casts = [
+        'in_nav' => 'boolean',
+    ];
+
+    /**
      * Get the options for generating the slug.
      */
     public function getSlugOptions(): SlugOptions
@@ -44,6 +53,17 @@ class Brand extends Model implements HasMedia, Sortable
         $this
             ->addMediaCollection('logo')
             ->singleFile();
+    }
+
+    /**
+     * Scope a query to only include in nav
+     *
+     * @param  \Illuminate\Database\Eloquent\Builder $query
+     * @return \Illuminate\Database\Eloquent\Builder
+     */
+    public function scopeInNav($query)
+    {
+        return $query->where('in_nav', true);
     }
 
     /**

@@ -33,7 +33,7 @@
         <x-video-player url="{{ asset('video/product.mp4') }}" />
     </div>
 
-    <section class="space-y-8" x-data="{ modalOpen: false, }">
+    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
         {{-- Brand --}}
         <div class="bg-products relative object-contain transition-all max-md:mb-4">
             <img class="max-md:hidden" draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
@@ -120,7 +120,7 @@
                         <div class="flex flex-col gap-8">
                             <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                                 x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
-                                wire:key='{{ $item->slug }}' wire:key='{{ $item->slug }}'>
+                                wire:key='{{ $item->slug }}'>
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-full aspect-square object-contain object-center"
@@ -129,36 +129,36 @@
                                 </div>
 
                                 {{-- hover content --}}
-                                <div class="before:size-12 top-full mt-10 h-auto w-full items-center rounded-3xl bg-white drop-shadow-top before:absolute before:left-1/2 before:top-1/3 before:-z-1 before:-translate-x-1/2 before:-translate-y-full before:rotate-45 before:rounded-lg before:bg-white before:duration-700"
+                                <div class="before:size-12 top-full mt-10 h-auto w-full items-center rounded-3xl bg-white drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
                                     x-show="hoverCardHovered" x-transition x-cloak>
-                                    <div class="flex gap-2 p-5">
-                                        <div class="w-1/4">
+                                    <div class="flex items-center justify-center gap-2 p-5 max-md:flex-col">
+
+                                        <div class="w-1/2 md:w-1/4">
                                             <img class="size-full object-contain object-center"
                                                 src="{{ $item->brand->getFirstMediaUrl('logo') }}" alt="">
                                         </div>
 
-                                        <div class="flex gap-2">
-                                            <div class="flex items-center text-cedea-red">
+                                        <div class="flex items-center justify-center gap-2">
+                                            <div class="text-cedea-red">
                                                 {{ $item->name }}
                                             </div>
-                                            <div class="flex items-center text-2xl text-cedea-red"
+
+                                            <div class="cursor-pointer text-cedea-red"
                                                 @click="()=>{
                                                     modalOpen=true;
                                                     $wire.handleChangeActiveProduct('{{ $item->slug }}')
                                                     }">
-                                                <span class="cursor-pointer">
-                                                    <svg class="h-8" xmlns="http://www.w3.org/2000/svg"
-                                                        xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                        viewBox="0 0 17.78 32.83">
-                                                        <g>
-                                                            <g style="fill: none; filter: url(#d);">
-                                                                <polyline class="fill-none stroke-cedea-red"
-                                                                    points="1.36 .75 16.72 16.11 .75 32.07"
-                                                                    style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                            </g>
+                                                <svg class="~h-4/8" xmlns="http://www.w3.org/2000/svg"
+                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
+                                                    viewBox="0 0 17.78 32.83">
+                                                    <g>
+                                                        <g style="fill: none; filter: url(#d);">
+                                                            <polyline class="fill-none stroke-cedea-red"
+                                                                points="1.36 .75 16.72 16.11 .75 32.07"
+                                                                style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
                                                         </g>
-                                                    </svg>
-                                                </span>
+                                                    </g>
+                                                </svg>
                                             </div>
                                         </div>
                                     </div>
@@ -167,13 +167,15 @@
                         </div>
                     @endforeach
                 </div>
+
+                {{--  TODO: exclude activeProductChange --}}
+                <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
+                    <x-product-list-skeleton />
+                </div>
                 {{ $products->links(data: ['scrollTo' => false]) }}
             </div>
 
-            {{--  TODO: exclude activeProductChange --}}
-            <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
-                <x-product-list-skeleton />
-            </div>
+
 
         </div>
 
@@ -189,7 +191,7 @@
                         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
                     </div>
-                    <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red px-7 py-6 sm:max-w-lg sm:rounded-3xl lg:w-min lg:max-w-7xl"
+                    <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red px-7 py-6 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"
                         x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
                         x-transition:enter="ease-out duration-300"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
@@ -213,32 +215,32 @@
                                 <h2 class="mt-2 uppercase ~text-xl/4xl">{{ $activeProduct->name }}</h2>
 
                                 <div class="mt-8 flex gap-6 max-lg:flex-col">
-                                    <div class="flex basis-1/6 flex-col items-center justify-center gap-y-4">
+                                    <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
                                         <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
-                                        <button
-                                            class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black">Beli
-                                            sekarang</button>
+                                        <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
+                                            href="{{ $activeProduct->buy_link }}">Beli
+                                            sekarang</a>
                                     </div>
 
-                                    <div class="grow basis-3/6 text-justify">
+                                    <div class="grow basis-2/5 text-justify">
                                         {!! $item->description !!}
                                     </div>
 
-                                    @if ($item->have_video)
-                                        <div class="flex basis-2/6 flex-col items-center gap-y-4">
-                                            <div class="relative overflow-hidden rounded-xl">
-                                                <img class="h-full w-full object-center"
-                                                    src="{{ asset('img/video-thumb-small-placeholder.jpg') }}"
-                                                    alt="">
-                                                <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                                    src="{{ asset('img/icons/play.svg') }}" alt="">
-                                            </div>
-
-                                            <a
-                                                class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black">Tonton
-                                                videonya</a>
+                                    {{-- @if ($item->have_video) --}}
+                                    <div class="flex basis-2/5 flex-col items-center gap-y-4">
+                                        <div class="relative overflow-hidden rounded-xl">
+                                            <img class="h-full w-full object-center"
+                                                src="{{ asset('img/video-thumb-small-placeholder.jpg') }}"
+                                                alt="">
+                                            <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                                                src="{{ asset('img/icons/play.svg') }}" alt="">
                                         </div>
-                                    @endif
+
+                                        <a
+                                            class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black">Tonton
+                                            videonya</a>
+                                    </div>
+                                    {{-- @endif --}}
                                 </div>
                             @endif
                         </div>

@@ -44,10 +44,14 @@ class ProductList extends Component
     {
         Meta::prependTitle('Products');
 
+
         $this->allCategories = Category::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
-        if ($this->brands->first()) {
-            $this->activeBrand = $this->brands->first()->slug;
+
+        if (! request('brand')) {
+            if ($this->brands->first()) {
+                $this->activeBrand = $this->brands->first()->slug;
+            }
         }
     }
 

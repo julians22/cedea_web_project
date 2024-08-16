@@ -81,7 +81,7 @@
                                 ],
                                 [
                                     'name' => 'grabmart',
-                                    'url' => 'https://mart.grab.com/id/id/search?keyword=Cedea',
+                                    'url' => 'https://r.grab.com/g/2-2-6-C23HL3CEPGKANT',
                                     'logo' => asset('img/Marketplace/grabmart.png'),
                                 ],
                                 [
