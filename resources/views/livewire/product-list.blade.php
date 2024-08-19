@@ -90,18 +90,19 @@
                                 'max-h-0' => $brand->slug != $activeBrand,
                             ])>
                                 @foreach ($brand->uniqueCategories as $category)
-                                    <div @class([
-                                        'cursor-pointer ~text-sm/base transition-all duration-700 ',
-                                        'text-cedea-red border-l-4 border-cedea-red pl-2 font-bold ' => in_array(
-                                            $category->slug,
-                                            $activeCategories),
-                                        'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100' => !in_array(
-                                            $category->slug,
-                                            $activeCategories),
-                                    ]) wire:key='{{ $category->slug }}'
-                                        wire:click="handleChangeActiveCategories('{{ $category->slug }}')">
-                                        {{ $category->name }}
-                                    </div>
+                                    <label wire:key='{{ $category->slug }}'
+                                        for="{{ $brand->slug }}-{{ $category->slug }}">
+                                        <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
+                                            type="checkbox" value="{{ $category->slug }}"
+                                            wire:model.live="activeCategories">
+                                        <div @class([
+                                            'cursor-pointer ~text-sm/base transition-all select-none',
+                                            'peer-checked:text-cedea-red peer-checked:border-l-4 peer-checked:border-cedea-red peer-checked:pl-2 peer-checked:font-bold',
+                                            'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
+                                        ])>
+                                            {{ $category->name }}
+                                        </div>
+                                    </label>
                                 @endforeach
                             </div>
                         </div>
