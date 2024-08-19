@@ -35,12 +35,17 @@
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
         {{-- Brand --}}
-        <div class="bg-products relative object-contain transition-all max-md:mb-4">
-            <img class="max-md:hidden" draggable="false" src="{{ asset('img/product-section-bg.jpg') }}" alt="">
-            <img class="md:hidden" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}"
-                alt="">
+        <div class="bg-products relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+            <picture>
+                <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
+                    media="(min-width: 1024px)" />
 
-            <div class="container absolute ~top-4/8 md:left-[10%] md:top-1/2 md:w-1/3 md:-translate-y-1/2">
+                <img draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
+            </picture>
+
+
+
+            <div class="container absolute ~top-4/8 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
                 <h2 class="section-title">Produk</h2>
 
                 <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
@@ -93,7 +98,7 @@
                                     <label wire:key='{{ $category->slug }}'
                                         for="{{ $brand->slug }}-{{ $category->slug }}">
                                         <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
-                                            type="checkbox" value="{{ $category->slug }}"
+                                            type="checkbox" value="{{ $category->slug }}" wire:loading.attr="disabled"
                                             wire:model.live="activeCategories">
                                         <div @class([
                                             'cursor-pointer ~text-sm/base transition-all select-none',
