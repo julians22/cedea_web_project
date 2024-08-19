@@ -85,22 +85,22 @@
                                         'desc' => 'Seiring dengan perkembangan perusahaan dan tuntutan zaman,
                                         CEDEA kembali melakukan penambahan pabrik di Majalengka, Jawa
                                         Barat. Pabrik baru ini dioperasikan dengan mesin otomasi dan
-                                        menggunakan tekonologi terkini yang sesuai dengan standar industri
+                                        menggunakan teknologi terkini yang sesuai dengan standar industri
                                         4.0.',
                                     ],
                                     [
                                         'date' => '2022',
                                         'title' => 'Market Leader',
                                         'desc' => 'Perusahaan semakin maju, dan mulai melakukan promosi dan iklan di
-                                        TV lokal, theme park, hingga acara – acara musik di Indonesia, hingga
-                                        saat ini CEDEA menjadi market leader diantara produsen ikan olahan
+                                        TV lokal, theme park, hingga acara - acara musik di Indonesia, hingga
+                                        saat ini CEDEA menjadi market leader di antara produsen ikan olahan
                                         beku indonesia.',
                                     ],
                                     [
                                         'date' => '2024',
                                         'title' => 'Berdiri Pabrik Baru',
                                         'desc' => 'PT. CitraDimensi Arthali kembali memperluas perusahaan dengan
-                                        membangun pabrik baru di kota Semarang, Jawa Tengah',
+                                        membangun pabrik baru di kota Semarang, Jawa Tengah.',
                                     ],
                                 ];
                             @endphp
