@@ -135,8 +135,12 @@
                                 </div>
 
                                 {{-- hover content --}}
-                                <div class="before:size-12 top-full mt-10 h-auto w-full items-center rounded-3xl bg-white drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
-                                    x-show="hoverCardHovered" x-transition x-cloak>
+                                <div class="before:size-12 top-full mt-10 h-auto w-full cursor-pointer items-center rounded-3xl bg-white drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
+                                    x-show="hoverCardHovered" x-transition x-cloak
+                                    @click="()=>{
+                                        modalOpen=true;
+                                        $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                        }">
                                     <div class="flex items-center justify-center gap-2 p-5 max-md:flex-col">
 
                                         <div class="w-1/2 md:w-1/4">
@@ -149,11 +153,7 @@
                                                 {{ $item->name }}
                                             </div>
 
-                                            <div class="cursor-pointer text-cedea-red"
-                                                @click="()=>{
-                                                    modalOpen=true;
-                                                    $wire.handleChangeActiveProduct('{{ $item->slug }}')
-                                                    }">
+                                            <div class="cursor-pointer text-cedea-red">
                                                 <svg class="~h-4/8" xmlns="http://www.w3.org/2000/svg"
                                                     xmlns:xlink="http://www.w3.org/1999/xlink"
                                                     viewBox="0 0 17.78 32.83">
