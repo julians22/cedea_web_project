@@ -38,14 +38,14 @@ Route::get(
 )
     ->name('product');
 
-Route::get(
-    'recipe',
-    RecipeList::class
-)
-    ->name('recipe');
+// Route::get(
+//     'recipe',
+//     RecipeList::class
+// )
+//     ->name('recipe');
 
-Route::view('recipe/detail', 'recipe-detail')
-    ->name('recipe.detail');
+// Route::view('recipe/detail', 'recipe-detail')
+//     ->name('recipe.detail');
 
 Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact');

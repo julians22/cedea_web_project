@@ -6,6 +6,7 @@ example @click="modalOpen=false"
 
 @props(['trigger' => null, 'content' => null])
 
+{{-- TODO: Refactor to dialog element ?  --}}
 <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" x-data="{ modalOpen: false }"
     @keydown.escape.window="modalOpen = false">
 

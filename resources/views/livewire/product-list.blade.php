@@ -45,14 +45,14 @@
 
 
 
-            <div class="container absolute ~top-4/8 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
-                <h2 class="section-title">Produk</h2>
+            <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
+                <h1 class="section-title">Produk</h1>
 
                 <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
                     produk terbaik dari Cedea Seafood!</p>
                 <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square max-h-80 cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="lg:size-full" src="{{ $brand->getFirstMediaUrl('logo') }}" alt="">
@@ -63,9 +63,8 @@
         </div>
 
         <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~gap-8/20 lg:grid" id="product-list">
-
             {{-- category side nav --}}
-            <div class="top-4 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] ~p-4/8 lg:sticky">
+            <div class="top-28 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] ~p-4/8 lg:sticky">
                 {{-- search form --}}
                 <div class="lg:mt-4">
                     <label class="sr-only mb-2 text-sm font-medium" for="default-search">Search</label>
@@ -117,10 +116,10 @@
             </div>
 
             {{-- product grid --}}
-            {{-- TODO: exclude activeProductChange  --}}
             <div class="flex flex-col gap-4">
                 <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
+                    {{-- TODO: Refactor to component --}}
                     @foreach ($products as $item)
                         {{-- hover trigger --}}
                         <div class="flex flex-col gap-8">
@@ -135,13 +134,14 @@
                                 </div>
 
                                 {{-- hover content --}}
-                                <div class="before:size-12 top-full mt-10 h-auto w-full cursor-pointer items-center rounded-3xl bg-white drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
+                                <div class="before:size-12 top-full mt-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
                                     x-show="hoverCardHovered" x-transition x-cloak
                                     @click="()=>{
                                         modalOpen=true;
                                         $wire.handleChangeActiveProduct('{{ $item->slug }}')
                                         }">
-                                    <div class="flex items-center justify-center gap-2 p-5 max-md:flex-col">
+                                    <div
+                                        class="flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] p-5 max-md:flex-col">
 
                                         <div class="w-1/2 md:w-1/4">
                                             <img class="size-full object-contain object-center"
@@ -181,15 +181,13 @@
                 {{ $products->links(data: ['scrollTo' => false]) }}
             </div>
 
-
-
         </div>
 
 
         {{-- pop-up --}}
+        {{-- TODO: Refactor to dialog element ?  --}}
         @teleport('body')
             <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" @keydown.escape.window="modalOpen = false">
-
                 <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
                     x-cloak>
                     <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
@@ -268,13 +266,14 @@
                         </div>
                     </div>
                 </div>
-
             </div>
         @endteleport
 
     </section>
 
-    <section class="container mt-8" wire:ignore>
+
+    {{-- recipe --}}
+    {{-- <section class="container mt-8" wire:ignore>
         <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
 
         <p>Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari
@@ -319,5 +318,5 @@
                 @endforeach
             </x-meals-container>
         </div>
-    </section>
+    </section> --}}
 </div>
