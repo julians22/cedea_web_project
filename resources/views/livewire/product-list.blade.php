@@ -141,7 +141,7 @@
                                         $wire.handleChangeActiveProduct('{{ $item->slug }}')
                                         }">
                                     <div
-                                        class="flex items-center justify-center gap-2 rounded-3xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] p-5 max-md:flex-col">
+                                        class="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
                                         <div class="w-1/2 md:w-1/4">
                                             <img class="size-full object-contain object-center"
