@@ -43,8 +43,6 @@
                 <img draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
             </picture>
 
-
-
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
                 <h1 class="section-title">Produk</h1>
 
@@ -52,7 +50,7 @@
                     produk terbaik dari Cedea Seafood!</p>
                 <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex aspect-square max-h-80 cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
+                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/3xl ~p-2/8"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="lg:size-full" src="{{ $brand->getFirstMediaUrl('logo') }}" alt="">
@@ -134,38 +132,36 @@
                                 </div>
 
                                 {{-- hover content --}}
-                                <div class="before:size-12 top-full mt-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
+                                <div class="before:size-8 top-full mt-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
                                     x-show="hoverCardHovered" x-transition x-cloak
                                     @click="()=>{
                                         modalOpen=true;
                                         $wire.handleChangeActiveProduct('{{ $item->slug }}')
                                         }">
                                     <div
-                                        class="flex items-center justify-center gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
+                                        class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
                                         <div class="w-1/2 md:w-1/4">
                                             <img class="size-full object-contain object-center"
                                                 src="{{ $item->brand->getFirstMediaUrl('logo') }}" alt="">
                                         </div>
 
-                                        <div class="flex items-center justify-center gap-2">
-                                            <div class="text-cedea-red">
-                                                {{ $item->name }}
-                                            </div>
+                                        <div class="text-cedea-red">
+                                            {{ $item->name }}
+                                        </div>
 
-                                            <div class="cursor-pointer text-cedea-red">
-                                                <svg class="~h-2/5" xmlns="http://www.w3.org/2000/svg"
-                                                    xmlns:xlink="http://www.w3.org/1999/xlink"
-                                                    viewBox="0 0 17.78 32.83">
-                                                    <g>
-                                                        <g style="fill: none; filter: url(#d);">
-                                                            <polyline class="fill-none stroke-cedea-red"
-                                                                points="1.36 .75 16.72 16.11 .75 32.07"
-                                                                style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                        </g>
+                                        <div class="cursor-pointer text-cedea-red">
+                                            <svg class="~h-2/5" xmlns="http://www.w3.org/2000/svg"
+                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
+                                                <g>
+                                                    <g style="fill: none; filter: url(#d);">
+                                                        <polyline class="fill-none stroke-cedea-red"
+                                                            points="1.36 .75 16.72 16.11 .75 32.07"
+                                                            style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
                                                     </g>
-                                                </svg>
-                                            </div>
+                                                </g>
+                                            </svg>
+
                                         </div>
                                     </div>
                                 </div>
