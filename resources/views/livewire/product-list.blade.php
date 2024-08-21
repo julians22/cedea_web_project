@@ -141,28 +141,15 @@
                                     <div
                                         class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
-                                        <div class="w-1/2 md:w-1/4">
-                                            <img class="size-full object-contain object-center"
-                                                src="{{ $item->brand->getFirstMediaUrl('logo') }}" alt="">
-                                        </div>
+                                        <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
+                                            alt="">
 
                                         <div class="text-cedea-red">
                                             {{ $item->name }}
+                                            {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                         </div>
 
-                                        <div class="cursor-pointer text-cedea-red">
-                                            <svg class="~h-2/5" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
-                                                <g>
-                                                    <g style="fill: none; filter: url(#d);">
-                                                        <polyline class="fill-none stroke-cedea-red"
-                                                            points="1.36 .75 16.72 16.11 .75 32.07"
-                                                            style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                    </g>
-                                                </g>
-                                            </svg>
-
-                                        </div>
+                                        <x-arrow-right class="max-lg:hidden" />
                                     </div>
                                 </div>
                             </div>
@@ -193,7 +180,7 @@
                         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
                     </div>
 
-                    <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red p-12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"
+                    <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"
                         x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
                         x-transition:enter="ease-out duration-300"
                         x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
