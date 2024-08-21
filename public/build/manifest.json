@@ -1,52 +1,48 @@
 {
-  "_autoplay-BGHAakiq.js": {
-    "file": "assets/autoplay-BGHAakiq.js",
-    "name": "autoplay"
-  },
-  "resources/assets/brick-pattern.webp": {
-    "file": "assets/brick-pattern-CdwqVlwB.webp",
-    "src": "resources/assets/brick-pattern.webp"
-  },
-  "resources/assets/fonts/AndrogyneMedium.woff": {
-    "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
-    "src": "resources/assets/fonts/AndrogyneMedium.woff"
-  },
-  "resources/assets/fonts/AndrogyneMedium.woff2": {
-    "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
-    "src": "resources/assets/fonts/AndrogyneMedium.woff2"
-  },
-  "resources/css/app.css": {
-    "file": "assets/app-C-r_gRGS.css",
-    "src": "resources/css/app.css",
-    "isEntry": true
-  },
-  "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-kOWe-uzG.css",
-    "src": "resources/css/filament/admin/theme.css",
-    "isEntry": true
-  },
-  "resources/js/app.js": {
-    "file": "assets/app-CGvvzMRB.js",
-    "name": "app",
-    "src": "resources/js/app.js",
-    "isEntry": true
-  },
-  "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-BodASFnk.js",
-    "name": "swiper-home",
-    "src": "resources/js/vendor/swiper-home.js",
-    "isEntry": true,
-    "imports": [
-      "_autoplay-BGHAakiq.js"
-    ]
-  },
-  "resources/js/vendor/swiper-recipe.js": {
-    "file": "assets/swiper-recipe-DtGvb2Ul.js",
-    "name": "swiper-recipe",
-    "src": "resources/js/vendor/swiper-recipe.js",
-    "isEntry": true,
-    "imports": [
-      "_autoplay-BGHAakiq.js"
-    ]
-  }
+    "_autoplay-BGHAakiq.js": {
+        "file": "assets/autoplay-BGHAakiq.js",
+        "name": "autoplay"
+    },
+    "resources/assets/brick-pattern.webp": {
+        "file": "assets/brick-pattern-CdwqVlwB.webp",
+        "src": "resources/assets/brick-pattern.webp"
+    },
+    "resources/assets/fonts/AndrogyneMedium.woff": {
+        "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
+        "src": "resources/assets/fonts/AndrogyneMedium.woff"
+    },
+    "resources/assets/fonts/AndrogyneMedium.woff2": {
+        "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
+        "src": "resources/assets/fonts/AndrogyneMedium.woff2"
+    },
+    "resources/css/app.css": {
+        "file": "assets/app-ObVPpK8S.css",
+        "src": "resources/css/app.css",
+        "isEntry": true
+    },
+    "resources/css/filament/admin/theme.css": {
+        "file": "assets/theme-kOWe-uzG.css",
+        "src": "resources/css/filament/admin/theme.css",
+        "isEntry": true
+    },
+    "resources/js/app.js": {
+        "file": "assets/app-CGvvzMRB.js",
+        "name": "app",
+        "src": "resources/js/app.js",
+        "isEntry": true
+    },
+    "resources/js/vendor/swiper-home.js": {
+        "file": "assets/swiper-home-BodASFnk.js",
+        "name": "swiper-home",
+        "src": "resources/js/vendor/swiper-home.js",
+        "isEntry": true,
+        "imports": ["_autoplay-BGHAakiq.js"]
+    },
+    "resources/js/vendor/swiper-recipe.js": {
+        "file": "assets/swiper-recipe-DtGvb2Ul.js",
+        "name": "swiper-recipe",
+        "src": "resources/js/vendor/swiper-recipe.js",
+        "isEntry": true,
+        "imports": ["_autoplay-BGHAakiq.js"]
+    }
 }
