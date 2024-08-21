@@ -48,7 +48,7 @@
 
                 <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
                     produk terbaik dari Cedea Seafood!</p>
-                <div class="my-4 grid grid-cols-3 ~gap-x-2/8" type="button">
+                <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
                             type="button" wire:key='{{ $brand->slug }}'
