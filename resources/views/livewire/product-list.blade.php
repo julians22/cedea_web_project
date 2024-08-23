@@ -118,7 +118,7 @@
                 <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
                     {{-- TODO: Refactor to component --}}
-                    @foreach ($products as $item)
+                    @forelse ($products as $item)
                         {{-- hover trigger --}}
                         <div class="flex flex-col gap-8">
                             <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
@@ -166,7 +166,20 @@
                                 </div>
                             </div>
                         </div>
-                    @endforeach
+                    @empty
+                        <div
+                            class="col-span-full flex flex-col items-center justify-center self-center justify-self-center">
+                            <lord-icon class="size-40 inline-block" src="https://cdn.lordicon.com/rmkpgtpt.json"
+                                trigger="in" delay="500" state="in-reveal"
+                                colors="primary:#e4e4e4,secondary:#d02028">
+                            </lord-icon>
+
+                            <h2 class="section-title">
+                                Data tidak ditemukan
+                            </h2>
+
+                        </div>
+                    @endforelse
                 </div>
 
                 {{--  TODO: exclude activeProductChange --}}
@@ -189,7 +202,8 @@
                     <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
+                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                        @click="modalOpen=false">
                     </div>
 
                     <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"

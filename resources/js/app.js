@@ -1,3 +1,6 @@
+import { defineElement } from "@lordicon/element";
+import lottie from "lottie-web";
+
 import focus from "@alpinejs/focus";
 import resize from "@alpinejs/resize";
 
@@ -15,3 +18,6 @@ document.addEventListener("alpine:init", () => {
 });
 
 Livewire.start();
+
+// define "lord-icon" custom element with default properties
+defineElement(lottie.loadAnimation);
