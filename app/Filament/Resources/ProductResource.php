@@ -68,7 +68,7 @@ class ProductResource extends Resource
                                 ]),
 
                             TextInput::make('no_bpom')
-                                ->required()
+                                // ->required()
                                 ->label(__('no_bpom')),
 
                             TableRepeater::make('packaging')
