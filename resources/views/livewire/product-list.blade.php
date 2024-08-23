@@ -237,11 +237,37 @@
                                             sekarang</a>
                                     </div>
 
-                                    <div class="grow basis-2/5 text-justify">
-                                        {!! $item->description !!}
+                                    <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
+                                        <span>{!! $activeProduct->description !!}</span>
+
+                                        <div>
+                                            {{ $activeProduct->no_bpom }}
+                                        </div>
+
+                                        @if ($activeProduct->packaging)
+                                            <div class="overflow-x-auto">
+                                                <table class="table">
+                                                    {{-- <thead class="invisible">
+                                                        <tr>
+                                                            <th>Unit</th>
+                                                            <th>size</th>
+                                                        </tr>
+                                                    </thead> --}}
+
+                                                    <tbody>
+                                                        @foreach ($activeProduct->packaging as $package)
+                                                            <tr class="table-row">
+                                                                <td>{{ $package['unit'] }}&nbsp;</td>
+                                                                <td>:&nbsp;{{ $package['size'] }}</td>
+                                                            </tr>
+                                                        @endforeach
+                                                    </tbody>
+                                                </table>
+                                            </div>
+                                        @endif
                                     </div>
 
-                                    @if ($item->have_video)
+                                    @if ($activeProduct->have_video)
                                         <div class="flex basis-2/5 flex-col items-center gap-y-4">
                                             <div class="relative overflow-hidden rounded-xl">
                                                 <img class="h-full w-full object-center"

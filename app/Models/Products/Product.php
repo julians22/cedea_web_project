@@ -15,7 +15,7 @@ class Product extends Model implements HasMedia
 {
     use HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
 
-    public $translatable = ['name', 'description'];
+    public $translatable = ['name', 'description', 'packaging'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -30,7 +30,8 @@ class Product extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        'ingredients' => 'array',
+        // 'ingredients' => 'array',
+        'packaging' => 'array',
         'have_video' => 'boolean',
     ];
 

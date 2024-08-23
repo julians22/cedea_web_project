@@ -4,7 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Products\Product;
+use Awcodes\TableRepeater\Components\TableRepeater;
+use Awcodes\TableRepeater\Header;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
+use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -63,6 +66,23 @@ class ProductResource extends Resource
                                     'id' => ['required', 'string'],
                                     'en' => ['nullable', 'string'],
                                 ]),
+
+                            TextInput::make('no_bpom')
+                                ->required()
+                                ->label(__('no_bpom')),
+
+                            TableRepeater::make('packaging')
+                                ->headers([
+                                    Header::make('unit'),
+                                    Header::make('size'),
+                                ])
+                                ->schema([
+                                    TextInput::make('unit'),
+                                    TextInput::make('size'),
+                                ])
+                                ->label('Packaging list')
+                                ->default([])
+                                ->translatable(),
                         ]),
 
                         Section::make([
