@@ -127,8 +127,10 @@
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-full aspect-square object-contain object-center"
-                                        src="{{ $item->getFirstMediaUrl('packaging') }}"
-                                        alt="{{ $item->getFirstMedia('packaging')->name }}">
+                                        src="{{ $item->getFirstMediaUrl('packaging') }}" {{-- TODO: THIS DATA SOMETIMES NULL --}}
+                                        {{-- alt="{{
+                                        $item->getFirstMedia('packaging')->name
+                                        }}" --}}>
                                 </div>
 
                                 {{-- hover content --}}
@@ -202,8 +204,7 @@
                     <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                        @click="modalOpen=false">
+                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
                     </div>
 
                     <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"
