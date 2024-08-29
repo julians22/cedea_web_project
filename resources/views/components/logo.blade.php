@@ -1,7 +1,7 @@
 <svg class="w-full" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 189.3 174.55">
     <g>
         <g>
-            <rect y="0" width="189.3" height="174.55" style="fill: #d02028;" />
+            <rect y="0" width="189.3" height="174.55" style="fill: #BA0020;" />
             <polygon points="184.8 0 184.8 170.5 4.5 170.5 4.5 0 3.76 0 3.76 171.24 185.54 171.24 185.54 0 184.8 0"
                 style="fill: #fff;" />
             <path
