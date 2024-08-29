@@ -95,8 +95,8 @@
                                     <label wire:key='{{ $category->slug }}'
                                         for="{{ $brand->slug }}-{{ $category->slug }}">
                                         <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
-                                            type="checkbox" value="{{ $category->slug }}" wire:loading.attr="disabled"
-                                            wire:model.live="activeCategories">
+                                            type="radio" value="{{ $category->slug }}" wire:loading.attr="disabled"
+                                            wire:model.live="activeCategory">
                                         <div @class([
                                             'cursor-pointer ~text-sm/base transition-all select-none',
                                             'peer-checked:text-cedea-red peer-checked:border-l-4 peer-checked:border-cedea-red peer-checked:pl-2 peer-checked:font-bold',
