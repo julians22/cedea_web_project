@@ -47,7 +47,8 @@ class ProductResource extends Resource
                                 ->required()
                                 ->maxFiles(1)
                                 ->image()
-                                ->optimize('webp')
+                                ->conversion('thumb')
+                                // ->optimize('webp')
                                 ->collection('packaging'),
 
                             Toggle::make('have_video')
