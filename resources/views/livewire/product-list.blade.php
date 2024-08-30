@@ -50,7 +50,7 @@
                     produk terbaik dari Cedea Seafood!</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border border-cedea-red shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
+                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="lg:size-full" src="{{ $brand->getFirstMediaUrl('logo') }}" alt="">
@@ -83,7 +83,7 @@
                         <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
                             <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')" @class([
                                 '~text-lg/2xl',
-                                'text-cedea-red' => $brand->slug == $activeBrand,
+                                'text-cedea-red-dark' => $brand->slug == $activeBrand,
                             ])>
                                 {{ $brand->name }}</p>
                             <div @class([
@@ -91,15 +91,27 @@
                                 'max-h-40 mt-2' => $brand->slug == $activeBrand,
                                 'max-h-0' => $brand->slug != $activeBrand,
                             ])>
+                                <label for="{{ $brand->slug }}-all">
+                                    <input class="peer hidden" id="{{ $brand->slug }}-all" type="radio"
+                                        value="all" wire:loading.attr="disabled" wire:model.live="activeCategory">
+                                    <div wire:loading.class='cursor-wait' @class([
+                                        'cursor-pointer ~text-sm/base transition-all select-none',
+                                        'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
+                                        'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
+                                    ])>
+                                        All
+                                    </div>
+                                </label>
+
                                 @foreach ($brand->uniqueCategories as $category)
                                     <label wire:key='{{ $category->slug }}'
                                         for="{{ $brand->slug }}-{{ $category->slug }}">
                                         <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
                                             type="radio" value="{{ $category->slug }}" wire:loading.attr="disabled"
                                             wire:model.live="activeCategory">
-                                        <div @class([
+                                        <div wire:loading.class='cursor-wait' @class([
                                             'cursor-pointer ~text-sm/base transition-all select-none',
-                                            'peer-checked:text-cedea-red peer-checked:border-l-4 peer-checked:border-cedea-red peer-checked:pl-2 peer-checked:font-bold',
+                                            'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
                                             'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
                                         ])>
                                             {{ $category->name }}
@@ -146,7 +158,7 @@
                                         <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
                                             alt="">
 
-                                        <div class="text-cedea-red">
+                                        <div class="text-cedea-red-dark">
                                             {{ $item->name }}
                                             {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                         </div>
@@ -198,13 +210,14 @@
         {{-- TODO: Refactor to dialog element ?  --}}
         @teleport('body')
             <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" @keydown.escape.window="modalOpen = false">
-                <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
+                <div class="h-dvh fixed left-0 top-0 z-[99] flex w-screen items-center justify-center" x-show="modalOpen"
                     x-cloak>
 
                     <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                         x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                         x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
+                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                        @click="modalOpen=false">
                     </div>
 
                     <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"

@@ -24,8 +24,8 @@ class ProductList extends Component
     #[Url(as: 'brand', except: null, keep: true)]
     public ?string $activeBrand = null;
 
-    #[Url(as: 'category', except: '')]
-    public ?string $activeCategory = null;
+    #[Url(as: 'category', except: ['all', null, ''], keep: true)]
+    public ?string $activeCategory = 'all';
 
     #[Url(except: '')]
     public string $keyword = '';
@@ -68,6 +68,11 @@ class ProductList extends Component
         $this->activeProduct = Product::where('slug', $slug)->first();
     }
 
+    public function updatedActiveCategory()
+    {
+        $this->resetPage();
+    }
+
     #[Computed(persist: true, seconds: 120)]
     public function brandWithUniqueCategories()
     {
@@ -77,7 +82,7 @@ class ProductList extends Component
 
             // Now you have unique categories for the brand
             // You can assign it to the brand or use it as needed
-            $brand->uniqueCategories = $uniqueCategories;
+            $brand->uniqueCategories = $uniqueCategories->sortBy('name');
         }
 
         return $this->brands;
@@ -94,7 +99,7 @@ class ProductList extends Component
                     }
                 )
                 ->when(
-                    $this->activeCategory,
+                    $this->activeCategory !== 'all',
                     function ($q) {
                         return $q->whereHas('categories', function (Builder $query) {
                             $query->where('slug', $this->activeCategory);
