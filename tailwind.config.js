@@ -82,7 +82,7 @@ export default {
                         900: "#000000",
                         950: "#000000",
                     },
-                    reddark: "#991a1d",
+                    "red-dark": "#B90020",
                     "yellow-1": "#F3B91A",
                     "yellow-2": "#F8DA04",
                 },

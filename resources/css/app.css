@@ -42,7 +42,7 @@
     }
 
     .section-title {
-        @apply font-androgyne text-cedea-red ~text-2xl/5xl ~mb-2/10;
+        @apply font-androgyne text-cedea-red-dark ~text-2xl/5xl ~mb-2/10;
     }
 
     #recipe-swiper {

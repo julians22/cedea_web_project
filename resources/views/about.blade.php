@@ -26,7 +26,7 @@
             <x-modal>
 
                 <x-slot:trigger>
-                    <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red" type="button"
+                    <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red-dark" type="button"
                         @click="modalOpen=true">
                         Informasi Lebih Lanjut </button>
                 </x-slot:trigger>
@@ -136,7 +136,7 @@
     <section class="relative ~scroll-mt-12/20" id="visi-misi">
         {{-- gradient bg with container hack --}}
         <div
-            class="absolute left-0 top-0 -z-1 grid h-full w-full grid-cols-1 items-start justify-center text-justify text-cedea-red max-md:hidden md:grid-cols-2">
+            class="absolute left-0 top-0 -z-1 grid h-full w-full grid-cols-1 items-start justify-center text-justify text-cedea-red-dark max-md:hidden md:grid-cols-2">
             <div class="visi-misi-gradient h-full w-full">
             </div>
             <div class="visi-misi-gradient h-full w-full">
@@ -144,7 +144,7 @@
         </div>
 
         <div
-            class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red md:container md:grid-cols-2">
+            class="grid grid-cols-1 items-start justify-center text-justify text-cedea-red-dark md:container md:grid-cols-2">
             {{-- visi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
