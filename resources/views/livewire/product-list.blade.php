@@ -129,6 +129,7 @@
             <div class="flex flex-col gap-4">
                 <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
+
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
@@ -139,7 +140,7 @@
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-full aspect-square object-contain object-center"
-                                        src="{{ $item->getFirstMediaUrl('packaging') }}" {{-- TODO: THIS DATA SOMETIMES NULL --}}
+                                        src="{{ $item->getFirstMediaUrl('packaging', 'thumb') }}" {{-- TODO: THIS DATA SOMETIMES NULL --}}
                                         {{-- alt="{{
                                         $item->getFirstMedia('packaging')->name
                                         }}" --}}>
