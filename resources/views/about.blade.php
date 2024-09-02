@@ -32,18 +32,9 @@
                 </x-slot:trigger>
 
                 <x-slot:content>
-                    <button
-                        class="absolute right-0 top-0 z-1 flex h-8 w-8 items-center justify-center rounded-full text-white ~mt-2/5 ~mr-2/5 hover:bg-gray-50 hover:text-gray-800"
-                        @click="modalOpen=false">
-                        <svg class="h-5 w-5" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                            stroke-width="1.5" stroke="currentColor">
-                            <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                        </svg>
-                    </button>
 
                     <div class="justify-center text-white">
-                        <ul
-                            class="max-h-[80vh] max-w-[70vw] overflow-auto pr-2 md:mt-8 md:max-h-[85vh] md:max-w-[90vw]">
+                        <ul class="pr-2 md:mt-8">
                             @php
                                 $timeline = [
                                     [
