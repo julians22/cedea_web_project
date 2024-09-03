@@ -54,6 +54,21 @@
             --swiper-navigation-color: #ffffff;
             */
         /* } */
+
+        .swiper-slide {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-end;
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: bottom;
+            }
+        }
+
         .swiper-button-next {
             --swiper-navigation-top-offset: 70%;
             --swiper-navigation-sides-offset: 50px;
@@ -65,8 +80,6 @@
                 --swiper-navigation-sides-offset: 150px;
             }
         }
-
-        /* Navigation font end */
     }
 
     .visi-misi-gradient {
