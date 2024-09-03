@@ -208,119 +208,93 @@
         </div>
 
 
-        {{-- pop-up --}}
-        {{-- TODO: Refactor to dialog element ?  --}}
-        @teleport('body')
-            <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" @keydown.escape.window="modalOpen = false">
-                <div class="h-dvh fixed left-0 top-0 z-[99] flex w-screen items-center justify-center" x-show="modalOpen"
-                    x-cloak>
+        <x-modal-product-detail>
+            <button
+                class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
+                @click="modalOpen=false">
+                <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                    stroke-width="0.5" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+            </button>
 
-                    <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
-                        x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
-                        x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                        x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
-                        @click="modalOpen=false">
-                    </div>
+            <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
+                @if ($activeProduct)
+                    <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
+                    <h2 class="mt-2 uppercase ~text-xl/4xl">{{ $activeProduct->name }}</h2>
 
-                    <div class="relative max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl"
-                        x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
-                        x-transition:enter="ease-out duration-300"
-                        x-transition:enter-start="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95"
-                        x-transition:enter-end="opacity-100 translate-y-0 sm:scale-100"
-                        x-transition:leave="ease-in duration-200"
-                        x-transition:leave-start="opacity-100 translate-y-0 sm:scale-100"
-                        x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
+                    <div class="mt-8 flex gap-6 max-lg:flex-col">
+                        <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
+                            <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
+                            <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
+                                href="{{ $activeProduct->buy_link }}">Beli
+                                sekarang</a>
+                        </div>
 
-                        <button
-                            class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
-                            @click="modalOpen=false">
-                            <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                                stroke-width="0.5" stroke="currentColor">
-                                <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                            </svg>
-                        </button>
+                        <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
+                            <span>{!! $activeProduct->description !!}</span>
 
-                        <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
-                            @if ($activeProduct)
-                                <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
-                                <h2 class="mt-2 uppercase ~text-xl/4xl">{{ $activeProduct->name }}</h2>
+                            <div>
+                                {{ $activeProduct->no_bpom }}
+                            </div>
 
-                                <div class="mt-8 flex gap-6 max-lg:flex-col">
-                                    <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
-                                        <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
-                                        <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                            href="{{ $activeProduct->buy_link }}">Beli
-                                            sekarang</a>
-                                    </div>
+                            @if ($activeProduct->packaging)
+                                <div class="overflow-x-auto">
+                                    <table class="table">
+                                        {{-- <thead class="invisible">
+                                                <tr>
+                                                    <th>Unit</th>
+                                                    <th>size</th>
+                                                </tr>
+                                            </thead> --}}
 
-                                    <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
-                                        <span>{!! $activeProduct->description !!}</span>
-
-                                        <div>
-                                            {{ $activeProduct->no_bpom }}
-                                        </div>
-
-                                        @if ($activeProduct->packaging)
-                                            <div class="overflow-x-auto">
-                                                <table class="table">
-                                                    {{-- <thead class="invisible">
-                                                        <tr>
-                                                            <th>Unit</th>
-                                                            <th>size</th>
-                                                        </tr>
-                                                    </thead> --}}
-
-                                                    <tbody>
-                                                        @foreach ($activeProduct->packaging as $package)
-                                                            <tr class="table-row">
-                                                                <td>{{ $package['unit'] }}&nbsp;</td>
-                                                                <td>:&nbsp;{{ $package['size'] }}</td>
-                                                            </tr>
-                                                        @endforeach
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        @endif
-                                    </div>
-
-                                    @if ($activeProduct->have_video)
-                                        <div class="flex basis-2/5 flex-col items-center gap-y-4">
-                                            <div class="relative overflow-hidden rounded-xl">
-                                                <img class="h-full w-full object-center"
-                                                    src="{{ asset('img/video-thumb-small-placeholder.jpg') }}"
-                                                    alt="">
-                                                <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                                    src="{{ asset('img/icons/play.svg') }}" alt="">
-                                            </div>
-
-                                            <a
-                                                class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black">Tonton
-                                                videonya</a>
-                                        </div>
-                                    @endif
+                                        <tbody>
+                                            @foreach ($activeProduct->packaging as $package)
+                                                <tr class="table-row">
+                                                    <td>{{ $package['unit'] }}&nbsp;</td>
+                                                    <td>:&nbsp;{{ $package['size'] }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
                                 </div>
                             @endif
                         </div>
 
-                        {{-- skeleton --}}
-                        <div class="space-y-4 pr-2 text-white" wire:loading wire:target='handleChangeActiveProduct'>
+                        @if ($activeProduct->have_video)
+                            <div class="flex basis-2/5 flex-col items-center gap-y-4">
+                                <div class="relative overflow-hidden rounded-xl">
+                                    <img class="h-full w-full object-center"
+                                        src="{{ asset('img/video-thumb-small-placeholder.jpg') }}" alt="">
+                                    <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
+                                        src="{{ asset('img/icons/play.svg') }}" alt="">
+                                </div>
 
-                            <x-text-skeleton />
-                            <x-text-skeleton />
-
-                            <div class="grid grid-cols-1 items-center gap-6 lg:grid-cols-3">
-                                <x-image-skeleton />
-
-                                <x-paragraph-skeleton />
-
-                                <x-video-skeleton />
+                                <a
+                                    class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black">Tonton
+                                    videonya</a>
                             </div>
-
-                        </div>
+                        @endif
                     </div>
-                </div>
+                @endif
             </div>
-        @endteleport
+
+            {{-- skeleton --}}
+            <div class="space-y-4 pr-2 text-white" wire:loading wire:target='handleChangeActiveProduct'>
+
+                <x-text-skeleton />
+                <x-text-skeleton />
+
+                <div class="grid grid-cols-1 items-center gap-6 lg:grid-cols-3">
+                    <x-image-skeleton />
+
+                    <x-paragraph-skeleton />
+
+                    <x-video-skeleton />
+                </div>
+
+            </div>
+        </x-modal-product-detail>
 
     </section>
 

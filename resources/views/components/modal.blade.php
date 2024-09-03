@@ -1,7 +1,20 @@
-{{--
-use alpine,
-to change open state use modalOpen
-example @click="modalOpen=false"
+{{-- This component use Alpine JS to toggle its visibility.
+It is highly customizable, general usage modal component.
+!!! DO NOT USE WITH LIVEWIRE, USE MODAL-LIVEWIRE INSTEAD  !!!!
+
+You can use `x-show` to toggle the visibility of the modal.
+You can use `x-transition` to customize the transition of the modal.
+
+You can also use `x-on` to add event listener to the modal.
+For example, you can add `x-on:keydown.escape="modalOpen=false"` to close the modal when user press the escape key.
+
+You can also use `x-ref` to add a reference to the modal.
+For example, you can add `x-ref="modal"` and then use `this.$refs.modal` to access the modal element in your JS code.
+
+You can pass the content of the modal using the `content` slot.
+You can also pass the trigger of the modal using the `trigger` slot.
+
+You can customize the style of the modal using tailwindcss classes.
 --}}
 
 @props(['trigger' => null, 'content' => null])
@@ -33,8 +46,8 @@ example @click="modalOpen=false"
             </button>
 
             <div class="mt-6 h-full overflow-auto md:mt-8">
-                @if ($content)
-                    {{ $content }}
+                @if ($slot)
+                    {{ $slot }}
                 @else
                     <div class="flex items-center justify-between pb-2">
                         <h3 class="text-lg font-semibold">Modal Title</h3>

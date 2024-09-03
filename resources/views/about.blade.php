@@ -31,93 +31,91 @@
                         Informasi Lebih Lanjut </button>
                 </x-slot:trigger>
 
-                <x-slot:content>
 
-                    <div class="justify-center text-white">
-                        <ul class="pr-2 md:mt-8">
-                            @php
-                                $timeline = [
-                                    [
-                                        'date' => '1995',
-                                        'title' => 'Berdiri Sejak',
-                                        'desc' => 'PT. CitraDimensi Arthali berdiri dengan fokus usaha di industri
+                <div class="justify-center text-white">
+                    <ul class="pr-2 md:mt-8">
+                        @php
+                            $timeline = [
+                                [
+                                    'date' => '1995',
+                                    'title' => 'Berdiri Sejak',
+                                    'desc' => 'PT. CitraDimensi Arthali berdiri dengan fokus usaha di industri
                                         perikanan Indonesia. Di awal-awal tahun pendirian perusahaan ini,
                                         ekonomi dalam negeri Indonesia sedang tumbuh pesat menciptakan
                                         peluang usaha yang menjanjikan untuk produk perikanan berkualitas.
                                         Target pasar adalah ritel modern yang juga baru mulai tumbuh saat
                                         itu serta hotel-hotel berbintang.',
-                                    ],
-                                    [
-                                        'date' => '2004',
-                                        'title' => 'Bertumbuh',
-                                        'desc' => 'PT. CitraDimensi Arthali mulai melakukan impor produk ikan olahan
+                                ],
+                                [
+                                    'date' => '2004',
+                                    'title' => 'Bertumbuh',
+                                    'desc' => 'PT. CitraDimensi Arthali mulai melakukan impor produk ikan olahan
                                         berbasis surimi dari Thailand dan Malaysia.',
-                                    ],
-                                    [
-                                        'date' => '2013',
-                                        'title' => 'Memperkuat',
-                                        'desc' => 'Perusahaan kembali memperluas area pabrik menjadi 6,000 M2 dan
+                                ],
+                                [
+                                    'date' => '2013',
+                                    'title' => 'Memperkuat',
+                                    'desc' => 'Perusahaan kembali memperluas area pabrik menjadi 6,000 M2 dan
                                         membangun tambahan gedung produksi baru yang jauh lebih
                                         modern dan canggih. Mesin-mesin otomatis untuk produksi crab stick
                                         dan chikuwa didatangkan dari Jepang. Kapasitas produksi melonjak
                                         dan permintaan pasar atas produk-produk CEDEA terus meningkat.',
-                                    ],
-                                    [
-                                        'date' => '2013',
-                                        'title' => 'Memperluas',
-                                        'desc' => 'PT. CitraDimensi Arthali semakin memperluas jaringan pemasaran ke
+                                ],
+                                [
+                                    'date' => '2013',
+                                    'title' => 'Memperluas',
+                                    'desc' => 'PT. CitraDimensi Arthali semakin memperluas jaringan pemasaran ke
                                         wilayah baru di Pulau Sumatera. Perusahaan mampu berkembang
                                         lebih dari 30% per tahun dan berhasil memperoleh ISO 22000 dan
                                         penghargaan SNI award kelompok perusahaan menengah besar.',
-                                    ],
-                                    [
-                                        'date' => '2020',
-                                        'title' => 'Automated Production (Industry 4.0)',
-                                        'desc' => 'Seiring dengan perkembangan perusahaan dan tuntutan zaman,
+                                ],
+                                [
+                                    'date' => '2020',
+                                    'title' => 'Automated Production (Industry 4.0)',
+                                    'desc' => 'Seiring dengan perkembangan perusahaan dan tuntutan zaman,
                                         CEDEA kembali melakukan penambahan pabrik di Majalengka, Jawa
                                         Barat. Pabrik baru ini dioperasikan dengan mesin otomasi dan
                                         menggunakan teknologi terkini yang sesuai dengan standar industri
                                         4.0.',
-                                    ],
-                                    [
-                                        'date' => '2022',
-                                        'title' => 'Market Leader',
-                                        'desc' => 'Perusahaan semakin maju, dan mulai melakukan promosi dan iklan di
+                                ],
+                                [
+                                    'date' => '2022',
+                                    'title' => 'Market Leader',
+                                    'desc' => 'Perusahaan semakin maju, dan mulai melakukan promosi dan iklan di
                                         TV lokal, theme park, hingga acara - acara musik di Indonesia, hingga
                                         saat ini CEDEA menjadi market leader di antara produsen ikan olahan
                                         beku indonesia.',
-                                    ],
-                                    [
-                                        'date' => '2024',
-                                        'title' => 'Berdiri Pabrik Baru',
-                                        'desc' => 'PT. CitraDimensi Arthali kembali memperluas perusahaan dengan
+                                ],
+                                [
+                                    'date' => '2024',
+                                    'title' => 'Berdiri Pabrik Baru',
+                                    'desc' => 'PT. CitraDimensi Arthali kembali memperluas perusahaan dengan
                                         membangun pabrik baru di kota Semarang, Jawa Tengah.',
-                                    ],
-                                ];
-                            @endphp
+                                ],
+                            ];
+                        @endphp
 
-                            @foreach ($timeline as $item)
-                                <li class="grid grid-cols-[10%_1fr] ~gap-4/2 [&:last-child>div>div]:before:hidden">
-                                    <p class="~text-sm/base">{{ $item['date'] }}</p>
-                                    <div class="relative flex pb-5 pr-2 ~gap-2/6">
-                                        <div
-                                            class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
-                                            <svg class="bi bi-circle-fill fill-white" xmlns="http://www.w3.org/2000/svg"
-                                                width="12" height="12" viewBox="0 0 16 16">
-                                                <circle cx="8" cy="8" r="8" />
-                                            </svg>
-                                        </div>
-                                        <div>
-                                            <p class="font-androgyne ~text-sm/base">{{ $item['title'] }}</p>
-                                            <p class="mt-1 text-justify text-xs">{{ $item['desc'] }}</p>
-                                        </div>
+                        @foreach ($timeline as $item)
+                            <li class="grid grid-cols-[10%_1fr] ~gap-4/2 [&:last-child>div>div]:before:hidden">
+                                <p class="~text-sm/base">{{ $item['date'] }}</p>
+                                <div class="relative flex pb-5 pr-2 ~gap-2/6">
+                                    <div
+                                        class="before:absolute before:left-[5.5px] before:h-full before:w-[1px] before:bg-white">
+                                        <svg class="bi bi-circle-fill fill-white" xmlns="http://www.w3.org/2000/svg"
+                                            width="12" height="12" viewBox="0 0 16 16">
+                                            <circle cx="8" cy="8" r="8" />
+                                        </svg>
                                     </div>
-                                </li>
-                            @endforeach
+                                    <div>
+                                        <p class="font-androgyne ~text-sm/base">{{ $item['title'] }}</p>
+                                        <p class="mt-1 text-justify text-xs">{{ $item['desc'] }}</p>
+                                    </div>
+                                </div>
+                            </li>
+                        @endforeach
 
-                        </ul>
-                    </div>
-                </x-slot:content>
+                    </ul>
+                </div>
             </x-modal>
 
         </x-slot>
