@@ -160,7 +160,7 @@
                                         <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
                                             alt="">
 
-                                        <div class="text-cedea-red-dark">
+                                        <div class="text-pretty text-cedea-red-dark">
                                             {{ $item->name }}
                                             {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                         </div>
