@@ -23,7 +23,8 @@
         </x-slot>
 
         <x-slot:button>
-            <x-modal>
+
+            <x-modal.alpine>
 
                 <x-slot:trigger>
                     <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red-dark" type="button"
@@ -32,8 +33,8 @@
                 </x-slot:trigger>
 
 
-                <div class="justify-center text-white">
-                    <ul class="pr-2 md:mt-8">
+                <div class="text-white">
+                    <ul class="pr-2">
                         @php
                             $timeline = [
                                 [
@@ -116,7 +117,7 @@
 
                     </ul>
                 </div>
-            </x-modal>
+                </x-modal.alpi>
 
         </x-slot>
     </x-section-banner>

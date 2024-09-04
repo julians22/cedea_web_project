@@ -17,7 +17,7 @@ You can also pass the trigger of the modal using the `trigger` slot.
 You can customize the style of the modal using tailwindcss classes.
 --}}
 
-@props(['trigger' => null, 'content' => null])
+@props(['trigger' => null])
 
 {{-- TODO: Refactor to dialog element ?  --}}
 <div x-data="{ modalOpen: false }">
@@ -33,9 +33,10 @@ You can customize the style of the modal using tailwindcss classes.
     @endif
 
     <dialog
-        {{ $attributes->withoutTwMergeClasses()->twMerge('overflow-clip sm:max-w-lg rounded-lg sm:rounded-3xl h-full bg-cedea-red px-4 py-4 sm:px-7 sm:py-6 ') }}
+        {{ $attributes->withoutTwMergeClasses()->twMerge('h-full overflow-clip max-w-[90vw] sm:max-w-lg rounded-lg bg-cedea-red sm:rounded-3xl') }}
         x-show="modalOpen" x-htmldialog.noscroll="modalOpen = false">
-        <div class="h-[95%] overflow-clip">
+        <div
+            class="relative h-[95%] max-w-[90vw] overflow-clip rounded-lg bg-cedea-red px-4 py-4 sm:max-w-lg sm:rounded-3xl sm:px-7 sm:py-6">
             <button
                 class="absolute right-0 top-0 z-1 flex h-8 w-8 items-center justify-center rounded-full text-white ~mt-2/5 ~mr-2/5 hover:bg-gray-50 hover:text-gray-800"
                 type="button" @click="modalOpen=false">
