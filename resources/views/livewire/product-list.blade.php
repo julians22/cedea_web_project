@@ -141,8 +141,8 @@
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-full aspect-square object-contain object-center"
-                                        src="{{ $item->getFirstMediaUrl('packaging', 'thumb') }}" {{-- TODO: THIS DATA SOMETIMES NULL --}}
-                                        {{-- alt="{{
+                                        src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
+                                        {{-- TODO: THIS DATA SOMETIMES NULL --}} {{-- alt="{{
                                         $item->getFirstMedia('packaging')->name
                                         }}" --}}>
                                 </div>

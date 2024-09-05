@@ -47,9 +47,17 @@ class ProductResource extends Resource
                                 ->required()
                                 ->maxFiles(1)
                                 ->image()
-                                ->conversion('thumb')
+                                ->conversion('preview_cropped')
                                 // ->optimize('webp')
                                 ->collection('packaging'),
+
+                            SpatieMediaLibraryFileUpload::make('featured_image')
+                                ->required()
+                                ->maxFiles(1)
+                                ->image()
+                                ->conversion('thumb')
+                                // ->optimize('webp')
+                                ->collection('featured_packaging'),
 
                             Toggle::make('have_video')
                                 ->live(),
