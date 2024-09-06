@@ -259,6 +259,11 @@
                                     </table>
                                 </div>
                             @endif
+
+                            <div>
+                                {{ __('Should be stored at -18°C (0°F) or lower') }}
+                            </div>
+
                         </div>
 
                         @if ($activeProduct->have_video)
@@ -294,6 +299,7 @@
                 </div>
 
             </div>
+
         </x-modal-product-detail>
 
     </section>

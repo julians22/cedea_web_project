@@ -32,14 +32,12 @@ class Product extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        // 'ingredients' => 'array',
         'packaging' => 'array',
         'have_video' => 'boolean',
     ];
 
     public function registerMediaCollections(): void
     {
-
         $this
             ->addMediaCollection('packaging')
             ->singleFile();
