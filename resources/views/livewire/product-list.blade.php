@@ -306,7 +306,7 @@
 
 
     {{-- recipe --}}
-    {{-- <section class="container mt-8" wire:ignore>
+    <section class="container mt-8" wire:ignore>
         <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
 
         <p>Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari
@@ -345,11 +345,11 @@
 
             <x-meals-container>
                 @foreach ($times as $time)
-                    <a href="{{ route('recipe', ['recipe_type' => $time['recipe_type']]) }}">
+                    <a href="{{ route('recipe', ['type' => $time['recipe_type']]) }}">
                         <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
                     </a>
                 @endforeach
             </x-meals-container>
         </div>
-    </section> --}}
+    </section>
 </div>

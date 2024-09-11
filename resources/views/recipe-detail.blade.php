@@ -79,7 +79,7 @@
                 @endphp
                 <x-meals-container>
                     @foreach ($times as $time)
-                        <a href="{{ route('recipe', ['recipe_type' => $time['recipe_type']]) }}">
+                        <a href="{{ route('recipe', ['type' => $time['recipe_type']]) }}">
                             <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
                         </a>
                     @endforeach

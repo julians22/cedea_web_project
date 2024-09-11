@@ -87,29 +87,29 @@ class Nav extends Component
                 'disable' => false,
                 'submenu' => [
                     ...$this->brands,
-
-                    // [
-                    //     'label' => 'Kreasi Resep',
-                    //     'route' => '#',
-                    //     'submenu' => [
-                    //         [
-                    //             'label' => 'Sarapan',
-                    //             'route' => '#',
-                    //         ],
-                    //         [
-                    //             'label' => 'Makan Siang',
-                    //             'route' => '#',
-                    //         ],
-                    //         [
-                    //             'label' => 'Makan Malam',
-                    //             'route' => '#',
-                    //         ],
-                    //         [
-                    //             'label' => 'Snack',
-                    //             'route' => '#',
-                    //         ],
-                    //     ]
-                    // ],
+                    [
+                        'label' => 'Kreasi Resep',
+                        'route' => route('recipe'),
+                        'disable' => false,
+                        'submenu' => [
+                            [
+                                'label' => 'Sarapan',
+                                'route' => route('recipe', ['type' => 'sarapan']),
+                            ],
+                            [
+                                'label' => 'Makan Siang',
+                                'route' => route('recipe', ['type' => 'makan-siang']),
+                            ],
+                            [
+                                'label' => 'Makan Malam',
+                                'route' => route('recipe', ['type' => 'makan-malam']),
+                            ],
+                            [
+                                'label' => 'Snack',
+                                'route' => route('recipe', ['type' => 'snack']),
+                            ],
+                        ]
+                    ],
                     // [
                     //     'label' => 'Video',
                     //     'route' => '#',
