@@ -24,8 +24,8 @@ class ProductList extends Component
     #[Url(as: 'brand', except: null, keep: true)]
     public ?string $activeBrand = null;
 
-    #[Url(as: 'categories', except: [])]
-    public array $activeCategories = [];
+    #[Url(as: 'category', except: ['all', null, ''], keep: true)]
+    public ?string $activeCategory = 'all';
 
     #[Url(except: '')]
     public string $keyword = '';
@@ -44,7 +44,6 @@ class ProductList extends Component
     {
         Meta::prependTitle('Products');
 
-
         $this->allCategories = Category::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
 
@@ -59,21 +58,19 @@ class ProductList extends Component
     {
         $this->activeBrand = $slug;
 
-        $this->reset('activeCategories');
+        $this->reset('activeCategory');
         $this->reset('activeProduct');
         $this->resetPage();
-    }
-
-    public function handleChangeActiveCategories($slug)
-    {
-        $this->handleArrayDiffing($slug, $this->activeCategories);
-
-        $this->reset('activeProduct');
     }
 
     public function handleChangeActiveProduct($slug)
     {
         $this->activeProduct = Product::where('slug', $slug)->first();
+    }
+
+    public function updatedActiveCategory()
+    {
+        $this->resetPage();
     }
 
     #[Computed(persist: true, seconds: 120)]
@@ -85,7 +82,7 @@ class ProductList extends Component
 
             // Now you have unique categories for the brand
             // You can assign it to the brand or use it as needed
-            $brand->uniqueCategories = $uniqueCategories;
+            $brand->uniqueCategories = $uniqueCategories->sortBy('name');
         }
 
         return $this->brands;
@@ -102,10 +99,10 @@ class ProductList extends Component
                     }
                 )
                 ->when(
-                    count($this->activeCategories),
+                    $this->activeCategory !== 'all',
                     function ($q) {
                         return $q->whereHas('categories', function (Builder $query) {
-                            $query->whereIn('slug', $this->activeCategories);
+                            $query->where('slug', $this->activeCategory);
                         });
                     }
                 )

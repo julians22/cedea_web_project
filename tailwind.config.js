@@ -57,32 +57,25 @@ export default {
                 1: 1,
             },
 
-            //animation
-            animation: {
-                float: "float 1s ease-in-out infinite",
-                slideBottom:
-                    "slideBottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
-            },
-
             // colors
             colors: {
                 cedea: {
                     //'red': '#b22a2e',
                     red: {
-                        DEFAULT: "#D02028",
-                        50: "#F3B4B7",
-                        100: "#F1A2A6",
-                        200: "#EB7F84",
-                        300: "#E65C62",
-                        400: "#E03840",
-                        500: "#D02028",
-                        600: "#9F191F",
-                        700: "#6F1115",
-                        800: "#3E0A0C",
-                        900: "#0E0203",
+                        DEFAULT: "#BA0020",
+                        50: "#FF738B",
+                        100: "#FF5E7A",
+                        200: "#FF3558",
+                        300: "#FF0D36",
+                        400: "#E30027",
+                        500: "#BA0020",
+                        600: "#820016",
+                        700: "#4A000D",
+                        800: "#120003",
+                        900: "#000000",
                         950: "#000000",
                     },
-                    reddark: "#991a1d",
+                    "red-dark": "#B90020",
                     "yellow-1": "#F3B91A",
                     "yellow-2": "#F8DA04",
                 },
@@ -99,6 +92,12 @@ export default {
                     xl: "1140px",
                     "2xl": "1320px",
                 },
+            },
+
+            animation: {
+                float: "float 1s ease-in-out infinite",
+                slideBottom:
+                    "slideBottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
             },
 
             // keyframes

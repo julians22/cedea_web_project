@@ -5,8 +5,10 @@ namespace App\Models\Products;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
@@ -30,7 +32,6 @@ class Product extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        // 'ingredients' => 'array',
         'packaging' => 'array',
         'have_video' => 'boolean',
     ];
@@ -39,6 +40,10 @@ class Product extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('packaging')
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('featured_packaging')
             ->singleFile();
     }
 
@@ -51,6 +56,17 @@ class Product extends Model implements HasMedia
             ->usingLanguage('id')
             ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
+    }
+
+    public function registerMediaConversions(?Media $media = null): void
+    {
+        $this->addMediaConversion('thumb')
+            ->width(300)
+            ->format('webp');
+
+        $this->addMediaConversion('preview_cropped')
+            ->format('webp')
+            ->focalCrop(700, 700, 50, 50, 1.3); // Trim or crop the image to the center for specified width and height.
     }
 
     public function brand()

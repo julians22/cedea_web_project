@@ -1,11 +1,14 @@
 <?php
 
+use App\Http\Controllers\NewsController;
 use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
+use App\Http\Controllers\PostController;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
+use App\Models\PostNews;
 use App\Models\PostRecipes;
 
 /*
@@ -47,8 +50,19 @@ Route::get(
 Route::view('recipe/detail', 'recipe-detail')
     ->name('recipe.detail');
 
+Route::get(
+    'news',
+    [NewsController::class, 'create']
+)->name('news');
+
+Route::get(
+    'news/$slug',
+    [NewsController::class, 'show']
+)->name('news.detail');
+
 Route::get('contact', [HomeController::class, 'contact'])
     ->name('contact');
+
 
 Route::get('video_get', function () {
     $recipe = PostRecipes::first();
