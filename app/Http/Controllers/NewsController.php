@@ -14,9 +14,10 @@ class NewsController extends Controller
         // return view('news', compact('posts'));
     }
 
-    public function show($slug)
+    public function show()
     {
-        $post = PostNews::findBySlug($slug);
-        return view('news-detail', compact('post'));
+        // $post = PostNews::findBySlug($slug);
+        // return view('news-detail', compact('post'));
+        return view('news-detail');
     }
 }

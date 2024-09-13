@@ -8,6 +8,7 @@ export default {
             "./resources/**/*.blade.php",
             "./resources/**/*.js",
             "./resources/**/*.vue",
+            "./vendor/awcodes/filament-tiptap-editor/resources/**/*.blade.php",
         ],
         extract,
     },
@@ -112,6 +113,13 @@ export default {
                     "100%": { transform: "translateX(0);", opacity: 1 },
                 },
             },
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        maxWidth: "none",
+                    },
+                },
+            }),
         },
     },
     plugins: [require("@tailwindcss/typography"), fluid],

@@ -10,6 +10,7 @@
     "require": {
         "php": "^8.1",
         "awcodes/filament-table-repeater": "^3.0",
+        "awcodes/filament-tiptap-editor": "^3.4",
         "bezhansalleh/filament-language-switch": "^3.1",
         "butschster/meta-tags": "^3.1",
         "codezero/laravel-unique-translation": "^4.3",

@@ -56,7 +56,7 @@ Route::get(
 )->name('news');
 
 Route::get(
-    'news/$slug',
+    'news/detail',
     [NewsController::class, 'show']
 )->name('news.detail');
 

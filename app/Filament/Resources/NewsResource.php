@@ -21,6 +21,8 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\Enums\TiptapOutput;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -50,33 +52,42 @@ class NewsResource extends Resource
                         Section::make(
                             [
                                 TextInput::make('title')
-                                    ->required()
                                     ->label(__('title'))
                                     ->translatable(true, null, [
                                         'id' => ['required', 'string', 'max:255'],
                                         'en' => ['nullable', 'string', 'max:255'],
                                     ]),
 
-                                RichEditor::make('content')
-                                    ->label(__('content'))
-                                    ->translatable(true, null, [
-                                        'id' => ['required', 'string',],
-                                        'en' => ['nullable', 'string',],
-                                    ]),
+                                // RichEditor::make('content')
+                                //     ->label(__('content'))
+                                //     ->translatable(true, null, [
+                                //         'id' => ['required', 'string',],
+                                //         'en' => ['nullable', 'string',],
+                                //     ]),
                             ]
                         ),
                         Section::make([
                             SpatieMediaLibraryFileUpload::make('featured_image')
+                                ->image()
                                 ->required()
                                 ->collection('featured_image'),
 
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success')
-                                ->offColor('danger'),
+                            // ->offColor('danger'),
                         ]),
+
                     ]
-                )
+                ),
+                TiptapEditor::make('content')
+                    ->profile('default')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp',])
+
+                    ->translatable(true, null, [
+                        'id' => ['required',],
+                        'en' => ['nullable',],
+                    ]),
             ])->columns(1);
     }
 
