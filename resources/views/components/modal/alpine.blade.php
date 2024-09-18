@@ -22,8 +22,7 @@ example @click="modalOpen=false"
     @endif
 
     <template x-teleport="body">
-        <div class="fixed left-0 top-0 z-[99] flex h-screen w-screen items-center justify-center" x-show="modalOpen"
-            x-cloak>
+        <div class="h-dvh fixed left-0 top-0 z-[99] flex w-screen items-center justify-center" x-show="modalOpen" x-cloak>
             <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                 x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
