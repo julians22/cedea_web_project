@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\NewsController;
 use Embed\Embed;
 use Butschster\Head\Facades\Meta;
@@ -76,3 +77,6 @@ Route::get('video_get', function () {
     // return $info->image;
     dd($info);
 });
+
+Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
+    ->name('locale.switch');
