@@ -3,6 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
+use App\Models\Products\Brand;
+use App\Models\Products\Category;
 use App\Models\Products\Product;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
@@ -17,9 +19,11 @@ use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
+use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\App;
 use Illuminate\Database\Eloquent\Builder;
@@ -27,6 +31,13 @@ use Illuminate\Database\Eloquent\Builder;
 
 class ProductResource extends Resource
 {
+    use Translatable;
+
+    public static function getTranslatableLocales(): array
+    {
+        return ['id', 'en'];
+    }
+
     protected static ?string $model = Product::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -47,9 +58,17 @@ class ProductResource extends Resource
                                 ->required()
                                 ->maxFiles(1)
                                 ->image()
-                                ->conversion('thumb')
+                                ->conversion('preview_cropped')
                                 // ->optimize('webp')
                                 ->collection('packaging'),
+
+                            SpatieMediaLibraryFileUpload::make('featured_image')
+                                // ->required()
+                                ->maxFiles(1)
+                                ->image()
+                                ->conversion('thumb')
+                                // ->optimize('webp')
+                                ->collection('featured_packaging'),
 
                             Toggle::make('have_video')
                                 ->live(),
@@ -106,8 +125,7 @@ class ProductResource extends Resource
                                             ]
                                         ),
                                 ])
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
-                                // ->options(Category::all()->pluck('name', 'id'))
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                                 ->label(__('category'))
                                 ->multiple()->translatable(false)
                                 ->searchable(['name'])
@@ -116,7 +134,7 @@ class ProductResource extends Resource
                                 ->required()
                                 ->label(__('brand'))
                                 ->relationship(name: 'brand', titleAttribute: 'name')
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->getTranslation('name', App::currentLocale()))
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                         ])->grow(false),
                     ],
                 )->from('xl')]
@@ -127,7 +145,8 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name'),
+                TextColumn::make('name')
+                    ->searchable(),
                 // TextColumn::make('slug'),
                 TextColumn::make('brand.name'),
                 TextColumn::make('categories.name')
@@ -138,7 +157,30 @@ class ProductResource extends Resource
 
             ])
             ->filters([
-                //
+                SelectFilter::make('brand')
+                    ->relationship('brand', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                    ->indicateUsing(function (array $data): array | string {
+                        return implode(
+                            ' & ',
+                            Brand::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
+                        );
+                    })
+                    ->preload(),
+                SelectFilter::make('categorie')
+                    ->relationship('categories', 'name')
+                    ->searchable()
+                    ->multiple()
+                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                    ->indicateUsing(function (array $data): array | string {
+                        return implode(
+                            ' & ',
+                            Category::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
+                        );
+                    })
+                    ->preload()
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

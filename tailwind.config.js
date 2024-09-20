@@ -57,13 +57,6 @@ export default {
                 1: 1,
             },
 
-            //animation
-            animation: {
-                float: "float 1s ease-in-out infinite",
-                slideBottom:
-                    "slideBottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
-            },
-
             // colors
             colors: {
                 cedea: {
@@ -99,6 +92,12 @@ export default {
                     xl: "1140px",
                     "2xl": "1320px",
                 },
+            },
+
+            animation: {
+                float: "float 1s ease-in-out infinite",
+                slideBottom:
+                    "slideBottom 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both",
             },
 
             // keyframes

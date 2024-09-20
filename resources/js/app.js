@@ -3,6 +3,7 @@ import lottie from "lottie-web";
 
 import focus from "@alpinejs/focus";
 import resize from "@alpinejs/resize";
+import dialog from "@fylgja/alpinejs-dialog";
 
 import {
     Alpine,
@@ -12,6 +13,7 @@ import "./bootstrap";
 
 Alpine.plugin(focus);
 Alpine.plugin(resize);
+Alpine.plugin(dialog);
 
 document.addEventListener("alpine:init", () => {
     Alpine.data("modal", () => ({ modalOpen: false }));
