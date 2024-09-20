@@ -5,6 +5,7 @@ namespace App\Models\Products;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
@@ -31,7 +32,6 @@ class Product extends Model implements HasMedia
      * @var array
      */
     protected $casts = [
-        // 'ingredients' => 'array',
         'packaging' => 'array',
         'have_video' => 'boolean',
     ];
@@ -40,6 +40,10 @@ class Product extends Model implements HasMedia
     {
         $this
             ->addMediaCollection('packaging')
+            ->singleFile();
+
+        $this
+            ->addMediaCollection('featured_packaging')
             ->singleFile();
     }
 
@@ -58,7 +62,9 @@ class Product extends Model implements HasMedia
     {
         $this->addMediaConversion('thumb')
             ->width(300)
-            // ->withResponsiveImages()
+            ->format('webp');
+
+        $this->addMediaConversion('preview_cropped')
             ->format('webp');
     }
 
