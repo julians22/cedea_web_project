@@ -49,7 +49,7 @@
 
                         <a @class([
                             'relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
-                            'text-red' => url()->current() === route('home'),
+                            'after:!bg-white after:!w-1/2' => url()->current() === $item['route'],
                         ])
                             :class="{
                                 'after:bg-white after:w-1/2': navigationMenu=='home',
