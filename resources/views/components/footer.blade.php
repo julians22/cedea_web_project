@@ -27,7 +27,7 @@
 
             </div>
             <div class="space-y-4 ~py-2/10 lg:justify-self-end">
-                <p class="text-center"><strong>Temukan Kami Di:</strong></p>
+                <p class="text-center"><strong>{{ __('footer.social.title') }}</strong></p>
                 <div class="flex flex-row flex-nowrap justify-center space-x-4">
                     <a class="size-8" href="https://www.facebook.com/CedeaSeafood" target="_blank">
                         <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 58.09 58.12">

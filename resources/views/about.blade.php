@@ -1,24 +1,18 @@
 <x-layouts.app>
-    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
+    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('about.brief.title')">
         <x-slot:desc>
             <p>
-                PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru,
-                Majalengka,
-                Medan & Semarang.
+                {{ __('about.brief.detail') }}
             </p>
         </x-slot>
     </x-section-banner>
 
     {{-- sejarah --}}
     <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white" id="sejarah"
-        :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
+        :imageUrl="asset('img/cedea-industrial.jpg')" :title="__('about.history.title')">
         <x-slot:desc>
             <p>
-                Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis
-                hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang
-                mutakhir, PT CitraDimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil
-                laut yang dipasarkan di berbagai pasar di Indonesia.
+                {{ __('about.history.detail') }}
             </p>
         </x-slot>
 
@@ -28,8 +22,7 @@
 
                 <x-slot:trigger>
                     <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red-dark" type="button"
-                        @click="modalOpen=true">
-                        Informasi Lebih Lanjut </button>
+                        @click="modalOpen=true">{{ __('Learn More') }}</button>
                 </x-slot:trigger>
 
 
@@ -138,23 +131,16 @@
             {{-- visi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Visi.title') }}</h2>
                 <p class="text-last-center text-justify">
-                    Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi
-                    pilihan
-                    utama di pasar global tertentu.
+                    {{ __('about.Visi.detail') }}
                 </p>
             </div>
             {{-- misi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Misi</h2>
-                <p class="text-last-center text-justify">Aktif berperan dalam menyehatkan bangsa dengan membuat produk
-                    makanan
-                    bergizi,
-                    aman dan bermanfaat untuk seluruh lapisan masyarakat melalui pendekatan inovasi dan teknologi
-                    serta
-                    perbaikan berkesinambungan.</p>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Misi.title') }}</h2>
+                <p class="text-last-center text-justify">{{ __('about.Misi.detail') }}</p>
             </div>
         </div>
     </section>
@@ -191,7 +177,7 @@
                 ];
             @endphp
 
-            <h2 class="section-title">Nilai-nilai Perusahaan</h2>
+            <h2 class="section-title">{{ __('about.value.title') }}</h2>
 
             <div class="flex items-center justify-center gap-y-6 ~gap-x-2/12">
 
@@ -220,20 +206,16 @@
             @php
                 $value_list = [
                     [
-                        'title' => 'Menjadi Pemain Unggul di Indonesia',
-                        'content' =>
-                            'Kita harus lari lebih cepat mencapai pertumbuhan yang lebih tinggi dan diakui sebagai pemenang dibandingkan dengan pesaing dengan bisnis yang sejenis untuk wilayah Indonesia.',
+                        'title' => __('about.value.point1.title'),
+                        'content' => __('about.value.point1.detail'),
                     ],
                     [
-                        'title' => 'Menjadi Pilihan Utama di Pasar Global Tertentu',
-                        'content' => 'Kita harus mampu dan handal untuk menjadi bagian dari pemain global dengan mampu mengeksport produk-produk Cedea
-                            melalui strategi pemasaran dan perencanaan yang cermat melalui penetrasi pasar Global tertentu sehingga tercapai target
-                            bahwa produk CEDEA menjadi pilihan utama bagi masyarakat di daerah tersebut.',
+                        'title' => __('about.value.point2.title'),
+                        'content' => __('about.value.point2.detail'),
                     ],
                     [
-                        'title' => 'Inovasi dan Teknologi',
-                        'content' => 'Kita harus selalu mengikuti perkembangan pasar maupun teknologi, memiliki ide-ide baru untuk perbaikan, pembaharuan produk
-                            dan corrective action dalam perbaikan proses yang dijalankan.',
+                        'title' => __('about.value.point3.title'),
+                        'content' => __('about.value.point3.detail'),
                     ],
                 ];
             @endphp
@@ -267,11 +249,8 @@
     {{-- Achieve Section --}}
     <section class="container my-16 grid grid-cols-1 gap-x-8 md:grid-cols-2">
         <div>
-            <h2 class="section-title">Mutu yang Tetap Terjaga</h2>
-            <p class="~text-xs/base">CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang
-                berkomitmen untuk terus menghasilkan makanan beku dari ikan
-                olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM,
-                Halal.</p>
+            <h2 class="section-title">{{ __('about.mutu.title') }}</h2>
+            <p class="~text-xs/base">{{ __('about.mutu.detail') }}</p>
         </div>
 
         <div class="flex justify-between gap-x-2">

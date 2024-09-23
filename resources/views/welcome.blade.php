@@ -18,11 +18,11 @@
         </x-slot>
     </x-section-banner>
 
-    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('quality.title')">
+    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('home.quality.title')">
 
         <x-slot:desc>
             <p>
-                {{ __('quality.detail') }}
+                {{ __('home.quality.detail') }}
             </p>
         </x-slot>
 
@@ -48,9 +48,7 @@
         <div class="col-span-5 lg:col-span-3">
             <div class="flex h-full flex-col justify-center">
                 <h2 class="section-title text-center leading-[1.2]">
-                    <span>Nggak Ada Waktu Belanja?</span>
-                    <br>
-                    <span>Pesan Online Solusinya!</span>
+                    {!! __('home.marketplace.title') !!}
                 </h2>
 
                 <div class="mt-4 flex items-center justify-center gap-4 max-sm:flex-wrap lg:mt-8">

@@ -44,10 +44,9 @@
             </picture>
 
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
-                <h1 class="section-title">Produk</h1>
+                <h1 class="section-title">{{ __('product.product.title') }}</h1>
 
-                <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
-                    produk terbaik dari Cedea Seafood!</p>
+                <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
@@ -75,17 +74,18 @@
                         <input
                             class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
                             id="product-search" wire:model.live='keyword' type="search"
-                            placeholder="Cari produk di sini" />
+                            placeholder="{{ __('Search product here') }}" />
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-y-4 uppercase">
                     @foreach ($this->brandWithUniqueCategories as $brand)
                         <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
-                            <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')" @class([
-                                '~text-lg/2xl',
-                                'text-cedea-red-dark' => $brand->slug == $activeBrand,
-                            ])>
+                            <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')"
+                                @class([
+                                    '~text-lg/2xl',
+                                    'text-cedea-red-dark' => $brand->slug == $activeBrand,
+                                ])>
                                 {{ $brand->name }}</p>
                             <div @class([
                                 'flex flex-col gap-1 overflow-auto transition-all duration-1000',
@@ -100,7 +100,7 @@
                                         'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
                                         'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
                                     ])>
-                                        All
+                                        {{ __('All') }}
                                     </div>
                                 </label>
 
@@ -307,35 +307,33 @@
 
     {{-- recipe --}}
     <section class="container mt-8" wire:ignore>
-        <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
+        <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
-        <p>Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari
-            Cedea Seafood! Mulai dari
-            sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.</p>
+        <p>{{ __('product.creation.detail') }}</p>
 
         <div>
             @php
                 $times = [
                     [
-                        'label' => 'Sarapan',
+                        'label' => __('meal.Sarapan'),
                         'icon' => asset('img/icons/time/sarapan.svg'),
                         'background' => asset('img/time/sarapan.jpg'),
                         'recipe_type' => 'sarapan',
                     ],
                     [
-                        'label' => 'Makan Siang',
+                        'label' => __('meal.Makan Siang'),
                         'icon' => asset('img/icons/time/makan_siang.svg'),
                         'background' => asset('img/time/makan_siang.jpg'),
                         'recipe_type' => 'makan-siang',
                     ],
                     [
-                        'label' => 'Makan Malam',
+                        'label' => __('meal.Makan Malam'),
                         'icon' => asset('img/icons/time/makan_malam.svg'),
                         'background' => asset('img/time/makan_malam.jpg'),
                         'recipe_type' => 'makan-malam',
                     ],
                     [
-                        'label' => 'Snack',
+                        'label' => __('meal.Snack'),
                         'icon' => asset('img/icons/time/snack.svg'),
                         'background' => asset('img/time/snack.jpg'),
                         'recipe_type' => 'snack',
