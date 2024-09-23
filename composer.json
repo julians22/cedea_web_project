@@ -25,6 +25,7 @@
         "laravel/tinker": "^2.9",
         "livewire/livewire": "^3.5",
         "mallardduck/blade-lucide-icons": "^1.23",
+        "mcamara/laravel-localization": "^2.0",
         "outerweb/filament-translatable-fields": "^2.0.0",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-sitemap": "^7.0",

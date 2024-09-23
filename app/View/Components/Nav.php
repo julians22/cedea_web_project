@@ -54,7 +54,7 @@ class Nav extends Component
         //* ][]
         $this->nav_items = [
             [
-                'label' => 'Perusahaan',
+                'label' => __('nav.company'),
                 'route' => route('about'),
                 'disable' => false,
                 'submenu' => [

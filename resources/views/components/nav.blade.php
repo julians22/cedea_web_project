@@ -52,7 +52,7 @@
                                 'after:bg-transparent after:w-0 ': navigationMenu!='home'
                             }"
                             href="{{ route('home') }}">
-                            Beranda
+                            {{ __('nav.home') }}
                             {{-- <x-lucide-house class="size-4" /> --}}
                         </a>
 

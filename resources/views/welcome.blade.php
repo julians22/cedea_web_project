@@ -5,39 +5,31 @@
         <x-home.banner />
     </section>
 
-    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" title="Kenal Lebih Dekat">
+    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('home.closer.title')">
 
         <x-slot:desc>
-            <p>
-                PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru,
-                Majalengka, Medan & Semarang. Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor
-                industri makanan olahan berbasis hasil laut.
-            </p>
+            <p>{{ __('home.closer.detail') }}</p>
         </x-slot>
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('about') }}">
-                Baca Selengkapnya
+                {{ __('Read More') }}
             </a>
         </x-slot>
     </x-section-banner>
 
-    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" title="Mutu yang Tetap Terjaga">
+    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('quality.title')">
 
         <x-slot:desc>
             <p>
-                CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali
-                yang berkomitmen untuk terus menghasilkan makanan
-                beku dari ikan olahan terbaik dengan penerapan GMP,
-                HACCP, ISO 22000, BPOM, Halal.
+                {{ __('quality.detail') }}
             </p>
         </x-slot>
 
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('product') }}">
-                Lihat Produk
+                {{ __('See Product') }}
             </a>
         </x-slot>
     </x-section-banner>

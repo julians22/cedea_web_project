@@ -11,6 +11,7 @@ use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
+use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -23,60 +24,68 @@ use App\Models\PostRecipes;
 |
 */
 
-Route::get('/', [HomeController::class, 'index'])
-    ->name('home');
 
-Route::get(
-    'about',
-    function () {
-        Meta::prependTitle('TENTANG CEDEA');
+Route::group([
+    'prefix' => LaravelLocalization::setLocale(),
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+], function () {
+    Route::get('/', [HomeController::class, 'index'])
+        ->name('home');
 
-        return view('about');
-    }
-)
-    ->name('about');
+    Route::get(
+        'about',
+        function () {
+            Meta::prependTitle('TENTANG CEDEA');
 
-Route::get(
-    'product',
-    ProductList::class
-)
-    ->name('product');
+            return view('about');
+        }
+    )
+        ->name('about');
 
-Route::get(
-    'recipe',
-    RecipeList::class
-)
-    ->name('recipe');
+    Route::get(
+        'product',
+        ProductList::class
+    )
+        ->name('product');
 
-Route::view('recipe/detail', 'recipe-detail')
-    ->name('recipe.detail');
+    Route::get(
+        'recipe',
+        RecipeList::class
+    )
+        ->name('recipe');
 
-Route::get(
-    'news',
-    [NewsController::class, 'create']
-)->name('news');
+    Route::view('recipe/detail', 'recipe-detail')
+        ->name('recipe.detail');
 
-Route::get(
-    'news/$slug',
-    [NewsController::class, 'show']
-)->name('news.detail');
+    Route::get(
+        'news',
+        [NewsController::class, 'create']
+    )->name('news');
 
-Route::get('contact', [HomeController::class, 'contact'])
-    ->name('contact');
+    Route::get(
+        'news/$slug',
+        [NewsController::class, 'show']
+    )->name('news.detail');
+
+    Route::get('contact', [HomeController::class, 'contact'])
+        ->name('contact');
 
 
-Route::get('video_get', function () {
-    $recipe = PostRecipes::first();
+    Route::get('video_get', function () {
+        $recipe = PostRecipes::first();
 
-    return $recipe->ingredients;
+        return $recipe->ingredients;
 
-    $embed = new Embed();
+        $embed = new Embed();
 
-    //Load any url:
-    $info = $embed->get('https://www.youtube.com/watch?v=W9cAe7SUTyo');
-    // return $info->image;
-    dd($info);
+        //Load any url:
+        $info = $embed->get('https://www.youtube.com/watch?v=W9cAe7SUTyo');
+        // return $info->image;
+        dd($info);
+    });
 });
 
 Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
     ->name('locale.switch');
+
+/** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
