@@ -59,29 +59,29 @@ class Nav extends Component
                 'disable' => false,
                 'submenu' => [
                     [
-                        'label' => 'Sekilas perusahaan',
+                        'label' => __('nav.company.brief'),
                         'route' => route('about', ['#sekilas-perusahaan']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Sejarah',
+                        'label' => __('nav.company.history'),
                         'route' => route('about', ['#sejarah']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Visi, Misi & Nilai Perusahaan',
+                        'label' => __('nav.company.value'),
                         'route' =>  route('about', ['#visi-misi']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Wilayah Kerja',
+                        'label' => __('nav.company.area'),
                         'route' => route('about', ['#wilayah']),
                         'submenu' => []
                     ],
                 ]
             ],
             [
-                'label' => 'Merek',
+                'label' => __('nav.product'),
                 'route' => route('product'),
                 // 'route' => '#',
                 'disable' => false,
@@ -108,48 +108,48 @@ class Nav extends Component
             ],
 
             [
-                'label' => 'Kreasi Resep',
+                'label' => __('nav.recipe'),
                 'route' => route('recipe'),
                 'disable' => false,
                 'submenu' => [
                     [
-                        'label' => 'Sarapan',
+                        'label' => __('meal.Sarapan'),
                         'route' => route('recipe', ['type' => 'sarapan']),
                     ],
                     [
-                        'label' => 'Makan Siang',
+                        'label' => __('meal.Makan Siang'),
                         'route' => route('recipe', ['type' => 'makan-siang']),
                     ],
                     [
-                        'label' => 'Makan Malam',
+                        'label' => __('meal.Makan Malam'),
                         'route' => route('recipe', ['type' => 'makan-malam']),
                     ],
                     [
-                        'label' => 'Snack',
+                        'label' => __('meal.Snack'),
                         'route' => route('recipe', ['type' => 'snack']),
                     ],
                 ]
             ],
 
             [
-                'label' => 'Berita',
+                'label' => __('nav.news'),
                 'route' => '#',
                 'disable' => true,
                 'submenu' => [
                     [
-                        'label' => 'Kegiatan',
+                        'label' => __('nav.news.activity'),
                         'route' => '#',
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Artikel / Blog',
+                        'label' => __('nav.news.Artikel'),
                         'route' => '#',
                         'submenu' => []
                     ],
                 ]
             ],
             [
-                'label' => 'Hubungi Kami',
+                'label' => __('nav.contact'),
                 'route' => '#',
                 'disable' => true,
                 'submenu' => []
