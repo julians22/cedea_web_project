@@ -65,8 +65,7 @@ class Product extends Model implements HasMedia
             ->format('webp');
 
         $this->addMediaConversion('preview_cropped')
-            ->format('webp')
-            ->focalCrop(700, 700, 50, 50, 1.3); // Trim or crop the image to the center for specified width and height.
+            ->format('webp');
     }
 
     public function brand()
