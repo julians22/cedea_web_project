@@ -28,6 +28,8 @@ return [
     'value.point3.detail' => "We must always follow market developments as well as technology, have new ideas for improvement, product innovation and corrective action in process improvement.",
 
     'mutu.title' => 'Consistent Quality',
-    'mutu.detail' => 'CEDEA SEAFOOD is produced by PT CitraDimensi Arthali which is committed to continuously producing the best frozen food from processed fish with the application of GMP, HACCP, ISO 22000, BPOM, Halal.'
+    'mutu.detail' => 'CEDEA SEAFOOD is produced by PT CitraDimensi Arthali which is committed to continuously producing the best frozen food from processed fish with the application of GMP, HACCP, ISO 22000, BPOM, Halal.',
+
+    'area.title' => 'Working Area',
 
 ];

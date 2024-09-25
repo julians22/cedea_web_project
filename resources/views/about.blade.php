@@ -32,59 +32,38 @@
                             $timeline = [
                                 [
                                     'date' => '1995',
-                                    'title' => 'Berdiri Sejak',
-                                    'desc' => 'PT. CitraDimensi Arthali berdiri dengan fokus usaha di industri
-                                        perikanan Indonesia. Di awal-awal tahun pendirian perusahaan ini,
-                                        ekonomi dalam negeri Indonesia sedang tumbuh pesat menciptakan
-                                        peluang usaha yang menjanjikan untuk produk perikanan berkualitas.
-                                        Target pasar adalah ritel modern yang juga baru mulai tumbuh saat
-                                        itu serta hotel-hotel berbintang.',
+                                    'title' => __('history.1995.title'),
+                                    'desc' => __('history.1995.detail'),
                                 ],
                                 [
                                     'date' => '2004',
-                                    'title' => 'Bertumbuh',
-                                    'desc' => 'PT. CitraDimensi Arthali mulai melakukan impor produk ikan olahan
-                                        berbasis surimi dari Thailand dan Malaysia.',
+                                    'title' => __('history.2004.title'),
+                                    'desc' => __('history.2004.detail'),
                                 ],
                                 [
                                     'date' => '2013',
-                                    'title' => 'Memperkuat',
-                                    'desc' => 'Perusahaan kembali memperluas area pabrik menjadi 6,000 M2 dan
-                                        membangun tambahan gedung produksi baru yang jauh lebih
-                                        modern dan canggih. Mesin-mesin otomatis untuk produksi crab stick
-                                        dan chikuwa didatangkan dari Jepang. Kapasitas produksi melonjak
-                                        dan permintaan pasar atas produk-produk CEDEA terus meningkat.',
+                                    'title' => __('history.2013-1.title'),
+                                    'desc' => __('history.2013-1.detail'),
                                 ],
                                 [
                                     'date' => '2013',
-                                    'title' => 'Memperluas',
-                                    'desc' => 'PT. CitraDimensi Arthali semakin memperluas jaringan pemasaran ke
-                                        wilayah baru di Pulau Sumatera. Perusahaan mampu berkembang
-                                        lebih dari 30% per tahun dan berhasil memperoleh ISO 22000 dan
-                                        penghargaan SNI award kelompok perusahaan menengah besar.',
+                                    'title' => __('history.2013-2.title'),
+                                    'desc' => __('history.2013-2.detail'),
                                 ],
                                 [
                                     'date' => '2020',
-                                    'title' => 'Automated Production (Industry 4.0)',
-                                    'desc' => 'Seiring dengan perkembangan perusahaan dan tuntutan zaman,
-                                        CEDEA kembali melakukan penambahan pabrik di Majalengka, Jawa
-                                        Barat. Pabrik baru ini dioperasikan dengan mesin otomasi dan
-                                        menggunakan teknologi terkini yang sesuai dengan standar industri
-                                        4.0.',
+                                    'title' => __('history.2020.title'),
+                                    'desc' => __('history.2020.detail'),
                                 ],
                                 [
                                     'date' => '2022',
-                                    'title' => 'Market Leader',
-                                    'desc' => 'Perusahaan semakin maju, dan mulai melakukan promosi dan iklan di
-                                        TV lokal, theme park, hingga acara - acara musik di Indonesia, hingga
-                                        saat ini CEDEA menjadi market leader di antara produsen ikan olahan
-                                        beku indonesia.',
+                                    'title' => __('history.2022.title'),
+                                    'desc' => __('history.2022.detail'),
                                 ],
                                 [
                                     'date' => '2024',
-                                    'title' => 'Berdiri Pabrik Baru',
-                                    'desc' => 'PT. CitraDimensi Arthali kembali memperluas perusahaan dengan
-                                        membangun pabrik baru di kota Semarang, Jawa Tengah.',
+                                    'title' => __('history.2024.title'),
+                                    'desc' => __('history.2024.detail'),
                                 ],
                             ];
                         @endphp
@@ -274,7 +253,7 @@
 
     {{-- Map --}}
     <section class="group container my-16 pt-2 ~scroll-mt-24/36" id="wilayah">
-        <h2 class="section-title transition-all ~pt-0/4">Wilayah Kerja</h2>
+        <h2 class="section-title transition-all ~pt-0/4">{{ __('about.area.title') }}</h2>
         <div class="md:mx-auto md:w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>

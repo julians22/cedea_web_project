@@ -29,6 +29,8 @@ return [
     'value.point3.detail' => "Kita harus selalu mengikuti perkembangan pasar maupun teknologi, memiliki ide-ide baru untuk perbaikan, pembaharuan produk dan corrective action dalam perbaikan proses yang dijalankan.",
 
     'mutu.title' => 'Mutu yang Tetap Terjaga',
-    'mutu.detail' => 'CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang berkomitmen untuk terus menghasilkan makanan beku dari ikan olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM, Halal.'
+    'mutu.detail' => 'CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang berkomitmen untuk terus menghasilkan makanan beku dari ikan olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM, Halal.',
+
+    'area.title' => 'Wilayah Kerja',
 
 ];

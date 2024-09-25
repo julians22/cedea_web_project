@@ -34,8 +34,10 @@
     </div>
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
+
         {{-- Brand --}}
         <div class="bg-products relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+
             <picture>
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
                     media="(min-width: 1024px)" />
