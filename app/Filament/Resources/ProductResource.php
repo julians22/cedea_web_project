@@ -63,7 +63,7 @@ class ProductResource extends Resource
                                 ->collection('packaging'),
 
                             SpatieMediaLibraryFileUpload::make('featured_image')
-                                ->required()
+                                // ->required()
                                 ->maxFiles(1)
                                 ->image()
                                 ->conversion('thumb')

@@ -1,24 +1,18 @@
 <x-layouts.app>
-    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" title="Pelopor Ikan Olahan Bermutu">
+    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('about.brief.title')">
         <x-slot:desc>
             <p>
-                PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru,
-                Majalengka,
-                Medan & Semarang.
+                {{ __('about.brief.detail') }}
             </p>
         </x-slot>
     </x-section-banner>
 
     {{-- sejarah --}}
     <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white" id="sejarah"
-        :imageUrl="asset('img/cedea-industrial.jpg')" title="Komitmen Sejak 2004">
+        :imageUrl="asset('img/cedea-industrial.jpg')" :title="__('about.history.title')">
         <x-slot:desc>
             <p>
-                Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis
-                hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang
-                mutakhir, PT CitraDimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil
-                laut yang dipasarkan di berbagai pasar di Indonesia.
+                {{ __('about.history.detail') }}
             </p>
         </x-slot>
 
@@ -28,8 +22,7 @@
 
                 <x-slot:trigger>
                     <button class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red-dark" type="button"
-                        @click="modalOpen=true">
-                        Informasi Lebih Lanjut </button>
+                        @click="modalOpen=true">{{ __('Learn More') }}</button>
                 </x-slot:trigger>
 
 
@@ -39,59 +32,38 @@
                             $timeline = [
                                 [
                                     'date' => '1995',
-                                    'title' => 'Berdiri Sejak',
-                                    'desc' => 'PT. CitraDimensi Arthali berdiri dengan fokus usaha di industri
-                                        perikanan Indonesia. Di awal-awal tahun pendirian perusahaan ini,
-                                        ekonomi dalam negeri Indonesia sedang tumbuh pesat menciptakan
-                                        peluang usaha yang menjanjikan untuk produk perikanan berkualitas.
-                                        Target pasar adalah ritel modern yang juga baru mulai tumbuh saat
-                                        itu serta hotel-hotel berbintang.',
+                                    'title' => __('history.1995.title'),
+                                    'desc' => __('history.1995.detail'),
                                 ],
                                 [
                                     'date' => '2004',
-                                    'title' => 'Bertumbuh',
-                                    'desc' => 'PT. CitraDimensi Arthali mulai melakukan impor produk ikan olahan
-                                        berbasis surimi dari Thailand dan Malaysia.',
+                                    'title' => __('history.2004.title'),
+                                    'desc' => __('history.2004.detail'),
                                 ],
                                 [
                                     'date' => '2013',
-                                    'title' => 'Memperkuat',
-                                    'desc' => 'Perusahaan kembali memperluas area pabrik menjadi 6,000 M2 dan
-                                        membangun tambahan gedung produksi baru yang jauh lebih
-                                        modern dan canggih. Mesin-mesin otomatis untuk produksi crab stick
-                                        dan chikuwa didatangkan dari Jepang. Kapasitas produksi melonjak
-                                        dan permintaan pasar atas produk-produk CEDEA terus meningkat.',
+                                    'title' => __('history.2013-1.title'),
+                                    'desc' => __('history.2013-1.detail'),
                                 ],
                                 [
                                     'date' => '2013',
-                                    'title' => 'Memperluas',
-                                    'desc' => 'PT. CitraDimensi Arthali semakin memperluas jaringan pemasaran ke
-                                        wilayah baru di Pulau Sumatera. Perusahaan mampu berkembang
-                                        lebih dari 30% per tahun dan berhasil memperoleh ISO 22000 dan
-                                        penghargaan SNI award kelompok perusahaan menengah besar.',
+                                    'title' => __('history.2013-2.title'),
+                                    'desc' => __('history.2013-2.detail'),
                                 ],
                                 [
                                     'date' => '2020',
-                                    'title' => 'Automated Production (Industry 4.0)',
-                                    'desc' => 'Seiring dengan perkembangan perusahaan dan tuntutan zaman,
-                                        CEDEA kembali melakukan penambahan pabrik di Majalengka, Jawa
-                                        Barat. Pabrik baru ini dioperasikan dengan mesin otomasi dan
-                                        menggunakan teknologi terkini yang sesuai dengan standar industri
-                                        4.0.',
+                                    'title' => __('history.2020.title'),
+                                    'desc' => __('history.2020.detail'),
                                 ],
                                 [
                                     'date' => '2022',
-                                    'title' => 'Market Leader',
-                                    'desc' => 'Perusahaan semakin maju, dan mulai melakukan promosi dan iklan di
-                                        TV lokal, theme park, hingga acara - acara musik di Indonesia, hingga
-                                        saat ini CEDEA menjadi market leader di antara produsen ikan olahan
-                                        beku indonesia.',
+                                    'title' => __('history.2022.title'),
+                                    'desc' => __('history.2022.detail'),
                                 ],
                                 [
                                     'date' => '2024',
-                                    'title' => 'Berdiri Pabrik Baru',
-                                    'desc' => 'PT. CitraDimensi Arthali kembali memperluas perusahaan dengan
-                                        membangun pabrik baru di kota Semarang, Jawa Tengah.',
+                                    'title' => __('history.2024.title'),
+                                    'desc' => __('history.2024.detail'),
                                 ],
                             ];
                         @endphp
@@ -138,23 +110,16 @@
             {{-- visi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Visi</h2>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Visi.title') }}</h2>
                 <p class="text-last-center text-justify">
-                    Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi
-                    pilihan
-                    utama di pasar global tertentu.
+                    {{ __('about.Visi.detail') }}
                 </p>
             </div>
             {{-- misi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">Misi</h2>
-                <p class="text-last-center text-justify">Aktif berperan dalam menyehatkan bangsa dengan membuat produk
-                    makanan
-                    bergizi,
-                    aman dan bermanfaat untuk seluruh lapisan masyarakat melalui pendekatan inovasi dan teknologi
-                    serta
-                    perbaikan berkesinambungan.</p>
+                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Misi.title') }}</h2>
+                <p class="text-last-center text-justify">{{ __('about.Misi.detail') }}</p>
             </div>
         </div>
     </section>
@@ -191,7 +156,7 @@
                 ];
             @endphp
 
-            <h2 class="section-title">Nilai-nilai Perusahaan</h2>
+            <h2 class="section-title">{{ __('about.value.title') }}</h2>
 
             <div class="flex items-center justify-center gap-y-6 ~gap-x-2/12">
 
@@ -220,20 +185,16 @@
             @php
                 $value_list = [
                     [
-                        'title' => 'Menjadi Pemain Unggul di Indonesia',
-                        'content' =>
-                            'Kita harus lari lebih cepat mencapai pertumbuhan yang lebih tinggi dan diakui sebagai pemenang dibandingkan dengan pesaing dengan bisnis yang sejenis untuk wilayah Indonesia.',
+                        'title' => __('about.value.point1.title'),
+                        'content' => __('about.value.point1.detail'),
                     ],
                     [
-                        'title' => 'Menjadi Pilihan Utama di Pasar Global Tertentu',
-                        'content' => 'Kita harus mampu dan handal untuk menjadi bagian dari pemain global dengan mampu mengeksport produk-produk Cedea
-                            melalui strategi pemasaran dan perencanaan yang cermat melalui penetrasi pasar Global tertentu sehingga tercapai target
-                            bahwa produk CEDEA menjadi pilihan utama bagi masyarakat di daerah tersebut.',
+                        'title' => __('about.value.point2.title'),
+                        'content' => __('about.value.point2.detail'),
                     ],
                     [
-                        'title' => 'Inovasi dan Teknologi',
-                        'content' => 'Kita harus selalu mengikuti perkembangan pasar maupun teknologi, memiliki ide-ide baru untuk perbaikan, pembaharuan produk
-                            dan corrective action dalam perbaikan proses yang dijalankan.',
+                        'title' => __('about.value.point3.title'),
+                        'content' => __('about.value.point3.detail'),
                     ],
                 ];
             @endphp
@@ -267,11 +228,8 @@
     {{-- Achieve Section --}}
     <section class="container my-16 grid grid-cols-1 gap-x-8 md:grid-cols-2">
         <div>
-            <h2 class="section-title">Mutu yang Tetap Terjaga</h2>
-            <p class="~text-xs/base">CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang
-                berkomitmen untuk terus menghasilkan makanan beku dari ikan
-                olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM,
-                Halal.</p>
+            <h2 class="section-title">{{ __('about.mutu.title') }}</h2>
+            <p class="~text-xs/base">{{ __('about.mutu.detail') }}</p>
         </div>
 
         <div class="flex justify-between gap-x-2">
@@ -295,7 +253,7 @@
 
     {{-- Map --}}
     <section class="group container my-16 pt-2 ~scroll-mt-24/36" id="wilayah">
-        <h2 class="section-title transition-all ~pt-0/4">Wilayah Kerja</h2>
+        <h2 class="section-title transition-all ~pt-0/4">{{ __('about.area.title') }}</h2>
         <div class="md:mx-auto md:w-3/4">
             <img src="{{ asset('img/map.svg') }}" alt="">
         </div>

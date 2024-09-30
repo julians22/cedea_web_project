@@ -46,13 +46,17 @@
                     <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
                         @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='home'"
                         @mouseleave="navigationMenuLeave()">
-                        <a class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+
+                        <a @class([
+                            'relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+                            'after:!bg-white after:!w-1/2' => url()->current() === route('home'),
+                        ])
                             :class="{
                                 'after:bg-white after:w-1/2': navigationMenu=='home',
                                 'after:bg-transparent after:w-0 ': navigationMenu!='home'
                             }"
                             href="{{ route('home') }}">
-                            Beranda
+                            {{ __('nav.home') }}
                             {{-- <x-lucide-house class="size-4" /> --}}
                         </a>
 
@@ -71,7 +75,10 @@
                             <li class="gap-y-1 px-5 py-7 font-medium transition-colors"
                                 @mouseover="navigationMenuOpen=true; navigationMenuReposition($el); navigationMenu='{{ Str::kebab($item['label']) }}'"
                                 @mouseleave="navigationMenuLeave()">
-                                <a class="relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+                                <a @class([
+                                    'relative font-medium transition-colors after:absolute after:left-0 after:top-8 after:h-1 after:w-0 after:bg-transparent after:transition-all after:duration-700 focus:outline-none disabled:pointer-events-none disabled:opacity-50',
+                                    'after:!bg-white after:!w-1/2' => url()->current() === $item['route'],
+                                ])
                                     :class="{
                                         'after:bg-white after:w-1/2': navigationMenu=='{{ Str::kebab($item['label']) }}',
                                         'after:bg-transparent after:w-0 ': navigationMenu!='{{ Str::kebab($item['label']) }}'

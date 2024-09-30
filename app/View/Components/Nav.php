@@ -54,62 +54,41 @@ class Nav extends Component
         //* ][]
         $this->nav_items = [
             [
-                'label' => 'Perusahaan',
+                'label' => __('nav.company'),
                 'route' => route('about'),
                 'disable' => false,
                 'submenu' => [
                     [
-                        'label' => 'Sekilas perusahaan',
+                        'label' => __('nav.company.brief'),
                         'route' => route('about', ['#sekilas-perusahaan']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Sejarah',
+                        'label' => __('nav.company.history'),
                         'route' => route('about', ['#sejarah']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Visi, Misi & Nilai Perusahaan',
+                        'label' => __('nav.company.value'),
                         'route' =>  route('about', ['#visi-misi']),
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Wilayah Kerja',
+                        'label' => __('nav.company.area'),
                         'route' => route('about', ['#wilayah']),
                         'submenu' => []
                     ],
                 ]
             ],
             [
-                'label' => 'Merek',
+                'label' => __('nav.product'),
                 'route' => route('product'),
                 // 'route' => '#',
                 'disable' => false,
                 'submenu' => [
                     ...$this->brands,
-                    [
-                        'label' => 'Kreasi Resep',
-                        'route' => route('recipe'),
-                        'disable' => false,
-                        'submenu' => [
-                            [
-                                'label' => 'Sarapan',
-                                'route' => route('recipe', ['type' => 'sarapan']),
-                            ],
-                            [
-                                'label' => 'Makan Siang',
-                                'route' => route('recipe', ['type' => 'makan-siang']),
-                            ],
-                            [
-                                'label' => 'Makan Malam',
-                                'route' => route('recipe', ['type' => 'makan-malam']),
-                            ],
-                            [
-                                'label' => 'Snack',
-                                'route' => route('recipe', ['type' => 'snack']),
-                            ],
-                        ]
-                    ],
+
+
                     // [
                     //     'label' => 'Video',
                     //     'route' => '#',
@@ -127,52 +106,50 @@ class Nav extends Component
                     // ],
                 ]
             ],
+
             [
-                'label' => 'Tanggung Jawab Sosial',
+                'label' => __('nav.recipe'),
+                'route' => route('recipe'),
+                'disable' => false,
+                'submenu' => [
+                    [
+                        'label' => __('meal.Sarapan'),
+                        'route' => route('recipe', ['type' => 'sarapan']),
+                    ],
+                    [
+                        'label' => __('meal.Makan Siang'),
+                        'route' => route('recipe', ['type' => 'makan-siang']),
+                    ],
+                    [
+                        'label' => __('meal.Makan Malam'),
+                        'route' => route('recipe', ['type' => 'makan-malam']),
+                    ],
+                    [
+                        'label' => __('meal.Snack'),
+                        'route' => route('recipe', ['type' => 'snack']),
+                    ],
+                ]
+            ],
+
+            [
+                'label' => __('nav.news'),
                 'route' => '#',
                 'disable' => true,
                 'submenu' => [
                     [
-                        'label' => 'Kegiatan Sosial',
+                        'label' => __('nav.news.activity'),
                         'route' => '#',
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Lingkungan Hidup',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Ketenagakerjaan Kesehatan Dan Keselamatan Kerja',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Pengembangan Sosial Dan Kemasyarakatan',
+                        'label' => __('nav.news.Artikel'),
                         'route' => '#',
                         'submenu' => []
                     ],
                 ]
             ],
             [
-                'label' => 'Berita',
-                'route' => '#',
-                'disable' => true,
-                'submenu' => [
-                    [
-                        'label' => 'Kegiatan',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                    [
-                        'label' => 'Artikel / Blog',
-                        'route' => '#',
-                        'submenu' => []
-                    ],
-                ]
-            ],
-            [
-                'label' => 'Hubungi Kami',
+                'label' => __('nav.contact'),
                 'route' => '#',
                 'disable' => true,
                 'submenu' => []

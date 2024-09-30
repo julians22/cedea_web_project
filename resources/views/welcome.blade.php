@@ -5,39 +5,31 @@
         <x-home.banner />
     </section>
 
-    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" title="Kenal Lebih Dekat">
+    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('home.closer.title')">
 
         <x-slot:desc>
-            <p>
-                PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan
-                hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru,
-                Majalengka, Medan & Semarang. Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor
-                industri makanan olahan berbasis hasil laut.
-            </p>
+            <p>{{ __('home.closer.detail') }}</p>
         </x-slot>
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('about') }}">
-                Baca Selengkapnya
+                {{ __('Read More') }}
             </a>
         </x-slot>
     </x-section-banner>
 
-    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" title="Mutu yang Tetap Terjaga">
+    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('home.quality.title')">
 
         <x-slot:desc>
             <p>
-                CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali
-                yang berkomitmen untuk terus menghasilkan makanan
-                beku dari ikan olahan terbaik dengan penerapan GMP,
-                HACCP, ISO 22000, BPOM, Halal.
+                {{ __('home.quality.detail') }}
             </p>
         </x-slot>
 
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('product') }}">
-                Lihat Produk
+                {{ __('See Product') }}
             </a>
         </x-slot>
     </x-section-banner>
@@ -56,9 +48,7 @@
         <div class="col-span-5 lg:col-span-3">
             <div class="flex h-full flex-col justify-center">
                 <h2 class="section-title text-center leading-[1.2]">
-                    <span>Nggak Ada Waktu Belanja?</span>
-                    <br>
-                    <span>Pesan Online Solusinya!</span>
+                    {!! __('home.marketplace.title') !!}
                 </h2>
 
                 <div class="mt-4 flex items-center justify-center gap-4 max-sm:flex-wrap lg:mt-8">
