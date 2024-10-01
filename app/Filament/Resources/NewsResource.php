@@ -28,7 +28,6 @@ use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsResource extends Resource
 {
-
     protected static ?string $model = PostNews::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';

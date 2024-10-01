@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -57,5 +58,15 @@ class PostNews extends Model implements HasMedia, Sitemapable
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
+    }
+
+    /**
+     * Get all of the category for the PostNews
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function category(): HasMany
+    {
+        return $this->hasMany(NewsCategory::class);
     }
 }
