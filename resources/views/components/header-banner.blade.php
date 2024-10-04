@@ -1,25 +1,21 @@
+@props(['banners' => [], 'type' => 'default'])
+
 <!-- Slider main container -->
-<div>
+<section>
     <!-- Additional required wrapper -->
-    <div class="swiper h-full bg-cedea-red-500" id="home-swiper">
-        <div class="swiper-wrapper">
+    <div id="header-banner" {{ $attributes->twMerge('swiper h-full bg-cedea-red-500') }}>
+        <div {{ $attributes->twMergeFor('wrapper', 'swiper-wrapper') }}>
             <!-- Slides -->
             @foreach ($banners as $banner)
                 <div class="swiper-slide cursor-grab">
-                    <picture>
-                        <source class="block w-full" srcset="{{ $banner->getFirstMediaUrl('banner_desktop') }}"
-                            media="(min-width: 1024px)" />
-                        <img class="mx-auto block h-full w-full object-cover"
-                            src="{{ $banner->getFirstMediaUrl('banner_mobile') }}"
-                            alt="{{ $banner->getFirstMedia('banner_mobile')->name }}" />
-                    </picture>
+                    <x-dynamic-component class="mt-4" component='{{ "banner.{$type}" }}' :item='$banner' />
                 </div>
             @endforeach
         </div>
         <!-- If we need pagination -->
         <div class="swiper-pagination"></div>
     </div>
-</div>
+</section>
 
 
 @push('plugin-scripts')

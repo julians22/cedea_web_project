@@ -63,9 +63,9 @@ Route::group([
     )->name('news');
 
     Route::get(
-        'news/$slug',
+        'news/{post}',
         [NewsController::class, 'show']
-    )->name('news.detail');
+    )->name('news.show');
 
     Route::get('contact', [HomeController::class, 'contact'])
         ->name('contact');

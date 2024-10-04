@@ -15,13 +15,20 @@ class NewsCategory extends Model
 {
     use HasTranslations, HasSlug;
 
-    public $translatable = ['title'];
+    public $translatable = ['name'];
+
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
 
     public function getSlugOptions(): SlugOptions
     {
         return SlugOptions::create()
             ->usingLanguage('id')
-            ->generateSlugsFrom('title')
+            ->generateSlugsFrom('name')
             ->saveSlugsTo('slug');
     }
 

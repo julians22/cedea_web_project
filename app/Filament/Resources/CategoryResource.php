@@ -34,7 +34,6 @@ class CategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->required()
                     ->translatable(true, null, [
                         'id' => [
                             'required',

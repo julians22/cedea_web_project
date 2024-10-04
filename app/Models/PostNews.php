@@ -18,7 +18,7 @@ class PostNews extends Model implements HasMedia, Sitemapable
 {
     use HasFactory, HasSlug, InteractsWithMedia, HasTranslations;
 
-    public $translatable = ['title', 'content'];
+    public $translatable = ['title', 'content', 'excerpt'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -48,13 +48,21 @@ class PostNews extends Model implements HasMedia, Sitemapable
     }
 
     /**
+     * Get the route key for the model.
+     */
+    public function getRouteKeyName(): string
+    {
+        return 'slug';
+    }
+
+    /**
      * Get the sitemap tag for the resource.
      *
      * @return \Spatie\Sitemap\Tags\Url|string|array
      */
     public function toSitemapTag(): Url | string | array
     {
-        return Url::create(route('news.detail', $this))
+        return Url::create(route('news.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);

@@ -7,10 +7,12 @@ use App\Filament\Resources\NewsResource\RelationManagers;
 use App\Models\News;
 use App\Models\PostNews;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -57,6 +59,13 @@ class NewsResource extends Resource
                                         'en' => ['nullable', 'string', 'max:255'],
                                     ]),
 
+                                Textarea::make('excerpt')
+                                    ->autosize()
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string'],
+                                        'en' => ['nullable', 'string'],
+                                    ])
+
                                 // RichEditor::make('content')
                                 //     ->label(__('content'))
                                 //     ->translatable(true, null, [
@@ -73,8 +82,15 @@ class NewsResource extends Resource
 
                             Toggle::make('published')
                                 ->default(true)
-                                ->onColor('success')
+                                ->onColor('success'),
                             // ->offColor('danger'),
+
+                            DatePicker::make('published_at')
+                                ->required()
+                                ->default(now())
+
+
+
                         ]),
 
                     ]
@@ -94,7 +110,8 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('featured_image'),
+                SpatieMediaLibraryImageColumn::make('featured_image')
+                    ->collection('featured_image'),
                 TextColumn::make('title'),
                 ToggleColumn::make('published')
             ])

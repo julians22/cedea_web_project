@@ -1,9 +1,7 @@
 <x-layouts.app>
 
     {{-- Banner Section --}}
-    <section>
-        <x-home.banner />
-    </section>
+    <x-header-banner :banners="$banners" />
 
     <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('home.closer.title')">
 
@@ -36,7 +34,6 @@
 
     {{-- News Section --}}
     {{-- <livewire:news-section /> --}}
-
 
     {{-- Marketplace Section --}}
     <div class="container my-12 flex justify-center gap-2 px-4 lg:px-0">

@@ -12,13 +12,6 @@ class Banner extends Model implements HasMedia, Sortable
 {
     use SortableTrait, InteractsWithMedia;
 
-    /**
-     * The attributes that aren't mass assignable.
-     *
-     * @var array
-     */
-    protected $guarded = ['id'];
-
     protected $casts = [
         'enable' => 'boolean',
     ];
