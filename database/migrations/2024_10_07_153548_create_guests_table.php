@@ -11,9 +11,13 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::table('post_news', function (Blueprint $table) {
-            $table->json('excerpt')->nullable();
-            $table->date('published_at')->nullable();
+        Schema::create('guests', function (Blueprint $table) {
+           $table->id();
+
+           $table->string('name')->nullable();
+           $table->string('email')->nullable();
+           $table->string('ip_address')->nullable();
+           $table->timestamps();
         });
     }
 
@@ -22,8 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::table('post_news', function (Blueprint $table) {
-            $table->dropColumn(['excerpt', 'published_at']);
-        });
+        Schema::dropIfExists('guests');
     }
 };

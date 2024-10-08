@@ -37,7 +37,7 @@
             </div>
         </section>
 
-        <hr class="container my-8 h-0.5 border-0 bg-gray-200 dark:bg-gray-700">
+        <hr class="container my-8 h-0.5 border-0 bg-gray-200">
 
         {{-- recipe --}}
         <section class="container mt-8" wire:ignore>

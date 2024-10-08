@@ -9,8 +9,6 @@ class NewsController extends Controller
 {
     public function create()
     {
-
-
         $news = PostNews::paginate(6);
         $banners = $news->take(3);
 
@@ -28,8 +26,6 @@ class NewsController extends Controller
      */
     public function show(PostNews $post)
     {
-        // $post = PostNews::findBySlug($slug);
         return view('news-detail', compact('post'));
-        // return view('news-detail');
     }
 }

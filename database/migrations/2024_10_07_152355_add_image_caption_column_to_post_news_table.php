@@ -12,8 +12,7 @@ return new class extends Migration
     public function up(): void
     {
         Schema::table('post_news', function (Blueprint $table) {
-            $table->json('excerpt')->nullable();
-            $table->date('published_at')->nullable();
+            $table->json('featured_image_caption')->nullable();
         });
     }
 
@@ -23,7 +22,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('post_news', function (Blueprint $table) {
-            $table->dropColumn(['excerpt', 'published_at']);
+            $table->dropColumn('featured_image_caption');
         });
     }
 };

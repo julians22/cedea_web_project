@@ -204,7 +204,7 @@
                 <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
                     <x-product-list-skeleton />
                 </div>
-                {{ $products->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+                {{ $products->links(data: ['scrollTo' => false]) }}
             </div>
 
         </div>

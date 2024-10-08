@@ -5,10 +5,7 @@ import focus from "@alpinejs/focus";
 import resize from "@alpinejs/resize";
 import dialog from "@fylgja/alpinejs-dialog";
 
-import {
-    Alpine,
-    Livewire,
-} from "../../vendor/livewire/livewire/dist/livewire.esm";
+import { Alpine } from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
 
 Alpine.plugin(focus);

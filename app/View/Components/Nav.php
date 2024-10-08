@@ -133,8 +133,8 @@ class Nav extends Component
 
             [
                 'label' => __('nav.news'),
-                'route' => '#',
-                'disable' => true,
+                'route' => route('news'),
+                'disable' => false,
                 'submenu' => [
                     [
                         'label' => __('nav.news.activity'),

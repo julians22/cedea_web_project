@@ -4,8 +4,11 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
+use LakM\Comments\Concerns\Commentable;
+use LakM\Comments\Contracts\CommentableContract;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\HasMedia;
@@ -14,11 +17,13 @@ use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
 use Spatie\Translatable\HasTranslations;
 
-class PostNews extends Model implements HasMedia, Sitemapable
+class PostNews extends Model implements
+    HasMedia,
+    Sitemapable
 {
     use HasFactory, HasSlug, InteractsWithMedia, HasTranslations;
 
-    public $translatable = ['title', 'content', 'excerpt'];
+    public $translatable = ['title', 'content', 'excerpt', 'featured_image_caption'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -69,12 +74,12 @@ class PostNews extends Model implements HasMedia, Sitemapable
     }
 
     /**
-     * Get all of the category for the PostNews
+     * The categories that belong to the PostNews
      *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
-    public function category(): HasMany
+    public function categories(): BelongsToMany
     {
-        return $this->hasMany(NewsCategory::class);
+        return $this->belongsToMany(NewsCategory::class, 'post_news_news_category');
     }
 }

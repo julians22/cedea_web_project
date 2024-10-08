@@ -8,6 +8,7 @@ use App\Models\News;
 use App\Models\PostNews;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -62,7 +63,7 @@ class NewsResource extends Resource
                                 Textarea::make('excerpt')
                                     ->autosize()
                                     ->translatable(true, null, [
-                                        'id' => ['required', 'string'],
+                                        'id' => ['nullable', 'string'],
                                         'en' => ['nullable', 'string'],
                                     ])
 
@@ -80,16 +81,21 @@ class NewsResource extends Resource
                                 ->required()
                                 ->collection('featured_image'),
 
+                            Textarea::make('featured_image_caption')
+                                ->translatable(true, null, [
+                                    'id' => ['nullable', 'string'],
+                                    'en' => ['nullable', 'string'],
+                                ]),
+
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success'),
                             // ->offColor('danger'),
 
-                            DatePicker::make('published_at')
+                            DateTimePicker::make('published_at')
                                 ->required()
-                                ->default(now())
-
-
+                                ->default(now()) // Set the default value to the current datetime
+                                ->format('Y-m-d H:i:s')  // Set the datetime format if needed
 
                         ]),
 
@@ -97,7 +103,7 @@ class NewsResource extends Resource
                 ),
                 TiptapEditor::make('content')
                     ->profile('default')
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp',])
+                    ->acceptedFileTypes(['image/*'])
 
                     ->translatable(true, null, [
                         'id' => ['required',],
@@ -113,7 +119,10 @@ class NewsResource extends Resource
                 SpatieMediaLibraryImageColumn::make('featured_image')
                     ->collection('featured_image'),
                 TextColumn::make('title'),
-                ToggleColumn::make('published')
+                TextColumn::make('excerpt'),
+                ToggleColumn::make('published'),
+                TextColumn::make('published_at')
+                    ->dateTime()
             ])
             ->filters([
                 //
