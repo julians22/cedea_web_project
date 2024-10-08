@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'froze' => 'Simpan pada suhu beku: -18°C (0°F).',
+    'buy' => 'Beli Sekarang',
     'product.title' => 'Product',
     'product.detail' => 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari Cedea Seafood!',
 

@@ -3,6 +3,8 @@
 declare(strict_types=1);
 
 return [
+    'froze' => 'Store in the freezer at -18°C (0°F).',
+    'buy' => 'Buy Now',
     'product.title' => 'Product',
     'product.detail' => 'Explore the richness of the sea with the best product range from Cedea Seafood!',
 
