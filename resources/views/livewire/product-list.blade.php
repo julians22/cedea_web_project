@@ -229,8 +229,7 @@
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
                             <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
                             <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                href="{{ $activeProduct->buy_link }}">Beli
-                                sekarang</a>
+                                href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>
 
                         <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
@@ -263,7 +262,7 @@
                             @endif
 
                             <div>
-                                {{ __('Should be stored at -18°C (0°F) or lower') }}
+                                {{ __('product.froze') }}
                             </div>
 
                         </div>
