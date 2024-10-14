@@ -39,7 +39,7 @@ export default {
                 ],
             },
             fontSize: {
-                xxs: "0.5rem",
+                xxs: ["0.5rem", "1rem"],
             },
             fontFamily: {
                 androgyne: "Androgyne",

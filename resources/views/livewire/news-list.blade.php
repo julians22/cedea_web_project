@@ -42,8 +42,8 @@
                 @if ($loop->first)
                     <div
                         class="col-span-1 row-span-1 overflow-hidden rounded-xl shadow-top md:col-span-2 md:row-span-1 lg:row-span-3 2xl:[&:not(:only-child)]:mr-8">
-                        <img class="w-full object-cover" src="{{ $item->getFirstMediaUrl('featured_image') }}"
-                            alt="">
+                        <img class="max-h-64 w-full object-cover max-md:max-h-52"
+                            src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
                         <div class="flex h-full w-full flex-col gap-y-4 bg-white font-semibold ~p-4/8">
                             <p class="text-[#919497]">{{ $item->published_at }}</p>
                             <h2 class="line-clamp-3 ~text-lg/2xl"> {{ $item->title }}</h2>
@@ -55,11 +55,14 @@
                     </div>
                 @else
                     {{-- news list --}}
-                    <div class="flex overflow-hidden rounded-xl shadow-top">
-                        <img class="h-full w-40 object-cover" src="{{ $item->getFirstMediaUrl('featured_image') }}"
-                            alt="">
-                        <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white p-4 font-semibold">
-                            <p class="cursor-pointer text-[#919497] ~text-xs/sm">{{ $item->published_at }}</p>
+                    <div class="flex overflow-hidden rounded-xl shadow-top max-md:flex-col">
+                        <div
+                            class="md:max-w-28 grid max-h-80 items-center justify-center overflow-hidden md:aspect-[6/2] md:max-h-40 md:w-52">
+                            <img class="object-cover object-center"
+                                src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
+                        </div>
+                        <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white font-semibold ~p-2/4">
+                            <p class="cursor-pointer text-[#919497] ~text-xxs/xs">{{ $item->published_at }}</p>
                             <h2 class="line-clamp-3 ~text-xxs/xs">
                                 {{ $item->title }}
                             </h2>
