@@ -2,9 +2,10 @@
 
 namespace App\Filament\Resources;
 
-use App\Filament\Resources\CategoryResource\Pages;
-use App\Filament\Resources\CategoryResource\RelationManagers;
-use App\Models\Products\Category;
+use App\Filament\Resources\ProductCategoryResource\Pages;
+use App\Filament\Resources\ProductCategoryResource\RelationManagers;
+use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
 use Filament\Forms\Components\TextInput;
@@ -18,9 +19,9 @@ use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 use Spatie\Tags\Tag;
 
-class CategoryResource extends Resource
+class ProductCategoryResource extends Resource
 {
-    protected static ?string $model = Category::class;
+    protected static ?string $model = ProductCategory::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
@@ -82,9 +83,10 @@ class CategoryResource extends Resource
     public static function getPages(): array
     {
         return [
-            'index' => Pages\ListCategories::route('/'),
-            'create' => Pages\CreateCategory::route('/create'),
-            'edit' => Pages\EditCategory::route('/{record}/edit'),
+            'index' => Pages\ManageProductCategories::route('/'),
+            // 'index' => Pages\ListCategories::route('/'),
+            // 'create' => Pages\CreateCategory::route('/create'),
+            // 'edit' => Pages\EditCategory::route('/{record}/edit'),
         ];
     }
 }

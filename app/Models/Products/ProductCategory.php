@@ -11,11 +11,18 @@ use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
-class Category extends Model
+class ProductCategory extends Model
 {
     use HasFactory, HasTranslations, HasSlug;
 
     public $translatable = ['name'];
+
+    /**
+     * The table associated with the model.
+     *
+     * @var string
+     */
+    protected $table = 'product_categories';
 
     /**
      * The attributes that aren't mass assignable.

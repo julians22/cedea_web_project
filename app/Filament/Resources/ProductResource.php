@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Products\Brand;
 use App\Models\Products\Category;
 use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
@@ -174,7 +175,7 @@ class ProductResource extends Resource
                     ->indicateUsing(function (array $data): array | string {
                         return implode(
                             ' & ',
-                            Category::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
+                            ProductCategory::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
                         );
                     })
                     ->preload()

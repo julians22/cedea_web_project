@@ -41,7 +41,7 @@
 
         {{-- recipe --}}
         <section class="container mt-8" wire:ignore>
-            <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
+            <h2 class="section-title">Kreasi Resep <span class="font-cedea">Cedea</span></h2>
 
             <p>Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik
                 dari

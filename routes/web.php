@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
 use Embed\Embed;
 use Butschster\Head\Facades\Meta;
@@ -69,6 +70,9 @@ Route::group([
 
     Route::get('contact', [HomeController::class, 'contact'])
         ->name('contact');
+
+    Route::get('marketplace', MarketplaceController::class)
+        ->name('marketplace');
 
 
     Route::get('video_get', function () {

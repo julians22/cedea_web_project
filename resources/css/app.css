@@ -69,6 +69,10 @@
 }
 
 @layer components {
+    .font-cedea {
+        @apply font-montserrat font-semibold;
+    }
+
     /* Base layout Component */
     /*?
     :before = ribbon point

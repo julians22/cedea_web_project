@@ -11,13 +11,8 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('guests', function (Blueprint $table) {
-           $table->id();
-
-           $table->string('name')->nullable();
-           $table->string('email')->nullable();
-           $table->string('ip_address')->nullable();
-           $table->timestamps();
+        Schema::table('product_product_category', function (Blueprint $table) {
+            $table->renameColumn('category_id', 'product_category_id');
         });
     }
 
@@ -26,6 +21,8 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('guests');
+        Schema::table('product_product_category', function (Blueprint $table) {
+            $table->renameColumn('product_category_id', 'category_id');
+        });
     }
 };

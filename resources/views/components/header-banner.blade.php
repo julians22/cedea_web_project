@@ -1,3 +1,8 @@
+{{--
+banners: array, Collection
+types: default, news
+--}}
+
 @props(['banners' => [], 'type' => 'default'])
 
 <!-- Slider main container -->

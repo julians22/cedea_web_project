@@ -9,6 +9,7 @@ use Livewire\WithPagination;
 use App\Models\Products\Brand;
 use App\Models\Products\Product;
 use App\Models\Products\Category;
+use App\Models\Products\ProductCategory;
 use Butschster\Head\Facades\Meta;
 use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
@@ -44,7 +45,7 @@ class ProductList extends Component
     {
         Meta::prependTitle('Products');
 
-        $this->allCategories = Category::all();
+        $this->allCategories = ProductCategory::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
 
         if (! request('brand')) {

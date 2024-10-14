@@ -80,6 +80,6 @@ class Product extends Model implements HasMedia
      */
     public function categories(): BelongsToMany
     {
-        return $this->belongsToMany(Category::class);
+        return $this->belongsToMany(ProductCategory::class);
     }
 }
