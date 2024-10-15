@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\SearchController;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Models\PostNews;
@@ -74,6 +75,9 @@ Route::group([
 
     Route::get('marketplace', MarketplaceController::class)
         ->name('marketplace');
+
+    Route::get('search', SearchController::class)
+        ->name('search');
 
 
     Route::get('video_get', function () {

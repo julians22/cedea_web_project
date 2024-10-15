@@ -154,7 +154,7 @@
 
     <div class="flex justify-start gap-4 lg:flex-row lg:justify-end lg:gap-x-6 lg:gap-y-0">
         {{-- search icon --}}
-        <livewire:search-modal />
+        <x-search-modal />
 
         {{-- Locale Toggle --}}
         <x-locale-toggler />
