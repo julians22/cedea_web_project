@@ -15,6 +15,7 @@ export default {
     theme: {
         screens: {
             ...screens,
+            "navbar-small": "34rem",
             "footer-small": "25rem",
         },
         fontSize,
