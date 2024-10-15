@@ -16,16 +16,16 @@ class SearchController extends Controller
 
         $news = PostNews::where(
             'title->' . app()->getLocale(),
-            'iLIKE',
+            'LIKE',
             '%' . $query . '%'
         )->limit(3)->get();;
 
         $recipes = PostRecipes::where(
             'title->' . app()->getLocale(),
-            'iLIKE',
+            'LIKE',
             '%' . $query . '%'
         )->limit(3)->get();;
-        $product = Product::where('name->' . app()->getLocale(), 'iLIKE', '%' . $query . '%')->limit(3)->get();;
+        $product = Product::where('name->' . app()->getLocale(), 'LIKE', '%' . $query . '%')->limit(3)->get();;
 
 
         return view('search', compact('recipes', 'news', 'product'));
