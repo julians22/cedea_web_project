@@ -82,11 +82,21 @@ class RecipeResource extends Resource
                                     'makan-siang' => 'Makan Siang',
                                     'makan-malam' => 'Makan Malam',
                                     'snack' => 'Snack',
-                                ]),
+                                ])
+                                ->required(),
+
+                            Select::make('product')
+                                ->relationship('product')
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->searchable(['name'])
+                                ->nullable(),
+
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success')
                                 ->offColor('danger'),
+
+
                         ]),
                     ]
                 ),
@@ -94,7 +104,6 @@ class RecipeResource extends Resource
                 TiptapEditor::make('content')
                     ->profile('default')
                     ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp',])
-
                     ->translatable(true, null, [
                         'id' => ['required',],
                         'en' => ['nullable',],

@@ -47,8 +47,8 @@
                         <div class="flex h-full w-full flex-col gap-y-4 bg-white font-semibold ~p-4/8">
                             <p class="text-[#919497]">{{ $item->published_at }}</p>
                             <h2 class="line-clamp-3 ~text-lg/2xl"> {{ $item->title }}</h2>
-                            <a
-                                class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red">
+                            <a class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red"
+                                href="{{ route('news.show', ['post' => $item->slug]) }}">
                                 Baca Beritanya
                             </a>
                         </div>

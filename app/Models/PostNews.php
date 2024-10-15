@@ -15,13 +15,18 @@ use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
 class PostNews extends Model implements
     HasMedia,
     Sitemapable
 {
-    use HasFactory, HasSlug, InteractsWithMedia, HasTranslations;
+    use HasFactory,
+        HasSlug,
+        InteractsWithMedia,
+        HasTranslations,
+        HasTags;
 
     public $translatable = ['title', 'content', 'excerpt', 'featured_image_caption'];
 

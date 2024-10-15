@@ -6,12 +6,15 @@ use App\Filament\Resources\NewsResource\Pages;
 use App\Filament\Resources\NewsResource\RelationManagers;
 use App\Models\News;
 use App\Models\PostNews;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
 use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
@@ -91,6 +94,31 @@ class NewsResource extends Resource
                                 ->default(true)
                                 ->onColor('success'),
                             // ->offColor('danger'),
+                            Select::make('category_id')
+                                ->required()
+                                ->relationship(
+                                    name: 'categories',
+                                    titleAttribute: 'name',
+                                )
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->label(__('name'))
+                                        ->translatable(
+                                            true,
+                                            null,
+                                            [
+                                                'id' => ['required', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
+                                                'en' => ['nullable', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
+                                            ]
+                                        ),
+                                ])
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->label(__('category'))
+                                ->multiple()
+                                ->translatable(false)
+                                ->searchable(['name'])
+                                ->preload(),
+                            SpatieTagsInput::make('tags'),
 
                             DateTimePicker::make('published_at')
                                 ->required()

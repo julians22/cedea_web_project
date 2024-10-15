@@ -8,6 +8,7 @@ use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RecipeController;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Models\PostNews;
@@ -55,7 +56,7 @@ Route::group([
     )
         ->name('recipe');
 
-    Route::view('recipe/detail', 'recipe-detail')
+    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
         ->name('recipe.detail');
 
     Route::get(

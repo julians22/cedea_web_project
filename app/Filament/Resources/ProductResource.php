@@ -118,14 +118,15 @@ class ProductResource extends Resource
                                             true,
                                             null,
                                             [
-                                                'id' => ['required', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
-                                                'en' => ['nullable', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
+                                                'id' => ['required', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
+                                                'en' => ['nullable', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
                                             ]
                                         ),
                                 ])
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                                 ->label(__('category'))
-                                ->multiple()->translatable(false)
+                                ->multiple()
+                                ->translatable(false)
                                 ->searchable(['name'])
                                 ->preload(),
                             Select::make('brand_id')

@@ -2,9 +2,11 @@
 
 namespace App\Models\Products;
 
+use App\Models\PostRecipes;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\Image\Manipulations;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
@@ -81,5 +83,15 @@ class Product extends Model implements HasMedia
     public function categories(): BelongsToMany
     {
         return $this->belongsToMany(ProductCategory::class);
+    }
+
+    /**
+     * Get all of the recipes for the Product
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function recipes(): HasMany
+    {
+        return $this->hasMany(PostRecipes::class);
     }
 }
