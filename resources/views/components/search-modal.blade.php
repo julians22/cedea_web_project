@@ -1,5 +1,5 @@
-<div class="grid content-center items-center navbar-small:relative" x-data="{ seachModalOpen: false }"
-    @keydown.escape="seachModalOpen=false" @click.outside="seachModalOpen=false">
+<div class="grid content-center items-center sm:relative" x-data="{ seachModalOpen: false }" @keydown.escape="seachModalOpen=false"
+    @click.outside="seachModalOpen=false">
 
     <button
         class="origin-bottom-left text-xl transition-all disabled:pointer-events-none disabled:cursor-not-allowed disabled:opacity-50"
