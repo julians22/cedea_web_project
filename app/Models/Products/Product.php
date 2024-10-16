@@ -3,6 +3,7 @@
 namespace App\Models\Products;
 
 use App\Models\PostRecipes;
+use App\Traits\Searchable;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -17,7 +18,11 @@ use Spatie\Translatable\HasTranslations;
 
 class Product extends Model implements HasMedia
 {
-    use HasSlug, InteractsWithMedia, HasFactory, HasTranslations;
+    use HasSlug,
+        InteractsWithMedia,
+        HasFactory,
+        HasTranslations,
+        Searchable;
 
     public $translatable = ['name', 'description', 'packaging'];
 

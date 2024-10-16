@@ -2,6 +2,9 @@
 
 namespace App\Models;
 
+use Illuminate\Support\Str;
+use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -26,7 +29,8 @@ class PostNews extends Model implements
         HasSlug,
         InteractsWithMedia,
         HasTranslations,
-        HasTags;
+        HasTags,
+        Searchable;
 
     public $translatable = ['title', 'content', 'excerpt', 'featured_image_caption'];
 
@@ -45,6 +49,25 @@ class PostNews extends Model implements
     protected $casts = [
         'published' => 'boolean',
     ];
+
+
+    /**
+     * Get the excerpt.
+     *
+     * @return string
+     */
+    protected function excerpt(): Attribute
+    {
+        return Attribute::make(
+            get: function (string $value): string {
+                if (empty($value)) {
+                    return Str::limit($this->content, 200);
+                }
+                return $value;
+            },
+        );
+    }
+
 
     /**
      * Get the options for generating the slug.

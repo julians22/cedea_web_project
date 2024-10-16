@@ -16,17 +16,17 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CT1O_jre.css",
+    "file": "assets/app-kHT--v_i.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-DrmSYgFN.css",
+    "file": "assets/theme-BCCp8lQ4.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-gYCn62TV.js",
+    "file": "assets/app-hIS9nLFt.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
