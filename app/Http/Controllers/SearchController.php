@@ -16,7 +16,7 @@ class SearchController extends Controller
 
         $news = PostNews::search('slug', $query)->searchTranslated('title', $query)->limit(3)->get();
         $recipes = PostRecipes::searchTranslated('title', $query)->limit(3)->get();
-        $products = Product::searchTranslated('name', $query)->limit(3)->get();
+        $products = Product::searchTranslated('name', $query, "*")->limit(3)->get();
 
         return view('search', compact('recipes', 'news', 'products'));
     }
