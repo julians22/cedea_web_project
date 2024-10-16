@@ -43,7 +43,7 @@
                 @endforeach
                 @if (count($products) > 2)
                     <li class="text-right">
-                        <a href="{{ route('recipe', ['keyword' => request('query')]) }}">More results</a>
+                        <a href="{{ route('product', ['keyword' => request('query')]) }}">More results</a>
                     </li>
                 @endif
             </ul>
