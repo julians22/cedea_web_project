@@ -4,6 +4,8 @@ namespace App\Models\Products;
 
 use App\Models\PostRecipes;
 use App\Traits\Searchable;
+use Attribute;
+use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
@@ -15,6 +17,7 @@ use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
+use Spatie\Translatable\Translatable;
 
 class Product extends Model implements HasMedia
 {
@@ -42,6 +45,18 @@ class Product extends Model implements HasMedia
         'packaging' => 'array',
         'have_video' => 'boolean',
     ];
+
+    /**
+     * Get the packaging.
+     */
+    protected function packaging(): Attribute
+    {
+        return Attribute::make(
+            get: function (string $value) {
+                dd($value);
+            },
+        );
+    }
 
     public function registerMediaCollections(): void
     {
@@ -98,5 +113,39 @@ class Product extends Model implements HasMedia
     public function recipes(): HasMany
     {
         return $this->hasMany(PostRecipes::class);
+    }
+
+    /**
+     * Filter out empty or disallowed translations
+     * Modified to filter out empty array
+     *
+     * @param mixed $value
+     * @param string|null $locale
+     * @param array|null $allowedLocales
+     * @return bool
+     */
+    protected function filterTranslations(mixed $value = null, string $locale = null, array $allowedLocales = null): bool
+    {
+        if ($value === null) {
+            return false;
+        }
+
+        if ($value === '') {
+            return false;
+        }
+
+        if ($value === []) {
+            return false;
+        }
+
+        if ($allowedLocales === null) {
+            return true;
+        }
+
+        if (! in_array($locale, $allowedLocales)) {
+            return false;
+        }
+
+        return true;
     }
 }
