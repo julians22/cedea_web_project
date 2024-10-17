@@ -19,8 +19,8 @@
         x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" action="{{ route('search') }}"
         method="GET" @keyup.enter="$event.target.submit(); seachModalOpen=false">
 
-        <input class="p-0.5 text-cedea-red-500 outline-none placeholder:text-cedea-red-500/50 sm:w-full" id="query"
-            name="query" type="text" placeholder="Cari di sini">
+        <input class="p-0.5 text-cedea-red-500 outline-none placeholder:text-cedea-red-500/50 max-sm:w-full"
+            id="query" name="query" type="text" placeholder="Cari di sini">
 
         <button type="submit">
             <x-icon.magnifying-glass class="text-cedea-red-500" />

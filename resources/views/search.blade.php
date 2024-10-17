@@ -1,52 +1,63 @@
 <x-layouts.app>
-    <section class="h-dvh container bg-brick">
+    <section class="min-h-dvh bg-brick">
 
-        {{-- Recipe --}}
-        <div>
-            <h1 class="text-left font-androgyne text-cedea-red-dark ~text-xl/5xl">Kreasi Resep</h1>
-            <ul class="flex flex-col gap-y-4">
-                @foreach ($news as $item)
-                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
-                        :url="route('news.show', ['post' => $item->slug])" />
-                @endforeach
-                @if (count($recipes) > 2)
-                    <li class="text-right">
-                        <a href="{{ route('recipe', ['keyword' => request('query')]) }}">More results</a>
-                    </li>
-                @endif
-            </ul>
+        <div class="bg-cedea-red-500 ~h-48/80">
+
+            <div class="container ~pt-14/28">
+                <form action="{{ route('search') }}" method="GET"
+                    @keyup.enter="$event.target.submit(); seachModalOpen=false">
+                    <div
+                        class="relative mx-auto flex w-11/12 gap-x-4 rounded-full border border-white bg-transparent bg-white px-4 text-sm placeholder:text-white sm:w-3/4">
+                        <button type="submit">
+                            <x-icon.magnifying-glass class="text-cedea-red-500" />
+                        </button>
+
+                        <input
+                            class="block h-10 w-full px-2 py-1 text-cedea-red-500 outline-none placeholder:text-cedea-red-500"
+                            id="query" name="query" type="search" value="{{ request()->query('query') }}"
+                            placeholder="Cari di sini" />
+
+                    </div>
+                </form>
+                <p class="pt-4 text-center text-white">
+                    Berikut hasil pencarian untuk Sosis Kentang Korea:
+                </p>
+            </div>
         </div>
 
-        {{-- news --}}
-        <div>
-            <h1 class="text-left font-androgyne text-cedea-red-dark ~text-xl/5xl">Berita</h1>
-            <ul class="flex flex-col gap-y-4">
+        <div class="container my-4">
+            {{-- Recipe --}}
+            <x-search.item-group title="Kreasi Resep" :showReadmore="count($recipes) > 3"
+                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+
                 @foreach ($recipes as $item)
                     <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
                         :url="route('news.show', ['post' => $item->slug])" />
                 @endforeach
-                @if (count($news) > 2)
-                    <li class="text-right">
-                        <a href="{{ route('news', ['keyword' => request('query')]) }}">More results</a>
-                    </li>
-                @endif
-            </ul>
-        </div>
 
-        {{-- product --}}
-        <div>
-            <h1 class="text-left font-androgyne text-cedea-red-dark ~text-xl/5xl">Product</h1>
-            <ul class="flex flex-col gap-y-4">
+            </x-search.item-group>
+
+            {{-- news --}}
+            <x-search.item-group title="berita" :showReadmore="count($news) > 3"
+                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+
+                @foreach ($news as $item)
+                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
+                        :url="route('news.show', ['post' => $item->slug])" />
+                @endforeach
+
+            </x-search.item-group>
+
+            {{-- product --}}
+            <x-search.item-group title="Product" :showReadmore="count($products) > 3"
+                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+
                 @foreach ($products as $item)
                     <x-search.item :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')->name" :title="$item->name" :desc="$item->description"
-                        :url="route('product', ['keyword' => $item->slug])" />
+                        :url="route('product', ['keyword' => $item->name, 'brand' => $item->brand->slug])" />
                 @endforeach
-                @if (count($products) > 2)
-                    <li class="text-right">
-                        <a href="{{ route('product', ['keyword' => request('query')]) }}">More results</a>
-                    </li>
-                @endif
-            </ul>
+
+            </x-search.item-group>
         </div>
     </section>
 </x-layouts.app>
