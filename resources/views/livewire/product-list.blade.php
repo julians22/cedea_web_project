@@ -211,14 +211,7 @@
 
 
         <x-modal-product-detail>
-            <button
-                class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
-                @click="modalOpen=false">
-                <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="0.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+
 
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
@@ -229,12 +222,11 @@
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
                             <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
                             <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                href="{{ $activeProduct->buy_link }}">Beli
-                                sekarang</a>
+                                href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>
 
-                        <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
-                            <span>{!! $activeProduct->description !!}</span>
+                        <div class="gap-y-4 text-justify md:flex md:grow md:basis-2/5 md:flex-col">
+                            <div>{!! $activeProduct->description !!}</div>
 
                             <div>
                                 {{ $activeProduct->no_bpom }}
@@ -263,7 +255,7 @@
                             @endif
 
                             <div>
-                                {{ __('Should be stored at -18°C (0°F) or lower') }}
+                                {{ __('product.froze') }}
                             </div>
 
                         </div>

@@ -54,7 +54,7 @@
     </section>
 
     <section class="container flex flex-col ~gap-8/16 ~px-4/60">
-        @php
+        {{-- @php
             $recipes = [
                 [
                     'product' => 'Cedea Salmon fish cake',
@@ -71,9 +71,9 @@
                         'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut',
                 ],
             ];
-        @endphp
+        @endphp --}}
         @foreach ($recipes as $recipe)
-            <x-recipe-item :name="$recipe['name']" :product="$recipe['product']" :imagePath="$recipe['imagePath']" :description="$recipe['description']" />
+            <x-recipe-item :name="$recipe->title" :product="$recipe->product" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')" :description="$recipe->slug" />
         @endforeach
     </section>
 

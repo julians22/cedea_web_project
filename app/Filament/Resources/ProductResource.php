@@ -6,6 +6,7 @@ use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Products\Brand;
 use App\Models\Products\Category;
 use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
@@ -59,15 +60,12 @@ class ProductResource extends Resource
                                 ->maxFiles(1)
                                 ->image()
                                 ->conversion('preview_cropped')
-                                // ->optimize('webp')
                                 ->collection('packaging'),
 
                             SpatieMediaLibraryFileUpload::make('featured_image')
-                                // ->required()
                                 ->maxFiles(1)
                                 ->image()
                                 ->conversion('thumb')
-                                // ->optimize('webp')
                                 ->collection('featured_packaging'),
 
                             Toggle::make('have_video')
@@ -120,14 +118,15 @@ class ProductResource extends Resource
                                             true,
                                             null,
                                             [
-                                                'id' => ['required', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
-                                                'en' => ['nullable', UniqueTranslationRule::for('categories', 'name'), 'string', 'max:255'],
+                                                'id' => ['required', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
+                                                'en' => ['nullable', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
                                             ]
                                         ),
                                 ])
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                                 ->label(__('category'))
-                                ->multiple()->translatable(false)
+                                ->multiple()
+                                ->translatable(false)
                                 ->searchable(['name'])
                                 ->preload(),
                             Select::make('brand_id')
@@ -177,7 +176,7 @@ class ProductResource extends Resource
                     ->indicateUsing(function (array $data): array | string {
                         return implode(
                             ' & ',
-                            Category::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
+                            ProductCategory::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
                         );
                     })
                     ->preload()

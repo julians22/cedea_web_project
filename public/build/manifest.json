@@ -16,23 +16,23 @@
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DPg6HkX7.css",
+    "file": "assets/app-DOo_QFXj.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-kOWe-uzG.css",
+    "file": "assets/theme-BCCp8lQ4.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CMqJ7oXf.js",
+    "file": "assets/app-hIS9nLFt.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-BodASFnk.js",
+    "file": "assets/swiper-home-DOo6GEHe.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
     "isEntry": true,

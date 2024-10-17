@@ -9,7 +9,7 @@ import { Autoplay, Pagination } from "swiper/modules";
 //     "height"
 // ];
 
-const homeSwiper = new Swiper("#home-swiper", {
+const headerBanner = new Swiper("#header-banner", {
     modules: [Pagination, Autoplay],
 
     // Optional parameters

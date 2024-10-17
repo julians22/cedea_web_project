@@ -15,7 +15,9 @@ return new class extends Migration
             $table->id();
             $table->string('name');
             $table->string('link');
-            $table->text('group');
+            $table->boolean('enable');
+            $table->string('type');
+            $table->boolean('show_on_home');
             $table->bigInteger('order_column');
             $table->timestamps();
         });

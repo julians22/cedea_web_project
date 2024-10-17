@@ -8,12 +8,14 @@ export default {
             "./resources/**/*.blade.php",
             "./resources/**/*.js",
             "./resources/**/*.vue",
+            "./vendor/awcodes/filament-tiptap-editor/resources/**/*.blade.php",
         ],
         extract,
     },
     theme: {
         screens: {
             ...screens,
+            "navbar-small": "28rem",
             "footer-small": "25rem",
         },
         fontSize,
@@ -38,7 +40,7 @@ export default {
                 ],
             },
             fontSize: {
-                xxs: "0.5rem",
+                xxs: ["0.5rem", "1rem"],
             },
             fontFamily: {
                 androgyne: "Androgyne",
@@ -112,6 +114,13 @@ export default {
                     "100%": { transform: "translateX(0);", opacity: 1 },
                 },
             },
+            typography: (theme) => ({
+                DEFAULT: {
+                    css: {
+                        maxWidth: "none",
+                    },
+                },
+            }),
         },
     },
     plugins: [require("@tailwindcss/typography"), fluid],

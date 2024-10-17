@@ -6,11 +6,17 @@ use App\Filament\Resources\NewsResource\Pages;
 use App\Filament\Resources\NewsResource\RelationManagers;
 use App\Models\News;
 use App\Models\PostNews;
+use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms;
+use Filament\Forms\Components\DatePicker;
+use Filament\Forms\Components\DateTimePicker;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
@@ -21,12 +27,13 @@ use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\Enums\TiptapOutput;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsResource extends Resource
 {
-
     protected static ?string $model = PostNews::class;
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
@@ -50,33 +57,86 @@ class NewsResource extends Resource
                         Section::make(
                             [
                                 TextInput::make('title')
-                                    ->required()
                                     ->label(__('title'))
                                     ->translatable(true, null, [
                                         'id' => ['required', 'string', 'max:255'],
                                         'en' => ['nullable', 'string', 'max:255'],
                                     ]),
 
-                                RichEditor::make('content')
-                                    ->label(__('content'))
+                                Textarea::make('excerpt')
+                                    ->autosize()
                                     ->translatable(true, null, [
-                                        'id' => ['required', 'string',],
-                                        'en' => ['nullable', 'string',],
-                                    ]),
+                                        'id' => ['nullable', 'string'],
+                                        'en' => ['nullable', 'string'],
+                                    ])
+
+                                // RichEditor::make('content')
+                                //     ->label(__('content'))
+                                //     ->translatable(true, null, [
+                                //         'id' => ['required', 'string',],
+                                //         'en' => ['nullable', 'string',],
+                                //     ]),
                             ]
                         ),
                         Section::make([
                             SpatieMediaLibraryFileUpload::make('featured_image')
+                                ->image()
                                 ->required()
                                 ->collection('featured_image'),
 
+                            Textarea::make('featured_image_caption')
+                                ->translatable(true, null, [
+                                    'id' => ['nullable', 'string'],
+                                    'en' => ['nullable', 'string'],
+                                ]),
+
                             Toggle::make('published')
                                 ->default(true)
-                                ->onColor('success')
-                                ->offColor('danger'),
+                                ->onColor('success'),
+                            // ->offColor('danger'),
+                            Select::make('category_id')
+                                ->required()
+                                ->relationship(
+                                    name: 'categories',
+                                    titleAttribute: 'name',
+                                )
+                                ->createOptionForm([
+                                    TextInput::make('name')
+                                        ->label(__('name'))
+                                        ->translatable(
+                                            true,
+                                            null,
+                                            [
+                                                'id' => ['required', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
+                                                'en' => ['nullable', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
+                                            ]
+                                        ),
+                                ])
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->label(__('category'))
+                                ->multiple()
+                                ->translatable(false)
+                                ->searchable(['name'])
+                                ->preload(),
+                            SpatieTagsInput::make('tags'),
+
+                            DateTimePicker::make('published_at')
+                                ->required()
+                                ->default(now()) // Set the default value to the current datetime
+                                ->format('Y-m-d H:i:s')  // Set the datetime format if needed
+
                         ]),
+
                     ]
-                )
+                ),
+                TiptapEditor::make('content')
+                    ->profile('default')
+                    ->acceptedFileTypes(['image/*'])
+
+                    ->translatable(true, null, [
+                        'id' => ['required',],
+                        'en' => ['nullable',],
+                    ]),
             ])->columns(1);
     }
 
@@ -84,9 +144,13 @@ class NewsResource extends Resource
     {
         return $table
             ->columns([
-                SpatieMediaLibraryImageColumn::make('featured_image'),
+                SpatieMediaLibraryImageColumn::make('featured_image')
+                    ->collection('featured_image'),
                 TextColumn::make('title'),
-                ToggleColumn::make('published')
+                TextColumn::make('excerpt'),
+                ToggleColumn::make('published'),
+                TextColumn::make('published_at')
+                    ->dateTime()
             ])
             ->filters([
                 //

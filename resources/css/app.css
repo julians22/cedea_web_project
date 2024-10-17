@@ -14,6 +14,7 @@
 
     html {
         scroll-behavior: smooth;
+        color-scheme: light !important;
     }
 
     /*   Open state of the dialog  */
@@ -68,6 +69,10 @@
 }
 
 @layer components {
+    .font-cedea {
+        @apply font-montserrat font-semibold;
+    }
+
     /* Base layout Component */
     /*?
     :before = ribbon point

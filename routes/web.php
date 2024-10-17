@@ -1,12 +1,15 @@
 <?php
 
 use App\Http\Controllers\LocaleController;
+use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
 use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
+use App\Http\Controllers\RecipeController;
+use App\Http\Controllers\SearchController;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Models\PostNews;
@@ -54,7 +57,7 @@ Route::group([
     )
         ->name('recipe');
 
-    Route::view('recipe/detail', 'recipe-detail')
+    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
         ->name('recipe.detail');
 
     Route::get(
@@ -63,12 +66,18 @@ Route::group([
     )->name('news');
 
     Route::get(
-        'news/$slug',
+        'news/{post}',
         [NewsController::class, 'show']
-    )->name('news.detail');
+    )->name('news.show');
 
     Route::get('contact', [HomeController::class, 'contact'])
         ->name('contact');
+
+    Route::get('marketplace', MarketplaceController::class)
+        ->name('marketplace');
+
+    Route::get('search', SearchController::class)
+        ->name('search');
 
 
     Route::get('video_get', function () {

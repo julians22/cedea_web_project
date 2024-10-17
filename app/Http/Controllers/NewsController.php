@@ -9,14 +9,23 @@ class NewsController extends Controller
 {
     public function create()
     {
-        $posts = PostNews::paginate(6);
-        return redirect()->route('home');
-        // return view('news', compact('posts'));
+        $news = PostNews::paginate(6);
+        $banners = $news->take(3);
+
+        return view('news', compact(
+            'news',
+            'banners'
+        ));
     }
 
-    public function show($slug)
+    /**
+     * Display the specified resource.
+     *
+     * @param  string  $slug
+     * @return \Illuminate\Http\Response
+     */
+    public function show(PostNews $post)
     {
-        $post = PostNews::findBySlug($slug);
         return view('news-detail', compact('post'));
     }
 }
