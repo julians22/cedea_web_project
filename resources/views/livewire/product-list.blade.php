@@ -30,7 +30,7 @@
 
 <div>
     <div wire:ignore>
-        <x-video-player url="{{ asset('video/product.mp4') }}" />
+        <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
     </div>
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
