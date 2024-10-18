@@ -33,10 +33,10 @@
         <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
     </div>
 
-    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
+    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
-        <div class="bg-products relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+        <div class="bg-products min-h-72 minh relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
 
             <picture>
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
@@ -129,7 +129,7 @@
             </div>
 
             {{-- product grid --}}
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 ~scroll-mt-36/24" id="product-grid">
                 <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
@@ -142,11 +142,14 @@
                                 wire:key='{{ $item->slug }}'>
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
-                                    <img class="size-full aspect-square object-contain object-center"
+                                    <img class="size-ful aspect-square object-contain object-center lg:cursor-pointer"
                                         src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
-                                        {{-- TODO: THIS DATA SOMETIMES NULL --}} {{-- alt="{{
-                                        $item->getFirstMedia('packaging')->name
-                                        }}" --}}>
+                                        @click="()=>{
+                                            if(width<=1024) return
+                                            modalOpen=true;
+                                            $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                            }">
+
                                 </div>
 
                                 {{-- hover content --}}

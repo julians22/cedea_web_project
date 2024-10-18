@@ -20,7 +20,7 @@
                     </div>
                 </form>
                 <p class="pt-4 text-center text-white">
-                    Berikut hasil pencarian untuk Sosis Kentang Korea:
+                    Berikut hasil pencarian untuk {{ request()->query('query') }}:
                 </p>
             </div>
         </div>
@@ -54,7 +54,11 @@
 
                 @foreach ($products as $item)
                     <x-search.item :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')->name" :title="$item->name" :desc="$item->description"
-                        :url="route('product', ['keyword' => $item->name, 'brand' => $item->brand->slug])" />
+                        :url="route('product', [
+                            '#product-grid',
+                            'keyword' => $item->name,
+                            'brand' => $item->brand->slug,
+                        ])" />
                 @endforeach
 
             </x-search.item-group>

@@ -35,7 +35,7 @@
     </div>
 
     <div @class([
-        'md:col-start-2 min-h-72 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
+        'md:col-start-2 ~min-h-72/96 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
     ])>
         <img class="w-full" src="{{ $imageUrl }}" alt="">
     </div>
