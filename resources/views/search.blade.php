@@ -20,7 +20,7 @@
                     </div>
                 </form>
                 <p class="pt-4 text-center text-white">
-                    Berikut hasil pencarian untuk {{ request()->query('query') }}:
+                    Berikut hasil pencarian untuk <span class="font-semibold">{{ request()->query('query') }}</span>:
                 </p>
             </div>
         </div>
