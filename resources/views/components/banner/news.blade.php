@@ -1,6 +1,6 @@
 @props(['item'])
 
-<div class="relative grid h-full [&>*]:col-start-1 [&>*]:row-start-1">
+<div class="relative grid h-full grid-overlay">
     <picture
         class="after:size-full after:via-black/35 h-full overflow-hidden after:absolute after:bottom-0 after:block after:bg-gradient-to-t after:from-black/70 after:to-50%">
         <source class="h-full w-full" srcset="{{ $item->getFirstMediaUrl('featured_image') }}"

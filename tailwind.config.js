@@ -27,6 +27,7 @@ export default {
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 brick: "url('/resources/assets/brick-pattern.webp')",
+                shippo: "url('/resources/assets/shippo-pattern.png')",
             },
             boxShadow: {
                 nav: "0px 0px 18px 1px rgba(0,0,0,0.50);",

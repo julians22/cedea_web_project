@@ -97,7 +97,7 @@
     }
 
     .section-title {
-        @apply font-androgyne text-cedea-red-dark ~text-2xl/5xl ~mb-2/10;
+        @apply font-androgyne text-cedea-red-dark ~text-xl/5xl ~mb-2/10;
     }
 
     #recipe-swiper {
@@ -139,6 +139,18 @@
 
     .visi-misi-gradient {
         @apply bg-gradient-to-r from-white to-[#E6E7E8];
+    }
+
+    .grid-overlay {
+        @apply [&>*]:col-start-1 [&>*]:row-start-1;
+    }
+
+    .contact-form-wrapper > div:has(:is(input, textarea)) {
+        @apply flex flex-col;
+
+        > :is(input, textarea) {
+            @apply border-2 text-black border-gray-500/50 placeholder:text-gray-500/50 pl-4 py-1 font-normal;
+        }
     }
 }
 

@@ -10,6 +10,7 @@ use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
+use App\Livewire\Contact;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Models\PostNews;
@@ -70,7 +71,7 @@ Route::group([
         [NewsController::class, 'show']
     )->name('news.show');
 
-    Route::get('contact', [HomeController::class, 'contact'])
+    Route::get('contact', Contact::class)
         ->name('contact');
 
     Route::get('marketplace', MarketplaceController::class)

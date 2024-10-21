@@ -20,7 +20,7 @@
                 'md:~pl-0/1' => $gradient,
                 'md:~pr-0/1 md:col-start-2' => !$gradient,
             ])>
-                <h2 {{ $attributes->twMergeFor('title', 'font-androgyne text-left text-cedea-red-dark ~text-xl/5xl') }}>
+                <h2 {{ $attributes->twMergeFor('title', 'section-title text-left text-cedea-red-dark ') }}>
                     {{ $title }}
                 </h2>
 
