@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Models\Message;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
@@ -17,21 +18,28 @@ class Contact extends Component
 
     public function rules()
     {
-        return [
+        $base =   [
             'name' => 'required|max:255',
             'email' => 'required|email|max:255',
-
-            'message' => 'required|min:3',
         ];
+
+        if (!($this->tabIndex > 0)) {
+            $base = array_merge($base, [
+                'subject'  => 'required|max:255',
+                'message' => 'required|min:3'
+            ]);
+        }
+
+        return $base;
     }
 
-    public function messages()
-    {
-        return [
-            'message.required' => 'The :attribute are missing.',
-            'message.min' => 'The :attribute is too short.',
-        ];
-    }
+    // public function messages()
+    // {
+    //     return [
+    //         'message.required' => 'The :attribute are missing.',
+    //         'message.min' => 'The :attribute is too short.',
+    //     ];
+    // }
 
     // public function validationAttributes()
     // {
@@ -47,12 +55,21 @@ class Contact extends Component
             return;
         }
 
+        $this->reset();
+
         $this->tabIndex = $index;
     }
 
     function send()
     {
         $this->validate();
+
+        Message::create([
+            'name' => $this->name,
+            'email' => $this->email,
+            'subject' => $this->subject,
+            'message' => $this->message
+        ]);
 
         $this->dispatch('message-sent');
 
