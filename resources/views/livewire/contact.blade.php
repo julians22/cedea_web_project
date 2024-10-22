@@ -158,9 +158,11 @@
                         @click="messageSent=false" />
 
                     <div class="flex flex-col items-start justify-center gap-12 rounded-md px-10 py-14 font-medium">
-                        <h2 class="section-title" :capitalize='false' align='left'>
+
+                        <h2 class="section-title">
                             Terima kasih sudah menghubungi kami, pesan anda sedang kami proses.
                         </h2>
+
                         <button
                             class="h-10 w-40 cursor-pointer items-center justify-center overflow-hidden rounded-full border-none bg-cedea-red-500 text-white shadow-md"
                             type="button" @click="messageSent=false">
