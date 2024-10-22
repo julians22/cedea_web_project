@@ -68,12 +68,13 @@ class Contact extends Component
             'name' => $this->name,
             'email' => $this->email,
             'subject' => $this->subject,
-            'message' => $this->message
+            'message' => $this->message,
+            'type' => $this->tabIndex == 0 ? 'question' : 'visit',
         ]);
 
         $this->dispatch('message-sent');
 
-        $this->reset();
+        $this->resetExcept('tabIndex');
     }
 
     public function render()

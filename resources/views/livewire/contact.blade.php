@@ -1,4 +1,5 @@
-<section class="min-h-dvh bg-cedea-red bg-shippo bg-left-top bg-repeat bg-blend-multiply ~py-16/36">
+<section class="min-h-dvh bg-cedea-red bg-shippo bg-left-top bg-repeat bg-blend-multiply ~py-16/36"
+    x-data="{ messageSent: false }" x-on:message-sent="messageSent=true">
 
     <div class="lg:grid-overlay grid max-lg:gap-y-8">
         <div class="container grid gap-4 text-white lg:grid-cols-2">
@@ -53,19 +54,21 @@
                 <div class="col-start-2 bg-white"></div>
             </div>
 
-            <div class="container pointer-events-none grid text-cedea-red-500 lg:grid-cols-2">
-                <div class="pointer-events-auto bg-white ~p-4/8 lg:col-start-2">
+            <div class="container pointer-events-none grid text-cedea-red-500 lg:grid-cols-2" x-show="!messageSent"
+                x-cloak>
+
+                <div class="pointer-events-auto relative bg-white ~p-4/8 lg:col-start-2">
                     <h2 class="section-title">Tinggalkan Pesan</h2>
 
                     <div class="mb-8 flex gap-4 max-lg:flex-col">
-                        <button wire:loading.attr="disabled" wire:click='handleTabChange(0)'
+                        <button type="button" wire:loading.attr="disabled" wire:click='handleTabChange(0)'
                             @class([
                                 'px-3 py-1 transition-all rounded-full border-2 border-cedea-red-500',
                                 'bg-cedea-red-500 text-white' => $tabIndex == 0,
                             ])>
                             Pertanyaan Umum
                         </button>
-                        <button wire:loading.attr="disabled" wire:click='handleTabChange(1)'
+                        <button type="button" wire:loading.attr="disabled" wire:click='handleTabChange(1)'
                             @class([
                                 'px-3 py-1 transition-all rounded-full border-2 border-cedea-red-500',
                                 'bg-cedea-red-500 text-white' => $tabIndex == 1,
@@ -125,10 +128,48 @@
                         <button wire:loading.attr="disabled" type="submit" @class([
                             'px-4 rounded-full w-fit border-2 border-cedea-red-500',
                             true => 'bg-cedea-red-500 text-white',
-                        ])>Kirim</button>
+                        ])>
+                            <span class="items-center justify-center" wire:loading.flex wire:target="send">
+                                <svg class="-ml-1 mr-3 h-5 w-5 animate-spin text-white" data-motion-id="svg 2"
+                                    xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                                    <circle class="opacity-25" cx="12" cy="12" r="10"
+                                        stroke="currentColor" stroke-width="4">
+                                    </circle>
+                                    <path class="opacity-75" fill="currentColor"
+                                        d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
+                                    </path>
+                                </svg>
+                                Processing...
+                            </span>
+
+                            <span wire:loading.remove wire:target="send">
+                                Kirim
+                            </span>
+                        </button>
+                    </div>
+
+                </div>
+            </div>
+
+            {{-- pop-up --}}
+            <div class="container pointer-events-none grid lg:grid-cols-2" x-show="messageSent" x-cloak>
+                <div class="pointer-events-auto relative lg:col-start-2">
+                    <x-lucide-circle-x class="size-12 absolute right-4 top-6 cursor-pointer rounded-full"
+                        @click="messageSent=false" />
+
+                    <div class="flex flex-col items-start justify-center gap-12 rounded-md px-10 py-14 font-medium">
+                        <h2 class="section-title" :capitalize='false' align='left'>
+                            Terima kasih sudah menghubungi kami, pesan anda sedang kami proses.
+                        </h2>
+                        <button
+                            class="h-10 w-40 cursor-pointer items-center justify-center overflow-hidden rounded-full border-none bg-cedea-red-500 text-white shadow-md"
+                            type="button" @click="messageSent=false">
+                            Tutup Pesan
+                        </button>
                     </div>
                 </div>
             </div>
+            {{-- pop-up end --}}
         </form>
     </div>
 </section>
