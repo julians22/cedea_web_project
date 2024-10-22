@@ -15,8 +15,12 @@
     "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
+  "resources/assets/shippo-pattern.png": {
+    "file": "assets/shippo-pattern-BlzYwU9H.png",
+    "src": "resources/assets/shippo-pattern.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-7AOqw01n.css",
+    "file": "assets/app-BBH1TKl_.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
