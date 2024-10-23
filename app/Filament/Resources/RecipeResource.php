@@ -23,6 +23,7 @@ use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
+use FilamentTiptapEditor\TiptapEditor;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\SoftDeletingScope;
 
@@ -69,14 +70,6 @@ class RecipeResource extends Resource
                                     ])
                                     ->translatable()
                                     ->default([]),
-
-                                RichEditor::make('content')
-                                    ->label(__('content'))
-                                    ->translatable(true, null, [
-                                        'id' => ['required', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
-                                        // 'ko' => ['nullable', 'string', 'max:255'],
-                                    ]),
                             ]
                         ),
                         Section::make([
@@ -89,14 +82,32 @@ class RecipeResource extends Resource
                                     'makan-siang' => 'Makan Siang',
                                     'makan-malam' => 'Makan Malam',
                                     'snack' => 'Snack',
-                                ]),
+                                ])
+                                ->required(),
+
+                            Select::make('product')
+                                ->relationship('product')
+                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->searchable(['name'])
+                                ->nullable(),
+
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success')
                                 ->offColor('danger'),
+
+
                         ]),
                     ]
-                )
+                ),
+
+                TiptapEditor::make('content')
+                    ->profile('default')
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp',])
+                    ->translatable(true, null, [
+                        'id' => ['required',],
+                        'en' => ['nullable',],
+                    ]),
             ])->columns(1);
     }
 

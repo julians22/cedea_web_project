@@ -30,12 +30,14 @@
 
 <div>
     <div wire:ignore>
-        <x-video-player url="{{ asset('video/product.mp4') }}" />
+        <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
     </div>
 
-    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }">
+    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
+
         {{-- Brand --}}
-        <div class="bg-products relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+        <div class="bg-products min-h-72 minh relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+
             <picture>
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
                     media="(min-width: 1024px)" />
@@ -44,10 +46,9 @@
             </picture>
 
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
-                <h1 class="section-title">Produk</h1>
+                <h1 class="section-title">{{ __('product.product.title') }}</h1>
 
-                <p class="~text-sm/base">Jelajahi kekayaan laut dengan rangkaian
-                    produk terbaik dari Cedea Seafood!</p>
+                <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
@@ -75,17 +76,18 @@
                         <input
                             class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
                             id="product-search" wire:model.live='keyword' type="search"
-                            placeholder="Cari produk di sini" />
+                            placeholder="{{ __('Search product here') }}" />
                     </div>
                 </div>
 
                 <div class="flex flex-col gap-y-4 uppercase">
                     @foreach ($this->brandWithUniqueCategories as $brand)
                         <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
-                            <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')" @class([
-                                '~text-lg/2xl',
-                                'text-cedea-red-dark' => $brand->slug == $activeBrand,
-                            ])>
+                            <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')"
+                                @class([
+                                    '~text-lg/2xl',
+                                    'text-cedea-red-dark' => $brand->slug == $activeBrand,
+                                ])>
                                 {{ $brand->name }}</p>
                             <div @class([
                                 'flex flex-col gap-1 overflow-auto transition-all duration-1000',
@@ -100,7 +102,7 @@
                                         'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
                                         'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
                                     ])>
-                                        All
+                                        {{ __('All') }}
                                     </div>
                                 </label>
 
@@ -127,7 +129,7 @@
             </div>
 
             {{-- product grid --}}
-            <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-4 ~scroll-mt-36/24" id="product-grid">
                 <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
@@ -140,11 +142,14 @@
                                 wire:key='{{ $item->slug }}'>
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
-                                    <img class="size-full aspect-square object-contain object-center"
+                                    <img class="size-ful aspect-square object-contain object-center lg:cursor-pointer"
                                         src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
-                                        {{-- TODO: THIS DATA SOMETIMES NULL --}} {{-- alt="{{
-                                        $item->getFirstMedia('packaging')->name
-                                        }}" --}}>
+                                        @click="()=>{
+                                            if(width<=1024) return
+                                            modalOpen=true;
+                                            $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                            }">
+
                                 </div>
 
                                 {{-- hover content --}}
@@ -209,14 +214,7 @@
 
 
         <x-modal-product-detail>
-            <button
-                class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
-                @click="modalOpen=false">
-                <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
-                    stroke-width="0.5" stroke="currentColor">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
-                </svg>
-            </button>
+
 
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
@@ -227,12 +225,11 @@
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
                             <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
                             <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                href="{{ $activeProduct->buy_link }}">Beli
-                                sekarang</a>
+                                href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>
 
-                        <div class="flex grow basis-2/5 flex-col gap-y-4 text-justify">
-                            <span>{!! $activeProduct->description !!}</span>
+                        <div class="gap-y-4 text-justify md:flex md:grow md:basis-2/5 md:flex-col">
+                            <div>{!! $activeProduct->description !!}</div>
 
                             <div>
                                 {{ $activeProduct->no_bpom }}
@@ -261,7 +258,7 @@
                             @endif
 
                             <div>
-                                {{ __('Should be stored at -18°C (0°F) or lower') }}
+                                {{ __('product.froze') }}
                             </div>
 
                         </div>
@@ -306,36 +303,34 @@
 
 
     {{-- recipe --}}
-    {{-- <section class="container mt-8" wire:ignore>
-        <h2 class="section-title">Kreasi Resep <span class="font-montserrat font-semibold">Cedea</span></h2>
+    <section class="container mt-8" wire:ignore>
+        <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
-        <p>Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari
-            Cedea Seafood! Mulai dari
-            sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.</p>
+        <p>{{ __('product.creation.detail') }}</p>
 
         <div>
             @php
                 $times = [
                     [
-                        'label' => 'Sarapan',
+                        'label' => __('meal.Sarapan'),
                         'icon' => asset('img/icons/time/sarapan.svg'),
                         'background' => asset('img/time/sarapan.jpg'),
                         'recipe_type' => 'sarapan',
                     ],
                     [
-                        'label' => 'Makan Siang',
+                        'label' => __('meal.Makan Siang'),
                         'icon' => asset('img/icons/time/makan_siang.svg'),
                         'background' => asset('img/time/makan_siang.jpg'),
                         'recipe_type' => 'makan-siang',
                     ],
                     [
-                        'label' => 'Makan Malam',
+                        'label' => __('meal.Makan Malam'),
                         'icon' => asset('img/icons/time/makan_malam.svg'),
                         'background' => asset('img/time/makan_malam.jpg'),
                         'recipe_type' => 'makan-malam',
                     ],
                     [
-                        'label' => 'Snack',
+                        'label' => __('meal.Snack'),
                         'icon' => asset('img/icons/time/snack.svg'),
                         'background' => asset('img/time/snack.jpg'),
                         'recipe_type' => 'snack',
@@ -345,11 +340,11 @@
 
             <x-meals-container>
                 @foreach ($times as $time)
-                    <a href="{{ route('recipe', ['recipe_type' => $time['recipe_type']]) }}">
+                    <a href="{{ route('recipe', ['type' => $time['recipe_type']]) }}">
                         <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
                     </a>
                 @endforeach
             </x-meals-container>
         </div>
-    </section> --}}
+    </section>
 </div>

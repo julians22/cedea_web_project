@@ -15,24 +15,28 @@
     "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
     "src": "resources/assets/fonts/AndrogyneMedium.woff2"
   },
+  "resources/assets/shippo-pattern.png": {
+    "file": "assets/shippo-pattern-BlzYwU9H.png",
+    "src": "resources/assets/shippo-pattern.png"
+  },
   "resources/css/app.css": {
-    "file": "assets/app-BFqxNuO1.css",
+    "file": "assets/app-BBLIki0B.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-kOWe-uzG.css",
+    "file": "assets/theme-BCCp8lQ4.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CMqJ7oXf.js",
+    "file": "assets/app-hIS9nLFt.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-BodASFnk.js",
+    "file": "assets/swiper-home-DOo6GEHe.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
     "isEntry": true,

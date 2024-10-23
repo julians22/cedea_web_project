@@ -14,6 +14,7 @@
 
     html {
         scroll-behavior: smooth;
+        color-scheme: light !important;
     }
 
     /*   Open state of the dialog  */
@@ -68,6 +69,10 @@
 }
 
 @layer components {
+    .font-cedea {
+        @apply font-montserrat font-semibold;
+    }
+
     /* Base layout Component */
     /*?
     :before = ribbon point
@@ -92,7 +97,7 @@
     }
 
     .section-title {
-        @apply font-androgyne text-cedea-red-dark ~text-2xl/5xl ~mb-2/10;
+        @apply font-androgyne text-cedea-red-dark ~text-xl/5xl ~mb-2/10;
     }
 
     #recipe-swiper {
@@ -104,6 +109,21 @@
             --swiper-navigation-color: #ffffff;
             */
         /* } */
+
+        .swiper-slide {
+            height: auto;
+            flex-direction: column;
+            align-items: flex-end;
+
+            img {
+                display: block;
+                width: 100%;
+                height: 100%;
+                object-fit: contain;
+                object-position: bottom;
+            }
+        }
+
         .swiper-button-next {
             --swiper-navigation-top-offset: 70%;
             --swiper-navigation-sides-offset: 50px;
@@ -115,12 +135,22 @@
                 --swiper-navigation-sides-offset: 150px;
             }
         }
-
-        /* Navigation font end */
     }
 
     .visi-misi-gradient {
         @apply bg-gradient-to-r from-white to-[#E6E7E8];
+    }
+
+    .grid-overlay {
+        @apply [&>*]:col-start-1 [&>*]:row-start-1;
+    }
+
+    .contact-form-wrapper > div:has(:is(input, textarea)) {
+        @apply flex flex-col;
+
+        > :is(input, textarea) {
+            @apply border-2 text-black border-gray-500/50 placeholder:text-gray-500/50 pl-4 py-1 font-normal;
+        }
     }
 }
 

@@ -9,7 +9,7 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 
-class marketplace extends Model implements HasMedia, Sortable
+class Marketplace extends Model implements HasMedia, Sortable
 {
     use HasFactory, SortableTrait, InteractsWithMedia;
 

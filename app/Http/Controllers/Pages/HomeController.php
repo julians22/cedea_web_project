@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Pages;
 
 use App\Http\Controllers\Controller;
+use App\Models\Banner;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
 use App\Models\Products\Brand;
@@ -18,10 +19,12 @@ class HomeController extends Controller
     {
         Meta::prependTitle('Home');
 
+        $banners = Banner::with('media')->orderBy('order_column')->where('enable', true)->get();
+
         // $brands = Brand::orderBy('order_column')->get();
         // $articles = PostNews::with('media')->where('published', true)->take(2)->get();
         // $recipes = PostRecipes::with('media')->where('published', true)->take(2)->get();
-        return view('welcome');
+        return view('welcome', compact('banners'));
     }
 
     function product()

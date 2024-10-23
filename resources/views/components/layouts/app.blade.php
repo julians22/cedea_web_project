@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ str_replace('_', '-', app()->getLocale()) }}">
+<html data-theme="light" lang="{{ str_replace('_', '-', app()->getLocale()) }}">
 
 <head>
     <meta charset="utf-8">
@@ -57,7 +57,8 @@
                     'https://www.googletagmanager.com/gtm.js?id=' + i + dl;
                 f.parentNode.insertBefore(j, f);
 
-            })(window, document, 'script', 'dataLayer', 'GTM-TJJ7HQWD');
+            })
+            (window, document, 'script', 'dataLayer', 'GTM-TJJ7HQWD');
         </script>
 
         <!-- End Google Tag Manager -->
@@ -67,6 +68,7 @@
 </head>
 
 <body class="font-poppins antialiased">
+
     @production
         <!-- Google Tag Manager (noscript) -->
 
@@ -82,6 +84,7 @@
     <x-footer />
 
     @stack('after-scripts')
+
     @livewireScriptConfig
 
 </body>
