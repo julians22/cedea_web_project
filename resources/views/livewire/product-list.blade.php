@@ -166,7 +166,7 @@
                                             alt="">
 
                                         <div class="text-pretty text-cedea-red-dark">
-                                            {{ $item->name }}
+                                            {{ implode(' ', [$item->name, $item->size]) }}
                                             {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                         </div>
 
@@ -219,7 +219,8 @@
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
                     <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
-                    <h2 class="mt-2 uppercase ~text-xl/4xl">{{ $activeProduct->name }}</h2>
+                    <h2 class="mt-2 uppercase ~text-xl/4xl">
+                        {{ implode(' ', [$activeProduct->name, $activeProduct->size]) }}</h2>
 
                     <div class="mt-8 flex gap-6 max-lg:flex-col">
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
