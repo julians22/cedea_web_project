@@ -97,12 +97,21 @@ class ProductResource extends Resource
                             TextInput::make('video_link')
                                 ->hidden(fn(Get $get): bool => ! $get('have_video')),
 
-                            TextInput::make('name')
-                                ->label(__('name'))
-                                ->translatable(true, null, [
-                                    'id' => ['required', 'string', 'max:255'],
-                                    'en' => ['nullable', 'string', 'max:255'],
-                                ]),
+                            Split::make([
+                                TextInput::make('name')
+                                    ->label(__('name'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                    ]),
+                                TextInput::make('size')
+                                    ->label(__('size'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                    ])->grow(false),
+                            ])->from('md'),
+
                             RichEditor::make('description')
                                 ->label(__('description'))
                                 ->translatable(true, null, [

@@ -118,7 +118,8 @@ class NewsResource extends Resource
                                 ->translatable(false)
                                 ->searchable(['name'])
                                 ->preload(),
-                            SpatieTagsInput::make('tags'),
+                            SpatieTagsInput::make('tags')
+                                ->type('news'),
 
                             DateTimePicker::make('published_at')
                                 ->required()
