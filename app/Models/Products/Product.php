@@ -27,7 +27,7 @@ class Product extends Model implements HasMedia
         HasTranslations,
         Searchable;
 
-    public $translatable = ['name', 'description', 'packaging'];
+    public $translatable = ['name', 'size', 'description', 'packaging'];
 
     /**
      * The attributes that aren't mass assignable.

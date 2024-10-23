@@ -14,6 +14,7 @@ use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
 class PostRecipes extends Model implements HasMedia
@@ -22,6 +23,7 @@ class PostRecipes extends Model implements HasMedia
         HasSlug,
         InteractsWithMedia,
         HasTranslations,
+        HasTags,
         Searchable;
 
     public $translatable = ['title', 'content', 'ingredients'];

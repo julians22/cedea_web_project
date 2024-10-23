@@ -14,6 +14,7 @@ use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\Split;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -90,6 +91,9 @@ class RecipeResource extends Resource
                                 ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                                 ->searchable(['name'])
                                 ->nullable(),
+
+                            SpatieTagsInput::make('tags')
+                                ->type('recipe'),
 
                             Toggle::make('published')
                                 ->default(true)

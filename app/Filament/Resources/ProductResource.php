@@ -43,6 +43,30 @@ class ProductResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    /**
+     * Implode array of strings to comma separated list with "and" before last element of array
+     *
+     * Example [1, 2, 3] => "1, 2 and 3"
+     *
+     * @param array $values
+     * @return string | array
+     */
+    protected static function verboseImplode($values, $prefix = null)
+    {
+        if (count($values) === 0) {
+            return [];
+        }
+
+        $prefix = $prefix ? $prefix . ' : ' : '';
+
+        if (count($values) > 1) {
+            $last = array_pop($values);
+            return $prefix . implode(', ', $values) . ' & ' . $last;
+        }
+
+        return $prefix . implode($values);
+    }
+
     public static function getNavigationGroup(): ?string
     {
         return __('Products');
@@ -73,12 +97,21 @@ class ProductResource extends Resource
                             TextInput::make('video_link')
                                 ->hidden(fn(Get $get): bool => ! $get('have_video')),
 
-                            TextInput::make('name')
-                                ->label(__('name'))
-                                ->translatable(true, null, [
-                                    'id' => ['required', 'string', 'max:255'],
-                                    'en' => ['nullable', 'string', 'max:255'],
-                                ]),
+                            Split::make([
+                                TextInput::make('name')
+                                    ->label(__('name'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                    ]),
+                                TextInput::make('size')
+                                    ->label(__('size'))
+                                    ->translatable(true, null, [
+                                        'id' => ['required', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                    ])->grow(false),
+                            ])->from('md'),
+
                             RichEditor::make('description')
                                 ->label(__('description'))
                                 ->translatable(true, null, [
@@ -162,13 +195,13 @@ class ProductResource extends Resource
                     ->multiple()
                     ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
                     ->indicateUsing(function (array $data): array | string {
-                        return implode(
-                            ' & ',
-                            Brand::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
+                        return self::verboseImplode(
+                            Brand::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray(),
+                            'Brands'
                         );
                     })
                     ->preload(),
-                SelectFilter::make('categorie')
+                SelectFilter::make('categories')
                     ->relationship('categories', 'name')
                     ->searchable()
                     ->multiple()
