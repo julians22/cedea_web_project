@@ -80,4 +80,38 @@ class PostRecipes extends Model implements HasMedia
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
     }
+
+    /**
+     * Filter out empty or disallowed translations
+     * Modified to filter out empty array
+     *
+     * @param mixed $value
+     * @param string|null $locale
+     * @param array|null $allowedLocales
+     * @return bool
+     */
+    protected function filterTranslations(mixed $value = null, string $locale = null, array $allowedLocales = null): bool
+    {
+        if ($value === null) {
+            return false;
+        }
+
+        if ($value === '') {
+            return false;
+        }
+
+        if ($value === []) {
+            return false;
+        }
+
+        if ($allowedLocales === null) {
+            return true;
+        }
+
+        if (! in_array($locale, $allowedLocales)) {
+            return false;
+        }
+
+        return true;
+    }
 }
