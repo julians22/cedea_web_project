@@ -74,22 +74,22 @@ Route::group([
     Route::get('contact', Contact::class)
         ->name('contact');
 
-    Route::get('marketplace', MarketplaceController::class)
-        ->name('marketplace');
+    // Route::get('marketplace', MarketplaceController::class)
+    //     ->name('marketplace');
 
     Route::get('search', SearchController::class)
         ->name('search');
 
 
-    Route::get('video_get', function () {
+    // Route::get('video_get', function () {
 
-        $embed = new Embed();
+    //     $embed = new Embed();
 
-        //Load any url:
-        $info = $embed->get('https://www.youtube.com/watch?v=W9cAe7SUTyo');
-        // return $info->image;
-        dd($info);
-    });
+    //     //Load any url:
+    //     $info = $embed->get('https://www.youtube.com/watch?v=W9cAe7SUTyo');
+    //     // return $info->image;
+    //     dd($info);
+    // });
 });
 
 Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
