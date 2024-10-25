@@ -36,7 +36,7 @@ class NewsList extends Component
                 ->when(
                     $this->keyword,
                     function ($q) {
-                        return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
+                        return $q->searchTranslated('title', $this->keyword);
                     }
                 )
                 ->orderBy('published_at', 'desc')
