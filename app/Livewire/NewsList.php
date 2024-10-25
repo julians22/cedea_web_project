@@ -33,13 +33,13 @@ class NewsList extends Component
     {
         return view('livewire.news-list', [
             'news' => PostNews::with(['media', 'categories'])
-                ->orderby
                 ->when(
                     $this->keyword,
                     function ($q) {
                         return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
                     }
                 )
+                ->orderBy('published_at', 'desc')
                 ->paginate(6),
         ]);
     }
