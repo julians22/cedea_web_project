@@ -95,7 +95,10 @@ class NewsResource extends Resource
                                         'activity' => 'Activity',
                                         'article' => 'Article/blog',
                                     ]
-                                ),
+                                )->selectablePlaceholder(false)
+
+
+                                ->required(),
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success'),
