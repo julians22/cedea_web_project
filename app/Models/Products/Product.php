@@ -44,6 +44,7 @@ class Product extends Model implements HasMedia
     protected $casts = [
         'packaging' => 'array',
         'have_video' => 'boolean',
+        'video' => 'array'
     ];
 
     /**

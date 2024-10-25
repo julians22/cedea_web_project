@@ -26,7 +26,7 @@ class PostRecipes extends Model implements HasMedia
         HasTags,
         Searchable;
 
-    public $translatable = ['title', 'content', 'ingredients'];
+    public $translatable = ['title', 'content', 'ingredients', 'description'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -37,6 +37,7 @@ class PostRecipes extends Model implements HasMedia
 
     protected $casts = [
         'published' => 'boolean',
+        'video' => 'array'
     ];
 
     /**

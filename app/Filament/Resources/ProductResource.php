@@ -7,9 +7,11 @@ use App\Models\Products\Brand;
 use App\Models\Products\Category;
 use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
+use Awcodes\Matinee\Matinee;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
+use Filament\Forms\Components\Actions\Action;
 use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
@@ -94,7 +96,8 @@ class ProductResource extends Resource
 
                             Toggle::make('have_video')
                                 ->live(),
-                            TextInput::make('video_link')
+
+                            Matinee::make('video')
                                 ->hidden(fn(Get $get): bool => ! $get('have_video')),
 
                             Split::make([
@@ -107,7 +110,7 @@ class ProductResource extends Resource
                                 TextInput::make('size')
                                     ->label(__('size'))
                                     ->translatable(true, null, [
-                                        'id' => ['required', 'string', 'max:255'],
+                                        'id' => ['nullable', 'string', 'max:255'],
                                         'en' => ['nullable', 'string', 'max:255'],
                                     ])->grow(false),
                             ])->from('md'),
@@ -119,6 +122,17 @@ class ProductResource extends Resource
                                     'en' => ['nullable', 'string'],
                                 ]),
 
+                            TextInput::make('buy_link')
+                                ->url()
+                                ->suffixAction(
+                                    fn(?string $state): Action =>
+                                    Action::make('visit')
+                                        ->icon('heroicon-m-globe-alt')
+                                        ->url(
+                                            filled($state) ? "{$state}" : null,
+                                            shouldOpenInNewTab: true,
+                                        ),
+                                ),
                             TextInput::make('no_bpom')
                                 // ->required()
                                 ->label(__('no_bpom')),

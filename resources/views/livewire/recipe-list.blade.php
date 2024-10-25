@@ -73,7 +73,7 @@
             ];
         @endphp --}}
         @foreach ($recipes as $recipe)
-            <x-recipe-item :name="$recipe->title" :product="$recipe->product" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')" :description="$recipe->slug" />
+            <x-recipe-item :name="$recipe->title" :product="$recipe->product" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')" :description="$recipe->description" />
         @endforeach
     </section>
 

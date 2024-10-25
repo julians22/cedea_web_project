@@ -8,7 +8,7 @@
                 <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
 
                 <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
-                    href="#">Beli sekarang</a>
+                    target="_blank" href="{{ $recipe->product->buy_link }}">Beli sekarang</a>
 
             </div>
             <div class="flex flex-col gap-y-8">

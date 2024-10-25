@@ -6,6 +6,7 @@ use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\PostRecipes;
 use App\Models\Recipe;
+use Awcodes\Matinee\Matinee;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use Filament\Forms;
@@ -16,9 +17,11 @@ use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\SpatieTagsInput;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
@@ -55,6 +58,13 @@ class RecipeResource extends Resource
                                         // 'ko' => ['nullable', 'string', 'max:255'],
                                     ]),
 
+                                Textarea::make('description')
+                                    ->translatable(true, null, [
+                                        'id' => ['nullable', 'string', 'max:255'],
+                                        'en' => ['nullable', 'string', 'max:255'],
+                                        // 'ko' => ['nullable', 'string', 'max:255'],
+                                    ]),
+
                                 Repeater::make('ingredients')
                                     ->schema([
                                         TextInput::make('title'),
@@ -77,6 +87,7 @@ class RecipeResource extends Resource
                             SpatieMediaLibraryFileUpload::make('featured_image')
                                 ->required()
                                 ->collection('featured_image'),
+                            Matinee::make('video'),
                             Select::make('recipe_type')
                                 ->options([
                                     'sarapan' => 'Sarapan',

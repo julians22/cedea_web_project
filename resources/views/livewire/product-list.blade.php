@@ -229,7 +229,7 @@
                                 href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>
 
-                        <div class="gap-y-4 text-justify md:flex md:grow md:basis-2/5 md:flex-col">
+                        <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
                             <div>{!! $activeProduct->description !!}</div>
 
                             <div>
@@ -266,15 +266,13 @@
 
                         @if ($activeProduct->have_video)
                             <div class="flex basis-2/5 flex-col items-center gap-y-4">
-                                <div class="relative overflow-hidden rounded-xl">
-                                    <img class="h-full w-full object-center"
-                                        src="{{ asset('img/video-thumb-small-placeholder.jpg') }}" alt="">
-                                    <img class="size-1/4 absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2"
-                                        src="{{ asset('img/icons/play.svg') }}" alt="">
-                                </div>
-
-                                <a
-                                    class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black">Tonton
+                                <template x-if="modalOpen">
+                                    <div class="relative aspect-video w-full overflow-hidden rounded-lg">
+                                        <x-matinee::embed :data="$activeProduct->video_link" />
+                                    </div>
+                                </template>
+                                <a class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black"
+                                    target="_blank" href="{{ $activeProduct->video_link['url'] }}">Tonton
                                     videonya</a>
                             </div>
                         @endif

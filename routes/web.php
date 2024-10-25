@@ -82,9 +82,6 @@ Route::group([
 
 
     Route::get('video_get', function () {
-        $recipe = PostRecipes::first();
-
-        return $recipe->ingredients;
 
         $embed = new Embed();
 
