@@ -15,6 +15,7 @@
         "bezhansalleh/filament-language-switch": "^3.1",
         "butschster/meta-tags": "^3.1",
         "codezero/laravel-unique-translation": "^4.3",
+        "doctrine/dbal": "^3.9",
         "embed/embed": "^4.4",
         "filament/filament": "^3.2",
         "filament/spatie-laravel-media-library-plugin": "^3.2",

@@ -33,6 +33,7 @@ class NewsList extends Component
     {
         return view('livewire.news-list', [
             'news' => PostNews::with(['media', 'categories'])
+                ->orderby
                 ->when(
                     $this->keyword,
                     function ($q) {
