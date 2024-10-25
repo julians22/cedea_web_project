@@ -89,7 +89,13 @@ class NewsResource extends Resource
                                     'id' => ['nullable', 'string'],
                                     'en' => ['nullable', 'string'],
                                 ]),
-
+                            Select::make('type')
+                                ->options(
+                                    [
+                                        'activity' => 'Activity',
+                                        'article' => 'Article/blog',
+                                    ]
+                                ),
                             Toggle::make('published')
                                 ->default(true)
                                 ->onColor('success'),

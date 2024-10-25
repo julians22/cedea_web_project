@@ -12,7 +12,6 @@ class NewsList extends Component
     public $types = [
         'kegiatan',
         'artikel/blog',
-
     ];
 
     public $currentType;
