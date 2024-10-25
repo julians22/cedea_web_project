@@ -94,11 +94,11 @@ class Nav extends Component
                     //     'route' => '#',
                     //     'submenu' => []
                     // ],
-                    // [
-                    //     'label' => 'Belanja',
-                    //     'route' => '#',
-                    //     'submenu' => []
-                    // ],
+                    [
+                        'label' => 'Belanja',
+                        'route' => route('marketplace'),
+                        'submenu' => []
+                    ],
                     // [
                     //     'label' => 'Royalti Point',
                     //     'route' => '#',
