@@ -88,7 +88,6 @@ class Nav extends Component
                 'submenu' => [
                     ...$this->brands,
 
-
                     // [
                     //     'label' => 'Video',
                     //     'route' => '#',

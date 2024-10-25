@@ -42,7 +42,7 @@
 
         <section class="container flex">
             <div class="shrink grow-0 basis-1/2 max-md:hidden">
-                <img src="{{ asset('img/marketplace/phone.png') }}" alt="">
+                <img src="{{ asset('img/Marketplace/phone.png') }}" alt="">
             </div>
 
             {{-- marketplace --}}
