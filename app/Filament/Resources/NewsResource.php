@@ -96,8 +96,6 @@ class NewsResource extends Resource
                                         'article' => 'Article/blog',
                                     ]
                                 )->selectablePlaceholder(false)
-
-
                                 ->required(),
                             Toggle::make('published')
                                 ->default(true)
