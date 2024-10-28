@@ -130,7 +130,7 @@ class NewsResource extends Resource
                             DateTimePicker::make('published_at')
                                 ->required()
                                 ->default(now()) // Set the default value to the current datetime
-                                ->format('Y-m-d H:i:s')  // Set the datetime format if needed
+                            // ->format('Y-m-d H:i:s')  // Set the datetime format if needed
 
                         ]),
 
