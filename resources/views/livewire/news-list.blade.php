@@ -72,7 +72,7 @@
                 @endif
 
             @empty
-                <x-placeholder.empty label="{{ __('status.empty') }}" />
+                <x-placeholder.empty :text="__('status.empty')" />
             @endforelse
         </div>
     </div>
