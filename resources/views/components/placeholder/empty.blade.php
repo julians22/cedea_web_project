@@ -1,4 +1,4 @@
-{{-- @props(['text' => '']) --}}
+@props(['text' => ''])
 
 <div class="col-span-full flex flex-col items-center justify-center self-center justify-self-center">
     <lord-icon class="~size-20/40 inline-blsock" src="https://cdn.lordicon.com/rmkpgtpt.json" trigger="in" delay="500"
