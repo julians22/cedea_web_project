@@ -94,7 +94,7 @@ class NewsResource extends Resource
                                 ->options(
                                     NewsType::class
                                 )
-                                ->selectablePlaceholder(false)
+                                // ->selectablePlaceholder(false)
                                 ->required(),
                             Toggle::make('published')
                                 ->default(true)
