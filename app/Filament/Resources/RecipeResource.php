@@ -78,10 +78,12 @@ class RecipeResource extends Resource
                                                 TextInput::make('unit'),
                                                 TextInput::make('name'),
                                             ])
+
                                             ->label('ingredient list'),
+
                                     ])
-                                    ->translatable()
-                                    ->default([]),
+                                    ->default(null)
+                                    ->translatable(),
                             ]
                         ),
                         Section::make([
