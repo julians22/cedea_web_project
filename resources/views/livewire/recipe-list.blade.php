@@ -14,31 +14,34 @@
             {{ __('recipe.subheading') }}
         </p>
 
+        @use('App\Enums\RecipeType')
+
         @php
+
             $times = [
                 [
-                    'label' => __('meal.Sarapan'),
+                    'label' => __('meal.breakfast'),
                     'icon' => asset('img/icons/time/sarapan.svg'),
                     'background' => asset('img/time/sarapan.jpg'),
-                    'recipe_type' => 'sarapan',
+                    'recipe_type' => RecipeType::BREAKFAST->value,
                 ],
                 [
-                    'label' => __('meal.Makan Siang'),
+                    'label' => __('meal.lunch'),
                     'icon' => asset('img/icons/time/makan_siang.svg'),
                     'background' => asset('img/time/makan_siang.jpg'),
-                    'recipe_type' => 'makan-siang',
+                    'recipe_type' => RecipeType::LUNCH->value,
                 ],
                 [
-                    'label' => __('meal.Makan Malam'),
+                    'label' => __('meal.dinner'),
                     'icon' => asset('img/icons/time/makan_malam.svg'),
                     'background' => asset('img/time/makan_malam.jpg'),
-                    'recipe_type' => 'makan-malam',
+                    'recipe_type' => RecipeType::DINNER->value,
                 ],
                 [
-                    'label' => __('meal.Snack'),
+                    'label' => __('meal.snack'),
                     'icon' => asset('img/icons/time/snack.svg'),
                     'background' => asset('img/time/snack.jpg'),
-                    'recipe_type' => 'snack',
+                    'recipe_type' => RecipeType::SNACK->value,
                 ],
             ];
         @endphp
@@ -54,27 +57,11 @@
     </section>
 
     <section class="container flex flex-col ~gap-8/16 ~px-4/60">
-        {{-- @php
-            $recipes = [
-                [
-                    'product' => 'Cedea Salmon fish cake',
-                    'name' => 'Lorem Ipsum',
-                    'imagePath' => asset('placeholder/recipe-1.jpg'),
-                    'description' =>
-                        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut',
-                ],
-                [
-                    'product' => 'Cedea Salmon fish cake',
-                    'name' => 'Lorem Ipsum',
-                    'imagePath' => asset('placeholder/recipe-2.jpg'),
-                    'description' =>
-                        'Lorem ipsum dolor sit amet, consectetuer adipiscing elit, sed diam nonummy nibh euismod tincidunt ut laoreet dolore magna aliquam erat volutpat. Ut wisi enim ad minim veniam, quis nostrud exerci tation ullamcorper suscipit lobortis nisl ut',
-                ],
-            ];
-        @endphp --}}
-        @foreach ($recipes as $recipe)
+        @forelse ($recipes as $recipe)
             <x-recipe-item :name="$recipe->title" :product="$recipe->product" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')" :description="$recipe->description" />
-        @endforeach
+        @empty
+            <x-placeholder.empty text="{{ __('status.empty') }}" />
+        @endforelse
     </section>
 
     <section class="container relative overflow-visible font-medium" wire:ignore x-data="{ lengthFromLeft: 0 }"

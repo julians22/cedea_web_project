@@ -6,9 +6,9 @@
     'url' => null,
 ])
 
-<div class="flex gap-x-8 gap-y-4 max-md:flex-col">
+<div {{ $attributes->withoutTwMergeClasses()->twMerge('flex gap-x-8 gap-y-4 max-md:flex-col') }}>
     <a class="aspect-video overflow-hidden rounded-lg max-md:w-full md:h-28" href="{{ $url }}">
-        <img class="max-md:w-full" src="{{ $imageurl }}" alt="{{ $alt }}">
+        <img {{ $attributes->twMergeFor('image', 'max-md:w-full') }} src="{{ $imageurl }}" alt="{{ $alt }}">
     </a>
 
     <div>

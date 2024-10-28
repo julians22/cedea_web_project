@@ -10,8 +10,8 @@ use Livewire\Component;
 class NewsList extends Component
 {
     public $types = [
-        'kegiatan',
-        'artikel/blog',
+        'activity' => 'Kegiatan',
+        'article' => 'Artikel/blog',
     ];
 
     public $currentType;
@@ -21,16 +21,22 @@ class NewsList extends Component
 
     public function handleChangeType($type): void
     {
+        if (!array_key_exists($type, $this->types)) {
+            return;
+        }
+
         $this->currentType = $type;
     }
 
     public function mount()
     {
-        $this->currentType = $this->types[0];
+        $this->currentType = array_keys($this->types)[0] ?? null;
     }
 
     public function render()
     {
+
+
         return view('livewire.news-list', [
             'news' => PostNews::with(['media', 'categories'])
                 ->when(
@@ -39,6 +45,7 @@ class NewsList extends Component
                         return $q->searchTranslated('title', $this->keyword);
                     }
                 )
+                ->where('type', $this->currentType)
                 ->orderBy('published_at', 'desc')
                 ->paginate(6),
         ]);

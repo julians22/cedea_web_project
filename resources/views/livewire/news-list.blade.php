@@ -12,14 +12,14 @@
 
         <div class="mb-8 mt-2 flex justify-between gap-y-8 max-md:flex-col">
 
-            <div class="flex basis-3/4 flex-wrap gap-x-8 gap-y-4">
-                @foreach ($types as $type)
+            <div class="flex basis-3/4 flex-wrap gap-4">
+                @foreach ($types as $type => $label)
                     <button type="button" cla wire:click='handleChangeType("{{ $type }}")'
                         @class([
                             'cursor-pointer px-6 py-0.5 border border-cedea-red text-cedea-red rounded-full',
                             'bg-cedea-red text-white' => $type === $currentType,
                         ])>
-                        {{ $type }}</button>
+                        {{ $label }}</button>
                 @endforeach
             </div>
 
@@ -37,7 +37,7 @@
 
         <div class="grid grid-flow-dense grid-cols-1 ~gap-4/8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
 
-            @foreach ($news as $item)
+            @forelse ($news as $item)
                 {{-- featured news --}}
                 @if ($loop->first)
                     <div
@@ -49,7 +49,7 @@
                             <h2 class="line-clamp-3 ~text-lg/2xl"> {{ $item->title }}</h2>
                             <a class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red"
                                 href="{{ route('news.show', ['post' => $item->slug]) }}">
-                                Baca Beritanya
+                                {{ __('news.read') }}
                             </a>
                         </div>
                     </div>
@@ -70,7 +70,10 @@
                         </div>
                     </div>
                 @endif
-            @endforeach
+
+            @empty
+                <x-placeholder.empty label="{{ __('status.empty') }}" />
+            @endforelse
         </div>
     </div>
 </section>

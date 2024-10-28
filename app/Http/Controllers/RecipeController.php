@@ -14,7 +14,7 @@ class RecipeController extends Controller
         Meta::prependTitle($recipe->title);
 
         return view(
-            'recipe-detail',
+            'recipe.show',
             compact('recipe')
         );
     }

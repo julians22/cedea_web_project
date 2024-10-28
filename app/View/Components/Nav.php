@@ -2,6 +2,7 @@
 
 namespace App\View\Components;
 
+use App\Enums\RecipeType;
 use App\Models\Products\Brand;
 use Closure;
 use Illuminate\Contracts\View\View;
@@ -112,20 +113,20 @@ class Nav extends Component
                 'disable' => false,
                 'submenu' => [
                     [
-                        'label' => __('meal.Sarapan'),
-                        'route' => route('recipe', ['type' => 'sarapan']),
+                        'label' => __('meal.breakfast'),
+                        'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
                     ],
                     [
-                        'label' => __('meal.Makan Siang'),
-                        'route' => route('recipe', ['type' => 'makan-siang']),
+                        'label' => __('meal.lunch'),
+                        'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
                     ],
                     [
-                        'label' => __('meal.Makan Malam'),
-                        'route' => route('recipe', ['type' => 'makan-malam']),
+                        'label' => __('meal.dinner'),
+                        'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
                     ],
                     [
-                        'label' => __('meal.Snack'),
-                        'route' => route('recipe', ['type' => 'snack']),
+                        'label' => __('meal.snack'),
+                        'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
                     ],
                 ]
             ],

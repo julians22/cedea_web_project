@@ -1,20 +1,85 @@
 <x-layouts.app>
+    @if ($recipe->video)
+        <x-matinee::embed :data="$recipe->video" />
+    @endif
 
-    <section>
-        <div class="grid grid-cols-[35%_1fr]">
-            {{-- image --}}
-            <div>
-                <img src="#" alt="">
-                <button class="w-fit rounded-full bg-white px-8 py-1 text-sm font-semibold uppercase text-black">Beli
-                    sekarang</button>
+    <div class="bg-brick">
+        <section class="container my-8 grid gap-x-4 gap-y-8 md:grid-cols-[30%_1fr]">
+            <div class="flex w-full flex-col items-center gap-y-4">
+                <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
+
+                <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
+                    target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
+
             </div>
+            <div class="flex flex-col gap-y-8">
+                <div class="flex flex-col gap-2">
+                    <p class="uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
+                    <h1 class="~text-2xl/5xl">{{ $recipe->title }}</h1>
+                </div>
+                <div class="prose">
+                    @foreach ($recipe->ingredients as $ingredient)
+                        <div>
+                            <p>{{ $ingredient['title'] }}</p>
+                            <ul>
+                                @foreach ($ingredient['ingredient_group'] as $item)
+                                    <li>{{ $item['unit'] }} {{ $item['name'] }}</li>
+                                @endforeach
+                            </ul>
+                        </div>
+                    @endforeach
 
-            {{-- recipe detail --}}
-            <div>
-                <h1 class="uppercase">Cedea Salmon sosis keju</h1>
-                <p>Sosis Kentang Korea</p>
+                    {!! $recipe->content !!}
+
+                </div>
             </div>
-        </div>
-    </section>
+        </section>
 
+        <hr class="container my-8 h-0.5 border-0 bg-gray-200">
+
+        {{-- recipe --}}
+        <section class="container mt-8" wire:ignore>
+            <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
+
+            <p>{{ __('product.creation.detail') }}</p>
+
+            <div>
+                @php
+                    $times = [
+                        [
+                            'label' => 'Sarapan',
+                            'icon' => asset('img/icons/time/sarapan.svg'),
+                            'background' => asset('img/time/sarapan.jpg'),
+                            'recipe_type' => 'sarapan',
+                        ],
+                        [
+                            'label' => 'Makan Siang',
+                            'icon' => asset('img/icons/time/makan_siang.svg'),
+                            'background' => asset('img/time/makan_siang.jpg'),
+                            'recipe_type' => 'makan-siang',
+                        ],
+                        [
+                            'label' => 'Makan Malam',
+                            'icon' => asset('img/icons/time/makan_malam.svg'),
+                            'background' => asset('img/time/makan_malam.jpg'),
+                            'recipe_type' => 'makan-malam',
+                        ],
+                        [
+                            'label' => 'Snack',
+                            'icon' => asset('img/icons/time/snack.svg'),
+                            'background' => asset('img/time/snack.jpg'),
+                            'recipe_type' => 'snack',
+                        ],
+                    ];
+                @endphp
+                <x-meals-container>
+                    @foreach ($times as $time)
+                        <a href="{{ route('recipe', ['type' => $time['recipe_type']]) }}">
+                            <x-meal-card class="cursor-pointer" :background="$time['background']" :icon="$time['icon']" :label="$time['label']" />
+                        </a>
+                    @endforeach
+                </x-meals-container>
+            </div>
+        </section>
+    </div>
 </x-layouts.app>

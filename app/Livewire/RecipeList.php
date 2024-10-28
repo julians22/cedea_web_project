@@ -13,8 +13,8 @@ class RecipeList extends Component
     #[Url(except: '')]
     public string $keyword = '';
 
-    #[Url(as: 'type', except: '')]
-    public string $activeRecipeType = '';
+    #[Url(as: 'type', except: ['all', null, ''], keep: true)]
+    public string $activeRecipeType = 'all';
 
     #[Url(as: 'product', except: '')]
     public string $activeProduct = '';
@@ -52,14 +52,12 @@ class RecipeList extends Component
                 //         return $q->whereRelation('brand', 'slug', $this->activeBrand);
                 //     }
                 // )
-                // ->when(
-                //     $this->activeCategory !== 'all',
-                //     function ($q) {
-                //         return $q->whereHas('categories', function (Builder $query) {
-                //             $query->where('slug', $this->activeCategory);
-                //         });
-                //     }
-                // )
+                ->when(
+                    $this->activeRecipeType !== 'all',
+                    function ($q) {
+                        return $q->where('recipe_type', $this->activeRecipeType);
+                    }
+                )
                 // ->when(
                 //     $this->keyword,
                 //     function ($q) {

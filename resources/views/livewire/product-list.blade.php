@@ -149,7 +149,6 @@
                                             modalOpen=true;
                                             $wire.handleChangeActiveProduct('{{ $item->slug }}')
                                             }">
-
                                 </div>
 
                                 {{-- hover content --}}
@@ -188,18 +187,7 @@
                             </div>
                         </div>
                     @empty
-                        <div
-                            class="col-span-full flex flex-col items-center justify-center self-center justify-self-center">
-                            <lord-icon class="~size-20/40 inline-block" src="https://cdn.lordicon.com/rmkpgtpt.json"
-                                trigger="in" delay="500" state="in-reveal"
-                                colors="primary:#e4e4e4,secondary:#e4e4e4">
-                            </lord-icon>
-
-                            <h2 class="section-title">
-                                Data tidak ditemukan
-                            </h2>
-
-                        </div>
+                        <x-placeholder.empty label="{{ __('status.empty') }}" />
                     @endforelse
                 </div>
 
@@ -308,31 +296,33 @@
         <p>{{ __('product.creation.detail') }}</p>
 
         <div>
+            @use('App\Enums\RecipeType')
             @php
+
                 $times = [
                     [
-                        'label' => __('meal.Sarapan'),
+                        'label' => __('meal.breakfast'),
                         'icon' => asset('img/icons/time/sarapan.svg'),
                         'background' => asset('img/time/sarapan.jpg'),
-                        'recipe_type' => 'sarapan',
+                        'recipe_type' => RecipeType::BREAKFAST->value,
                     ],
                     [
-                        'label' => __('meal.Makan Siang'),
+                        'label' => __('meal.lunch'),
                         'icon' => asset('img/icons/time/makan_siang.svg'),
                         'background' => asset('img/time/makan_siang.jpg'),
-                        'recipe_type' => 'makan-siang',
+                        'recipe_type' => RecipeType::LUNCH->value,
                     ],
                     [
-                        'label' => __('meal.Makan Malam'),
+                        'label' => __('meal.dinner'),
                         'icon' => asset('img/icons/time/makan_malam.svg'),
                         'background' => asset('img/time/makan_malam.jpg'),
-                        'recipe_type' => 'makan-malam',
+                        'recipe_type' => RecipeType::DINNER->value,
                     ],
                     [
-                        'label' => __('meal.Snack'),
+                        'label' => __('meal.snack'),
                         'icon' => asset('img/icons/time/snack.svg'),
                         'background' => asset('img/time/snack.jpg'),
-                        'recipe_type' => 'snack',
+                        'recipe_type' => RecipeType::SNACK->value,
                     ],
                 ];
             @endphp

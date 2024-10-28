@@ -3,8 +3,8 @@
 declare(strict_types=1);
 
 return [
-    'Sarapan' => 'Breakfast',
-    'Makan Siang' => 'Lunch',
-    'Makan Malam' => 'Dinner',
-    'Snack' => 'Snack',
+    'breakfast' => 'Breakfast',
+    'lunch' => 'Lunch',
+    'dinner' => 'Dinner',
+    'snack' => 'Snack',
 ];

@@ -9,7 +9,7 @@ return [
 
     'history.title' => 'Komitmen Sejak 2004',
     'history.detail' => '
-    Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang mutakhir, PT CitraDimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil laut yang dipasarkan di berbagai pasar di Indonesia.',
+    Berdiri sejak 1995, PT CitraDimensi Arthali juga merupakan pelopor industri makanan olahan berbasis hasil laut. kualitas dalam produksi setiap olahannya, dengan menerapkan teknologi produksi yang mutakhir, PT CitraDimensi Arthali berhasil menjadi salah satu produsen makanan olahan berbasis hasil laut yang dipasarkan di berbagai pasar di Indonesia, Korea Selatan, dan Papua Nugini.',
 
     "Visi.title" => "Visi",
     "Visi.detail" => "Menjadi pemain unggul di bisnis makanan siap masak dan siap makan di Indonesia dan menjadi pilihan utama di pasar global tertentu.",

@@ -20,46 +20,72 @@
                     </div>
                 </form>
                 <p class="pt-4 text-center text-white">
-                    Berikut hasil pencarian untuk <span class="font-semibold">{{ request()->query('query') }}</span>:
+                    {{ __('search.desc') }} : <span class="font-semibold">{{ request()->query('query') }}</span>
                 </p>
             </div>
         </div>
 
         <div class="container my-4">
+
+            {{-- search language changer --}}
+
+            <div class="flex flex-wrap gap-2">
+                <a @class([
+                    'rounded-full px-3 py-1 flex items-center justify-center',
+                    'bg-cedea-red-500 text-white' => $lang == '*',
+                    'bg-white border-2 text-black' => $lang != '*',
+                ]) href="{{ request()->fullUrlWithQuery(['lang' => null]) }}">All</a>
+                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                    <a @class([
+                        'rounded-full px-3 py-1 flex items-center justify-center',
+                        'bg-cedea-red-500 text-white' => $lang == $localeCode,
+                        'bg-white border-2 text-black' => $lang != $localeCode,
+                    ])
+                        href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }} ">{{ $properties['native'] }}</a>
+                @endforeach
+            </div>
+
+
             {{-- Recipe --}}
-            <x-search.item-group title="Kreasi Resep" :showReadmore="count($recipes) > 3"
+            <x-search.item-group title="{{ __('nav.recipe') }}" :showReadmore="count($recipes) > 3"
                 readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
 
-                @foreach ($recipes as $item)
+                @forelse ($recipes as $item)
                     <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
                         :url="route('news.show', ['post' => $item->slug])" />
-                @endforeach
+                @empty
+                    <x-placeholder.empty text="{{ __('status.empty') }}" />
+                @endforelse
 
             </x-search.item-group>
 
             {{-- news --}}
-            <x-search.item-group title="berita" :showReadmore="count($news) > 3"
+            <x-search.item-group title="{{ __('nav.news') }}" :showReadmore="count($news) > 3"
                 readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
 
-                @foreach ($news as $item)
+                @forelse ($news as $item)
                     <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
                         :url="route('news.show', ['post' => $item->slug])" />
-                @endforeach
+                @empty
+                    <x-placeholder.empty text="{{ __('status.empty') }}" />
+                @endforelse
 
             </x-search.item-group>
 
             {{-- product --}}
-            <x-search.item-group title="Product" :showReadmore="count($products) > 3"
+            <x-search.item-group title="{{ __('nav.product') }}" :showReadmore="count($products) > 3"
                 readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
 
-                @foreach ($products as $item)
-                    <x-search.item :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')->name" :title="$item->name" :desc="$item->description"
-                        :url="route('product', [
+                @forelse ($products as $item)
+                    <x-search.item class:image="h-full" :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')->name" :title="$item->name"
+                        :desc="$item->description" :url="route('product', [
                             '#product-grid',
                             'keyword' => $item->name,
                             'brand' => $item->brand->slug,
                         ])" />
-                @endforeach
+                @empty
+                    <x-placeholder.empty text="{{ __('status.empty') }}" />
+                @endforelse
 
             </x-search.item-group>
         </div>

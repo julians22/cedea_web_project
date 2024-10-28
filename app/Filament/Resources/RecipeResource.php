@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\RecipeType;
 use App\Filament\Resources\RecipeResource\Pages;
 use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\PostRecipes;
@@ -89,12 +90,13 @@ class RecipeResource extends Resource
                                 ->collection('featured_image'),
                             Matinee::make('video'),
                             Select::make('recipe_type')
-                                ->options([
-                                    'sarapan' => 'Sarapan',
-                                    'makan-siang' => 'Makan Siang',
-                                    'makan-malam' => 'Makan Malam',
-                                    'snack' => 'Snack',
-                                ])
+                                ->options(RecipeType::class)
+                                // ->options([
+                                //     'breakfast' => 'Sarapan',
+                                //     'lunch' => 'Makan Siang',
+                                //     'dinner' => 'Makan Malam',
+                                //     'snack' => 'Snack',
+                                // ])
                                 ->required(),
 
                             Select::make('product')
