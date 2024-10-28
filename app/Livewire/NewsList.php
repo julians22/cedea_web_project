@@ -44,7 +44,7 @@ class NewsList extends Component
                 ->when(
                     $this->keyword,
                     function ($q) {
-                        return $q->searchTranslated('title', $this->keyword);
+                        return $q->searchTranslated('title', $this->keyword, '*');
                     }
                 )
                 ->when(
