@@ -2,12 +2,14 @@
 
 namespace App\View\Components;
 
+use App\Enums\NewsType;
 use App\Enums\RecipeType;
 use App\Models\Products\Brand;
 use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
+use Spatie\Sitemap\Tags\News;
 
 class Nav extends Component
 {
@@ -138,12 +140,12 @@ class Nav extends Component
                 'submenu' => [
                     [
                         'label' => __('nav.news.activity'),
-                        'route' => '#',
+                        'route' => route('news', ['type' => NewsType::ACTIVITY->value]),
                         'submenu' => []
                     ],
                     [
                         'label' => __('nav.news.Artikel'),
-                        'route' => '#',
+                        'route' => route('news', ['type' => NewsType::ARTICLE->value]),
                         'submenu' => []
                     ],
                 ]

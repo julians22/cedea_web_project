@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\NewsType;
 use App\Filament\Resources\NewsResource\Pages;
 use App\Filament\Resources\NewsResource\RelationManagers;
 use App\Models\News;
@@ -91,11 +92,9 @@ class NewsResource extends Resource
                                 ]),
                             Select::make('type')
                                 ->options(
-                                    [
-                                        'activity' => 'Activity',
-                                        'article' => 'Article/blog',
-                                    ]
-                                )->selectablePlaceholder(false)
+                                    NewsType::class
+                                )
+                                ->selectablePlaceholder(false)
                                 ->required(),
                             Toggle::make('published')
                                 ->default(true)

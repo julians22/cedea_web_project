@@ -13,13 +13,15 @@
         <div class="mb-8 mt-2 flex justify-between gap-y-8 max-md:flex-col">
 
             <div class="flex basis-3/4 flex-wrap gap-4">
-                @foreach ($types as $type => $label)
+                @use('App\Enums\NewsType')
+
+                @foreach (NewsType::cases() as $type)
                     <button type="button" cla wire:click='handleChangeType("{{ $type }}")'
                         @class([
                             'cursor-pointer px-6 py-0.5 border border-cedea-red text-cedea-red rounded-full',
-                            'bg-cedea-red text-white' => $type === $currentType,
+                            'bg-cedea-red text-white' => $type->value === $currentType,
                         ])>
-                        {{ $label }}</button>
+                        {{ $type->getLabel() }}</button>
                 @endforeach
             </div>
 

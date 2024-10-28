@@ -6,5 +6,8 @@ return [
     'heading' => "<span class='font-cedea'>CEDEA</span> News",
     'subheading' => "Find the latest news and updates about our company here. Follow the latest developments and important news from Cedea Seafood.",
     'search' => "SEARCH NEWS HERE",
-    'read' => 'READ THE NEWS'
+    'read' => 'READ THE NEWS',
+
+    'type.activity' => 'Activity',
+    'type.article' => 'Article/Blog',
 ];

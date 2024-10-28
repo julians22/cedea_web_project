@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\NewsType;
 use App\Models\PostNews;
 use Filament\Forms\Components\Builder;
 use Livewire\Attributes\Url;
@@ -9,28 +10,29 @@ use Livewire\Component;
 
 class NewsList extends Component
 {
-    public $types = [
-        'activity' => 'Kegiatan',
-        'article' => 'Artikel/blog',
-    ];
 
-    public $currentType;
+    #[Url(except: '', as: 'type', keep: true)]
+    public $currentType = 'all';
 
     #[Url(except: '')]
     public string $keyword = '';
 
     public function handleChangeType($type): void
     {
-        if (!array_key_exists($type, $this->types)) {
-            return;
-        }
 
-        $this->currentType = $type;
+        if ($this->currentType == $type) {
+            $this->reset('currentType');
+        } else {
+            if (!enum_exists(NewsType::class, $type)) {
+                return;
+            }
+            $this->currentType = $type;
+        }
     }
 
     public function mount()
     {
-        $this->currentType = array_keys($this->types)[0] ?? null;
+        // $this->currentType = array_keys($this->types)[0] ?? null;
     }
 
     public function render()
@@ -45,7 +47,12 @@ class NewsList extends Component
                         return $q->searchTranslated('title', $this->keyword);
                     }
                 )
-                ->where('type', $this->currentType)
+                ->when(
+                    $this->currentType !== 'all',
+                    function ($q) {
+                        return $q->where('type', $this->currentType);
+                    }
+                )
                 ->orderBy('published_at', 'desc')
                 ->paginate(6),
         ]);
