@@ -1,33 +1,44 @@
 <x-layouts.app>
-    @if ($recipe->video)
+
+    @if ($recipe->video['url'])
         <x-matinee::embed :data="$recipe->video" />
     @endif
 
     <div class="bg-brick">
-        <section class="container my-8 grid gap-x-4 gap-y-8 md:grid-cols-[30%_1fr]">
-            <div class="flex w-full flex-col items-center gap-y-4">
-                <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
+        <section @class([
+            'container my-8',
+            'grid gap-x-4 gap-y-8 md:grid-cols-[30%_1fr]' => $recipe->product,
+        ])>
+            @if ($recipe->product)
+                <div class="flex w-full flex-col items-center gap-y-4">
+                    <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
 
-                <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
-                    target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
+                    <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
+                        target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
 
-            </div>
+                </div>
+            @endif
             <div class="flex flex-col gap-y-8">
                 <div class="flex flex-col gap-2">
-                    <p class="uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
+                    @if ($recipe->product)
+                        <p class="uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
+                    @endif
                     <h1 class="~text-2xl/5xl">{{ $recipe->title }}</h1>
                 </div>
                 <div class="prose">
-                    @foreach ($recipe->ingredients as $ingredient)
-                        <div>
-                            <p>{{ $ingredient['title'] }}</p>
-                            <ul>
-                                @foreach ($ingredient['ingredient_group'] as $item)
-                                    <li>{{ $item['unit'] }} {{ $item['name'] }}</li>
-                                @endforeach
-                            </ul>
-                        </div>
-                    @endforeach
+
+                    @if ($recipe->ingredients)
+                        @foreach ($recipe->ingredients as $ingredient)
+                            <div>
+                                <p>{{ $ingredient['title'] }}</p>
+                                <ul>
+                                    @foreach ($ingredient['ingredient_group'] as $item)
+                                        <li>{{ $item['unit'] }} {{ $item['name'] }}</li>
+                                    @endforeach
+                                </ul>
+                            </div>
+                        @endforeach
+                    @endif
 
                     {!! $recipe->content !!}
 
