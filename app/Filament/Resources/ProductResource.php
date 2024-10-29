@@ -25,6 +25,8 @@ use Filament\Forms\Get;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
+use Filament\Tables\Columns\Layout\Stack;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
@@ -191,16 +193,23 @@ class ProductResource extends Resource
     {
         return $table
             ->columns([
-                TextColumn::make('name')
-                    ->searchable(),
-                // TextColumn::make('slug'),
-                TextColumn::make('brand.name'),
-                TextColumn::make('categories.name')
-                    ->label('Categories')
-                    ->listWithLineBreaks()
-                    ->limitList(2)
-                    ->expandableLimitedList(),
-
+                Stack::make([
+                    SpatieMediaLibraryImageColumn::make('image')
+                        ->collection('packaging'),
+                    TextColumn::make('name')
+                        ->searchable(),
+                    // TextColumn::make('slug'),
+                    TextColumn::make('brand.name'),
+                    TextColumn::make('categories.name')
+                        ->label('Categories')
+                        ->listWithLineBreaks()
+                        ->limitList(2)
+                        ->expandableLimitedList(),
+                ]),
+            ])
+            ->contentGrid([
+                'md' => 2,
+                'xl' => 3,
             ])
             ->filters([
                 SelectFilter::make('brand')
