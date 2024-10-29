@@ -7,7 +7,8 @@
     <div class="bg-brick">
         <section @class([
             'container my-8',
-            'grid gap-x-4 gap-y-8 md:grid-cols-[30%_1fr]' => $recipe->product,
+            'grid gap-x-4 gap-y-8  md:grid-cols-[30%_1fr]' => $recipe->product,
+            'mt-20' => !$recipe->video['url'],
         ])>
             @if ($recipe->product)
                 <div class="flex w-full flex-col items-center gap-y-4">
