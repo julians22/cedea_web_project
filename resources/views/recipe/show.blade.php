@@ -59,28 +59,28 @@
                 @php
                     $times = [
                         [
-                            'label' => 'Sarapan',
+                            'label' => __('meal.breakfast'),
                             'icon' => asset('img/icons/time/sarapan.svg'),
                             'background' => asset('img/time/sarapan.jpg'),
-                            'recipe_type' => 'sarapan',
+                            'recipe_type' => RecipeType::BREAKFAST->value,
                         ],
                         [
-                            'label' => 'Makan Siang',
+                            'label' => __('meal.lunch'),
                             'icon' => asset('img/icons/time/makan_siang.svg'),
                             'background' => asset('img/time/makan_siang.jpg'),
-                            'recipe_type' => 'makan-siang',
+                            'recipe_type' => RecipeType::LUNCH->value,
                         ],
                         [
-                            'label' => 'Makan Malam',
+                            'label' => __('meal.dinner'),
                             'icon' => asset('img/icons/time/makan_malam.svg'),
                             'background' => asset('img/time/makan_malam.jpg'),
-                            'recipe_type' => 'makan-malam',
+                            'recipe_type' => RecipeType::DINNER->value,
                         ],
                         [
-                            'label' => 'Snack',
+                            'label' => __('meal.snack'),
                             'icon' => asset('img/icons/time/snack.svg'),
                             'background' => asset('img/time/snack.jpg'),
-                            'recipe_type' => 'snack',
+                            'recipe_type' => RecipeType::SNACK->value,
                         ],
                     ];
                 @endphp
