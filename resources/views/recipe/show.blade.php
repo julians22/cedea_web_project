@@ -56,6 +56,8 @@
             <p>{{ __('product.creation.detail') }}</p>
 
             <div>
+                @use('App\Enums\RecipeType')
+
                 @php
                     $times = [
                         [
