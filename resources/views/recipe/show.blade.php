@@ -50,13 +50,12 @@
         <hr class="container my-8 h-0.5 border-0 bg-gray-200">
 
         {{-- recipe --}}
-        <section class="container mt-8" wire:ignore>
+        <section class="container mt-8">
             <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
             <p>{{ __('product.creation.detail') }}</p>
 
             <div>
-                @use('App\Enums\RecipeType')
 
                 @php
                     $times = [
@@ -64,25 +63,25 @@
                             'label' => __('meal.breakfast'),
                             'icon' => asset('img/icons/time/sarapan.svg'),
                             'background' => asset('img/time/sarapan.jpg'),
-                            'recipe_type' => RecipeType::BREAKFAST->value,
+                            'recipe_type' => \App\Enums\RecipeType::BREAKFAST->value,
                         ],
                         [
                             'label' => __('meal.lunch'),
                             'icon' => asset('img/icons/time/makan_siang.svg'),
                             'background' => asset('img/time/makan_siang.jpg'),
-                            'recipe_type' => RecipeType::LUNCH->value,
+                            'recipe_type' => \App\Enums\RecipeType::LUNCH->value,
                         ],
                         [
                             'label' => __('meal.dinner'),
                             'icon' => asset('img/icons/time/makan_malam.svg'),
                             'background' => asset('img/time/makan_malam.jpg'),
-                            'recipe_type' => RecipeType::DINNER->value,
+                            'recipe_type' => \App\Enums\RecipeType::DINNER->value,
                         ],
                         [
                             'label' => __('meal.snack'),
                             'icon' => asset('img/icons/time/snack.svg'),
                             'background' => asset('img/time/snack.jpg'),
-                            'recipe_type' => RecipeType::SNACK->value,
+                            'recipe_type' => \App\Enums\RecipeType::SNACK->value,
                         ],
                     ];
                 @endphp
@@ -96,4 +95,5 @@
             </div>
         </section>
     </div>
+
 </x-layouts.app>
