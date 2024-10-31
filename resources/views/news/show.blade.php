@@ -14,9 +14,12 @@
         </div>
     </section>
 
-    <article class="container prose mx-auto my-8">
-        {!! $post->content !!}
-    </article>
+    <section class="container">
 
+        <article class="prose mx-auto my-8">
+            {!! $post->content !!}
+        </article>
+
+    </section>
 
 </x-layouts.app>
