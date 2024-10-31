@@ -26,6 +26,6 @@ class NewsController extends Controller
      */
     public function show(PostNews $post)
     {
-        return view('news-detail', compact('post'));
+        return view('show', compact('post'));
     }
 }

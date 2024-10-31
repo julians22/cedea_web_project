@@ -14,7 +14,7 @@
         </div>
     </section>
 
-    <article class="container mx-auto my-8 font-medium">
+    <article class="container prose mx-auto my-8">
         {!! $post->content !!}
     </article>
 
