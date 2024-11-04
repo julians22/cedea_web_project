@@ -7,9 +7,12 @@ use Livewire\Component;
 use Livewire\Attributes\Url;
 use Butschster\Head\Facades\Meta;
 use Filament\Forms\Components\Builder;
+use Livewire\WithPagination;
 
 class RecipeList extends Component
 {
+    use WithPagination;
+
     #[Url(except: '')]
     public string $keyword = '';
 

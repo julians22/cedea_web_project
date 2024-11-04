@@ -66,6 +66,7 @@ class RecipeResource extends Resource
                                         // 'ko' => ['nullable', 'string', 'max:255'],
                                     ]),
 
+                                //? we probably won't need this but let's keep it for now
                                 Repeater::make('ingredients')
                                     ->schema([
                                         TextInput::make('title'),

@@ -73,9 +73,12 @@
                     </div>
                 @endif
 
+
+
             @empty
                 <x-placeholder.empty :text="__('status.empty')" />
             @endforelse
+            {{ $news->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
         </div>
     </div>
 </section>

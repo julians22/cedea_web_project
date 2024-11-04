@@ -70,13 +70,6 @@ class NewsResource extends Resource
                                         'id' => ['nullable', 'string'],
                                         'en' => ['nullable', 'string'],
                                     ])
-
-                                // RichEditor::make('content')
-                                //     ->label(__('content'))
-                                //     ->translatable(true, null, [
-                                //         'id' => ['required', 'string',],
-                                //         'en' => ['nullable', 'string',],
-                                //     ]),
                             ]
                         ),
                         Section::make([

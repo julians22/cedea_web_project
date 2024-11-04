@@ -7,9 +7,11 @@ use App\Models\PostNews;
 use Filament\Forms\Components\Builder;
 use Livewire\Attributes\Url;
 use Livewire\Component;
+use Livewire\WithPagination;
 
 class NewsList extends Component
 {
+    use WithPagination;
 
     #[Url(except: '', as: 'type', keep: true)]
     public $currentType = 'all';

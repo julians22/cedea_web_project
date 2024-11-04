@@ -62,6 +62,9 @@
         @empty
             <x-placeholder.empty text="{{ __('status.empty') }}" />
         @endforelse
+
+        {{ $recipes->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+
     </section>
 
     <section class="container relative overflow-visible font-medium" wire:ignore x-data="{ lengthFromLeft: 0 }"

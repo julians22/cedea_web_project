@@ -114,7 +114,11 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                             @if (is_array($element))
                                 @foreach ($element as $page => $url)
                                     <span
-                                    class="text-cedea-red"
+                                    @class([
+                                        "text-cedea-red",
+                                        "opacity-50"=> $loop->last,
+                                        "opacity-80"=> $loop->index === $loop->count - 2
+                                    ])
                                         wire:key="paginator-{{ $paginator->getPageName() }}-page{{ $page }}">
                                         @if ($page == $paginator->currentPage())
 
