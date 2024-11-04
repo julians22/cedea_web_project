@@ -38,7 +38,6 @@
         </div>
 
         <div class="grid grid-flow-dense grid-cols-1 ~gap-4/8 md:grid-cols-2 lg:grid-cols-3 2xl:grid-cols-4">
-
             @forelse ($news as $item)
                 {{-- featured news --}}
                 @if ($loop->first)
@@ -78,7 +77,9 @@
             @empty
                 <x-placeholder.empty :text="__('status.empty')" />
             @endforelse
-            {{ $news->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
         </div>
+
+        {{ $news->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+
     </div>
 </section>
