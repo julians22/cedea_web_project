@@ -56,7 +56,7 @@ class NewsList extends Component
                     }
                 )
                 ->orderBy('published_at', 'desc')
-                ->paginate(6),
+                ->paginate(7),
         ]);
     }
 }
