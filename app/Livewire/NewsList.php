@@ -21,7 +21,6 @@ class NewsList extends Component
 
     public function handleChangeType($type): void
     {
-
         if ($this->currentType == $type) {
             $this->reset('currentType');
         } else {
@@ -39,8 +38,6 @@ class NewsList extends Component
 
     public function render()
     {
-
-
         return view('livewire.news-list', [
             'news' => PostNews::with(['media', 'categories'])
                 ->when(

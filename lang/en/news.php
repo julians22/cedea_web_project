@@ -10,4 +10,5 @@ return [
 
     'type.activity' => 'Activity',
     'type.article' => 'Article/Blog',
+    'type.csr' => 'CSR',
 ];
