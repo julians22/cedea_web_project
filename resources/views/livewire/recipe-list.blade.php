@@ -63,7 +63,9 @@
             <x-placeholder.empty text="{{ __('status.empty') }}" />
         @endforelse
 
-        {{ $recipes->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+        <div class="pt-4">
+            {{ $recipes->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+        </div>
 
     </section>
 

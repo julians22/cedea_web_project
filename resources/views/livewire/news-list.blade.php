@@ -79,7 +79,9 @@
             @endforelse
         </div>
 
-        {{ $news->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+        <div class="pt-4">
+            {{ $news->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
+        </div>
 
     </div>
 </section>

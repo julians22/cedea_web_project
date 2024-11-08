@@ -195,7 +195,7 @@
                 <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
                     <x-product-list-skeleton />
                 </div>
-                {{ $products->links(data: ['scrollTo' => false]) }}
+                {{ $products->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
             </div>
 
         </div>
@@ -214,7 +214,7 @@
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
                             <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
                             <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
+                                target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>
 
                         <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
