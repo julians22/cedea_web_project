@@ -10,7 +10,8 @@ class NewsController extends Controller
     public function create()
     {
         $news = PostNews::paginate(6);
-        $banners = $news->take(3);
+        $banners = PostNews::orderBy('published_at', 'desc')->take(3)->get();
+
 
         return view('news', compact(
             'news',
