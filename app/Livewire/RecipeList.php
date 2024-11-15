@@ -61,6 +61,7 @@ class RecipeList extends Component
                         return $q->where('recipe_type', $this->activeRecipeType);
                     }
                 )
+                ->orderby('created_at', 'desc')
                 // ->when(
                 //     $this->keyword,
                 //     function ($q) {
