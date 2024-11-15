@@ -290,7 +290,7 @@
 
 
     {{-- recipe --}}
-    <section class="container mt-8" wire:ignore>
+    {{-- <section class="container mt-8" wire:ignore>
         <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
         <p>{{ __('product.creation.detail') }}</p>
@@ -336,5 +336,5 @@
                 @endforeach
             </x-meals-container>
         </div>
-    </section>
+    </section> --}}
 </div>
