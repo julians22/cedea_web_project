@@ -109,29 +109,34 @@ class Nav extends Component
                 ]
             ],
 
-            // [
-            //     'label' => __('nav.recipe'),
-            //     'route' => route('recipe'),
-            //     'disable' => false,
-            //     'submenu' => [
-            //         [
-            //             'label' => __('meal.breakfast'),
-            //             'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
-            //         ],
-            //         [
-            //             'label' => __('meal.lunch'),
-            //             'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
-            //         ],
-            //         [
-            //             'label' => __('meal.dinner'),
-            //             'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
-            //         ],
-            //         [
-            //             'label' => __('meal.snack'),
-            //             'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
-            //         ],
-            //     ]
-            // ],
+            [
+                'label' => __('nav.recipe'),
+                // 'route' => route('recipe'),
+                'route' => '#',
+                'disable' => true,
+                'submenu' => [
+                    [
+                        'label' => __('meal.breakfast'),
+                        'route' => '#',
+                        // 'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
+                    ],
+                    [
+                        'label' => __('meal.lunch'),
+                        'route' => '#',
+                        // 'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
+                    ],
+                    [
+                        'label' => __('meal.dinner'),
+                        'route' => '#',
+                        // 'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
+                    ],
+                    [
+                        'label' => __('meal.snack'),
+                        'route' => '#',
+                        // 'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
+                    ],
+                ]
+            ],
 
             [
                 'label' => __('nav.news'),
@@ -150,12 +155,13 @@ class Nav extends Component
                     ],
                 ]
             ],
-            // [
-            //     'label' => __('nav.contact'),
-            //     'route' => route('contact'),
-            //     'disable' => false,
-            //     'submenu' => []
-            // ]
+            [
+                'label' => __('nav.contact'),
+                'route' => '#',
+                // 'route' => route('contact'),
+                'disable' => true,
+                'submenu' => []
+            ]
         ];
     }
 
