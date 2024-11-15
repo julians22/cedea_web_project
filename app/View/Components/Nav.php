@@ -150,12 +150,12 @@ class Nav extends Component
                     ],
                 ]
             ],
-            [
-                'label' => __('nav.contact'),
-                'route' => route('contact'),
-                'disable' => false,
-                'submenu' => []
-            ]
+            // [
+            //     'label' => __('nav.contact'),
+            //     'route' => route('contact'),
+            //     'disable' => false,
+            //     'submenu' => []
+            // ]
         ];
     }
 
