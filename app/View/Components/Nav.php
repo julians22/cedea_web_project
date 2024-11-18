@@ -111,9 +111,9 @@ class Nav extends Component
 
             [
                 'label' => __('nav.recipe'),
-                // 'route' => route('recipe'),
-                'route' => '#',
-                'disable' => true,
+                'route' => route('recipe'),
+                // 'route' => '#',
+                'disable' => false,
                 'submenu' => [
                     [
                         'label' => __('meal.breakfast'),

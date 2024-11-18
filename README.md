@@ -7,6 +7,39 @@ Permission to use, copy, modify, and/or distribute this software for any purpose
 
 THE SOFTWARE IS PROVIDED "AS IS" AND THE AUTHOR DISCLAIMS ALL WARRANTIES WITH REGARD TO THIS SOFTWARE INCLUDING ALL IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS. IN NO EVENT SHALL THE AUTHOR BE LIABLE FOR ANY SPECIAL, DIRECT, INDIRECT, OR CONSEQUENTIAL DAMAGES OR ANY DAMAGES WHATSOEVER RESULTING FROM LOSS OF USE, DATA OR PROFITS, WHETHER IN AN ACTION OF CONTRACT, NEGLIGENCE OR OTHER TORTIOUS ACTION, ARISING OUT OF OR IN CONNECTION WITH THE USE OR PERFORMANCE OF THIS SOFTWARE.
 
+To cache your routes, use:
+
+php artisan route:trans:cache
+... instead of the normal route:cache command. Using artisan route:cache will not work correctly!
+
+For the route caching solution to work, it is required to make a minor adjustment to your application route provision.
+
+before laravel 11
+
+In your App's RouteServiceProvider, use the LoadsTranslatedCachedRoutes trait:
+
+<?php
+class RouteServiceProvider extends ServiceProvider
+{
+    use \Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
+after laravel 11
+
+In your App's AppServiceProvider, use the CachedTranslatedRouteLoader class in register method:
+
+<?php
+class AppServiceProvider extends ServiceProvider
+{
+    use \Mcamara\LaravelLocalization\Traits\LoadsTranslatedCachedRoutes;
+    /**
+     * Bootstrap any application services.
+     */
+    public function boot(): void
+    {
+        RouteServiceProvider::loadCachedRoutesUsing(fn() => $this->loadCachedRoutes());
+        ...
+    }
+For more details see here.
+
 <p align="center"><a href="https://laravel.com" target="_blank"><img src="https://raw.githubusercontent.com/laravel/art/master/logo-lockup/5%20SVG/2%20CMYK/1%20Full%20Color/laravel-logolockup-cmyk-red.svg" width="400" alt="Laravel Logo"></a></p>
 
 <p align="center">

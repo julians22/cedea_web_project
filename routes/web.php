@@ -52,14 +52,14 @@ Route::group([
     )
         ->name('product');
 
-    // Route::get(
-    //     'recipe',
-    //     RecipeList::class
-    // )
-    //     ->name('recipe');
+    Route::get(
+        'recipe',
+        RecipeList::class
+    )
+        ->name('recipe');
 
-    // Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
-    //     ->name('recipe.detail');
+    Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
+        ->name('recipe.detail');
 
     Route::get(
         'news',

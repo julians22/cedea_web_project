@@ -49,12 +49,12 @@ class RecipeList extends Component
     {
         return view('livewire.recipe-list', [
             'recipes' => PostRecipes::with(['media', 'product'])
-                // ->when(
-                //     $this->activeBrand,
-                //     function ($q) {
-                //         return $q->whereRelation('brand', 'slug', $this->activeBrand);
-                //     }
-                // )
+                ->when(
+                    $this->activeProduct,
+                    function ($q) {
+                        return $q->whereRelation('product', 'slug', $this->activeProduct);
+                    }
+                )
                 ->when(
                     $this->activeRecipeType !== 'all',
                     function ($q) {
@@ -62,12 +62,12 @@ class RecipeList extends Component
                     }
                 )
                 ->orderby('created_at', 'desc')
-                // ->when(
-                //     $this->keyword,
-                //     function ($q) {
-                //         return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
-                //     }
-                // )
+                ->when(
+                    $this->keyword,
+                    function ($q) {
+                        return $q->searchTranslated('title', $this->keyword, '*');
+                    }
+                )
                 ->paginate(2),
         ]);
     }
