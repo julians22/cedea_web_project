@@ -16,6 +16,13 @@ class Banner extends Model implements HasMedia, Sortable
         'enable' => 'boolean',
     ];
 
+    /**
+     * The attributes that aren't mass assignable.
+     *
+     * @var array
+     */
+    protected $guarded = [];
+
     public function registerMediaCollections(): void
     {
         $this
