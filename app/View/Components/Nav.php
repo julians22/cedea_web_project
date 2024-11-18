@@ -117,23 +117,23 @@ class Nav extends Component
                 'submenu' => [
                     [
                         'label' => __('meal.breakfast'),
-                        'route' => '#',
-                        // 'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
+                        // 'route' => '#',
+                        'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
                     ],
                     [
                         'label' => __('meal.lunch'),
-                        'route' => '#',
-                        // 'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
+                        // 'route' => '#',
+                        'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
                     ],
                     [
                         'label' => __('meal.dinner'),
-                        'route' => '#',
-                        // 'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
+                        // 'route' => '#',
+                        'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
                     ],
                     [
                         'label' => __('meal.snack'),
-                        'route' => '#',
-                        // 'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
+                        // 'route' => '#',
+                        'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
                     ],
                 ]
             ],
