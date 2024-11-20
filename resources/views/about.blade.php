@@ -263,23 +263,27 @@
                 $addresses = [
                     [
                         'title' => 'PT CitraDimensi Arthali Medan',
-                        'content' => 'Jl. KL. Yos Sudarso Km.10,5 Kawasan Industri Medan I (Jl. Pulau Sulawesi)
-                        Medan 20242',
+                        'content' => 'Kawasan Industri Medan
+                        Jl. P Sulawesi 2 Kel. Mabar
+                        Medan Deli, Kota Medan
+                        Sumatera Utara 20242',
                     ],
                     [
                         'title' => 'PT CitraDimensi Arthali Jakarta',
-                        'content' => 'Perumahan Prasarana Perikanan Samudera Block N No. 11 - 12,
-                        JL Pari Raya, Muara Baru Ujung, Jakarta Utara, DKI Jakarta, 14440',
+                        'content' => 'Jl. Raya Cirebon - Bandung Km 35, Sindangwasa Palasah, Majalengka
+                        Jawa Barat 45475',
                     ],
                     [
                         'title' => 'PT CitraDimensi Arthali Majalengka',
-                        'content' => 'Jl. Raya Cirebon - Bandung No.Km 35, Sindangwasa, Kec. Palasah,
-                        Kabupaten Majalengka, Jawa Barat 45475',
+                        'content' => 'Perumahan Prasarana Perikanan Samudera Block N No. 11 - 12, JL Pari Raya
+                        Muara Baru Ujung, Jakarta Utara
+                        DKI Jakarta 14440',
                     ],
                     [
                         'title' => 'PT CitraDimensi Arthali Semarang',
-                        'content' =>
-                            'Jl. Tambak Aji Raya V No. 9, Tambakaji, Kec. Ngaliyan, Kota Semarang, Jawa Tengah 50185',
+                        'content' => 'Jl. Tambak Aji Raya V No. 9, Tambakaji
+                            Ngaliyan, Kota Semarang
+                            Jawa Tengah 50185',
                     ],
                 ];
             @endphp

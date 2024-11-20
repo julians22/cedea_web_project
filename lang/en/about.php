@@ -7,8 +7,7 @@ return [
     'brief.detail' => 'PT CitraDimensi Arthali is one of the companies in Indonesia that is engaged in the processing of fishery products and frozen seafood manufacturing with the CEDEA brand, located in Muara Baru, Majalengka, Medan & Semarang.',
 
     'history.title' => 'Commitment Since 2004',
-    'history.detail' => '
-    Established since 1995, PT CitraDimensi Arthali is also a pioneer in the processed food industry based on seafood. quality in the production of each of its products, with the application of modern production technology, PT CitraDimensi Arthali has successfully become one of the producers of processed seafood products that are marketed in various markets in Indonesia, Korea Selatan, dan Papua Nugini.',
+    'history.detail' => 'Established since 1995, PT CitraDimensi Arthali is also a pioneer in the processed food industry based on seafood. quality in the production of each of its products, with the application of modern production technology, PT CitraDimensi Arthali has successfully become one of the producers of processed seafood products that are marketed in various markets in Indonesia, Korea Selatan, dan Papua Nugini.',
 
     "Visi.title" => "Vision",
     "Visi.detail" => "To be a leading player in the ready-to-cook and ready-to-eat food business in Indonesia and a preferred choice in certain global markets.",

@@ -7,20 +7,17 @@
                     <x-logo />
                 </div>
                 <div class="text-left ~py-2/10 lg:col-span-6">
-                    <p class="~text-xl/2xl">PT CitraDimensi Arthali</p>
+                    <p class="~text-xl/2xl">{{ __('footer.address.title') }}</p>
+                    <p class="~text-lg/xl">{{ __('footer.address.subtitle') }}</p>
                     <p>
-                        Sudirman 7.8, 20th Fl. Unit 01
-                        <br>
-                        Jl. Jend. Sudirman Kav. 7-8
-                        <br>
-                        Jakarta Pusat 10220 - Indonesia
+                        {!! __('footer.address.street') !!}
                     </p>
                     <ul>
                         <li>
-                            <p>P. (021) 3020 3333</p>
+                            <p>{{ __('footer.address.phone') }}</p>
                         </li>
                         <li>
-                            <a href="mailto:info@cedeaseafood.com">E. info@cedeaseafood.com</a>
+                            <a href="mailto:info@cedeaseafood.com">{{ __('footer.address.email') }}</a>
                         </li>
                     </ul>
                 </div>
