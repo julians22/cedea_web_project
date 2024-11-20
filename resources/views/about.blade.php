@@ -270,14 +270,14 @@
                     ],
                     [
                         'title' => 'PT CitraDimensi Arthali Jakarta',
-                        'content' => 'Jl. Raya Cirebon - Bandung Km 35, Sindangwasa Palasah, Majalengka
-                        Jawa Barat 45475',
-                    ],
-                    [
-                        'title' => 'PT CitraDimensi Arthali Majalengka',
                         'content' => 'Perumahan Prasarana Perikanan Samudera Block N No. 11 - 12, JL Pari Raya
                         Muara Baru Ujung, Jakarta Utara
                         DKI Jakarta 14440',
+                    ],
+                    [
+                        'title' => 'PT CitraDimensi Arthali Majalengka',
+                        'content' => 'Jl. Raya Cirebon - Bandung Km 35, Sindangwasa Palasah, Majalengka
+                        Jawa Barat 45475',
                     ],
                     [
                         'title' => 'PT CitraDimensi Arthali Semarang',
