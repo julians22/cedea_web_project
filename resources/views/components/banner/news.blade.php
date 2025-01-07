@@ -9,7 +9,7 @@
     </picture>
 
     <div class="container z-1 flex max-h-[90%] flex-col justify-end gap-4 text-white md:max-h-[80%]">
-        <div class="font-semibold ~text-xl/5xl">
+        <div class="font-semibold drop-shadow-md ~text-xl/5xl">
             {!! $item->title !!}
         </div>
         <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-androgyne"
