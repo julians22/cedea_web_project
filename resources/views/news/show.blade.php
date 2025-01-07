@@ -10,7 +10,7 @@
                 </figcaption>
             </figure>
 
-            <h1 class="~text-xl/4xl">{{ $post->title }}</h1>
+            <h1 class="~text-xl/4xl">{!! $post->title !!}</h1>
         </div>
     </section>
 

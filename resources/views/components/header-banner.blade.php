@@ -12,7 +12,7 @@ types: default, news
         <div {{ $attributes->twMergeFor('wrapper', 'swiper-wrapper') }}>
             <!-- Slides -->
             @foreach ($banners as $banner)
-                <div class="swiper-slide cursor-grab">
+                <div class="swiper-slide h-auto cursor-grab">
                     <x-dynamic-component class="mt-4" component='{{ "banner.{$type}" }}' :item='$banner' />
                 </div>
             @endforeach
