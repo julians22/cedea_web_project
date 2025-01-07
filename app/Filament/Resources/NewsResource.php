@@ -128,7 +128,7 @@ class NewsResource extends Resource
                         ]),
 
                     ]
-                ),
+                )->from('md'),
                 TiptapEditor::make('content')
                     ->profile('default')
                     ->acceptedFileTypes(['image/*'])

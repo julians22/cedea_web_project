@@ -77,10 +77,6 @@ class PostNews extends Model implements
         return SlugOptions::create()
             ->usingLanguage('id')
             ->generateSlugsFrom('title')
-            // ->slug
-            // ->slugifyUsing(function ($string) {
-            //     return Str::slug(strip_tags($string));
-            // })
             ->saveSlugsTo('slug');
     }
 
