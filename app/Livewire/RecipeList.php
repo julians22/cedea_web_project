@@ -24,6 +24,12 @@ class RecipeList extends Component
 
     public function mount()
     {
+
+        if (app()->environment('production')) {
+            // return redirect()->route('home');
+            $this->redirect('/');
+        }
+
         Meta::prependTitle('Recipe');
     }
 

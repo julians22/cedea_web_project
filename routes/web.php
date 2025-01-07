@@ -58,6 +58,7 @@ Route::group([
     )
         ->name('recipe');
 
+
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
         ->name('recipe.detail');
 

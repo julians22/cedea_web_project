@@ -57,11 +57,11 @@ class NewsResource extends Resource
                     [
                         Section::make(
                             [
-                                TextInput::make('title')
-                                    ->label(__('title'))
+                                TiptapEditor::make('title')
+                                    ->profile('minimal')
                                     ->translatable(true, null, [
-                                        'id' => ['required', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
+                                        'id' => ['required',],
+                                        'en' => ['nullable',],
                                     ]),
 
                                 Textarea::make('excerpt')
@@ -154,6 +154,7 @@ class NewsResource extends Resource
             ->filters([
                 //
             ])
+            ->defaultSort('published_at', 'desc')
             ->actions([
                 Tables\Actions\EditAction::make(),
             ])

@@ -13,6 +13,10 @@ class RecipeController extends Controller
     {
         Meta::prependTitle($recipe->title);
 
+        if (app()->environment('production')) {
+            return redirect()->route('home');
+        }
+
         return view(
             'recipe.show',
             compact('recipe')
