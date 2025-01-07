@@ -27,7 +27,7 @@
 
             <div class="h-auto md:basis-72">
                 <div class="relative ~pr-0/20">
-                    <x-lucide-search class="size-6 absolute left-2 top-1/2 -translate-y-1/2 md:left-3" />
+                    <x-lucide-search class="absolute left-2 top-1/2 size-6 -translate-y-1/2 md:left-3" />
                     <input
                         class="block w-full rounded-full border border-black bg-transparent px-1 py-3 ps-10 text-sm placeholder:text-black"
                         id="recipe-search" wire:model.live='keyword' type="search"
@@ -47,7 +47,7 @@
                             src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
                         <div class="flex h-full w-full flex-col gap-y-4 bg-white font-semibold ~p-4/8">
                             <p class="text-[#919497]">{{ $item->published_at }}</p>
-                            <h2 class="line-clamp-3 ~text-lg/2xl"> {{ $item->title }}</h2>
+                            <h2 class="line-clamp-3 ~text-lg/2xl"> {!! $item->title !!}</h2>
                             <a class="w-fit cursor-pointer rounded-xl bg-cedea-yellow-1 px-8 py-1 uppercase text-cedea-red"
                                 href="{{ route('news.show', ['post' => $item->slug]) }}">
                                 {{ __('news.read') }}
@@ -58,7 +58,7 @@
                     {{-- news list --}}
                     <div class="flex overflow-hidden rounded-xl shadow-top max-md:flex-col">
                         <div
-                            class="md:max-w-28 grid max-h-80 items-center justify-center overflow-hidden md:aspect-[6/2] md:max-h-40 md:w-52">
+                            class="grid max-h-80 items-center justify-center overflow-hidden md:aspect-[6/2] md:max-h-40 md:w-52 md:max-w-28">
                             <img class="object-cover object-center"
                                 src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
                         </div>
