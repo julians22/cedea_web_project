@@ -15,7 +15,7 @@ use Spatie\Tags\Tag;
 
 class HomeController extends Controller
 {
-    function index()
+    function __invoke()
     {
         Meta::prependTitle('Home');
 
@@ -25,17 +25,5 @@ class HomeController extends Controller
         // $articles = PostNews::with('media')->where('published', true)->take(2)->get();
         // $recipes = PostRecipes::with('media')->where('published', true)->take(2)->get();
         return view('welcome', compact('banners'));
-    }
-
-    function product()
-    {
-        Meta::prependTitle('PRODUCT');
-
-        return view('product');
-    }
-
-    function contact()
-    {
-        return view('contact');
     }
 }

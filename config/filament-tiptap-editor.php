@@ -50,6 +50,7 @@ return [
             'code-block',
             'source',
             'blocks',
+            'no-break'
         ],
         'simple' => ['heading', 'hr', 'bullet-list', 'ordered-list', 'checked-list', '|', 'bold', 'italic', 'lead', 'small', '|', 'link', 'media'],
         'minimal' => ['bold', 'italic', 'link', 'bullet-list', 'ordered-list'],
@@ -75,7 +76,7 @@ return [
     | Which output format should be stored in the Database.
     |
     | See: https://tiptap.dev/guide/output
-    */
+     */
     'output' => FilamentTiptapEditor\Enums\TiptapOutput::Html,
 
     /*
@@ -113,8 +114,8 @@ return [
     'disable_bubble_menus' => false,
     'disable_toolbar_menus' => false,
 
-    'bubble_menu_tools' => ['bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'link'],
-    'floating_menu_tools' => ['media', 'grid-builder', 'details', 'table', 'oembed', 'code-block', 'blocks'],
+    'bubble_menu_tools' => ['bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'link', 'no-break'],
+    'floating_menu_tools' => ['media', 'grid-builder', 'details', 'table', 'oembed', 'code-block', 'blocks',],
 
     /*
     |--------------------------------------------------------------------------
@@ -122,7 +123,15 @@ return [
     |--------------------------------------------------------------------------
     |
     */
-    'extensions_script' => null,
-    'extensions_styles' => null,
-    'extensions' => [],
+
+    'extensions_script' => 'resources/js/tiptap/extensions.js',
+    'extensions_styles' => 'resources/css/tiptap/extensions.css',
+    'extensions' => [
+        [
+            'id' => 'no-break',
+            'name' => 'no-break',
+            'button' => 'filament-tiptap-editor::tools.no-break',
+            'parser' => \App\TiptapExtensions\NoBreak::class,
+        ],
+    ],
 ];

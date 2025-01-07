@@ -20,19 +20,30 @@
     "src": "resources/assets/shippo-pattern.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-v2fer-0u.css",
+    "file": "assets/app-BDj1Q--S.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-BCxwUK-L.css",
+    "file": "assets/theme-BPVE1nPk.css",
     "src": "resources/css/filament/admin/theme.css",
+    "isEntry": true
+  },
+  "resources/css/tiptap/extensions.css": {
+    "file": "assets/extensions-qMWrykzB.css",
+    "src": "resources/css/tiptap/extensions.css",
     "isEntry": true
   },
   "resources/js/app.js": {
     "file": "assets/app-BlzMnIUT.js",
     "name": "app",
     "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/tiptap/extensions.js": {
+    "file": "assets/extensions-CLPdUlxh.js",
+    "name": "extensions",
+    "src": "resources/js/tiptap/extensions.js",
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {

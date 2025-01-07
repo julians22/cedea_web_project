@@ -132,7 +132,6 @@ class NewsResource extends Resource
                 TiptapEditor::make('content')
                     ->profile('default')
                     ->acceptedFileTypes(['image/*'])
-
                     ->translatable(true, null, [
                         'id' => ['required',],
                         'en' => ['nullable',],

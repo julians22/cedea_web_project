@@ -89,7 +89,7 @@
 
                     </ul>
                 </div>
-                </x-modal.alpi>
+            </x-modal.alpine>
 
         </x-slot>
     </x-section-banner>

@@ -33,7 +33,7 @@ Route::group([
     'prefix' => LaravelLocalization::setLocale(),
     'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
 ], function () {
-    Route::get('/', [HomeController::class, 'index'])
+    Route::get('/', HomeController::class)
         ->name('home');
 
     Route::get(

@@ -6,10 +6,12 @@ export default defineConfig({
         laravel({
             input: [
                 "resources/js/app.js",
-                "resources/css/app.css",
                 "resources/js/vendor/swiper-home.js",
                 "resources/js/vendor/swiper-recipe.js",
+                "resources/css/app.css",
                 "resources/css/filament/admin/theme.css",
+                "resources/js/tiptap/extensions.js",
+                "resources/css/tiptap/extensions.css",
             ],
             refresh: true,
         }),
