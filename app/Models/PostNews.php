@@ -81,6 +81,26 @@ class PostNews extends Model implements
     }
 
     /**
+     * Generate a non-unique slug for the post.
+     *
+     * If a custom slug has been used and is not empty, it returns the custom slug.
+     * Otherwise, it generates a slug from the source string using the specified separator and language.
+     *
+     * @return string The generated slug.
+     */
+
+    protected function generateNonUniqueSlug(): string
+    {
+        $slugField = $this->slugOptions->slugField;
+
+        if ($this->hasCustomSlugBeenUsed() && ! empty($this->$slugField)) {
+            return $this->$slugField;
+        }
+
+        return Str::slug(strip_tags($this->getSlugSourceString()), $this->slugOptions->slugSeparator, $this->slugOptions->slugLanguage);
+    }
+
+    /**
      * Get the route key for the model.
      */
     public function getRouteKeyName(): string

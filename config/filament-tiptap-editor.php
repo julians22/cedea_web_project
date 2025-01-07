@@ -102,7 +102,7 @@ return [
     'image_crop_aspect_ratio' => null,
     'image_resize_target_width' => null,
     'image_resize_target_height' => null,
-    'use_relative_paths' => false,
+    'use_relative_paths' => true,
 
     /*
     |--------------------------------------------------------------------------
@@ -115,7 +115,7 @@ return [
     'disable_toolbar_menus' => false,
 
     'bubble_menu_tools' => ['bold', 'italic', 'strike', 'underline', 'superscript', 'subscript', 'lead', 'small', 'link', 'no-break'],
-    'floating_menu_tools' => ['media', 'grid-builder', 'details', 'table', 'oembed', 'code-block', 'blocks',],
+    // 'floating_menu_tools' => ['media', 'grid-builder', 'details', 'table', 'oembed', 'code-block', 'blocks',],
 
     /*
     |--------------------------------------------------------------------------
