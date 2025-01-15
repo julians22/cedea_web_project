@@ -1,6 +1,4 @@
 <x-layouts.app>
-    {{-- @dd($post->getFirstMediaUrl('featured_image')) --}}
-
     <section class="bg-cedea-red text-white">
         <div class="container py-12">
             <figure class="mb-8">

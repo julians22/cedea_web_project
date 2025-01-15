@@ -69,7 +69,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                 </div>
 
                 <div>
-                    <span class="relative z-0 inline-flex rounded-md shadow-sm rtl:flex-row-reverse items-center gap-4">
+                    <span class="relative z-0 inline-flex rounded-md rtl:flex-row-reverse items-center gap-4">
                         <span>
                             {{-- Previous Page Link --}}
                             @if ($paginator->onFirstPage())
@@ -106,7 +106,7 @@ $scrollIntoViewJsSnippet = ($scrollTo !== false)
                             @if (is_string($element))
                                 <span aria-disabled="true">
                                     <span
-                                        class="relative -ml-px inline-flex cursor-default items-center border border-gray-300 bg-white px-4 py-2 text-sm font-medium leading-5 text-gray-700">{{ $element }}</span>
+                                        class="relative -ml-px inline-flex cursor-default items-center bg-white px-4 py-2 text-sm font-medium leading-5 text-gray-700">{{ $element }}</span>
                                 </span>
                             @endif
 
