@@ -72,11 +72,11 @@ Route::group([
         [NewsController::class, 'show']
     )->name('news.show');
 
-    // Route::get('contact', Contact::class)
-    //     ->name('contact');
+    Route::get('contact', Contact::class)
+        ->name('contact');
 
-    // Route::get('marketplace', MarketplaceController::class)
-    //     ->name('marketplace');
+    Route::get('marketplace', MarketplaceController::class)
+        ->name('marketplace');
 
     Route::get('search', SearchController::class)
         ->name('search');

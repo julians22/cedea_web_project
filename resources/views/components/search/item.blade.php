@@ -13,12 +13,14 @@
 
     <div>
 
-        <h3 class="text-lg text-cedea-red-500">
-            <a href="{{ $url }}">{{ $title }}</a>
-        </h3>
+        <a href="{{ $url }}">
+            <h3 class="text-lg text-cedea-red-500">
+                {!! $title !!}
+            </h3>
+        </a>
 
-        <p>
+        <div>
             {!! $desc !!}
-        </p>
+        </div>
     </div>
 </div>

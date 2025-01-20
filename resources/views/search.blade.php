@@ -64,7 +64,7 @@
                 readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
 
                 @forelse ($news as $item)
-                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
+                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="strip_tags($item->excerpt)"
                         :url="route('news.show', ['post' => $item->slug])" />
                 @empty
                     <x-placeholder.empty text="{{ __('status.empty') }}" />

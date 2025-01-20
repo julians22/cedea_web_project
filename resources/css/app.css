@@ -73,6 +73,10 @@
         @apply font-montserrat font-semibold;
     }
 
+    .font-title {
+        @apply font-androgyne;
+    }
+
     /* Base layout Component */
     /*?
     :before = ribbon point
@@ -97,7 +101,7 @@
     }
 
     .section-title {
-        @apply font-androgyne text-cedea-red-dark ~text-xl/5xl ~mb-2/10;
+        @apply font-title text-cedea-red-dark ~text-2xl/5xl ~mb-2/10;
     }
 
     #recipe-swiper {
@@ -150,6 +154,32 @@
 
         > :is(input, textarea) {
             @apply border-2 text-black border-gray-500/50 placeholder:text-gray-500/50 pl-4 py-1 font-normal;
+        }
+    }
+
+    figure.polaroid {
+        @apply bg-[#eaeaea] rotate-6 p-3;
+
+        img {
+            @apply w-full h-full;
+        }
+
+        figcaption {
+            @apply pt-6 -rotate-6;
+        }
+
+        &::before,
+        &::after {
+            content: "";
+            @apply absolute h-[12%] w-[45%] bg-[rgba(142,142,142,0.6)] -rotate-[40deg];
+        }
+
+        &::before {
+            @apply top-[3px] left-[-30px];
+        }
+
+        &::after {
+            @apply bottom-[3px] right-[-30px];
         }
     }
 }
