@@ -18,5 +18,3 @@ Livewire.start();
 
 // define "lord-icon" custom element with default properties
 defineElement(lottie.loadAnimation);
-
-// window.Pikaday = require("pikaday");

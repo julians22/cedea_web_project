@@ -2,14 +2,16 @@
 
 <x-form.input name="email" :label="__('contact.form.email')" :placeholder="__('contact.form.email')" model="email" />
 
+<x-form.input name="address" :label="__('contact.form.address')" :placeholder="__('contact.form.address')" model="address" />
+
 <x-form.input name="phone" :label="__('contact.form.phone')" :placeholder="__('contact.form.phone')" model="phone" />
 
-<x-form.radio name="gender" label="Jenis Kelamin" model="gender" :options="[
-    'male' => __('male'),
-    'female' => __('female'),
+<x-form.radio name="gender" :label="__('contact.form.gender')" model="gender" :options="[
+    'male' => __('contact.form.gender.male'),
+    'female' => __('contact.form.gender.female'),
 ]" />
 
-<x-form.dropdown name="age" label="umur" model="age" :options="[
+<x-form.dropdown name="age" :label="__('contact.form.age')" model="age" :options="[
     '12-16' => '12-16',
     '17-25' => '17-25',
     '26-35' => '26-35',

@@ -9,4 +9,9 @@
             <option value="{{ $value }}">{{ $label }}</option>
         @endforeach
     </select>
+    <span class="text-sm font-normal">
+        @error($name)
+            {{ $message }}
+        @enderror
+    </span>
 </div>

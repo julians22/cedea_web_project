@@ -20,49 +20,13 @@ class Contact extends Component
     public $gender = null;
     public $agency = null;
     public $visitor_size = null;
-    public $age = 0;
+    public $visit_date = null;
+    public $age = '0';
     public $city = null;
     public $subject = null;
     public $message = null;
 
-    public function rules()
-    {
-        $base =   [
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'address' => ['nullable', 'max:255'],
-            'phone' => ['nullable'],
-            'gender' => ['nullable', Rule::in(['male', 'female'])],
-            'age' => ['nullable'],
-            'city' => ['nullable', 'max:255'],
-        ];
-
-        if (!($this->tab_index > 0)) {
-            $base = array_merge($base, [
-                'subject' => ['required', 'max:255'],
-
-                // TODO: ADD TAG VALIDATION OR SANITIZATION
-                'message' => ['required', 'min:3']
-            ]);
-        }
-
-        return $base;
-    }
-
-    // public function messages()
-    // {
-    //     return [
-    //         'message.required' => 'The :attribute are missing.',
-    //         'message.min' => 'The :attribute is too short.',
-    //     ];
-    // }
-
-    // public function validationAttributes()
-    // {
-    //     return [
-    //         'message' => 'description',
-    //     ];
-    // }
+    public $type = null;
 
     public function mount()
     {
@@ -89,9 +53,61 @@ class Contact extends Component
         }
 
         $this->reset();
+        $this->resetErrorBag();
+        $this->resetValidation();
 
         $this->tab_index = $index;
     }
+
+    public function rules()
+    {
+        $base =   [
+            'name' => ['required', 'max:255'],
+            'email' => ['required', 'email', 'max:255'],
+            'phone' => ['required'],
+            'city' => ['required', 'max:255'],
+
+            // TODO: ADD TAG VALIDATION OR SANITIZATION
+            'message' => ['required', 'min:3'],
+
+            'type' => ['required']
+        ];
+
+        // inquiry
+        if ($this->tab_index === 0) {
+            $base = array_merge($base, [
+                'gender' => ['required', Rule::in(['male', 'female'])],
+                'address' => ['required', 'max:255'],
+                'age' => ['required', Rule::notIn(['0']),],
+                'city' => ['required'],
+                'subject' => ['required', 'max:255'],
+            ]);
+        }
+        // visit
+        else {
+            $base = array_merge($base, [
+                'visitor_size' => ['required'],
+                'visit_date' => ['required'],
+            ]);
+        }
+
+        return $base;
+    }
+
+    // public function messages()
+    // {
+    //     return [
+    //         'message.required' => 'The :attribute are missing.',
+    //         'message.min' => 'The :attribute is too short.',
+    //     ];
+    // }
+
+    // public function validationAttributes()
+    // {
+    //     return [
+    //         'message' => 'description',
+    //     ];
+    // }
 
     function send()
     {
@@ -99,15 +115,15 @@ class Contact extends Component
             return;
         }
 
+        $this->type = $this->tab_index == 0 ? 'inquiry' : 'visit';
+
         $this->validate();
 
-        Message::create([
-            'name' => $this->name,
-            'email' => $this->email,
-            'subject' => $this->subject,
-            'message' => $this->message,
-            'type' => $this->tab_index == 0 ? 'question' : 'visit',
-        ]);
+        if ($this->type === 'visit') {
+            $this->age = null;
+        }
+
+        Message::create($this->except('tab_index'));
 
         $this->dispatch('message-sent');
 

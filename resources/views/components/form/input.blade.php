@@ -3,7 +3,7 @@
 <div>
     <label for="{{ $name }}">{{ $label ?? $name }}</label>
 
-    <{{ $element }} wire:loading.attr="disabled" placeholder="{{ $placeholder }}" type="{{ $type }}"
+    <{{ $element }} wire:loading.attr="disabled" placeholder="{{ $placeholder ?? $name }}" type="{{ $type }}"
         name="{{ $name }}" wire:model="{{ $model }}" {{ $attributes }}>
         </{{ $element }}>
 

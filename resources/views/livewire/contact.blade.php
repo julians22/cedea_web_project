@@ -7,7 +7,7 @@
     x-data="{ messageSent: false }" x-on:message-sent="messageSent=true">
 
     <div class="lg:grid-overlay grid max-lg:gap-y-8">
-        <div class="container grid text-white md:gap-x-80 lg:grid-cols-2">
+        <div class="container grid text-white max-lg:order-2 md:gap-x-80 lg:grid-cols-2">
             <div>
                 <h1 class="section-title text-white">{{ __('contact.heading') }}</h1>
                 <div class="grid grid-cols-[auto_1fr] ~text-base/lg ~gap-x-2/4 ~gap-y-4/8">
@@ -78,7 +78,7 @@
         </div>
 
         {{-- form --}}
-        <form class="grid-overlay pointer-events-none grid" wire:submit="send">
+        <form class="grid-overlay pointer-events-none order-1 grid" wire:submit="send">
             <span class="pointer-events-none grid after:col-start-2 after:bg-white max-lg:hidden lg:grid-cols-2"></span>
 
             <div class="container pointer-events-none grid text-cedea-red-500 lg:grid-cols-2" x-show="!messageSent"

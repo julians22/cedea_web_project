@@ -15,4 +15,8 @@ class Message extends Model
      * @var array
      */
     protected $guarded = [];
+
+    protected $casts = [
+        'visit_date' => 'date',
+    ];
 }

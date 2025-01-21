@@ -149,10 +149,24 @@
         @apply [&>*]:col-start-1 [&>*]:row-start-1;
     }
 
-    .contact-form-wrapper > div:has(:is(input, textarea)) {
+    .contact-form-wrapper > div:has(:is(input, textarea, select)) {
         @apply flex flex-col;
 
-        > :is(input, textarea) {
+        > :is(input, textarea, select) {
+            &[type="date"] {
+                position: relative;
+            }
+
+            &[type="date"]::-webkit-calendar-picker-indicator {
+                position: absolute;
+                top: 0;
+                right: 0;
+                width: 100%;
+                height: 100%;
+                padding: 0;
+                color: transparent;
+                background: transparent;
+            }
             @apply border-2 text-black border-gray-500/50 placeholder:text-gray-500/50 pl-4 py-1 font-normal;
         }
     }

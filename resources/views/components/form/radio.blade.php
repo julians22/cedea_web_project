@@ -13,4 +13,10 @@
             </label>
         </div>
     @endforeach
+
+    <span class="text-sm font-normal">
+        @error($name)
+            {{ $message }}
+        @enderror
+    </span>
 </div>
