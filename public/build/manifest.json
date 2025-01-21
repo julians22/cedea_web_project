@@ -1,0 +1,75 @@
+{
+  "_autoplay-hIMayAKa.js": {
+    "file": "assets/autoplay-hIMayAKa.js",
+    "name": "autoplay"
+  },
+  "resources/assets/asia-pattern.png": {
+    "file": "assets/asia-pattern-Bq0GsITm.png",
+    "src": "resources/assets/asia-pattern.png"
+  },
+  "resources/assets/brick-pattern.webp": {
+    "file": "assets/brick-pattern-CdwqVlwB.webp",
+    "src": "resources/assets/brick-pattern.webp"
+  },
+  "resources/assets/fonts/AndrogyneMedium.woff": {
+    "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
+    "src": "resources/assets/fonts/AndrogyneMedium.woff"
+  },
+  "resources/assets/fonts/AndrogyneMedium.woff2": {
+    "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
+    "src": "resources/assets/fonts/AndrogyneMedium.woff2"
+  },
+  "resources/assets/market-footer.png": {
+    "file": "assets/market-footer-DwCXxfHH.png",
+    "src": "resources/assets/market-footer.png"
+  },
+  "resources/assets/shippo-pattern.png": {
+    "file": "assets/shippo-pattern-BlzYwU9H.png",
+    "src": "resources/assets/shippo-pattern.png"
+  },
+  "resources/css/app.css": {
+    "file": "assets/app-CJwqETO1.css",
+    "src": "resources/css/app.css",
+    "isEntry": true
+  },
+  "resources/css/filament/admin/theme.css": {
+    "file": "assets/theme-B2pHz0s7.css",
+    "src": "resources/css/filament/admin/theme.css",
+    "isEntry": true
+  },
+  "resources/css/tiptap/extensions.css": {
+    "file": "assets/extensions-DDBKxYXb.css",
+    "src": "resources/css/tiptap/extensions.css",
+    "isEntry": true
+  },
+  "resources/js/app.js": {
+    "file": "assets/app-gN-rFSsR.js",
+    "name": "app",
+    "src": "resources/js/app.js",
+    "isEntry": true
+  },
+  "resources/js/tiptap/extensions.js": {
+    "file": "assets/extensions-BQ0P0bjn.js",
+    "name": "extensions",
+    "src": "resources/js/tiptap/extensions.js",
+    "isEntry": true
+  },
+  "resources/js/vendor/swiper-home.js": {
+    "file": "assets/swiper-home-CcCsO-1U.js",
+    "name": "swiper-home",
+    "src": "resources/js/vendor/swiper-home.js",
+    "isEntry": true,
+    "imports": [
+      "_autoplay-hIMayAKa.js"
+    ]
+  },
+  "resources/js/vendor/swiper-recipe.js": {
+    "file": "assets/swiper-recipe-C0T95axW.js",
+    "name": "swiper-recipe",
+    "src": "resources/js/vendor/swiper-recipe.js",
+    "isEntry": true,
+    "imports": [
+      "_autoplay-hIMayAKa.js"
+    ]
+  }
+}
