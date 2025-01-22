@@ -3,17 +3,16 @@
     {{-- Banner Section --}}
     <x-header-banner :banners="$banners" />
 
-    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('home.closer.title')">
-
+    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :imageLeft="false" :title="__('home.closer.title')">
         <x-slot:desc>
             <p>{{ __('home.closer.detail') }}</p>
-        </x-slot>
+        </x-slot:desc>
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('about') }}">
                 {{ __('Read More') }}
             </a>
-        </x-slot>
+        </x-slot:button>
     </x-section-banner>
 
     <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('home.quality.title')">
@@ -22,14 +21,14 @@
             <p>
                 {{ __('home.quality.detail') }}
             </p>
-        </x-slot>
+        </x-slot:desc>
 
 
         <x-slot:button>
             <a class="w-fit rounded-full bg-cedea-red-dark px-4 py-2 text-white" href="{{ route('product') }}">
                 {{ __('See Product') }}
             </a>
-        </x-slot>
+        </x-slot:button>
     </x-section-banner>
 
     {{-- News Section --}}
