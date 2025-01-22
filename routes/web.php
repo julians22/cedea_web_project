@@ -10,6 +10,7 @@ use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VideoController;
 use App\Livewire\Contact;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
@@ -64,7 +65,7 @@ Route::group([
 
     Route::get(
         'news',
-        [NewsController::class, 'create']
+        [NewsController::class, 'index']
     )->name('news');
 
     Route::get(
@@ -77,6 +78,9 @@ Route::group([
 
     Route::get('marketplace', MarketplaceController::class)
         ->name('marketplace');
+
+    Route::get('videos', [VideoController::class, 'index'])
+        ->name('videos');
 
     Route::get('search', SearchController::class)
         ->name('search');

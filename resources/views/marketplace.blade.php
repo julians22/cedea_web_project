@@ -13,7 +13,7 @@
             <div
                 class="container z-1 flex flex-col items-end justify-center gap-4 text-center text-white max-sm:py-4 max-sm:pt-14">
                 <div class="flex flex-col items-center justify-center gap-y-6 sm:w-2/5">
-                    <h1 class="section-title text-inherit shadow-lg">
+                    <h1 class="section-title text-inherit drop-shadow-lg">
                         Rasakan Kelezatan <span class="~text-2xl/6xl"><span class="font-cedea">CEDEA</span>
                             Seafood</span>
                         dari <span class="~text-2xl/6xl">Rumah!</span>

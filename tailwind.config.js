@@ -127,8 +127,8 @@ export default {
         },
     },
     plugins: [
-        // require("@tailwindcss/typography"),
-        // require("tailwindcss-motion"),
+        require("@tailwindcss/typography"),
+        require("tailwindcss-motion"),
         fluid,
     ],
 };
