@@ -19,7 +19,7 @@
         </x-section-banner>
     </section>
 
-    <livewire:show-recipe-videos />
-    <livewire:show-ads-videos />
+    {{-- <livewire:show-recipe-videos />
+    <livewire:show-ads-videos /> --}}
 
 </x-layouts.app>

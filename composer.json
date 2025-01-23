@@ -16,7 +16,7 @@
         "codezero/laravel-unique-translation": "^4.3",
         "doctrine/dbal": "^3.9",
         "embed/embed": "^4.4",
-        "filament/filament": "^3.2",
+        "filament/filament": "v3.2.132",
         "filament/spatie-laravel-media-library-plugin": "^3.2",
         "filament/spatie-laravel-settings-plugin": "^3.2",
         "filament/spatie-laravel-tags-plugin": "3.2",

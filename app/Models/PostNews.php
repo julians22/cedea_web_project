@@ -85,6 +85,7 @@ class PostNews extends Model implements
      *
      * If a custom slug has been used and is not empty, it returns the custom slug.
      * Otherwise, it generates a slug from the source string using the specified separator and language.
+     * Also strip tags from the source string.
      *
      * @return string The generated slug.
      */
@@ -117,7 +118,7 @@ class PostNews extends Model implements
     {
         return Url::create(route('news.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
             ->setPriority(0.1);
     }
 

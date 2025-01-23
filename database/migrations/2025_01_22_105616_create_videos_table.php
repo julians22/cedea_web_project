@@ -14,8 +14,14 @@ return new class extends Migration
         Schema::create('videos', function (Blueprint $table) {
             $table->id();
 
-            $table->string('title');
-            $table->string('link');
+            $table->json('title');
+            $table->string('slug');
+            $table->json('video');
+
+            $table->string('thumbnail')->nullable();
+            $table->string('thumbnail_custom')->nullable();
+
+            $table->boolean('use_custom_thumbnail');
 
             $table->timestamps();
         });

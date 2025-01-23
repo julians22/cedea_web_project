@@ -14,6 +14,12 @@ class ManageContactPage extends SettingsPage
 
     protected static string $settings = ContactSettings::class;
 
+    public static function getNavigationGroup(): ?string
+    {
+        return __('Settings');
+    }
+
+
     public function form(Form $form): Form
     {
         return $form
