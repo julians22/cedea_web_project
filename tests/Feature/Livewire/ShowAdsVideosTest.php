@@ -1,9 +1,9 @@
 <?php
 
-use App\Livewire\ShowAdsVideos;
+use App\Livewire\ShowTvVideos;
 use Livewire\Livewire;
 
 it('renders successfully', function () {
-    Livewire::test(ShowAdsVideos::class)
+    Livewire::test(ShowTvVideos::class)
         ->assertStatus(200);
 });

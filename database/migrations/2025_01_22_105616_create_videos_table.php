@@ -15,12 +15,11 @@ return new class extends Migration
             $table->id();
 
             $table->json('title');
+            $table->json('description');
+            $table->string('type');
             $table->string('slug');
             $table->json('video');
-
             $table->string('thumbnail')->nullable();
-            $table->string('thumbnail_custom')->nullable();
-
             $table->boolean('use_custom_thumbnail');
 
             $table->timestamps();

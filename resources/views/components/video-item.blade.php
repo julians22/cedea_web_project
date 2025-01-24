@@ -1,4 +1,8 @@
-@props(['videoThumbnail', 'link'])
-<div>
-    <!-- Knowing is not enough; we must apply. Being willing is not enough; we must do. - Leonardo da Vinci -->
+@props(['video'])
+<div class="flex flex-col gap-4">
+    <a href="{{ $video->video['url'] }}" target="_blank">
+        <img class="aspect-video w-full max-w-none rounded object-cover object-center" src="{{ $video->thumbnail }}"
+            alt="{{ $video->title }}">
+    </a>
+    <p>{{ $video->description }}</p>
 </div>

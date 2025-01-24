@@ -3,7 +3,7 @@
     <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
 
     <section class="bg-cedea-red">
-        <x-section-banner class="container bg-cedea-red" class:title="text-white" class:desc="text-white" id="sejarah"
+        <x-section-banner class="container" class:title="text-white mb-0" class:desc="text-white" id="sejarah"
             :imageLeft="false" :gradient="false"
             imageUrl="https://cdn3.iconfinder.com/data/icons/social-network-30/512/social-06-512.png" :title="__('videos.explore.title')">
             <x-slot:desc>
@@ -19,7 +19,7 @@
         </x-section-banner>
     </section>
 
-    {{-- <livewire:show-recipe-videos />
-    <livewire:show-ads-videos /> --}}
+    <livewire:show-recipe-videos />
+    <livewire:show-tv-videos />
 
 </x-layouts.app>
