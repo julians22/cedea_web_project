@@ -2,7 +2,7 @@
 
     <h2 class="section-title text-center" wire:ignore>{{ $title }}</h2>
 
-    <div class="grid grid-cols-3 gap-x-8 gap-y-8">
+    <div class="grid grid-cols-1 gap-x-8 gap-y-8 sm:grid-cols-2 md:grid-cols-3">
         @foreach ($videos as $video)
             <x-video-item :video="$video" />
         @endforeach
