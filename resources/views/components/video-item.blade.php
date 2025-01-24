@@ -4,5 +4,5 @@
         <img class="aspect-video w-full max-w-none rounded object-cover object-center" src="{{ $video->thumbnail }}"
             alt="{{ $video->title }}">
     </a>
-    <p>{{ $video->description }}</p>
+    <h3>{{ $video->title }}</h3>
 </div>
