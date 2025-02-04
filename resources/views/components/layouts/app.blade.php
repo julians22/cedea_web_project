@@ -33,9 +33,6 @@
             gtag('js', new Date());
             gtag('config', 'G-57ZD2ZE0ME');
         </script>
-    @endproduction
-
-    @production
         <!-- Google Tag Manager -->
 
         <script>
