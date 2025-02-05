@@ -61,7 +61,7 @@ Route::group([
 
 
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
-        ->name('recipe.detail');
+        ->name('recipe.show');
 
     Route::get(
         'news',

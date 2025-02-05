@@ -2,31 +2,41 @@
     <script>
         document.addEventListener('alpine:init', () => {
             Alpine.data('hover', () => ({
-                hoverCardHovered: false,
-                hoverCardDelay: 100,
-                hoverCardLeaveDelay: 200,
-                hoverCardTimeout: null,
-                hoverCardLeaveTimeout: null,
-                hoverCardEnter() {
-                    clearTimeout(this.hoverCardLeaveTimeout);
-                    if (this.hoverCardHovered) return;
-                    clearTimeout(this.hoverCardTimeout);
-                    this.hoverCardTimeout = setTimeout(() => {
-                        this.hoverCardHovered = true;
-                    }, this.hoverCardDelay);
-                },
-                hoverCardLeave() {
-                    clearTimeout(this.hoverCardTimeout);
-                    if (!this.hoverCardHovered) return;
-                    clearTimeout(this.hoverCardLeaveTimeout);
-                    this.hoverCardLeaveTimeout = setTimeout(() => {
-                        this.hoverCardHovered = false;
-                    }, this.hoverCardLeaveDelay);
+                    hoverCardHovered: false,
+                    hoverCardDelay: 100,
+                    hoverCardLeaveDelay: 200,
+                    hoverCardTimeout: null,
+                    hoverCardLeaveTimeout: null,
+                    hoverCardEnter() {
+                        clearTimeout(this.hoverCardLeaveTimeout);
+                        if (this.hoverCardHovered) return;
+                        clearTimeout(this.hoverCardTimeout);
+                        this.hoverCardTimeout = setTimeout(() => {
+                            this.hoverCardHovered = true;
+                        }, this.hoverCardDelay);
+                    },
+                    hoverCardLeave() {
+                        clearTimeout(this.hoverCardTimeout);
+                        if (!this.hoverCardHovered) return;
+                        clearTimeout(this.hoverCardLeaveTimeout);
+                        this.hoverCardLeaveTimeout = setTimeout(() => {
+                            this.hoverCardHovered = false;
+                        }, this.hoverCardLeaveDelay);
+                    },
+                    handleProductClick(name) {
+                        @production
+                        dataLayer.push({
+                            'event': 'ProductView',
+                            'pagePath': window.location.href,
+                            'pageTitle': "Product : " + name,
+                        });
+                    @endproduction
                 }
             }))
         })
     </script>
 @endpush
+
 
 <div>
     <div wire:ignore>
@@ -36,7 +46,7 @@
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
-        <div class="bg-products min-h-72 minh relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+        <div class="bg-products minh relative min-h-72 object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
 
             <picture>
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
@@ -130,15 +140,15 @@
 
             {{-- product grid --}}
             <div class="flex flex-col gap-4 ~scroll-mt-36/24" id="product-grid">
-                <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
+                <div class="inline-grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <div class="flex flex-col gap-8">
-                            <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
-                                x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
+                        <div class="relative flex flex-col gap-8" x-data="hover" @mouseover="hoverCardEnter()"
+                            @mouseleave="hoverCardLeave()">
+                            <div class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                                 wire:key='{{ $item->slug }}'>
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
@@ -147,42 +157,44 @@
                                         @click="()=>{
                                             if(width<=1024) return
                                             modalOpen=true;
-                                            $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                            handleProductClick('{{ $item->name }}');
+                                            $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                             }">
                                 </div>
 
-                                {{-- hover content --}}
-                                <div class="before:size-8 top-full mt-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
-                                    x-show="hoverCardHovered" x-transition x-cloak
-                                    @click="()=>{
-                                        modalOpen=true;
-                                        $wire.handleChangeActiveProduct('{{ $item->slug }}')
-                                        }">
-                                    <div
-                                        class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
+                            </div>
+                            {{-- hover content --}}
+                            <div class="absolute top-full isolate z-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
+                                x-show="hoverCardHovered" x-transition x-cloak
+                                @click="()=>{
+                                    modalOpen=true;
+                                    handleProductClick('{{ $item->name }}');
+                                    $wire.handleChangeActiveProduct('{{ $item->slug }}');
+                                    }">
+                                <div
+                                    class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
-                                        <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
-                                            alt="">
+                                    <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
+                                        alt="">
 
-                                        <div class="text-pretty text-cedea-red-dark">
-                                            {{ implode(' ', [$item->name, $item->size]) }}
-                                            {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
-                                        </div>
-
-                                        <div class="cursor-pointer text-cedea-red max-md:hidden">
-                                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
-                                                <g>
-                                                    <g style="fill: none; filter: url(#d);">
-                                                        <polyline class="fill-none stroke-cedea-red"
-                                                            points="1.36 .75 16.72 16.11 .75 32.07"
-                                                            style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </div>
-
+                                    <div class="text-pretty text-cedea-red-dark">
+                                        {{ implode(' ', [$item->name, $item->size]) }}
+                                        {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                     </div>
+
+                                    <div class="cursor-pointer text-cedea-red max-md:hidden">
+                                        <svg class="h-5" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
+                                            <g>
+                                                <g style="fill: none; filter: url(#d);">
+                                                    <polyline class="fill-none stroke-cedea-red"
+                                                        points="1.36 .75 16.72 16.11 .75 32.07"
+                                                        style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+
                                 </div>
                             </div>
                         </div>
@@ -290,7 +302,7 @@
 
 
     {{-- recipe --}}
-    {{-- <section class="container mt-8" wire:ignore>
+    <section class="container mt-8" wire:ignore>
         <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
         <p>{{ __('product.creation.detail') }}</p>
@@ -336,5 +348,5 @@
                 @endforeach
             </x-meals-container>
         </div>
-    </section> --}}
+    </section>
 </div>

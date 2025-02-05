@@ -51,6 +51,11 @@ class RecipeList extends Component
         }
     }
 
+    function resetFilter(string $name)
+    {
+        $this->reset($name);
+    }
+
     public function render()
     {
         return view('livewire.recipe-list', [

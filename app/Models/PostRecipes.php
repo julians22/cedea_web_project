@@ -78,7 +78,7 @@ class PostRecipes extends Model implements HasMedia
      */
     public function toSitemapTag(): Url | string | array
     {
-        return Url::create(route('recipe.detail', $this))
+        return Url::create(route('recipe.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
             ->setPriority(0.1);

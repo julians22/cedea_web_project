@@ -8,6 +8,7 @@
     'showTime' => true,
     'loop' => true,
     'autoHideControls' => true,
+    'showMouseIcon' => true,
 ])
 
 @php
@@ -213,4 +214,12 @@ document.addEventListener('fullscreenchange', (e) => {
             </li>
         </ul>
     </div>
+    @if ($showMouseIcon)
+        <div class="absolute bottom-20 right-1/2 inline-flex translate-x-1/2 gap-4 text-white">
+            <span class="size-6">
+                <x-icon.mouse />
+            </span>
+            <p class="text-lg">Scroll</p>
+        </div>
+    @endif
 </div>

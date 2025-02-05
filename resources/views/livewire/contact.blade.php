@@ -24,7 +24,7 @@
                                     Jl. Jend. Sudirman Kav. 7-8
                                     Jakarta Pusat 10220 - Indonesia
                                 </div>
-                                <div>(021) 3020 3333</div>
+                                <a href="tel:(021) 3020 3333">(021) 3020 3333</a>
                             </div>
                             <div>
                                 <div class="~text-lg/xl">Muara Baru Operations Office</div>
@@ -33,7 +33,7 @@
                                     Blok N, No 12, Muara Baru Jakarta Utara,
                                     14440, Indonesia
                                 </div>
-                                <div>(021) 6602092</div>
+                                <a href="tel:(021) 6602092">(021) 6602092</a>
                             </div>
                         </div>
                     </x-contact.item>
@@ -64,14 +64,14 @@
                         <x-slot:icon>
                             <x-lucide-phone />
                         </x-slot:icon>
-                        <p>+6221 660 2092</p>
+                        <a href="telp:+6221 660 2092">+6221 660 2092</a>
                     </x-contact.item>
 
                     <x-contact.item>
                         <x-slot:icon>
                             <x-lucide-mail />
                         </x-slot:icon>
-                        <p>info@cedeaseafood.com</p>
+                        <a href="mailto:info@cedeaseafood.com">info@cedeaseafood.com</a>
                     </x-contact.item>
                 </div>
             </div>
