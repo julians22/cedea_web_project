@@ -18,9 +18,9 @@ class Contact extends Component
     public $address = null;
     public $phone = null;
     public $gender = null;
-    public $agency = null;
+    public $institution = null;
     public $visitor_size = null;
-    public $visit_date = null;
+    public $proposed_date = null;
     public $age = '0';
     public $city = null;
     public $subject = null;
@@ -87,7 +87,8 @@ class Contact extends Component
         else {
             $base = array_merge($base, [
                 'visitor_size' => ['required'],
-                'visit_date' => ['required'],
+                'institution' => ['required'],
+                'proposed_date' => ['required'],
             ]);
         }
 

@@ -58,7 +58,7 @@
                         text="{{ __('status.empty') }}" />
                 @endforelse
 
-                <p>More result</p>
+                {{-- <p>More result</p> --}}
 
             </x-search.item-group>
 

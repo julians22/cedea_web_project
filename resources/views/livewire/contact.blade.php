@@ -13,7 +13,7 @@
                 <div class="grid grid-cols-[auto_1fr] ~text-base/lg ~gap-x-2/4 ~gap-y-4/8">
                     <x-contact.item>
                         <x-slot:icon>
-                            <x-lucide-home />
+                            <x-icon.building />
                         </x-slot:icon>
                         <div class="flex flex-col ~gap-4/8">
                             <div>
@@ -27,9 +27,9 @@
                                 <a href="tel:(021) 3020 3333">(021) 3020 3333</a>
                             </div>
                             <div>
-                                <div class="~text-lg/xl">Muara Baru Operations Office</div>
-                                <div class='font-semibold'>
-                                    "Perum Prasarana Perikanan Samudera
+                                <div class="font-semibold ~text-lg/xl">Muara Baru Operations Office</div>
+                                <div class=''>
+                                    Perum Prasarana Perikanan Samudera
                                     Blok N, No 12, Muara Baru Jakarta Utara,
                                     14440, Indonesia
                                 </div>
@@ -62,14 +62,14 @@
 
                     <x-contact.item>
                         <x-slot:icon>
-                            <x-lucide-phone />
+                            <x-icon.phone />
                         </x-slot:icon>
                         <a href="telp:+6221 660 2092">+6221 660 2092</a>
                     </x-contact.item>
 
                     <x-contact.item>
                         <x-slot:icon>
-                            <x-lucide-mail />
+                            <x-icon.mail />
                         </x-slot:icon>
                         <a href="mailto:info@cedeaseafood.com">info@cedeaseafood.com</a>
                     </x-contact.item>
