@@ -35,7 +35,7 @@
 
         <section class="container grid grid-cols-1 lg:grid-cols-2">
             <div class="self-center max-lg:hidden">
-                <img src="{{ asset('img/marketplace/phone.png') }}" alt="">
+                <img src="{{ asset('img/marketplace/phonev2.png') }}" alt="">
             </div>
 
             {{-- marketplace --}}
