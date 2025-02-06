@@ -38,64 +38,146 @@
             </div>
 
             {{-- marketplace --}}
-            <div class="my-16 flex flex-col flex-wrap gap-y-4 [&_img]:max-h-28">
+            <div class="my-16 flex flex-col flex-wrap gap-y-4 [&_img]:max-h-[4.5rem]">
 
                 <h2 class="section-title mb-2 text-center">{{ __('marketplace.online') }}</h2>
 
-                <div class="grid grid-cols-2 items-center justify-center justify-items-center gap-4 md:grid-cols-3">
+                <div
+                    class="grid grid-cols-1 items-center justify-center justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3">
 
                     @php
+
                         $marketplace_logos_1 = [
-                            'tokopedia' => 'img/marketplace/tokopedia.png',
-                            'shopee' => 'img/marketplace/shopee.png',
-                            'blibli' => 'img/marketplace/blibli-2.png',
-                            'astro' => 'img/marketplace/astro.png',
-                            'grab mart' => 'img/marketplace/grabmart2.png',
-                            'pasar now' => 'img/marketplace/pasarnow.png',
-                            'indomaret' => 'img/marketplace/indomaret.png',
-                            'segari' => 'img/marketplace/segari.png',
-                            'sayurbox' => 'img/marketplace/sayurbox.png',
+                            [
+                                'name' => 'tokopedia',
+                                'url' => 'https://www.tokopedia.com/cedeaofficial',
+                                'logo' => asset('img/marketplace/tokopedia.png'),
+                            ],
+                            [
+                                'name' => 'shopee',
+                                'url' => 'https://shopee.co.id/cedeaofficialjakarta',
+                                'logo' => asset('img/marketplace/shopee.png'),
+                            ],
+                            [
+                                'name' => 'blibli',
+                                'url' => 'https://www.blibli.com/merchant/cedea-jakarta-pusat-official-store/CEJ-60045',
+                                'logo' => asset('img/marketplace/blibli-2.png'),
+                            ],
+                            [
+                                'name' => 'astro',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/astro.png'),
+                            ],
+                            [
+                                'name' => 'grab mart',
+                                'url' => 'https://r.grab.com/g/2-2-6-C23HL3CEPGKANT',
+                                'logo' => asset('img/marketplace/grabmart2.png'),
+                            ],
+                            [
+                                'name' => 'pasar now',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/pasarnow.png'),
+                            ],
+                            [
+                                'name' => 'indomaret',
+                                'url' => 'https://www.klikindomaret.com/search/?key=Cedea',
+                                'logo' => asset('img/marketplace/indomaret.png'),
+                            ],
+                            [
+                                'name' => 'segari',
+                                'url' => '',
+                                'logo' => asset('img/marketplace/segari.png'),
+                            ],
+                            [
+                                'name' => 'sayurbox',
+                                'url' => 'https://www.sayurbox.com/search?q=cedea',
+                                'logo' => asset('img/marketplace/sayurbox.png'),
+                            ],
                         ];
                     @endphp
 
-                    @foreach ($marketplace_logos_1 as $name => $path)
+                    @foreach ($marketplace_logos_1 as $logo)
                         <div class="p-6">
-                            <img src="{{ asset($path) }}" alt="logo {{ $name }}">
+                            <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+
                         </div>
                     @endforeach
                 </div>
 
-                <div class="mt-8 flex flex-col justify-center gap-12">
+                <div class="mt-8 flex flex-col justify-center gap-6">
 
                     <h2 class="section-title mb-2 text-center">{{ __('marketplace.found') }}</h2>
 
                     @php
+
                         $marketplace_logos_2 = [
-                            'hypermart' => 'img/marketplace/hypermart.png',
-                            'yogya group' => 'img/marketplace/yogyagroup.png',
-                            'indomaret fresh' => 'img/marketplace/indomaret-fresh.png',
-                            'alfamidi' => 'img/marketplace/alfamidi.png',
-                            'foodhall' => 'img/marketplace/foodhall.png',
-                            'farmermarket' => 'img/marketplace/farmermarket.png',
-                            'lottemart' => 'img/marketplace/lottemart.png',
-                            'ranchmarket' => 'img/marketplace/ranchmarket.png',
-                            'aeon' => 'img/marketplace/aeon.png',
-                            'superindo' => 'img/marketplace/superindo.png',
+                            [
+                                'name' => 'hypermart',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/hypermart.png'),
+                            ],
+                            [
+                                'name' => 'yogya group',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/yogyagroup.png'),
+                            ],
+                            [
+                                'name' => 'indomaret fresh',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/indomaret-fresh.png'),
+                            ],
+                            [
+                                'name' => 'alfamidi',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/alfamidi.png'),
+                            ],
+                            [
+                                'name' => 'foodhall',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/foodhall.png'),
+                            ],
+                            [
+                                'name' => 'farmermarket',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/farmermarket.png'),
+                            ],
+                            [
+                                'name' => 'lottemart',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/lottemart.png'),
+                            ],
+                            [
+                                'name' => 'ranchmarket',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/ranchmarket.png'),
+                            ],
+                            [
+                                'name' => 'aeon',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/aeon.png'),
+                            ],
+                            [
+                                'name' => 'superindo',
+                                'url' => '#',
+                                'logo' => asset('img/marketplace/superindo.png'),
+                            ],
                         ];
                     @endphp
 
-                    <div class="flex flex-wrap items-center justify-center gap-12">
-                        @foreach (array_slice($marketplace_logos_2, 0, 2) as $name => $path)
-                            <div class="h-20 max-w-40 flex-initial text-center">
-                                <img src="{{ asset($path) }}" alt="logo {{ $name }}">
+                    <div class="flex flex-wrap items-center justify-center gap-6">
+                        @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
+                            <div
+                                class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center">
+                                <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                             </div>
                         @endforeach
                     </div>
 
-                    <div class="flex flex-wrap items-center justify-center gap-12">
-                        @foreach (array_slice($marketplace_logos_2, 2) as $name => $path)
-                            <div class="h-20 max-w-40 flex-initial text-center">
-                                <img src="{{ asset($path) }}" alt="logo {{ $name }}">
+                    <div class="flex flex-wrap items-center justify-center gap-6">
+                        @foreach (array_slice($marketplace_logos_2, 2) as $logo)
+                            <div
+                                class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center">
+                                <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                             </div>
                         @endforeach
                     </div>
