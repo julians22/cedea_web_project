@@ -78,7 +78,22 @@
         </div>
 
         {{-- form --}}
-        <form class="grid-overlay pointer-events-none order-1 grid" wire:submit="send">
+        <form class="grid-overlay pointer-events-none order-1 grid" @submit.prevent="doCaptcha" x-data="{
+            siteKey: @js(config('services.recaptcha.public_key')),
+            init() {
+                // load our recaptcha.
+                if (!window.recaptcha) {
+                    const script = document.createElement('script');
+                    script.src = 'https://www.google.com/recaptcha/api.js?render=' + this.siteKey;
+                    document.body.append(script);
+                }
+            },
+            doCaptcha() {
+                grecaptcha.execute(this.siteKey, { action: 'submit' }).then(token => {
+                    Livewire.dispatch('formSubmitted', { token: token });
+                });
+            },
+        }">
             <span class="pointer-events-none grid after:col-start-2 after:bg-white max-lg:hidden lg:grid-cols-2"></span>
 
             <div class="container pointer-events-none grid text-cedea-red-500 lg:grid-cols-2" x-show="!messageSent"
@@ -143,6 +158,10 @@
                                     {{ __('contact.submit') }}
                                 </span>
                             </button>
+
+                            @error('recaptcha')
+                                <div class="rounded bg-red-300 p-3 text-red-700">{{ $message }}</div>
+                            @enderror
                         </div>
                     @endif
 

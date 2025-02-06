@@ -6,8 +6,11 @@ use App\Models\Message;
 use App\Settings\ContactSettings;
 use Illuminate\Validation\Rule;
 use Livewire\Attributes\Computed;
+use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Validation\ValidationException;
 
 class Contact extends Component
 {
@@ -109,8 +112,25 @@ class Contact extends Component
     //         'message' => 'description',
     //     ];
     // }
-
-    function send()
+    protected function validateRecaptcha(string $token): void
+    {
+        // validate Google reCaptcha.
+        $response = Http::asForm()->post('https://www.google.com/recaptcha/api/siteverify', [
+            'secret' => config('services.recaptcha.secret_key'),
+            'response' => $token,
+            'remoteip' => request()->ip(),
+        ]);
+        $throw = fn($message) => throw ValidationException::withMessages(['recaptcha' => $message]);
+        if (! $response->successful() || ! $response->json('success')) {
+            $throw($response->json(['error-codes'])[0] ?? 'An error occurred.');
+        }
+        // if response was score based (the higher the score, the more trustworthy the request)
+        if ($response->json('score') < 0.6) {
+            $throw('We were unable to verify that you\'re not a robot. Please try again.');
+        }
+    }
+    #[On('formSubmitted')]
+    function send($token)
     {
         if (!$this->isFormEnabled()) {
             return;
@@ -119,6 +139,7 @@ class Contact extends Component
         $this->type = $this->tab_index == 0 ? 'inquiry' : 'visit';
 
         $this->validate();
+        $this->validateRecaptcha($token);
 
         if ($this->type === 'visit') {
             $this->age = null;

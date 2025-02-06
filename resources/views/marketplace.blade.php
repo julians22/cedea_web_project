@@ -4,10 +4,9 @@
         <section
             class="relative grid max-h-[400px] content-center overflow-hidden lg:max-h-[600px] [&>*]:col-start-1 [&>*]:row-start-1">
             <picture class="overflow-hidden">
-                <source class="h-full w-full object-cover" srcset="{{ asset('placeholder/banner/marketplace.jpg') }}"
+                <source class="h-full w-full object-cover" srcset="{{ asset('img/marketplace/header.jpg') }}"
                     media="(min-width: 1024px)" />
-                <img class="h-full w-full object-cover" src="{{ asset('placeholder/banner/marketplace.jpg') }}"
-                    alt="">
+                <img class="h-full w-full object-cover" src="{{ asset('img/marketplace/header.jpg') }}" alt="">
             </picture>
 
             <div
