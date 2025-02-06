@@ -1,4 +1,4 @@
-<section class='container my-12'>
+<section class='container my-12' x-data="{ modalOpen: false }">
 
     <h2 class="section-title text-center" wire:ignore>{{ $title }}</h2>
 
@@ -11,4 +11,18 @@
     <div class="pt-4">
         {{ $videos->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
     </div>
+
+    <x-modal-video>
+
+        <div class="text-white" wire:loading.remove wire:target='handleChangeActiveVideo'>
+            @if ($activeVideo)
+                <x-matinee::embed :data="$activeVideo->video" />
+            @endif
+        </div>
+
+        {{-- skeleton --}}
+        <div class="space-y-4 text-white" wire:loading wire:target='handleChangeActiveVideo'>
+        </div>
+    </x-modal-video>
+
 </section>

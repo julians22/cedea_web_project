@@ -4,12 +4,15 @@ namespace App\Livewire;
 
 use App\Enums\VideoType;
 use App\Models\Video;
+use App\Traits\VideoPopUp;
 use Livewire\Component;
 use Livewire\WithPagination;
 
 class ShowRecipeVideos extends Component
 {
-    use WithPagination;
+    use WithPagination, VideoPopUp;
+
+
 
     public function render()
     {

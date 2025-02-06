@@ -1,6 +1,6 @@
 {{--
 This component is a simplified modal component designed to be used with
-product-list livewire element since we can't use the native `<dialog>`
+video-list livewire element since we can't use the native `<dialog>`
 element with Livewire.
 
 This component takes a single slot, which is the content of the modal.
@@ -27,8 +27,9 @@ can be clicked to close the modal.
                 x-transition:leave-end="opacity-0 translate-y-4 sm:translate-y-0 sm:scale-95">
 
                 <button
-                    class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
-                    @click="modalOpen=false" wire:click="handleChangeActiveProduct()">
+                    class="absolute -right-8 -top-8 z-1 mr-5 mt-5 flex items-center justify-center rounded-full bg-gray-50 text-gray-800 hover:bg-white"
+                    @click="modalOpen=false" wire:click="handleChangeActiveVideo()">
+
                     <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="0.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />
@@ -36,7 +37,7 @@ can be clicked to close the modal.
                 </button>
 
                 <div
-                    class="max-h-[90dvh] w-[80vw] min-w-[50vw] overflow-auto rounded-lg bg-cedea-red ~p-6/12 sm:max-w-lg sm:rounded-3xl lg:max-w-7xl">
+                    class="max-h-[90dvh] w-[90vw] min-w-[50vw] overflow-auto rounded-md bg-cedea-red ~p-2/4 sm:max-w-lg sm:rounded-lg lg:max-w-7xl">
                     {{ $slot }}
                 </div>
             </div>

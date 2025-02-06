@@ -215,7 +215,6 @@
 
         <x-modal-product-detail>
 
-
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
                     <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>

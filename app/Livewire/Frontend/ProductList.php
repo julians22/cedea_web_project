@@ -64,9 +64,13 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    public function handleChangeActiveProduct($slug)
+    public function handleChangeActiveProduct(string $slug = '')
     {
-        $this->activeProduct = Product::where('slug', $slug)->first();
+        if (!$slug) {
+            $this->reset('activeProduct');
+        } else {
+            $this->activeProduct = Product::where('slug', $slug)->first();
+        }
     }
 
     public function updatedActiveCategory()

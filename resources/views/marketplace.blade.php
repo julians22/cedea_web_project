@@ -86,7 +86,7 @@
 
                     <div class="flex flex-wrap items-center justify-center gap-12">
                         @foreach (array_slice($marketplace_logos_2, 0, 2) as $name => $path)
-                            <div class="max-w-40 flex-initial text-center">
+                            <div class="h-20 max-w-40 flex-initial text-center">
                                 <img src="{{ asset($path) }}" alt="logo {{ $name }}">
                             </div>
                         @endforeach
@@ -94,7 +94,7 @@
 
                     <div class="flex flex-wrap items-center justify-center gap-12">
                         @foreach (array_slice($marketplace_logos_2, 2) as $name => $path)
-                            <div class="max-w-40 flex-initial text-center">
+                            <div class="h-20 max-w-40 flex-initial text-center">
                                 <img src="{{ asset($path) }}" alt="logo {{ $name }}">
                             </div>
                         @endforeach
