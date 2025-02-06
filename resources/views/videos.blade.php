@@ -12,7 +12,8 @@
                 </p>
             </x-slot:desc>
             <x-slot:button>
-                <a class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red" href="youtube.com">
+                <a class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red"
+                    href="https://www.youtube.com/c/cedeaseafood" target="_blank">
                     {{ __('videos.visit_now') }}
                 </a>
             </x-slot>
