@@ -5,10 +5,9 @@
 ])
 
 {{-- Recipe --}}
-<div {{ $attributes->twMerge('my-8 mb-16') }}>
-    <h1 class="section-title mb-4 text-left text-cedea-red-dark">{{ $title }}</h1>
-    <ul class="flex flex-col gap-y-4">
-
+<div {{ $attributes->withoutTwMergeClasses()->twMerge('my-8 mb-16') }}>
+    <h2 class="section-title mb-4 text-left text-cedea-red-dark">{{ $title }}</h2>
+    <ul {{ $attributes->twMergeFor('content', 'flex flex-col gap-y-4') }}>
         {{ $slot }}
 
         @if ($showReadmore)

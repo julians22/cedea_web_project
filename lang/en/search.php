@@ -7,5 +7,10 @@ return [
     'desc' => 'Here are the search results for ',
     'empty' => 'No results found',
     'placeholder' => 'Search Here',
-    'more' => 'More result'
+    'more' => 'More result',
+
+    'home' => 'Home',
+    'about' => 'About',
+    'contact' => 'Contact',
+    'marketplace' => 'Marketplace',
 ];

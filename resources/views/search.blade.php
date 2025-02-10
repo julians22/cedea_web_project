@@ -94,6 +94,19 @@
                 @endforelse
 
             </x-search.item-group>
+
+            {{-- pages --}}
+            <x-search.item-group class:content="flex-row gap-2 flex-wrap" title="Halaman Terkait Lainnya"
+                :showReadmore="count($scrape_results) > 3" readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+
+                @forelse ($scrape_results as $name => $url)
+                    <a class="flex items-center justify-center rounded-full bg-cedea-red px-3 py-1 text-white"
+                        href="{{ $url }}">{{ __('search.' . $name) }}</a>
+                @empty
+                    <x-placeholder.empty class:text="~text-lg/2xl" class:icon="~size-14/24"
+                        text="{{ __('status.empty') }}" />
+                @endforelse
+            </x-search.item-group>
         </div>
     </section>
 </x-layouts.app>
