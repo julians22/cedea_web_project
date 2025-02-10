@@ -24,6 +24,8 @@ class SearchController extends Controller
 
         // Extract specific text using XPath or CSS selector
         $title = $crawler->filter('title')->text();
+        // Remove <header> tags and their contents from the HTML content
+        $html_content = preg_replace('/<header.*?>.*?<\/header>/s', '', $html_content);
         // Remove <script> tags and their contents from the HTML content
         $html_content = preg_replace('/<script.*?>.*?<\/script>/s', '', $html_content);
         // Remove <style> tags and their contents from the HTML content
