@@ -96,8 +96,7 @@
             </x-search.item-group>
 
             {{-- pages --}}
-            <x-search.item-group class:content="flex-row gap-2 flex-wrap" title="Halaman Terkait Lainnya"
-                :showReadmore="count($scrape_results) > 3" readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+            <x-search.item-group class:content="flex-row gap-2 flex-wrap" title="Halaman Terkait Lainnya">
 
                 @forelse ($scrape_results as $name => $url)
                     <a class="flex items-center justify-center rounded-full bg-cedea-red px-3 py-1 text-white"
