@@ -7,7 +7,7 @@
             'size-0 translate-y-full': seachModalOpen,
             'size-5 translate-y-0': !seachModalOpen
         }"
-        disabled="seachModalOpen" type="button" @click="seachModalOpen=true">
+        :disabled="seachModalOpen" type="button" @click="seachModalOpen=true">
         <x-icon.magnifying-glass class="size-auto" />
     </button>
 
