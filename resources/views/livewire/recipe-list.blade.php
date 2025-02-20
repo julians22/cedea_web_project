@@ -89,7 +89,7 @@
 
         <div class="flex flex-col ~gap-8/16">
             @forelse ($recipes as $recipe)
-                <x-recipe-item :name="$recipe->title" :product="$recipe->product ?: null" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')"
+                <x-recipe-item :category="$recipe->recipe_type" :name="$recipe->title" :product="$recipe->product ?: null" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')"
                     :description="$recipe->description" />
             @empty
                 <x-placeholder.empty text="{{ __('status.empty') }}" />
