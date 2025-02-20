@@ -1,9 +1,13 @@
 <x-layouts.app>
 
     @if ($recipe->video['url'])
-        <div class="relative aspect-video overflow-hidden">
+        <div class="relative aspect-video overflow-hidden" x-data="{
+            pageYOffset: 0,
+        }" x-init="pageYOffset = Math.max(40, ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);"
+            @scroll.window="pageYOffset = Math.max(40,  ( $el.offsetHeight - ($el.offsetHeight * 0.75) ) - window.scrollY );">
             <x-matinee::embed :data="$recipe->video" />
-            <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~bottom-4/20 ~gap-1/4">
+            <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~gap-1/4"
+                :style="`bottom: ${pageYOffset}px;`">
                 <span class="~size-3/6">
                     <x-icon.mouse />
                 </span>

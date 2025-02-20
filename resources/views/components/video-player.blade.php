@@ -16,6 +16,7 @@
 @endphp
 
 <div class="relative aspect-video overflow-hidden" x-data="{
+    pageYOffset: 0,
     sources: {
         mp4: '{{ $source_mp4 }}',
         webm: '{{ $source_webm }}',
@@ -131,35 +132,36 @@
             seconds: result.substring(6, 8),
         };
     }
-}" x-init="$refs.player.load();
-// Hide the default player controls
-$refs.player.controls = false;
-
-if (this.loop) {
-    $refs.player.loop = true;
-}
-
-
-$watch('playing', (value) => {
-    if (value) {
-        ended = false;
-        controlsHideTimeout = setTimeout(() => {
-            controls = false;
-        }, autoHideControlsDelay);
-    } else {
-        clearTimeout(controlsHideTimeout);
-        controls = true;
+}"
+    @scroll.window="pageYOffset = Math.max(40,  ( $el.offsetHeight - ($el.offsetHeight * 0.75) ) - window.scrollY );"
+    x-init="$refs.player.load();
+    pageYOffset = Math.max(40, ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);
+    // Hide the default player controls
+    $refs.player.controls = false;
+    
+    if (this.loop) {
+        $refs.player.loop = true;
     }
-});
-
-if (!document?.fullscreenEnabled) {
-    $refs.fullscreenButton.style.display = 'none';
-}
-
-document.addEventListener('fullscreenchange', (e) => {
-    fullscreen = !!document.fullscreenElement;
-});" x-ref="videoContainer"
-    @mouseleave="mouseleave=true" @mousemove="mousemoveVideo" x-cloak>
+    
+    $watch('playing', (value) => {
+        if (value) {
+            ended = false;
+            controlsHideTimeout = setTimeout(() => {
+                controls = false;
+            }, autoHideControlsDelay);
+        } else {
+            clearTimeout(controlsHideTimeout);
+            controls = true;
+        }
+    });
+    
+    if (!document?.fullscreenEnabled) {
+        $refs.fullscreenButton.style.display = 'none';
+    }
+    
+    document.addEventListener('fullscreenchange', (e) => {
+        fullscreen = !!document.fullscreenElement;
+    });" x-ref="videoContainer" @mouseleave="mouseleave=true" @mousemove="mousemoveVideo" x-cloak>
 
     <video class="relative h-full w-full bg-black object-cover" x-ref="player" @loadedmetadata="metaDataLoaded"
         @ended="videoEnded" autoplay muted preload="metadata" :poster="poster" crossorigin="anonymous">
@@ -215,7 +217,8 @@ document.addEventListener('fullscreenchange', (e) => {
         </ul>
     </div>
     @if ($showMouseIcon)
-        <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~bottom-4/20 ~gap-1/4">
+        <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~gap-1/4"
+            :style="`bottom: ${pageYOffset}px;`">
             <span class="~size-3/6">
                 <x-icon.mouse />
             </span>
