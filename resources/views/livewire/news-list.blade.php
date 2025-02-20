@@ -66,7 +66,7 @@
                             <p class="cursor-pointer text-[#919497] ~text-xxs/xs">{{ $item->published_at }}</p>
                             <a class="line-clamp-3 ~text-xxs/xs"
                                 href="{{ route('news.show', ['post' => $item->slug]) }}">
-                                {{ $item->title }}
+                                {!! $item->title !!}
                             </a>
                         </div>
                     </div>
