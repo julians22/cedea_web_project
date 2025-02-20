@@ -87,7 +87,7 @@ class Nav extends Component
                         'submenu' => []
                     ],
                     [
-                        'label' => 'Belanja',
+                        'label' => __('nav.product.marketplace'),
                         'route' => route('marketplace'),
                         'submenu' => []
                     ],
