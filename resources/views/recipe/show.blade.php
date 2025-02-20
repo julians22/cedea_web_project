@@ -1,7 +1,15 @@
 <x-layouts.app>
 
     @if ($recipe->video['url'])
-        <x-matinee::embed :data="$recipe->video" />
+        <div class="relative aspect-video overflow-hidden">
+            <x-matinee::embed :data="$recipe->video" />
+            <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~bottom-4/20 ~gap-1/4">
+                <span class="~size-3/6">
+                    <x-icon.mouse />
+                </span>
+                <p class="~text-base/lg">Scroll</p>
+            </div>
+        </div>
     @endif
 
     <section @class([
