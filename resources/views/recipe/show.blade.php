@@ -28,15 +28,19 @@
         @endif
         <div class="flex flex-col gap-y-8">
             <div class="flex flex-col gap-2">
+                <div class="w-fit rounded-full border-2 border-cedea-red px-2 text-cedea-red">
+                    {{ Str::title($recipe->recipe_type) }}</div>
                 @if ($recipe->product)
-                    <p class="uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
+                    <p class="mt-1 uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
                 @endif
                 <h1 class="~text-2xl/5xl">{{ $recipe->title }}</h1>
             </div>
+
             <div class="prose [&_ul_*]:m-0">
                 @if ($recipe->ingredients)
                     @foreach ($recipe->ingredients as $ingredient)
                         <div>
+                            @dd($recipe)
                             <p>{{ $ingredient['title'] }}</p>
                             <ul>
                                 @foreach ($ingredient['ingredient_group'] as $item)
