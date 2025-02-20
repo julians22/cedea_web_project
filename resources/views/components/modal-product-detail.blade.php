@@ -11,12 +11,13 @@ can be clicked to close the modal.
 --}}
 
 @teleport('body')
-    <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" @keydown.escape.window="modalOpen = false">
+    <div class="${modalOpen ? 'relative w-auto' : '' } h-auto">
         <div class="fixed left-0 top-0 z-[99] flex h-dvh w-screen items-center justify-center" x-show="modalOpen" x-cloak>
             <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                 x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
+                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                wire:click="handleChangeActiveProduct()" @click="modalOpen=false">
             </div>
 
             <div class="relative" x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
