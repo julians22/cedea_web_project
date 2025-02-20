@@ -18,7 +18,6 @@ return [
     */
     'profiles' => [
         'default' => [
-            'hurdle',
             'heading',
             'bullet-list',
             'ordered-list',
@@ -51,11 +50,11 @@ return [
             'code-block',
             'source',
             'blocks',
-            'iframe'
+            // 'iframe'
         ],
         'simple' => ['heading', 'hr', 'bullet-list', 'ordered-list', 'checked-list', '|', 'bold', 'italic', 'lead', 'small', '|', 'link', 'media'],
         'source',
-        'minimal' => ['bold', 'italic', 'no-break', 'source', 'Hurdle'],
+        'minimal' => ['bold', 'italic', 'no-break', 'source'],
         'none' => [],
     ],
 
@@ -135,12 +134,12 @@ return [
             'button' => 'filament-tiptap-editor::tools.no-break',
             'parser' => \App\TiptapExtensions\NoBreak::class,
         ],
-        [
-            'id' => 'iframe',
-            'name' => 'iframe',
-            'button' => 'filament-tiptap-editor::tools.iframe',
-            'parser' => \App\TiptapExtensions\Iframe::class,
-        ],
+        // [
+        //     'id' => 'iframe',
+        //     'name' => 'iframe',
+        //     'button' => 'filament-tiptap-editor::tools.iframe',
+        //     'parser' => \App\TiptapExtensions\Iframe::class,
+        // ],
         // [
         //     'id' => 'hurdle',
         //     'name' => 'Hurdle',
