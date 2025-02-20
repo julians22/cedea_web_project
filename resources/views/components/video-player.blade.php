@@ -215,11 +215,11 @@ document.addEventListener('fullscreenchange', (e) => {
         </ul>
     </div>
     @if ($showMouseIcon)
-        <div class="absolute bottom-20 right-1/2 inline-flex translate-x-1/2 gap-4 text-white">
-            <span class="size-6">
+        <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~bottom-4/20 ~gap-1/4">
+            <span class="~size-3/6">
                 <x-icon.mouse />
             </span>
-            <p class="text-lg">Scroll</p>
+            <p class="~text-base/lg">Scroll</p>
         </div>
     @endif
 </div>

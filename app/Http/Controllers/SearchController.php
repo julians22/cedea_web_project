@@ -51,8 +51,8 @@ class SearchController extends Controller
         foreach ($route_name_list as $name) {
             $locales = ($lang === '*') ? LaravelLocalization::getSupportedLanguagesKeys() : [$lang];
             foreach ($locales as $locale) {
-                $route = route($name);
                 if (!array_key_exists($name, $scrape_results)) {
+                    $route = route($name);
                     $result = $this->scrapePageContent(LaravelLocalization::getLocalizedURL($locale, $route));
                     if (stripos($result, $keyword) !== false) {
                         $scrape_results = array_merge($scrape_results, [$name => $route]);

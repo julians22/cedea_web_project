@@ -2,7 +2,8 @@ import { Mark, mergeAttributes } from "@tiptap/core";
 
 const NoBreak = Mark.create({
     name: "no-break",
-
+    group: "block",
+    content: "block+",
     addOptions() {
         return {
             HTMLAttributes: {},
@@ -15,9 +16,6 @@ const NoBreak = Mark.create({
                 default: null,
                 parseHTML: (element) => element.style.wordBreak,
                 renderHTML: (attributes) => {
-                    if (!attributes.style.wordBreak) {
-                        return {};
-                    }
                     return {
                         style: "word-break: keep-all;",
                     };
@@ -30,6 +28,7 @@ const NoBreak = Mark.create({
         return [
             {
                 tag: "span",
+                getAttrs: (element) => element.style.wordBreak,
             },
         ];
     },
@@ -52,6 +51,8 @@ const NoBreak = Mark.create({
             toggleNoBreak:
                 (attributes) =>
                 ({ commands }) => {
+                    console.log(attributes);
+                    console.log(commands);
                     return commands.toggleMark(this.name, attributes);
                 },
             unsetNoBreak:

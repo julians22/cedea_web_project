@@ -95,10 +95,10 @@
                 @endphp
 
                 @foreach ($marketplace_logos_1 as $logo)
-                    <div class="p-6">
+                    <a class="p-6" href="{{ $logo['url'] }}">
                         <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
 
-                    </div>
+                    </a>
                 @endforeach
             </div>
 
@@ -164,17 +164,19 @@
 
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
-                        <div class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center">
+                        <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
+                            href="{{ $logo['url'] }}">
                             <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
-                        </div>
+                        </a>
                     @endforeach
                 </div>
 
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 2) as $logo)
-                        <div class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center">
+                        <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
+                            href="{{ $logo['url'] }}">
                             <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
-                        </div>
+                        </a>
                     @endforeach
                 </div>
 

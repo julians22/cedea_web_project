@@ -22,7 +22,7 @@
             'right-1/2 md:translate-x-1/2' => !$imageLeft,
         ])>
             <div @class([
-                'ml-0 text-justify justify-center flex flex-col ~gap-y-2/4 ~md:~p-2/20',
+                'ml-0 text-justify justify-center flex flex-col ~gap-y-2/4 ~md:~p-2/20 ~md:~mb-4/0',
                 // '~md:~ml-4/48 ~md:~pl-0/1 md:w-3/5' => $imageLeft
                 'md:~pr-0/1 col-start-2' => $imageLeft,
                 'md:~pl-0/1' => !$imageLeft,

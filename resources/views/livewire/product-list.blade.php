@@ -1,44 +1,5 @@
-@push('after-scripts')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('hover', () => ({
-                    hoverCardHovered: false,
-                    hoverCardDelay: 100,
-                    hoverCardLeaveDelay: 200,
-                    hoverCardTimeout: null,
-                    hoverCardLeaveTimeout: null,
-                    hoverCardEnter() {
-                        clearTimeout(this.hoverCardLeaveTimeout);
-                        if (this.hoverCardHovered) return;
-                        clearTimeout(this.hoverCardTimeout);
-                        this.hoverCardTimeout = setTimeout(() => {
-                            this.hoverCardHovered = true;
-                        }, this.hoverCardDelay);
-                    },
-                    hoverCardLeave() {
-                        clearTimeout(this.hoverCardTimeout);
-                        if (!this.hoverCardHovered) return;
-                        clearTimeout(this.hoverCardLeaveTimeout);
-                        this.hoverCardLeaveTimeout = setTimeout(() => {
-                            this.hoverCardHovered = false;
-                        }, this.hoverCardLeaveDelay);
-                    },
-                    handleProductClick(name) {
-                        @production
-                        dataLayer.push({
-                            'event': 'ProductView',
-                            'pagePath': window.location.href,
-                            'pageTitle': "Product : " + name,
-                        });
-                    @endproduction
-                }
-            }))
-        })
-    </script>
-@endpush
-
-
 <div>
+
     <div wire:ignore>
         <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
     </div>
@@ -349,3 +310,40 @@
         </div>
     </section>
 </div>
+
+@script
+    <script>
+        Alpine.data('hover', () => ({
+            hoverCardHovered: false,
+            hoverCardDelay: 100,
+            hoverCardLeaveDelay: 200,
+            hoverCardTimeout: null,
+            hoverCardLeaveTimeout: null,
+            hoverCardEnter() {
+                clearTimeout(this.hoverCardLeaveTimeout);
+                if (this.hoverCardHovered) return;
+                clearTimeout(this.hoverCardTimeout);
+                this.hoverCardTimeout = setTimeout(() => {
+                    this.hoverCardHovered = true;
+                }, this.hoverCardDelay);
+            },
+            hoverCardLeave() {
+                clearTimeout(this.hoverCardTimeout);
+                if (!this.hoverCardHovered) return;
+                clearTimeout(this.hoverCardLeaveTimeout);
+                this.hoverCardLeaveTimeout = setTimeout(() => {
+                    this.hoverCardHovered = false;
+                }, this.hoverCardLeaveDelay);
+            },
+            handleProductClick(name) {
+                @production
+                dataLayer.push({
+                    'event': 'ProductView',
+                    'pagePath': window.location.href,
+                    'pageTitle': "Product : " + name,
+                });
+            @endproduction
+        }
+        }))
+    </script>
+@endscript
