@@ -1,4 +1,5 @@
 <x-layouts.app>
+
     <section
         class="relative grid max-h-[400px] content-center overflow-hidden lg:max-h-[600px] [&>*]:col-start-1 [&>*]:row-start-1">
         <picture class="overflow-hidden">
@@ -36,12 +37,12 @@
         </div>
 
         {{-- marketplace --}}
-        <div class="my-16 flex flex-col flex-wrap gap-y-4 [&_img]:max-h-[4.5rem]">
+        <div class="my-16 flex flex-col flex-wrap gap-y-4">
 
             <h2 class="section-title mb-2 text-center">{{ __('marketplace.online') }}</h2>
 
             <div
-                class="grid grid-cols-1 items-center justify-center justify-items-center gap-4 sm:grid-cols-2 md:grid-cols-3">
+                class="grid grid-cols-1 content-center items-center justify-center justify-items-center gap-1 sm:grid-cols-2 md:grid-cols-3 md:justify-center md:justify-items-center">
 
                 @php
 
@@ -83,7 +84,7 @@
                         ],
                         [
                             'name' => 'segari',
-                            'url' => '',
+                            'url' => '#',
                             'logo' => asset('img/marketplace/segari.png'),
                         ],
                         [
@@ -91,14 +92,28 @@
                             'url' => 'https://www.sayurbox.com/search?q=cedea',
                             'logo' => asset('img/marketplace/sayurbox.png'),
                         ],
+                        [
+                            'name' => null,
+                            'url' => null,
+                            'logo' => null,
+                        ],
+                        [
+                            'name' => 'allofresh',
+                            'url' => 'https://www.sayurbox.com/search?q=cedea',
+                            'logo' => asset('img/marketplace/allofresh.png'),
+                        ],
                     ];
                 @endphp
 
                 @foreach ($marketplace_logos_1 as $logo)
-                    <a class="p-6" href="{{ $logo['url'] }}">
-                        <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
-
-                    </a>
+                    @if (!$logo['logo'])
+                        <div class="flex items-center justify-center ~size-32/36">
+                        </div>
+                    @else
+                        <a class="flex items-center justify-center ~size-32/36" href="{{ $logo['url'] }}">
+                            <img class="" src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                        </a>
+                    @endif
                 @endforeach
             </div>
 
@@ -113,51 +128,61 @@
                             'name' => 'hypermart',
                             'url' => '#',
                             'logo' => asset('img/marketplace/hypermart.png'),
+                            'class' => '',
                         ],
                         [
                             'name' => 'yogya group',
                             'url' => '#',
                             'logo' => asset('img/marketplace/yogyagroup.png'),
+                            'class' => '',
                         ],
                         [
                             'name' => 'indomaret fresh',
                             'url' => '#',
                             'logo' => asset('img/marketplace/indomaret-fresh.png'),
+                            'class' => 'p-4',
                         ],
                         [
                             'name' => 'alfamidi',
                             'url' => '#',
                             'logo' => asset('img/marketplace/alfamidi.png'),
+                            'class' => 'p-4',
                         ],
                         [
                             'name' => 'foodhall',
                             'url' => '#',
                             'logo' => asset('img/marketplace/foodhall.png'),
+                            'class' => 'p-4',
                         ],
                         [
                             'name' => 'farmermarket',
                             'url' => '#',
                             'logo' => asset('img/marketplace/farmermarket.png'),
+                            'class' => '',
                         ],
                         [
                             'name' => 'lottemart',
                             'url' => '#',
                             'logo' => asset('img/marketplace/lottemart.png'),
+                            'class' => 'p-4',
                         ],
                         [
                             'name' => 'ranchmarket',
                             'url' => '#',
                             'logo' => asset('img/marketplace/ranchmarket.png'),
+                            'class' => '',
                         ],
                         [
                             'name' => 'aeon',
                             'url' => '#',
                             'logo' => asset('img/marketplace/aeon.png'),
+                            'class' => 'p-4',
                         ],
                         [
                             'name' => 'superindo',
                             'url' => '#',
                             'logo' => asset('img/marketplace/superindo.png'),
+                            'class' => 'p-4',
                         ],
                     ];
                 @endphp
@@ -173,7 +198,7 @@
 
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 2) as $logo)
-                        <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
+                        <a class="{{ TailwindMerge\Laravel\Facades\TailwindMerge::merge('inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center', $logo['class']) }}"
                             href="{{ $logo['url'] }}">
                             <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                         </a>
@@ -213,8 +238,8 @@
                         <x-logo class="block max-w-44 text-blue-400 shadow-nav" />
                     </div>
                     <div class="section-title mb-4 text-center font-normal text-white ~text-3xl/7xl">
-                        <h2 class="font-cedea mt-4">진짜 맛있다</h2>
-                        <h3 class="whitespace-nowrap">Jinjja Masisseoyo</h3>
+                        {{-- <h2 class="font-cedea mt-4">진짜 맛있다</h2> --}}
+                        <h2 class="whitespace-nowrap font-lobster ~text-5xl/8xl">{!! __('marketplace.daebak') !!}</h2>
                     </div>
                     <div>
                         <img src="{{ asset('img/marketplace/packages.png') }}" alt="packages">

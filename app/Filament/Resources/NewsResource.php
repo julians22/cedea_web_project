@@ -146,7 +146,8 @@ class NewsResource extends Resource
             ->columns([
                 SpatieMediaLibraryImageColumn::make('featured_image')
                     ->collection('featured_image'),
-                TextColumn::make('title'),
+                TextColumn::make('title')
+                    ->html(),
                 // TextColumn::make('excerpt'),
                 ToggleColumn::make('published'),
                 TextColumn::make('published_at')

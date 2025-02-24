@@ -6,5 +6,5 @@ return [
     'breakfast' => 'Sarapan',
     'lunch' => 'Makan Siang',
     'dinner' => 'Makan Malam',
-    'snack' => 'Snack',
+    'snack' => 'Cemilan',
 ];

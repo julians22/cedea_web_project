@@ -1,7 +1,7 @@
 <div>
 
     <div wire:ignore>
-        <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
+        <x-video-player source_mp4="{{ asset('video/product.mp4') }}" />
     </div>
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
@@ -13,7 +13,8 @@
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
                     media="(min-width: 1024px)" />
 
-                <img draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
+                <img class="w-full" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}"
+                    alt="">
             </picture>
 
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
@@ -22,7 +23,7 @@
                 <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
+                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~border-4/2 ~p-2/5"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="w-full object-contain" src="{{ $brand->getFirstMediaUrl('logo') }}"
@@ -337,10 +338,10 @@
             },
             handleProductClick(name) {
                 @production
-                dataLayer.push({
-                    'event': 'ProductView',
-                    'pagePath': window.location.href,
-                    'pageTitle': "Product : " + name,
+                gtag('event', 'product_show', {
+                    'event_category': 'Product',
+                    'event_label': 'Product Popup',
+                    'value': name
                 });
             @endproduction
         }

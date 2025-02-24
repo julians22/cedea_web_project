@@ -28,12 +28,12 @@
     "src": "resources/assets/shippo-pattern.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-BmcL0FZe.css",
+    "file": "assets/app-DEGAHbIe.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-BMEuBCF5.css",
+    "file": "assets/theme-BsTh_IIn.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
@@ -43,7 +43,7 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-CwftXQla.js",
+    "file": "assets/app-ArxGhZP6.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true

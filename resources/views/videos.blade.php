@@ -1,6 +1,6 @@
 <x-layouts.app>
 
-    <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
+    <x-video-player source_mp4="{{ asset('video/product.mp4') }}" />
 
     <div class="bg-cedea-red">
         <x-section-banner class="container" class:title="text-white mb-0" class:desc="text-white" id="sejarah"

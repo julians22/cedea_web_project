@@ -9,5 +9,6 @@ return [
     'desc' => 'Want to enjoy High-Quality Processed Fish dishes without leaving the comfort of your home? Cedea Seafood is here to fulfill your desires easily and practically! Now, you can buy premium quality Processed Fish products directly through your favorite e-commerce, without the hassle of going to the store.',
     'online' => 'Shop online:',
     'found' => "Find at:",
+    'daebak' => 'Daebak! <br/> it\'s delicious',
     'footer' => 'The Delicacy of <span class="font-cedea">CEDEA</span> Products <br/> Now Available in South Korea',
 ];

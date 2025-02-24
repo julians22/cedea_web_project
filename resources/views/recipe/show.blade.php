@@ -3,8 +3,19 @@
     @if ($recipe->video['url'])
         <div class="relative aspect-video overflow-hidden" x-data="{
             pageYOffset: 0,
-        }" x-init="pageYOffset = Math.max(40, ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);"
-            @scroll.window="pageYOffset = Math.max(40,  ( $el.offsetHeight - ($el.offsetHeight * 0.75) ) - window.scrollY );">
+            setPageYOffset() {
+                if ($el.offsetHeight > window.innerHeight) {
+                    this.pageYOffset = Math.max(
+                        $el.offsetHeight * 0.25,
+                        ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);
+                } else {
+                    this.pageYOffset = $el.offsetHeight * 0.25;
+                }
+            }
+        }" x-init="setTimeout(() => {
+            setPageYOffset()
+        }, 0);"
+            @scroll.window="setPageYOffset()">
             <x-matinee::embed :data="$recipe->video" />
             <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~gap-1/4"
                 :style="`bottom: ${pageYOffset}px;`">
@@ -24,7 +35,6 @@
         @if ($recipe->product)
             <div class="flex w-full flex-col items-center gap-y-4">
                 <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
-
                 <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
                     target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
 
@@ -35,7 +45,7 @@
                 <div class="w-fit rounded-full border-2 border-cedea-red px-2 text-cedea-red">
                     {{ Str::title($recipe->recipe_type) }}</div>
                 @if ($recipe->product)
-                    <p class="mt-1 uppercase ~text-base/2xl">{{ $recipe->product->name }}</p>
+                    <p class="mt-1 uppercase ~text-base/2xl">{{ $recipe->product->fullname }}</p>
                 @endif
                 <h1 class="~text-2xl/5xl">{{ $recipe->title }}</h1>
             </div>

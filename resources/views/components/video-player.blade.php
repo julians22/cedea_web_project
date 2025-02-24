@@ -131,18 +131,29 @@
             minutes: result.substring(3, 5),
             seconds: result.substring(6, 8),
         };
+    },
+    setPageYOffset() {
+        if ($el.offsetHeight > window.innerHeight) {
+            this.pageYOffset = Math.max(
+                $el.offsetHeight * 0.10,
+                ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);
+        } else {
+            this.pageYOffset = $el.offsetHeight * 0.10;
+        }
     }
-}"
-    @scroll.window="pageYOffset = Math.max(40,  ( $el.offsetHeight - ($el.offsetHeight * 0.75) ) - window.scrollY );"
+}" @scroll.window="setPageYOffset"
     x-init="$refs.player.load();
-    pageYOffset = Math.max(40, ($el.offsetHeight - ($el.offsetHeight * 0.75)) - window.scrollY);
+    setTimeout(() => {
+        setPageYOffset();
+    }, 0);
+
     // Hide the default player controls
     $refs.player.controls = false;
-    
+
     if (this.loop) {
         $refs.player.loop = true;
     }
-    
+
     $watch('playing', (value) => {
         if (value) {
             ended = false;
@@ -154,17 +165,18 @@
             controls = true;
         }
     });
-    
+
     if (!document?.fullscreenEnabled) {
         $refs.fullscreenButton.style.display = 'none';
     }
-    
+
     document.addEventListener('fullscreenchange', (e) => {
         fullscreen = !!document.fullscreenElement;
     });" x-ref="videoContainer" @mouseleave="mouseleave=true" @mousemove="mousemoveVideo" x-cloak>
 
     <video class="relative h-full w-full bg-black object-cover" x-ref="player" @loadedmetadata="metaDataLoaded"
-        @ended="videoEnded" autoplay muted preload="metadata" :poster="poster" crossorigin="anonymous">
+        @ended="videoEnded" :loop="loop" autoplay muted preload="metadata" :poster="poster"
+        crossorigin="anonymous">
         <source :src="sources.mp4" type="video/mp4" />
 
         @if ($source_ogg)
