@@ -75,7 +75,7 @@ class BannerResource extends Resource
                     ->offColor('danger'),
             ])
             ->reorderable('order_column')
-            ->defaultSort('order_column')
+            ->defaultSort('order_column', 'desc')
             ->filters([
                 //
             ])

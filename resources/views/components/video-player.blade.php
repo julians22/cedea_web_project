@@ -229,7 +229,7 @@
         </ul>
     </div>
     @if ($showMouseIcon)
-        <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~gap-1/4"
+        <div class="absolute right-1/2 inline-flex translate-x-1/2 text-white ~gap-1/4 max-md:hidden"
             :style="`bottom: ${pageYOffset}px;`">
             <span class="~size-3/6">
                 <x-icon.mouse />

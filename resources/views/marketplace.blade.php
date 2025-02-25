@@ -107,7 +107,7 @@
 
                 @foreach ($marketplace_logos_1 as $logo)
                     @if (!$logo['logo'])
-                        <div class="flex items-center justify-center ~size-32/36">
+                        <div class="flex items-center justify-center ~size-32/36 max-md:hidden">
                         </div>
                     @else
                         <a class="flex items-center justify-center ~size-32/36" href="{{ $logo['url'] }}">

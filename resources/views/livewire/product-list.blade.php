@@ -102,14 +102,14 @@
 
             {{-- product grid --}}
             <div class="flex flex-col gap-4 ~scroll-mt-36/24" id="product-grid">
-                <div class="inline-grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
+                <ul class="inline-grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <div class="relative flex flex-col gap-8" x-data="hover" @mouseover="hoverCardEnter()"
-                            @mouseleave="hoverCardLeave()">
+                        <li class="relative flex flex-col gap-8" data-product-item x-data="hover"
+                            @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()">
                             <div class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                                 wire:key='{{ $item->slug }}'>
                                 <div
@@ -159,11 +159,11 @@
 
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     @empty
                         <x-placeholder.empty label="{{ __('status.empty') }}" />
                     @endforelse
-                </div>
+                </ul>
 
                 {{--  TODO: exclude activeProductChange --}}
                 <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
@@ -314,6 +314,12 @@
 
 @script
     <script>
+        const {
+            animate,
+            stagger
+        } = window.Motion
+
+
         Alpine.data('hover', () => ({
             hoverCardHovered: false,
             hoverCardDelay: 100,
@@ -346,5 +352,19 @@
             @endproduction
         }
         }))
+
+        Livewire.hook('morph.updated', ({
+            el,
+            component
+        }) => {
+            animate("#product-grid li", {
+                opacity: [0, 1],
+                y: [50, 0]
+            }, {
+                delay: stagger(0.10, {
+                    ease: "easeIn"
+                })
+            })
+        })
     </script>
 @endscript
