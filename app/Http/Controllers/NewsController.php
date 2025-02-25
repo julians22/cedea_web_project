@@ -16,7 +16,7 @@ class NewsController extends Controller
         $twitter_card = new TwitterCardPackage('twitter');
 
         $title = 'News - ' . env('APP_NAME');
-        $description = 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood!';
+        $description = 'Temukan berita terbaru dan update kegiatan perusahaan kami di sini. Ikuti perkembangan terbaru dan berita penting dari CEDEA Seafood.';
         $url = config('app.env') === 'production' ? 'https://cedeaseafood.com' : 'https://cedea.democube.id';
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';

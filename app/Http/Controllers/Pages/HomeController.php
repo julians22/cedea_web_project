@@ -25,7 +25,7 @@ class HomeController extends Controller
         $twitter_card = new TwitterCardPackage('twitter');
 
         $title = 'Home - ' . env('APP_NAME');
-        $description = 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood!';
+        $description = 'CEDEA SEAFOOD diproduksi oleh PT CitraDimensi Arthali yang berkomitmen untuk terus menghasilkan makanan beku dari ikan olahan terbaik dengan penerapan GMP, HACCP, ISO 22000, BPOM, Halal.';
         $url = route('home');
         $image = $banners->first()?->getFirstMediaUrl('banner_desktop') ?? asset('img/mutu.jpg');
         $locale = 'id_ID';

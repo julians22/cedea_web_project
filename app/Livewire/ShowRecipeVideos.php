@@ -12,8 +12,6 @@ class ShowRecipeVideos extends Component
 {
     use WithPagination, VideoPopUp;
 
-
-
     public function render()
     {
         return view('livewire.video-list', [

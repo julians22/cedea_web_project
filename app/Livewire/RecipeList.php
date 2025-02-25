@@ -36,7 +36,7 @@ class RecipeList extends Component
         $twitter_card = new TwitterCardPackage('twitter');
 
         $title = 'Recipe - ' . env('APP_NAME');
-        $description = 'Tinggalkan Pesan';
+        $description = 'Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood! Mulai dari sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.';
         $url = route('recipe');
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';
