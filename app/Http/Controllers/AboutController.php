@@ -3,27 +3,29 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
-use Embed\Embed;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
 
-class VideoController extends Controller
+class AboutController extends Controller
 {
-    public function index()
+    /**
+     * Handle the incoming request.
+     */
+    public function __invoke(Request $request)
     {
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'Videos - ' . env('APP_NAME');
-        $description = 'Tonton video lengkap Cedea Seafood di kanal YouTube kami! Temukan resep kreatif, tips memasak, dan cerita inspiratif di balik produk hasil laut berkualitas tinggi kami.';
-        $url = route('videos');
+        $title = 'About - ' . env('APP_NAME');
+        $description = 'PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Majalengka, Medan & Semarang.';
+        $url = route('about');
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle('Videos');
+        Meta::prependTitle('About');
 
         $og
             ->setType('website')
@@ -43,6 +45,6 @@ class VideoController extends Controller
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
 
-        return view('videos');
+        return view('about');
     }
 }

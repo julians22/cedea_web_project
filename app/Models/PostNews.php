@@ -61,7 +61,7 @@ class PostNews extends Model implements
         return Attribute::make(
             get: function (string $value): string {
                 if (empty($value)) {
-                    return Str::limit($this->content, 200);
+                    return Str::limit(strip_tags((string) $this->content), 200);
                 }
                 return $value;
             },

@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
 use App\Models\Products\Product;
+use Butschster\Head\Facades\Meta;
+use Butschster\Head\Packages\Entities\OpenGraphPackage;
+use Butschster\Head\Packages\Entities\TwitterCardPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
@@ -67,6 +70,9 @@ class SearchController extends Controller
 
     public function __invoke(Request $request)
     {
+
+
+
         // Determine the language to use based on the request input
         // If the requested language is supported, use it; otherwise, use the default '*'
         $lang = array_key_exists($request->input('lang'), LaravelLocalization::getSupportedLocales())
@@ -75,6 +81,38 @@ class SearchController extends Controller
 
         $query = $request->input('query');
         $scrape_results = $this->scrapeRoutesAndFind($lang, $query);
+
+        $og = new OpenGraphPackage('open graph');
+        $twitter_card = new TwitterCardPackage('twitter');
+
+        $title = strip_tags($query) . ' - ' . env('APP_NAME');
+        $description = 'search result for: ' . strip_tags($query);
+        $url = route('search', ['query' => $query]);
+        $image = asset('img/mutu.jpg');
+        $locale = 'id_ID';
+        $alternateLocale = 'en_US';
+
+        Meta::setDescription($description);
+        Meta::prependTitle('Search Page');
+
+        $og
+            ->setType('website')
+            ->setSiteName(env('APP_NAME'))
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setUrl($url)
+            ->addImage($image)
+            ->setLocale($locale)
+            ->addAlternateLocale($alternateLocale);
+
+        $twitter_card
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setImage($image);
+
+        Meta::registerPackage($og);
+        Meta::registerPackage($twitter_card);
+
 
         $news = PostNews::search('slug', $query)->searchTranslated('title', $query, $lang)->limit(3)->with(['media'])->get();
         $recipes = PostRecipes::searchTranslated('title', $query, $lang)->limit(3)->with(['media'])->get();

@@ -11,6 +11,9 @@ use Livewire\Attributes\Validate;
 use Livewire\Component;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Validation\ValidationException;
+use Butschster\Head\Facades\Meta;
+use Butschster\Head\Packages\Entities\OpenGraphPackage;
+use Butschster\Head\Packages\Entities\TwitterCardPackage;
 
 class Contact extends Component
 {
@@ -33,10 +36,40 @@ class Contact extends Component
 
     public function mount()
     {
+        $og = new OpenGraphPackage('open graph');
+        $twitter_card = new TwitterCardPackage('twitter');
+
+        $title = 'Contact - ' . env('APP_NAME');
+        $description = 'Tinggalkan Pesan';
+        $url = route('contact');
+        $image = asset('img/mutu.jpg');
+        $locale = 'id_ID';
+        $alternateLocale = 'en_US';
+
+        Meta::setDescription($description);
+        Meta::prependTitle('Contact');
+
+        $og
+            ->setType('website')
+            ->setSiteName(env('APP_NAME'))
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setUrl($url)
+            ->addImage($image)
+            ->setLocale($locale)
+            ->addAlternateLocale($alternateLocale);
+
+        $twitter_card
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setImage($image);
+
+        Meta::registerPackage($og);
+        Meta::registerPackage($twitter_card);
+
+
         $this->handleTabChange(app(ContactSettings::class)->enable_inquiry_form ? 0 : 1);
     }
-
-
 
     #[Computed]
     public function isFormEnabled(): bool

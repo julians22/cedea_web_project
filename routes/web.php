@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
@@ -37,28 +38,14 @@ Route::group([
     Route::get('/', HomeController::class)
         ->name('home');
 
-    Route::get(
-        'about',
-        function () {
-            Meta::prependTitle('TENTANG CEDEA');
-
-            return view('about');
-        }
-    )
+    Route::get('about', AboutController::class)
         ->name('about');
 
-    Route::get(
-        'product',
-        ProductList::class
-    )
+    Route::get('product', ProductList::class)
         ->name('product');
 
-    Route::get(
-        'recipe',
-        RecipeList::class
-    )
+    Route::get('recipe', RecipeList::class)
         ->name('recipe');
-
 
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
         ->name('recipe.show');
