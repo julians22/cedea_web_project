@@ -13,6 +13,11 @@ class RecipeController extends Controller
 
     public function show(PostRecipes $recipe)
     {
+
+        if (!$recipe->published) {
+            abort(404);
+        }
+
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 

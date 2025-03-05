@@ -103,13 +103,14 @@ class RecipeList extends Component
                         return $q->where('recipe_type', $this->activeRecipeType);
                     }
                 )
-                ->orderby('created_at', 'desc')
                 ->when(
                     $this->keyword,
                     function ($q) {
                         return $q->searchTranslated('title', $this->keyword, '*');
                     }
                 )
+                ->where('published', 1)
+                ->orderby('created_at', 'desc')
                 ->paginate(2),
         ]);
     }

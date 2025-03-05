@@ -43,11 +43,8 @@ class NewsController extends Controller
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
 
-        $news = PostNews::paginate(6);
-        $banners = PostNews::orderBy('published_at', 'desc')->take(3)->get();
-
+        $banners = PostNews::where('published', 1)->orderBy('published_at', 'desc')->take(3)->get();
         return view('news', compact(
-            'news',
             'banners'
         ));
     }
@@ -60,6 +57,11 @@ class NewsController extends Controller
      */
     public function show(PostNews $post)
     {
+
+        if (!$post->published) {
+            abort(404);
+        }
+
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
