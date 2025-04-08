@@ -24,10 +24,12 @@ use Filament\Forms\Form;
 use Filament\Forms\Get;
 use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
+use Filament\Support\Enums\FontWeight;
 use Filament\Tables;
 use Filament\Tables\Columns\Layout\Stack;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
 use Illuminate\Support\Facades\App;
@@ -197,7 +199,10 @@ class ProductResource extends Resource
                     SpatieMediaLibraryImageColumn::make('image')
                         ->collection('packaging'),
                     TextColumn::make('name')
+                        ->weight(FontWeight::SemiBold)
+                        ->size(TextColumnSize::Large)
                         ->searchable(),
+                    TextColumn::make('size'),
                     // TextColumn::make('slug'),
                     TextColumn::make('brand.name'),
                     TextColumn::make('categories.name')
@@ -207,6 +212,8 @@ class ProductResource extends Resource
                         ->expandableLimitedList(),
                 ]),
             ])
+            ->reorderable('order_column')
+            ->defaultSort('order_column')
             ->contentGrid([
                 'md' => 2,
                 'xl' => 3,

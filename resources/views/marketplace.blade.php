@@ -1,187 +1,251 @@
 <x-layouts.app>
-    <div class="bg-brick">
 
-        <section
-            class="relative grid max-h-[400px] content-center overflow-hidden md:max-h-[600px] [&>*]:col-start-1 [&>*]:row-start-1">
-            <picture class="overflow-hidden">
-                <source class="h-full w-full" srcset="{{ asset('placeholder/banner/marketplace.jpg') }}"
-                    media="(min-width: 1024px)" />
-                <img src="{{ asset('placeholder/banner/marketplace.jpg') }}" alt="">
-            </picture>
+    <section
+        class="relative grid max-h-[400px] content-center overflow-hidden lg:max-h-[600px] [&>*]:col-start-1 [&>*]:row-start-1">
+        <picture class="overflow-hidden">
+            <source class="h-full w-full object-cover" srcset="{{ asset('img/marketplace/header.jpg') }}"
+                media="(min-width: 1024px)" />
+            <img class="h-full w-full object-cover" src="{{ asset('img/marketplace/header.jpg') }}" alt="">
+        </picture>
+
+        <div
+            class="container z-1 flex flex-col items-end justify-center gap-4 text-center text-white max-sm:py-4 max-sm:pt-14">
+            <div class="flex flex-col items-center justify-center gap-y-6 sm:w-2/5">
+                <h1 class="section-title text-inherit drop-shadow-lg">
+                    {!! __('marketplace.title') !!}
+                </h1>
+                <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-androgyne shadow-lg ~text-sm/xl"
+                    href="#marketplace">{!! __('marketplace.cta') !!}</a>
+            </div>
+        </div>
+    </section>
+
+    <section class="container scroll-mt-24" id="marketplace">
+        <div class="mx-auto my-12 text-center lg:w-3/4">
+            <h2 class="section-title mb-4 text-cedea-red-500">
+                {!! __('marketplace.heading') !!}
+            </h2>
+            <p>
+                {{ __('marketplace.desc') }}
+            </p>
+        </div>
+    </section>
+
+    <section class="container grid grid-cols-1 lg:grid-cols-2">
+        <div class="self-center max-lg:hidden">
+            <img src="{{ asset('img/marketplace/phonev2.png') }}" alt="">
+        </div>
+
+        {{-- marketplace --}}
+        <div class="my-16 flex flex-col flex-wrap gap-y-4">
+
+            <h2 class="section-title mb-2 text-center">{{ __('marketplace.online') }}</h2>
 
             <div
-                class="container z-1 flex flex-col items-end justify-center gap-4 text-center text-white max-sm:py-4 max-sm:pt-14">
-                <div class="flex flex-col items-center justify-center gap-y-6 sm:w-2/5">
-                    <h1 class="section-title text-inherit">
-                        Rasakan Kelezatan <span class="~text-2xl/6xl"><span class="font-cedea">CEDEA</span>
-                            Seafood</span>
-                        dari <span class="~text-2xl/6xl">Rumah!</span>
-                    </h1>
-                    <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-androgyne shadow-lg ~text-sm/xl"
-                        href="#">Pesan CEDEA Seafood Sekarang!</a>
-                </div>
-            </div>
-        </section>
+                class="grid grid-cols-1 content-center items-center justify-center justify-items-center gap-1 sm:grid-cols-2 md:grid-cols-3 md:justify-center md:justify-items-center">
 
-        <section class="container">
-            <div class="mx-auto my-12 text-center md:w-3/4">
-                <h2 class="section-title mb-4 text-cedea-red-500">
-                    Nikmati Kelezatan Laut Langsung dari Rumah dengan <span class="font-cedea">CEDEA</span> Seafood!
-                </h2>
-                <p>
-                    Ingin menikmati hidangan Ikan Olahan Bermutu tanpa harus meninggalkan kenyamanan rumah? Cedea
-                    Seafood
-                    hadir
-                    untuk memenuhi keinginan Anda dengan cara yang mudah dan praktis! Kini, Anda bisa membeli produk
-                    Ikan
-                    Olahan
-                    dengan kualitas premium, langsung melalui e-commerce favorit Anda, tanpa perlu repot pergi ke toko.
-                </p>
-            </div>
-        </section>
+                @php
 
-        <section class="container flex">
-            <div class="shrink grow-0 basis-1/2 max-md:hidden">
-                <img src="{{ asset('img/Marketplace/phone.png') }}" alt="">
-            </div>
+                    $marketplace_logos_1 = [
+                        [
+                            'name' => 'tokopedia',
+                            'url' => 'https://www.tokopedia.com/cedeaofficial',
+                            'logo' => asset('img/marketplace/tokopedia.png'),
+                        ],
+                        [
+                            'name' => 'shopee',
+                            'url' => 'https://shopee.co.id/cedeaofficialjakarta',
+                            'logo' => asset('img/marketplace/shopee.png'),
+                        ],
+                        [
+                            'name' => 'blibli',
+                            'url' => 'https://www.blibli.com/merchant/cedea-jakarta-pusat-official-store/CEJ-60045',
+                            'logo' => asset('img/marketplace/blibli-2.png'),
+                        ],
+                        [
+                            'name' => 'astro',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/astro.png'),
+                        ],
+                        [
+                            'name' => 'grab mart',
+                            'url' => 'https://r.grab.com/g/2-2-6-C23HL3CEPGKANT',
+                            'logo' => asset('img/marketplace/grabmart2.png'),
+                        ],
+                        [
+                            'name' => 'pasar now',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/pasarnow.png'),
+                        ],
+                        [
+                            'name' => 'indomaret',
+                            'url' => 'https://www.klikindomaret.com/search/?key=Cedea',
+                            'logo' => asset('img/marketplace/indomaret.png'),
+                        ],
+                        [
+                            'name' => 'segari',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/segari.png'),
+                        ],
+                        [
+                            'name' => 'sayurbox',
+                            'url' => 'https://www.sayurbox.com/search?q=cedea',
+                            'logo' => asset('img/marketplace/sayurbox.png'),
+                        ],
+                        [
+                            'name' => null,
+                            'url' => null,
+                            'logo' => null,
+                        ],
+                        [
+                            'name' => 'allofresh',
+                            'url' => 'https://www.sayurbox.com/search?q=cedea',
+                            'logo' => asset('img/marketplace/allofresh.png'),
+                        ],
+                    ];
+                @endphp
 
-            {{-- marketplace --}}
-            <div class="my-16 flex flex-col flex-wrap gap-y-4 [&_img]:max-h-28">
-
-                <div class="flex flex-wrap justify-center gap-12">
-                    <a href="#">
-                        <img src="{{ asset('img/Marketplace/tokopedia.png') }}" alt="logo tokopedia">
-                    </a>
-                    <a href="#">
-                        <img src="{{ asset('img/Marketplace/shopee.png') }}" alt="logo shopee">
-                    </a>
-                    <a href="#">
-                        <img src="{{ asset('img/Marketplace/blibli-2.png') }}" alt="logo blibli">
-                    </a>
-                </div>
-
-                <div
-                    class="text-nowrap flex items-center justify-center gap-x-4 text-lg before:h-1 before:w-1/3 before:bg-cedea-red-500 after:h-1 after:w-1/3 after:bg-cedea-red-500">
-                    di Official Store:
-                </div>
-
-                <div class="flex flex-col justify-center gap-12">
-                    <div class="flex justify-center gap-12 max-md:flex-wrap">
-                        <a href="#">
-                            <img src="{{ asset('img/Marketplace/hypermart.png') }}" alt="logo hypermart">
+                @foreach ($marketplace_logos_1 as $logo)
+                    @if (!$logo['logo'])
+                        <div class="flex items-center justify-center ~size-32/36 max-md:hidden">
+                        </div>
+                    @else
+                        <a class="flex items-center justify-center ~size-32/36" href="{{ $logo['url'] }}">
+                            <img class="" src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                         </a>
-
-                        <a href="#">
-                            <img src="{{ asset('img/Marketplace/superindo.png') }}" alt="logo superindo">
-                        </a>
-
-                        <a href="#">
-                            <img src="{{ asset('img/Marketplace/yogyagroup.png') }}" alt="logo yogya group">
-                        </a>
-                    </div>
-
-                    <div class="flex justify-center gap-12 max-md:flex-wrap">
-                        <a href="#">
-                            <img src="{{ asset('img/Marketplace/indomaret-2.png') }}" alt="logo indomaret">
-                        </a>
-
-                        <a href="#">
-                            <img src="{{ asset('img/Marketplace/alfamart.png') }}" alt="logo alfamart">
-                        </a>
-                    </div>
-                </div>
-
-            </div>
-
-        </section>
-
-        <section class="container my-36">
-            <h2 class="section-title text-center">Belanja online</h2>
-            <div class="flex flex-wrap items-center justify-center gap-12">
-                <a href="#">
-                    <img src="{{ asset('img/Marketplace/astro.png') }}" alt="">
-                </a>
-                <a href="#">
-                    <img src="{{ asset('img/Marketplace/grabmart2.png') }}" alt="">
-                </a>
-                <a href="#">
-                    <img src="{{ asset('img/Marketplace/pasarnow.png') }}" alt="">
-                </a>
-                <a href="#">
-                    <img src="{{ asset('img/Marketplace/indomaret.png') }}" alt="">
-                </a>
-                <a href="#">
-                    <img src="{{ asset('img/Marketplace/sayurbox.png') }}" alt="">
-                </a>
-            </div>
-        </section>
-
-        <section class="container my-16">
-            <h2 class="section-title text-center">Belanja Offline - Tersedia di 50 Toko ini:</h2>
-            @php
-                $stores = [
-                    'AEON',
-                    'Alfamart',
-                    'Alfamidi',
-                    'Allo Fresh',
-                    'Aneka Buana',
-                    'Astro',
-                    'Borma',
-                    'Budiman Swalayan',
-                    'Cicle K',
-                    'Diamond',
-                    'Diskon Supermarket',
-                    'Duta Buah',
-                    'Farmers Market',
-
-                    'Fortuna swalayan',
-                    'Food Hall',
-                    'Galael',
-                    'Grab Mart Kilat',
-                    'Gourmet',
-                    'Grand Lucky',
-                    'Hadi Supermarket',
-                    'Hari-Hari',
-                    'Hero',
-                    'Hapimart',
-                    'Indogrosir',
-                    'Indomaret Fresh',
-                    'Jakarta Fruit',
-
-                    'K-Stop',
-                    'KEbun Buah',
-                    'LSI',
-                    'Lawson',
-                    'Lulu',
-                    'Lotte Grosir',
-                    'LotteMart',
-                    'Market City',
-                    'M Blok',
-                    'Mugunghwa',
-                    'Naga Swalayan',
-                    'Narma',
-                    'Papaya',
-
-                    'Pasarnow',
-                    'Ramayana',
-                    'Ranch Market',
-                    'Rumah Buah',
-                    'Saga',
-                    'Segarai',
-                    'sayurbox',
-                    'Tiptop',
-                    'Toserba Berkah',
-                    'Toserba Gading',
-                    'Transmart',
-                ];
-            @endphp
-            <div
-                class="flow grid grid-cols-2 items-center justify-center gap-y-2 sm:grid-cols-3 md:~gap-x-28/40 lg:grid-flow-col lg:grid-rows-[repeat(13,minmax(0,1fr))]">
-                @foreach ($stores as $store)
-                    <a href="#">{{ $store }}</a>
+                    @endif
                 @endforeach
             </div>
-        </section>
-    </div>
 
+            <div class="mt-8 flex flex-col justify-center gap-6">
+
+                <h2 class="section-title mb-2 text-center">{{ __('marketplace.found') }}</h2>
+
+                @php
+
+                    $marketplace_logos_2 = [
+                        [
+                            'name' => 'hypermart',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/hypermart.png'),
+                            'class' => '',
+                        ],
+                        [
+                            'name' => 'yogya group',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/yogyagroup.png'),
+                            'class' => '',
+                        ],
+                        [
+                            'name' => 'indomaret fresh',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/indomaret-fresh.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'alfamidi',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/alfamidi.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'foodhall',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/foodhall.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'farmermarket',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/farmermarket.png'),
+                            'class' => '',
+                        ],
+                        [
+                            'name' => 'lottemart',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/lottemart.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'ranchmarket',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/ranchmarket.png'),
+                            'class' => '',
+                        ],
+                        [
+                            'name' => 'aeon',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/aeon.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'superindo',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/superindo.png'),
+                            'class' => 'p-4',
+                        ],
+                    ];
+                @endphp
+
+                <div class="flex flex-wrap items-center justify-center gap-6">
+                    @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
+                        <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
+                            href="{{ $logo['url'] }}">
+                            <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                        </a>
+                    @endforeach
+                </div>
+
+                <div class="flex flex-wrap items-center justify-center gap-6">
+                    @foreach (array_slice($marketplace_logos_2, 2) as $logo)
+                        <a class="{{ TailwindMerge\Laravel\Facades\TailwindMerge::merge('inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center', $logo['class']) }}"
+                            href="{{ $logo['url'] }}">
+                            <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                        </a>
+                    @endforeach
+                </div>
+
+            </div>
+
+        </div>
+
+    </section>
+
+
+    <section class="relative min-h-96 overflow-clip bg-cedea-red bg-shippo bg-blend-multiply">
+        <span
+            class="container absolute bottom-0 right-1/2 min-h-48 translate-x-1/2 bg-opacity-5 bg-asia-pattern bg-contain bg-center bg-no-repeat ~h-[15rem]/[30rem] max-md:top-32 md:bg-[right_2rem_bottom_1%]">
+        </span>
+
+        <div class="isolate bg-marketplace-footer bg-contain bg-bottom bg-no-repeat">
+            <div class="container relative isolate grid grid-cols-1 py-8 ~gap-2/12 md:grid-cols-[1fr_40%]">
+                {{-- shops photos --}}
+                <div class="text-center max-md:order-2 md:ml-12">
+                    <h2 class="section-title text-center font-normal text-white ~mb-2/4">
+                        {!! __('marketplace.footer') !!}
+                    </h2>
+                    <div class="grid grid-cols-2 gap-2 ~py-2/8 md:grid-cols-4">
+                        @for ($i = 1; $i < 21; $i++)
+                            <div class="rounded-xl border-4 border-white">
+                                <img src="{{ asset('img/marketplace/places/place-' . $i . '.png') }}" alt="">
+                            </div>
+                        @endfor
+                    </div>
+                </div>
+                {{-- shops photos end --}}
+                <div class="flex flex-col justify-between ~gap-2/4 max-md:mb-8">
+                    <div class="-mt-8 flex w-full justify-center">
+                        <x-logo class="block max-w-44 text-blue-400 shadow-nav" />
+                    </div>
+                    <div class="section-title mb-4 text-center font-normal text-white ~text-3xl/7xl">
+                        {{-- <h2 class="font-cedea mt-4">진짜 맛있다</h2> --}}
+                        <h2 class="whitespace-nowrap font-lobster ~text-5xl/8xl">{!! __('marketplace.daebak') !!}</h2>
+                    </div>
+                    <div>
+                        <img src="{{ asset('img/marketplace/packages.png') }}" alt="packages">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
 </x-layouts.app>

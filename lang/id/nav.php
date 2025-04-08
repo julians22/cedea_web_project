@@ -12,6 +12,7 @@ return [
     'company.area' => 'Wilayah Kerja',
 
     'product' => 'Merek',
+    'product.marketplace' => 'Belanja',
 
     'recipe' => 'Kreasi Resep',
 

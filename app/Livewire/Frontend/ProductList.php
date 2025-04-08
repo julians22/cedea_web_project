@@ -10,9 +10,11 @@ use App\Models\Products\Brand;
 use App\Models\Products\Product;
 use App\Models\Products\Category;
 use App\Models\Products\ProductCategory;
-use Butschster\Head\Facades\Meta;
 use Livewire\Attributes\Computed;
 use Illuminate\Database\Eloquent\Builder;
+use Butschster\Head\Facades\Meta;
+use Butschster\Head\Packages\Entities\OpenGraphPackage;
+use Butschster\Head\Packages\Entities\TwitterCardPackage;
 
 class ProductList extends Component
 {
@@ -43,7 +45,37 @@ class ProductList extends Component
 
     public function mount()
     {
+
+        $og = new OpenGraphPackage('open graph');
+        $twitter_card = new TwitterCardPackage('twitter');
+
+        $title = 'Products - ' . env('APP_NAME');
+        $description = 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood!';
+        $url = route('product');
+        $image = asset('img/mutu.jpg');
+        $locale = 'id_ID';
+        $alternateLocale = 'en_US';
+
+        Meta::setDescription($description);
         Meta::prependTitle('Products');
+
+        $og
+            ->setType('website')
+            ->setSiteName(env('APP_NAME'))
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setUrl($url)
+            ->addImage($image)
+            ->setLocale($locale)
+            ->addAlternateLocale($alternateLocale);
+
+        $twitter_card
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setImage($image);
+
+        Meta::registerPackage($og);
+        Meta::registerPackage($twitter_card);
 
         $this->allCategories = ProductCategory::all();
         $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
@@ -64,9 +96,13 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    public function handleChangeActiveProduct($slug)
+    public function handleChangeActiveProduct(string $slug = '')
     {
-        $this->activeProduct = Product::where('slug', $slug)->first();
+        if (!$slug) {
+            $this->reset('activeProduct');
+        } else {
+            $this->activeProduct = Product::where('slug', $slug)->first();
+        }
     }
 
     public function updatedActiveCategory()
@@ -113,6 +149,7 @@ class ProductList extends Component
                         return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
                     }
                 )
+                ->orderBy('order_column', 'asc')
                 ->paginate(6),
         ]);
     }

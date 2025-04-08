@@ -8,6 +8,7 @@ export default {
             "./resources/**/*.blade.php",
             "./resources/**/*.js",
             "./resources/**/*.vue",
+            "./lang/**/*.php",
         ],
         extract,
     },
@@ -27,6 +28,9 @@ export default {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 brick: "url('/resources/assets/brick-pattern.webp')",
                 shippo: "url('/resources/assets/shippo-pattern.png')",
+                "marketplace-footer":
+                    "url('/resources/assets/market-footer.png')",
+                "asia-pattern": "url('/resources/assets/asia-pattern.png')",
             },
             boxShadow: {
                 nav: "0px 0px 18px 1px rgba(0,0,0,0.50);",

@@ -4,7 +4,6 @@ namespace App\Models\Products;
 
 use App\Models\PostRecipes;
 use App\Traits\Searchable;
-use Attribute;
 use Exception;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
@@ -18,16 +17,20 @@ use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 use Spatie\Translatable\Translatable;
+use Illuminate\Database\Eloquent\Casts\Attribute;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 
-class Product extends Model implements HasMedia
+class Product extends Model implements HasMedia, Sortable
 {
-    use HasSlug,
+    use SortableTrait,
+        HasSlug,
         InteractsWithMedia,
         HasFactory,
         HasTranslations,
         Searchable;
 
-    public $translatable = ['name', 'size', 'description', 'packaging'];
+    public $translatable = ['name', 'size', 'description', 'packaging', 'fullname'];
 
     /**
      * The attributes that aren't mass assignable.
@@ -48,14 +51,12 @@ class Product extends Model implements HasMedia
     ];
 
     /**
-     * Get the packaging.
+     * Get the fullname.
      */
-    protected function packaging(): Attribute
+    protected function fullname(): Attribute
     {
         return Attribute::make(
-            get: function (string $value) {
-                dd($value);
-            },
+            get: fn(mixed $value, array $attributes) => trim($this->name . ' ' . $this->size),
         );
     }
 
@@ -77,7 +78,7 @@ class Product extends Model implements HasMedia
     {
         return SlugOptions::create()
             ->usingLanguage('id')
-            ->generateSlugsFrom('name')
+            ->generateSlugsFrom(['name', 'size'])
             ->saveSlugsTo('slug');
     }
 

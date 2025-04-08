@@ -21,7 +21,7 @@ class BuildSitemap
         Sitemap::create()
             ->add($this->build_index(PostRecipes::all(), 'sitemap_recipes.xml'))
             ->add($this->build_index(PostNews::all(), 'sitemap_news.xml'))
-            ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_ALWAYS))
+            ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
             ->writeToFile(public_path('sitemap.xml'))
         ;
     }

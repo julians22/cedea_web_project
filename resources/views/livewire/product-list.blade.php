@@ -1,48 +1,20 @@
-@push('after-scripts')
-    <script>
-        document.addEventListener('alpine:init', () => {
-            Alpine.data('hover', () => ({
-                hoverCardHovered: false,
-                hoverCardDelay: 100,
-                hoverCardLeaveDelay: 200,
-                hoverCardTimeout: null,
-                hoverCardLeaveTimeout: null,
-                hoverCardEnter() {
-                    clearTimeout(this.hoverCardLeaveTimeout);
-                    if (this.hoverCardHovered) return;
-                    clearTimeout(this.hoverCardTimeout);
-                    this.hoverCardTimeout = setTimeout(() => {
-                        this.hoverCardHovered = true;
-                    }, this.hoverCardDelay);
-                },
-                hoverCardLeave() {
-                    clearTimeout(this.hoverCardTimeout);
-                    if (!this.hoverCardHovered) return;
-                    clearTimeout(this.hoverCardLeaveTimeout);
-                    this.hoverCardLeaveTimeout = setTimeout(() => {
-                        this.hoverCardHovered = false;
-                    }, this.hoverCardLeaveDelay);
-                }
-            }))
-        })
-    </script>
-@endpush
-
 <div>
+
     <div wire:ignore>
-        <x-video-player :loop="false" source_mp4="{{ asset('video/product.mp4') }}" />
+        <x-video-player :autoplay="false" :loop="true" source_mp4="{{ asset('video/product_promo.mp4') }}" />
     </div>
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
-        <div class="bg-products min-h-72 minh relative object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
+        <div class="bg-products minh relative min-h-72 object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
 
             <picture>
                 <source class="block w-full" draggable="false" srcset="{{ asset('img/product-section-bg.jpg') }}"
                     media="(min-width: 1024px)" />
 
-                <img draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}" alt="">
+                <img class="w-full" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}"
+                    alt="">
             </picture>
 
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
@@ -51,7 +23,7 @@
                 <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brandWithUniqueCategories as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~p-2/5"
+                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~border-4/2 ~p-2/5"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="w-full object-contain" src="{{ $brand->getFirstMediaUrl('logo') }}"
@@ -130,15 +102,15 @@
 
             {{-- product grid --}}
             <div class="flex flex-col gap-4 ~scroll-mt-36/24" id="product-grid">
-                <div class="grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
+                <ul class="inline-grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <div class="flex flex-col gap-8">
-                            <div class="group relative flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
-                                x-data="hover" @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()"
+                        <li class="relative flex flex-col gap-8" data-product-item x-data="hover"
+                            @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()">
+                            <div class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                                 wire:key='{{ $item->slug }}'>
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
@@ -147,49 +119,51 @@
                                         @click="()=>{
                                             if(width<=1024) return
                                             modalOpen=true;
-                                            $wire.handleChangeActiveProduct('{{ $item->slug }}')
+                                            handleProductClick('{{ $item->name }}');
+                                            $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                             }">
                                 </div>
 
-                                {{-- hover content --}}
-                                <div class="before:size-8 top-full mt-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
-                                    x-show="hoverCardHovered" x-transition x-cloak
-                                    @click="()=>{
-                                        modalOpen=true;
-                                        $wire.handleChangeActiveProduct('{{ $item->slug }}')
-                                        }">
-                                    <div
-                                        class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
+                            </div>
+                            {{-- hover content --}}
+                            <div class="absolute top-full isolate z-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
+                                x-show="hoverCardHovered" x-transition x-cloak
+                                @click="()=>{
+                                    modalOpen=true;
+                                    handleProductClick('{{ $item->name }}');
+                                    $wire.handleChangeActiveProduct('{{ $item->slug }}');
+                                    }">
+                                <div
+                                    class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
-                                        <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
-                                            alt="">
+                                    <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
+                                        alt="">
 
-                                        <div class="text-pretty text-cedea-red-dark">
-                                            {{ implode(' ', [$item->name, $item->size]) }}
-                                            {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
-                                        </div>
-
-                                        <div class="cursor-pointer text-cedea-red max-md:hidden">
-                                            <svg class="h-5" xmlns="http://www.w3.org/2000/svg"
-                                                xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
-                                                <g>
-                                                    <g style="fill: none; filter: url(#d);">
-                                                        <polyline class="fill-none stroke-cedea-red"
-                                                            points="1.36 .75 16.72 16.11 .75 32.07"
-                                                            style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                    </g>
-                                                </g>
-                                            </svg>
-                                        </div>
-
+                                    <div class="text-pretty text-cedea-red-dark">
+                                        {{ implode(' ', [$item->name, $item->size]) }}
+                                        {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                     </div>
+
+                                    <div class="cursor-pointer text-cedea-red max-md:hidden">
+                                        <svg class="h-5" xmlns="http://www.w3.org/2000/svg"
+                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
+                                            <g>
+                                                <g style="fill: none; filter: url(#d);">
+                                                    <polyline class="fill-none stroke-cedea-red"
+                                                        points="1.36 .75 16.72 16.11 .75 32.07"
+                                                        style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
+                                                </g>
+                                            </g>
+                                        </svg>
+                                    </div>
+
                                 </div>
                             </div>
-                        </div>
+                        </li>
                     @empty
                         <x-placeholder.empty label="{{ __('status.empty') }}" />
                     @endforelse
-                </div>
+                </ul>
 
                 {{--  TODO: exclude activeProductChange --}}
                 <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
@@ -202,7 +176,6 @@
 
 
         <x-modal-product-detail>
-
 
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
@@ -290,7 +263,7 @@
 
 
     {{-- recipe --}}
-    {{-- <section class="container mt-8" wire:ignore>
+    <section class="container mt-8" wire:ignore>
         <h2 class="section-title">{!! __('product.creation.title') !!}</h2>
 
         <p>{{ __('product.creation.detail') }}</p>
@@ -336,5 +309,62 @@
                 @endforeach
             </x-meals-container>
         </div>
-    </section> --}}
+    </section>
 </div>
+
+@script
+    <script>
+        const {
+            animate,
+            stagger
+        } = window.Motion
+
+
+        Alpine.data('hover', () => ({
+            hoverCardHovered: false,
+            hoverCardDelay: 100,
+            hoverCardLeaveDelay: 200,
+            hoverCardTimeout: null,
+            hoverCardLeaveTimeout: null,
+            hoverCardEnter() {
+                clearTimeout(this.hoverCardLeaveTimeout);
+                if (this.hoverCardHovered) return;
+                clearTimeout(this.hoverCardTimeout);
+                this.hoverCardTimeout = setTimeout(() => {
+                    this.hoverCardHovered = true;
+                }, this.hoverCardDelay);
+            },
+            hoverCardLeave() {
+                clearTimeout(this.hoverCardTimeout);
+                if (!this.hoverCardHovered) return;
+                clearTimeout(this.hoverCardLeaveTimeout);
+                this.hoverCardLeaveTimeout = setTimeout(() => {
+                    this.hoverCardHovered = false;
+                }, this.hoverCardLeaveDelay);
+            },
+            handleProductClick(name) {
+                @production
+                gtag('event', 'product_show', {
+                    'event_category': 'Product',
+                    'event_label': 'Product Popup',
+                    'value': name
+                });
+            @endproduction
+        }
+        }))
+
+        Livewire.hook('morph.updated', ({
+            el,
+            component
+        }) => {
+            animate("#product-grid li", {
+                opacity: [0, 1],
+                y: [50, 0]
+            }, {
+                delay: stagger(0.10, {
+                    ease: "easeIn"
+                })
+            })
+        })
+    </script>
+@endscript

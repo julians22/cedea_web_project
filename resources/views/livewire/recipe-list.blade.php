@@ -3,7 +3,7 @@
         <div class="grid grid-cols-1 items-center justify-center ~mb-4/10 ~gap-4/8 md:grid-cols-[auto_1fr]">
             <h1 class="section-title m-0">{!! __('product.creation.title') !!}</h1>
             <div class="relative ~pr-0/20">
-                <x-lucide-search class="size-6 absolute left-2 top-1/2 -translate-y-1/2 md:left-3" />
+                <x-lucide-search class="absolute left-2 top-1/2 size-6 -translate-y-1/2 md:left-3" />
                 <input
                     class="block w-full rounded-full border border-black bg-transparent px-1 py-3 ps-10 text-sm placeholder:text-black"
                     id="recipe-search" wire:model.live='keyword' type="search" placeholder="{{ __('recipe.search') }}" />
@@ -56,12 +56,45 @@
         </x-meals-container>
     </section>
 
-    <section class="container flex flex-col ~gap-8/16 ~px-4/60">
-        @forelse ($recipes as $recipe)
-            <x-recipe-item :name="$recipe->title" :product="$recipe->product ?: null" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')" :description="$recipe->description" />
-        @empty
-            <x-placeholder.empty text="{{ __('status.empty') }}" />
-        @endforelse
+    <section class="container ~px-4/60">
+        <div class="mb-4">
+            @if ($keyword)
+                <div class="inline-flex cursor-pointer items-center gap-1 rounded-md bg-cedea-red px-2 py-1 text-white"
+                    wire:click="resetFilter('keyword')">
+                    <x-lucide-x class="size-4" />
+                    <span> {{ __('recipe.keyword') }}:
+                        {{ $keyword }}
+                    </span>
+                </div>
+            @endif
+            @if ($activeRecipeType && $activeRecipeType != 'all')
+                <div class="inline-flex cursor-pointer items-center gap-1 rounded-md bg-cedea-red px-2 py-1 text-white"
+                    wire:click="resetFilter('activeRecipeType')">
+                    <x-lucide-x class="size-4" />
+                    <span>{{ __('recipe.type') }}:
+                        {{ $activeRecipeType }}
+                    </span>
+                </div>
+            @endif
+            @if ($activeProduct)
+                <div class="inline-flex cursor-pointer items-center gap-1 rounded-md bg-cedea-red px-2 py-1 text-white"
+                    wire:click="resetFilter('activeProduct')">
+                    <x-lucide-x class="size-4" />
+                    <span>{{ __('recipe.product') }}:
+                        {{ Str::title(str_replace('-', ' ', $activeProduct)) }}
+                    </span>
+                </div>
+            @endif
+        </div>
+
+        <div class="flex flex-col ~gap-8/16">
+            @forelse ($recipes as $recipe)
+                <x-recipe-item :category="$recipe->recipe_type" :name="$recipe->title" :product="$recipe->product ?: null" :slug="$recipe->slug" :imagePath="$recipe->getFirstMediaUrl('featured_image')"
+                    :description="$recipe->description" />
+            @empty
+                <x-placeholder.empty text="{{ __('status.empty') }}" />
+            @endforelse
+        </div>
 
         <div class="pt-4">
             {{ $recipes->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}

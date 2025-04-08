@@ -12,6 +12,7 @@ return [
     'company.area' => 'Working Area',
 
     'product' => 'Brands',
+    'product.marketplace' => 'Marketplace',
 
     'recipe' => 'Recipe Creations',
 

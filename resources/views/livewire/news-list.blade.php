@@ -63,8 +63,8 @@
                                 src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
                         </div>
                         <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white font-semibold ~p-2/4">
-                            <p class="cursor-pointer text-[#919497] ~text-xxs/xs">{{ $item->published_at }}</p>
-                            <a class="line-clamp-3 ~text-xxs/xs"
+                            <p class="cursor-pointer text-[#919497] ~text-xs/xs">{{ $item->published_at }}</p>
+                            <a class="line-clamp-3 ~text-base/xs"
                                 href="{{ route('news.show', ['post' => $item->slug]) }}">
                                 {!! $item->title !!}
                             </a>

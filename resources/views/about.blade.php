@@ -1,20 +1,20 @@
 <x-layouts.app>
-    <x-section-banner id="sekilas-perusahaan" :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('about.brief.title')">
+    <x-section-banner id="sekilas-perusahaan" :imageLeft="false" :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('about.brief.title')">
         <x-slot:desc>
             <p>
                 {{ __('about.brief.detail') }}
             </p>
-        </x-slot>
+        </x-slot:desc>
     </x-section-banner>
 
     {{-- sejarah --}}
-    <x-section-banner class="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white" id="sejarah"
-        :imageUrl="asset('img/cedea-industrial.jpg')" :title="__('about.history.title')">
+    <x-section-banner class:content="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white"
+        id="sejarah" :imageLeft="false" :imageUrl="asset('img/cedea-industrial.jpg')" :title="__('about.history.title')">
         <x-slot:desc>
             <p>
                 {{ __('about.history.detail') }}
             </p>
-        </x-slot>
+        </x-slot:desc>
 
         <x-slot:button>
 
@@ -91,7 +91,7 @@
                 </div>
             </x-modal.alpine>
 
-        </x-slot>
+        </x-slot:button>
     </x-section-banner>
 
     {{-- Visi Misi --}}

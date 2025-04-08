@@ -31,6 +31,7 @@
 @endpush
 
 {{-- ? Main Menu --}}
+{{-- TODO: Clean-up and seperate into smaller components --}}
 <div class="flex items-center justify-end gap-4 lg:justify-center" data-mobile-nav-open
     x-bind:data-mobile-nav-open="mobileNavOpen ? 'true' : 'false'" x-data="{ mobileNavOpen: false, hoverPosition: null, closeMobileNav() { this.mobileNavOpen = false } }"
     x-resize.document="if($width> 1024) mobileNavOpen=false;">

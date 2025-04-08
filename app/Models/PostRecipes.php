@@ -4,11 +4,13 @@ namespace App\Models;
 
 use App\Models\Products\Product;
 use App\Traits\Searchable;
+
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
+
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\HasMedia;
@@ -76,9 +78,9 @@ class PostRecipes extends Model implements HasMedia
      */
     public function toSitemapTag(): Url | string | array
     {
-        return Url::create(route('recipe.detail', $this))
+        return Url::create(route('recipe.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
             ->setPriority(0.1);
     }
 

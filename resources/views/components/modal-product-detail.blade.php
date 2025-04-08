@@ -11,12 +11,13 @@ can be clicked to close the modal.
 --}}
 
 @teleport('body')
-    <div class="${modalOpen ? 'relative w-auto' : '' } h-auto" @keydown.escape.window="modalOpen = false">
-        <div class="h-dvh fixed left-0 top-0 z-[99] flex w-screen items-center justify-center" x-show="modalOpen" x-cloak>
+    <div class="${modalOpen ? 'relative w-auto' : '' } h-auto">
+        <div class="fixed left-0 top-0 z-[99] flex h-dvh w-screen items-center justify-center" x-show="modalOpen" x-cloak>
             <div class="absolute inset-0 h-full w-full bg-black bg-opacity-40" x-show="modalOpen"
                 x-transition:enter="ease-out duration-300" x-transition:enter-start="opacity-0"
                 x-transition:enter-end="opacity-100" x-transition:leave="ease-in duration-300"
-                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0" @click="modalOpen=false">
+                x-transition:leave-start="opacity-100" x-transition:leave-end="opacity-0"
+                wire:click="handleChangeActiveProduct()" @click="modalOpen=false">
             </div>
 
             <div class="relative" x-show="modalOpen" x-trap.inert.noscroll.noautofocus="modalOpen"
@@ -28,7 +29,7 @@ can be clicked to close the modal.
 
                 <button
                     class="absolute right-0 top-0 z-1 mr-5 mt-5 flex items-center justify-center rounded-full text-white hover:bg-gray-50 hover:text-gray-800"
-                    @click="modalOpen=false">
+                    @click="modalOpen=false" wire:click="handleChangeActiveProduct()">
                     <svg class="size-10" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                         stroke-width="0.5" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12" />

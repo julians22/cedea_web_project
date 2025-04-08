@@ -13,9 +13,6 @@ use Spatie\Sitemap\Tags\News;
 
 class Nav extends Component
 {
-
-
-
     public $nav_items;
     public $locale;
     public $brands;
@@ -24,12 +21,7 @@ class Nav extends Component
      */
     public function __construct()
     {
-
-
-
         $this->locale = App::currentLocale();
-
-
 
         $this->brands =
             Brand::query()->inNav()->orderBy('order_column')->get()->map(function ($brand) {
@@ -41,7 +33,6 @@ class Nav extends Component
                     'submenu' => []
                 ];
             })->toArray();
-
 
         //* TYPE DOC
         //* [label : string
@@ -86,21 +77,20 @@ class Nav extends Component
             [
                 'label' => __('nav.product'),
                 'route' => route('product'),
-                // 'route' => '#',
                 'disable' => false,
                 'submenu' => [
                     ...$this->brands,
 
-                    // [
-                    //     'label' => 'Video',
-                    //     'route' => '#',
-                    //     'submenu' => []
-                    // ],
-                    // [
-                    //     'label' => 'Belanja',
-                    //     'route' => route('marketplace'),
-                    //     'submenu' => []
-                    // ],
+                    [
+                        'label' => 'Video',
+                        'route' => route('videos'),
+                        'submenu' => []
+                    ],
+                    [
+                        'label' => __('nav.product.marketplace'),
+                        'route' => route('marketplace'),
+                        'submenu' => []
+                    ],
                     // [
                     //     'label' => 'Royalti Point',
                     //     'route' => '#',
@@ -113,26 +103,22 @@ class Nav extends Component
                 'label' => __('nav.recipe'),
                 'route' => route('recipe'),
                 // 'route' => '#',
-                'disable' => true,
+                'disable' => false,
                 'submenu' => [
                     [
                         'label' => __('meal.breakfast'),
-                        // 'route' => '#',
                         'route' => route('recipe', ['type' => RecipeType::BREAKFAST->value]),
                     ],
                     [
                         'label' => __('meal.lunch'),
-                        // 'route' => '#',
                         'route' => route('recipe', ['type' => RecipeType::LUNCH->value]),
                     ],
                     [
                         'label' => __('meal.dinner'),
-                        // 'route' => '#',
                         'route' => route('recipe', ['type' => RecipeType::DINNER->value]),
                     ],
                     [
                         'label' => __('meal.snack'),
-                        // 'route' => '#',
                         'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
                     ],
                 ]
@@ -157,9 +143,8 @@ class Nav extends Component
             ],
             [
                 'label' => __('nav.contact'),
-                'route' => '#',
-                // 'route' => route('contact'),
-                'disable' => true,
+                'route' => route('contact'),
+                'disable' => false,
                 'submenu' => []
             ]
         ];

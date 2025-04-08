@@ -5,9 +5,11 @@ namespace App\Livewire;
 use App\Models\PostRecipes;
 use Livewire\Component;
 use Livewire\Attributes\Url;
-use Butschster\Head\Facades\Meta;
 use Filament\Forms\Components\Builder;
 use Livewire\WithPagination;
+use Butschster\Head\Facades\Meta;
+use Butschster\Head\Packages\Entities\OpenGraphPackage;
+use Butschster\Head\Packages\Entities\TwitterCardPackage;
 
 class RecipeList extends Component
 {
@@ -30,7 +32,36 @@ class RecipeList extends Component
             $this->redirect('/');
         }
 
+        $og = new OpenGraphPackage('open graph');
+        $twitter_card = new TwitterCardPackage('twitter');
+
+        $title = 'Recipe - ' . env('APP_NAME');
+        $description = 'Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood! Mulai dari sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.';
+        $url = route('recipe');
+        $image = asset('img/mutu.jpg');
+        $locale = 'id_ID';
+        $alternateLocale = 'en_US';
+
+        Meta::setDescription($description);
         Meta::prependTitle('Recipe');
+
+        $og
+            ->setType('website')
+            ->setSiteName(env('APP_NAME'))
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setUrl($url)
+            ->addImage($image)
+            ->setLocale($locale)
+            ->addAlternateLocale($alternateLocale);
+
+        $twitter_card
+            ->setTitle($title)
+            ->setDescription($description)
+            ->setImage($image);
+
+        Meta::registerPackage($og);
+        Meta::registerPackage($twitter_card);
     }
 
     function handleChangeActiveRecipeType(string $slug)
@@ -51,6 +82,11 @@ class RecipeList extends Component
         }
     }
 
+    function resetFilter(string $name)
+    {
+        $this->reset($name);
+    }
+
     public function render()
     {
         return view('livewire.recipe-list', [
@@ -67,13 +103,14 @@ class RecipeList extends Component
                         return $q->where('recipe_type', $this->activeRecipeType);
                     }
                 )
-                ->orderby('created_at', 'desc')
                 ->when(
                     $this->keyword,
                     function ($q) {
                         return $q->searchTranslated('title', $this->keyword, '*');
                     }
                 )
+                ->where('published', 1)
+                ->orderby('created_at', 'desc')
                 ->paginate(2),
         ]);
     }

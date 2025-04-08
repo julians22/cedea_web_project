@@ -7,6 +7,7 @@ return [
     'subheading' => "Find the latest news and updates about our company here. Follow the latest developments and important news from Cedea Seafood.",
     'search' => "SEARCH NEWS HERE",
     'read' => 'READ THE NEWS',
+    'read.header' => 'Read News',
 
     'type.activity' => 'Activity',
     'type.article' => 'Article/Blog',

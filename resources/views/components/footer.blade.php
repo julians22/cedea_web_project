@@ -88,7 +88,7 @@
 
         </div>
 
-        <h4 class="mt-8 text-center text-sm font-semibold text-white md:text-base">© {{ date('Y') }} CEDEA. All
+        <h4 class="mt-8 text-center text-sm font-semibold text-white md:text-base">© 2024-{{ date('Y') }} CEDEA. All
             Rights Reserved.</h4>
     </div>
 

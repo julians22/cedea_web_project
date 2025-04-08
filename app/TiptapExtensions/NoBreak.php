@@ -29,7 +29,7 @@ class NoBreak extends Mark
     public function addAttributes()
     {
         return [
-            'color' => [
+            'wordBreak' => [
                 'parseHTML' => function ($DOMNode) {
                     return InlineStyle::getAttribute($DOMNode, 'word-break') ?: null;
                 },

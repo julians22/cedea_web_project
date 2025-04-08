@@ -52,6 +52,7 @@ class NewsList extends Component
                         return $q->where('type', $this->currentType);
                     }
                 )
+                ->where('published', 1)
                 ->orderBy('published_at', 'desc')
                 ->paginate(7),
         ]);

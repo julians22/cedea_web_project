@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
@@ -10,6 +11,7 @@ use App\Http\Controllers\Pages\HomeController;
 use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
+use App\Http\Controllers\VideoController;
 use App\Livewire\Contact;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
@@ -36,35 +38,21 @@ Route::group([
     Route::get('/', HomeController::class)
         ->name('home');
 
-    Route::get(
-        'about',
-        function () {
-            Meta::prependTitle('TENTANG CEDEA');
-
-            return view('about');
-        }
-    )
+    Route::get('about', AboutController::class)
         ->name('about');
 
-    Route::get(
-        'product',
-        ProductList::class
-    )
+    Route::get('product', ProductList::class)
         ->name('product');
 
-    Route::get(
-        'recipe',
-        RecipeList::class
-    )
+    Route::get('recipe', RecipeList::class)
         ->name('recipe');
 
-
     Route::get('recipe/{recipe}', [RecipeController::class, 'show'])
-        ->name('recipe.detail');
+        ->name('recipe.show');
 
     Route::get(
         'news',
-        [NewsController::class, 'create']
+        [NewsController::class, 'index']
     )->name('news');
 
     Route::get(
@@ -72,11 +60,14 @@ Route::group([
         [NewsController::class, 'show']
     )->name('news.show');
 
-    // Route::get('contact', Contact::class)
-    //     ->name('contact');
+    Route::get('contact', Contact::class)
+        ->name('contact');
 
-    // Route::get('marketplace', MarketplaceController::class)
-    //     ->name('marketplace');
+    Route::get('marketplace', MarketplaceController::class)
+        ->name('marketplace');
+
+    Route::get('videos', [VideoController::class, 'index'])
+        ->name('videos');
 
     Route::get('search', SearchController::class)
         ->name('search');
