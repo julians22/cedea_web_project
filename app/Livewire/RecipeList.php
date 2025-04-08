@@ -26,12 +26,6 @@ class RecipeList extends Component
 
     public function mount()
     {
-
-        if (app()->environment('production')) {
-            // return redirect()->route('home');
-            $this->redirect('/');
-        }
-
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
