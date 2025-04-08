@@ -10,6 +10,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Filament\Resources\MessageResource\Pages;
 use Filament\Infolists\Components\TextEntry;
+use Illuminate\Database\Eloquent\Model;
 
 class MessageResource extends Resource
 {
@@ -17,6 +18,15 @@ class MessageResource extends Resource
 
     protected static ?string $navigationIcon = 'heroicon-o-rectangle-stack';
 
+    public static function canCreate(): bool
+    {
+        return false;
+    }
+
+    public static function canEdit(Model $record): bool
+    {
+        return false;
+    }
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
