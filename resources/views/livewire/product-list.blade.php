@@ -1,7 +1,7 @@
 <div>
 
     <div wire:ignore>
-        <x-video-player source_mp4="{{ asset('video/product.mp4') }}" />
+        <x-video-player :autoplay="false" :loop="true" source_mp4="{{ asset('video/product_promo.mp4') }}" />
     </div>
 
     <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
