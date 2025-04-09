@@ -22,7 +22,7 @@ class SearchController extends Controller
     {
         // temp fix
         $response = Http::withOptions([
-            'verify' => '/path/to/cacert.pem',
+            'verify' => false,
         ])->get($url);
         $html_content = $response->getBody()->getContents();
 
