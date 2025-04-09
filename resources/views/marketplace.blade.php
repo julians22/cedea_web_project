@@ -69,7 +69,7 @@
                         ],
                         [
                             'name' => 'grab mart',
-                            'url' => 'https://r.grab.com/g/2-2-6-C23HL3CEPGKANT',
+                            'url' => 'http://grb.to/GMKstore',
                             'logo' => asset('img/marketplace/grabmart2.png'),
                         ],
                         [
