@@ -17,6 +17,7 @@ class ShowRecipeVideos extends Component
         return view('livewire.video-list', [
             'title' => __('videos.type.recipe'),
             'videos' => Video::where('type', VideoType::RECIPE)
+                ->latest()
                 ->paginate(6, pageName: 'recipe-page')
         ]);
     }

@@ -17,6 +17,7 @@ class ShowTvVideos extends Component
         return view('livewire.video-list', [
             'title' => __('videos.type.tv'),
             'videos' => Video::where('type', VideoType::TV)
+                ->latest()
                 ->paginate(6, pageName: 'tv-page')
         ]);
     }

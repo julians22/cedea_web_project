@@ -99,7 +99,7 @@
                         ],
                         [
                             'name' => 'allofresh',
-                            'url' => 'https://www.sayurbox.com/search?q=cedea',
+                            'url' => 'https://allofresh.onelink.me/31rm/3gllsbfi',
                             'logo' => asset('img/marketplace/allofresh.png'),
                         ],
                     ];
@@ -110,7 +110,8 @@
                         <div class="flex items-center justify-center ~size-32/36 max-md:hidden">
                         </div>
                     @else
-                        <a class="flex items-center justify-center ~size-32/36" href="{{ $logo['url'] }}">
+                        <a class="flex items-center justify-center ~size-32/36" target="_blank"
+                            href="{{ $logo['url'] }}">
                             <img class="" src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                         </a>
                     @endif
@@ -190,7 +191,7 @@
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
                         <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
-                            href="{{ $logo['url'] }}">
+                            target="_blank" href="{{ $logo['url'] }}">
                             <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                         </a>
                     @endforeach
@@ -199,7 +200,7 @@
                 <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 2) as $logo)
                         <a class="{{ TailwindMerge\Laravel\Facades\TailwindMerge::merge('inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center', $logo['class']) }}"
-                            href="{{ $logo['url'] }}">
+                            target="_blank" href="{{ $logo['url'] }}">
                             <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
                         </a>
                     @endforeach
