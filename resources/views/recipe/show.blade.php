@@ -54,7 +54,7 @@
                 @if ($recipe->ingredients)
                     @foreach ($recipe->ingredients as $ingredient)
                         <div>
-                            @dd($recipe)
+                            {{-- @dd($recipe) --}}
                             <p>{{ $ingredient['title'] }}</p>
                             <ul>
                                 @foreach ($ingredient['ingredient_group'] as $item)
