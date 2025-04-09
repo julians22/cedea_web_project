@@ -20,7 +20,10 @@ class SearchController extends Controller
 
     private function scrapePageContent($url)
     {
-        $response = Http::get($url);
+        // temp fix
+        $response = Http::withOptions([
+            'verify' => '/path/to/cacert.pem',
+        ])->get($url);
         $html_content = $response->getBody()->getContents();
 
         $crawler = new Crawler($html_content);
