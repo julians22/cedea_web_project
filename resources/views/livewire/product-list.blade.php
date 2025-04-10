@@ -229,11 +229,11 @@
                             <div class="flex basis-2/5 flex-col items-center gap-y-4">
                                 <template x-if="modalOpen">
                                     <div class="relative aspect-video w-full overflow-hidden rounded-lg">
-                                        <x-matinee::embed :data="$activeProduct->video_link" />
+                                        <x-matinee::embed :data="$activeProduct->video" />
                                     </div>
                                 </template>
                                 <a class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black"
-                                    target="_blank" href="{{ $activeProduct->video_link['url'] }}">Tonton
+                                    target="_blank" href="{{ $activeProduct->video['url'] }}">Tonton
                                     videonya</a>
                             </div>
                         @endif
