@@ -119,7 +119,7 @@
                                         @click="()=>{
                                             if(width<=1024) return
                                             modalOpen=true;
-                                            handleProductClick('{{ $item->name }}');
+                                            handleProductClick('{{ $item->fullname }}');
                                             $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                             }">
                                 </div>
@@ -130,7 +130,7 @@
                                 x-show="hoverCardHovered" x-transition x-cloak
                                 @click="()=>{
                                     modalOpen=true;
-                                    handleProductClick('{{ $item->name }}');
+                                    handleProductClick('{{ $item->fullname }}');
                                     $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                     }">
                                 <div
@@ -140,7 +140,7 @@
                                         alt="">
 
                                     <div class="text-pretty text-cedea-red-dark">
-                                        {{ implode(' ', [$item->name, $item->size]) }}
+                                        {{ $item->fullname }}
                                         {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
                                     </div>
 
