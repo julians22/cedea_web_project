@@ -17,6 +17,7 @@ return new class extends Migration
 
             $table->string('gender')->nullable();
             $table->string('age')->nullable();
+            $table->string('address')->nullable();
 
             $table->string('agency')->nullable();
             $table->string('visitor_size')->nullable();
@@ -30,7 +31,7 @@ return new class extends Migration
     public function down(): void
     {
         Schema::table('messages', function (Blueprint $table) {
-            $table->dropColumn(['phone', 'city', 'gender', 'age', 'agency', 'visitor_size', 'visit_date']);
+            $table->dropColumn(['phone', 'city', 'gender', 'age', 'address', 'agency', 'visitor_size', 'visit_date']);
         });
     }
 };
