@@ -79,6 +79,7 @@
 
         {{-- form --}}
         <form class="grid-overlay pointer-events-none order-1 grid" @submit.prevent="doCaptcha" x-data="{
+            loading: false,
             siteKey: @js(config('services.recaptcha.public_key')),
             init() {
                 // load our recaptcha.
@@ -89,8 +90,10 @@
                 }
             },
             doCaptcha() {
+                this.loading = true;
                 grecaptcha.execute(this.siteKey, { action: 'submit' }).then(token => {
                     Livewire.dispatch('formSubmitted', { token: token });
+                    this.loading = false;
                 });
             },
         }">
@@ -137,13 +140,18 @@
                             @endif
 
 
-                            <button wire:loading.attr="disabled" type="submit" @class([
-                                'px-4 rounded-full w-fit border-2 border-cedea-red-500',
-                                true => 'bg-cedea-red-500 text-white',
-                            ])>
-                                <span class="items-center justify-center" wire:loading.flex wire:target="send">
-                                    <svg class="-ml-1 mr-3 h-5 w-5 animate-spin text-white" data-motion-id="svg 2"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                            <button type="submit" :disabled="loading"
+                                :class="{
+                                    'px-4 rounded-full w-fit border-2 flex items-center justify-center border-cedea-red-500': true,
+                                    'bg-cedea-red-500 cursor-progress text-white': loading
+                                }">
+                                <span class="items-center justify-center"
+                                    x-bind:class="{
+                                        'inline-flex gap-2 opacity-50 pointer-events-none': loading
+                                    }">
+                                    <svg class="h-5 w-5 animate-spin text-white" data-motion-id="svg 2"
+                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
+                                        x-show="loading">
                                         <circle class="opacity-25" cx="12" cy="12" r="10"
                                             stroke="currentColor" stroke-width="4">
                                         </circle>
@@ -151,11 +159,8 @@
                                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                                         </path>
                                     </svg>
-                                    Processing...
-                                </span>
-
-                                <span wire:loading.remove wire:target="send">
-                                    {{ __('contact.submit') }}
+                                    <span x-show="!loading">{{ __('contact.submit') }}</span>
+                                    <span x-show="loading">Processing...</span>
                                 </span>
                             </button>
 

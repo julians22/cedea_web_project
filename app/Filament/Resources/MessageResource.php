@@ -2,6 +2,7 @@
 
 namespace App\Filament\Resources;
 
+use App\Filament\Exports\MessageExporter;
 use Filament\Tables;
 use App\Models\Message;
 use Filament\Infolists;
@@ -10,6 +11,7 @@ use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
 use App\Filament\Resources\MessageResource\Pages;
 use Filament\Infolists\Components\TextEntry;
+use Filament\Tables\Actions\ExportAction;
 use Illuminate\Database\Eloquent\Model;
 
 class MessageResource extends Resource
@@ -72,7 +74,11 @@ class MessageResource extends Resource
                 Tables\Actions\BulkActionGroup::make([
                     Tables\Actions\DeleteBulkAction::make(),
                 ]),
-            ]);
+            ])
+            ->headerActions([
+                ExportAction::make()
+                    ->exporter(MessageExporter::class)
+            ]);;
     }
 
     public static function getRelations(): array
