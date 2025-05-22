@@ -2,6 +2,7 @@
 
 namespace App\Livewire;
 
+use App\Enums\ContactPurposes;
 use App\Models\Message;
 use App\Settings\ContactSettings;
 use Illuminate\Validation\Rule;
@@ -29,6 +30,7 @@ class Contact extends Component
     public $proposed_date = null;
     public $age = '0';
     public $city = null;
+    public $purpose = '0';
     public $subject = null;
     public $message = null;
 
@@ -116,6 +118,7 @@ class Contact extends Component
                 'address' => ['required', 'max:255'],
                 'age' => ['required', Rule::notIn(['0']),],
                 'city' => ['required'],
+                'purpose' => ['required', Rule::enum(ContactPurposes::class)],
                 'subject' => ['required', 'max:255'],
             ]);
         }

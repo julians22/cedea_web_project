@@ -19,9 +19,15 @@
     '46-55' => '46-55',
     '56-65' => '56-65',
     '>65' => '>65',
-]" placeholder="Pilih rentang usia" />
+]"
+    placeholder="{{ __('contact.form.age.placeholder') }}" />
 
 <x-form.input name="city" :label="__('contact.form.city')" :placeholder="__('contact.form.city')" model="city" />
+
+<x-form.dropdown name="purpose" :label="__('contact.form.purpose')" model="purpose" :options="collect(\App\Enums\ContactPurposes::cases())
+    ->mapWithKeys(fn(\App\Enums\ContactPurposes $purpose) => [$purpose->value => $purpose->getLabel()])
+    ->toArray()"
+    placeholder="{{ __('contact.form.purpose.placeholder') }}" />
 
 <x-form.input name="subject" :label="__('contact.form.subject')" :placeholder="__('contact.form.subject')" model="subject" />
 
