@@ -179,6 +179,7 @@ class Contact extends Component
 
         if ($this->type === 'visit') {
             $this->age = null;
+            $this->purpose = null;
         }
 
         Message::create($this->except('tab_index'));
