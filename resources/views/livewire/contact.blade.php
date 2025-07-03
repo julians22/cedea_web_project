@@ -148,7 +148,7 @@
                                     x-bind:class="{
                                         'inline-flex gap-2 opacity-50 pointer-events-none': loading
                                     }">
-                                    <svg class="h-5 w-5 animate-spin text-white" data-motion-id="svg 2"
+                                    <svg class="h-5 w-5 animate-spin text-white" data-motion-id="svg 2" wire:loading
                                         xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24"
                                         x-show="loading">
                                         <circle class="opacity-25" cx="12" cy="12" r="10"
