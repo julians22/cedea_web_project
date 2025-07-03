@@ -4,19 +4,18 @@ use App\Http\Controllers\AboutController;
 use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
-use Embed\Embed;
-use Butschster\Head\Facades\Meta;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Pages\HomeController;
-use App\Http\Controllers\PostController;
 use App\Http\Controllers\RecipeController;
 use App\Http\Controllers\SearchController;
 use App\Http\Controllers\VideoController;
 use App\Livewire\Contact;
 use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
-use App\Models\PostNews;
-use App\Models\PostRecipes;
+use App\Mail\ContactMail;
+use App\Models\Message;
+use Embed\Embed;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -30,10 +29,9 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 |
 */
 
-
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath']
+    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
 ], function () {
     Route::get('/', HomeController::class)
         ->name('home');
@@ -72,7 +70,6 @@ Route::group([
     Route::get('search', SearchController::class)
         ->name('search');
 
-
     // Route::get('video_get', function () {
 
     //     $embed = new Embed();
@@ -83,6 +80,33 @@ Route::group([
     //     dd($info);
     // });
 });
+
+if (app()->environment('local')) {
+    Route::get('/preview/email', function () {
+
+        $mockMessage = new Message([
+            'name' => 'Ghassan Fadhlillah Sururi',
+            'email' => 'fsghassan2429d@gmail.com',
+            'subject' => 'test ajadsad',
+            'message' => 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nam sed dui. Mauris ut justo. Sed dolor nunc, pretium vel, scelerisque ac, condimentum ut, nulla. Mauris vitae pede. Pellentesque habitant morbi tristique senectus et netus et malesuada fames ac turpis egestas. Sed non lectus. Integer non velit. Donec ac eros. Nullam euismod, justo at cursus venenatis, nibh nisl viverra ipsum, nec imperdiet sem ipsum in sapien.',
+            'type' => 'inquiry',
+            'address' => 'Jl. agung raya 1 gg turi 2 lenteng agung',
+            'phone' => '082311354631',
+            'city' => 'Jakarta',
+            'gender' => 'male',
+            'age' => '12-16',
+            'institution' => null,
+            'visitor_size' => null,
+            'proposed_date' => null,
+            'purpose' => 'product_inquiry',
+        ]);
+
+        // The email sending is done using the to method on the Mail facade
+        // Mail::to(env('MAIL_TO_ADDRESS'))->send(new ContactMail($mockMessage));
+
+        return new App\Mail\ContactMail($mockMessage);
+    });
+}
 
 Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
     ->name('locale.switch');

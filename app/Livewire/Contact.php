@@ -3,35 +3,50 @@
 namespace App\Livewire;
 
 use App\Enums\ContactPurposes;
+use App\Jobs\SendMailJob;
 use App\Models\Message;
 use App\Settings\ContactSettings;
+use Butschster\Head\Facades\Meta;
+use Butschster\Head\Packages\Entities\OpenGraphPackage;
+use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use Illuminate\Support\Facades\Http;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
+use Illuminate\Validation\ValidationException;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\On;
 use Livewire\Attributes\Validate;
 use Livewire\Component;
-use Illuminate\Support\Facades\Http;
-use Illuminate\Validation\ValidationException;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use Throwable;
 
 class Contact extends Component
 {
     public $tab_index = 0;
 
     public $name = null;
+
     public $email = null;
+
     public $address = null;
+
     public $phone = null;
+
     public $gender = null;
+
     public $institution = null;
+
     public $visitor_size = null;
+
     public $proposed_date = null;
+
     public $age = '0';
+
     public $city = null;
+
     public $purpose = '0';
+
     public $subject = null;
+
     public $message = null;
 
     public $type = null;
@@ -41,7 +56,7 @@ class Contact extends Component
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'Contact - ' . env('APP_NAME');
+        $title = 'Contact - '.env('APP_NAME');
         $description = 'Tinggalkan Pesan';
         $url = route('contact');
         $image = asset('img/mutu.jpg');
@@ -69,7 +84,6 @@ class Contact extends Component
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
 
-
         $this->handleTabChange(app(ContactSettings::class)->enable_inquiry_form ? 0 : 1);
     }
 
@@ -79,10 +93,10 @@ class Contact extends Component
         return app(ContactSettings::class)->enable_visit_form || app(ContactSettings::class)->enable_inquiry_form;
     }
 
-    function handleTabChange($index)
+    public function handleTabChange($index)
     {
 
-        if (!app(ContactSettings::class)->enable_visit_form && !app(ContactSettings::class)->enable_inquiry_form) {
+        if (! app(ContactSettings::class)->enable_visit_form && ! app(ContactSettings::class)->enable_inquiry_form) {
             return;
         }
 
@@ -99,7 +113,7 @@ class Contact extends Component
 
     public function rules()
     {
-        $base =   [
+        $base = [
             'name' => ['required', 'max:255'],
             'email' => ['required', 'email', 'max:255'],
             'phone' => ['required'],
@@ -108,7 +122,7 @@ class Contact extends Component
             // TODO: ADD TAG VALIDATION OR SANITIZATION
             'message' => ['required', 'min:3'],
 
-            'type' => ['required']
+            'type' => ['required'],
         ];
 
         // inquiry
@@ -116,7 +130,7 @@ class Contact extends Component
             $base = array_merge($base, [
                 'gender' => ['required', Rule::in(['male', 'female'])],
                 'address' => ['required', 'max:255'],
-                'age' => ['required', Rule::notIn(['0']),],
+                'age' => ['required', Rule::notIn(['0'])],
                 'city' => ['required'],
                 'purpose' => ['required', Rule::enum(ContactPurposes::class)],
                 'subject' => ['required', 'max:255'],
@@ -148,6 +162,13 @@ class Contact extends Component
     //         'message' => 'description',
     //     ];
     // }
+
+    /**
+     * Validate the given reCAPTCHA token.
+     *
+     *
+     * @throws \Illuminate\Validation\ValidationException
+     */
     protected function validateRecaptcha(string $token): void
     {
         // validate Google reCaptcha.
@@ -156,7 +177,7 @@ class Contact extends Component
             'response' => $token,
             'remoteip' => request()->ip(),
         ]);
-        $throw = fn($message) => throw ValidationException::withMessages(['recaptcha' => $message]);
+        $throw = fn ($message) => throw ValidationException::withMessages(['recaptcha' => $message]);
         if (! $response->successful() || ! $response->json('success')) {
             $throw($response->json(['error-codes'])[0] ?? 'An error occurred.');
         }
@@ -165,16 +186,24 @@ class Contact extends Component
             $throw('We were unable to verify that you\'re not a robot. Please try again.');
         }
     }
+
+    /**
+     * Send the message.
+     *
+     * @param  string  $token
+     * @return void
+     */
     #[On('formSubmitted')]
-    function send($token)
+    public function send($token)
     {
-        if (!$this->isFormEnabled()) {
+        if (! $this->isFormEnabled()) {
             return;
         }
 
         $this->type = $this->tab_index == 0 ? 'inquiry' : 'visit';
 
         $this->validate();
+
         $this->validateRecaptcha($token);
 
         if ($this->type === 'visit') {
@@ -182,11 +211,16 @@ class Contact extends Component
             $this->purpose = null;
         }
 
-        Message::create($this->except('tab_index'));
+        $message = Message::create($this->except(['tab_index']));
 
-        $this->dispatch('message-sent');
-
-        $this->resetExcept('tab_index');
+        try {
+            dispatch(new SendMailJob($message));
+        } catch (Throwable $e) {
+            Log::error('Failed to send contact email: '.$e->getMessage());
+        } finally {
+            $this->dispatch('message-sent');
+            $this->resetExcept('tab_index');
+        }
     }
 
     public function render()

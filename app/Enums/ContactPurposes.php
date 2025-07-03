@@ -4,7 +4,6 @@ namespace App\Enums;
 
 use Filament\Support\Contracts\HasLabel;
 
-
 // 1.⁠ ⁠Informasi Produk = Product Inquiry
 // (Termasuk didalamnya nanya lokasi pembelian, nanya Harga, nanya katalog, nanya terkait produk tertentu)
 // 2.⁠ ⁠Komplain Produk = Product Complaint

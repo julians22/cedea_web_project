@@ -139,8 +139,7 @@
                                 <x-contact.form-visit />
                             @endif
 
-
-                            <button type="submit" :disabled="loading"
+                            <button type="submit" wire:loading.attr="disabled" :disabled="loading"
                                 :class="{
                                     'px-4 rounded-full w-fit border-2 flex items-center justify-center border-cedea-red-500': true,
                                     'bg-cedea-red-500 cursor-progress text-white': loading

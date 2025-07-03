@@ -2,25 +2,20 @@
 
 namespace App\Filament\Resources;
 
-use Filament\Forms;
-use Filament\Tables;
-use App\Models\Banner;
-use Filament\Forms\Form;
-use Filament\Tables\Table;
-use Filament\Resources\Resource;
-use Filament\Forms\Components\Split;
-use Filament\Forms\Components\Toggle;
-use Filament\Forms\Components\Section;
-use Filament\Tables\Columns\TextColumn;
-use Filament\Forms\Components\TextInput;
-use Filament\Forms\Components\RichEditor;
-use Filament\Tables\Columns\ToggleColumn;
-use Illuminate\Database\Eloquent\Builder;
 use App\Filament\Resources\BannerResource\Pages;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
-use App\Filament\Resources\BannerResource\RelationManagers;
+use App\Models\Banner;
+use Filament\Forms\Components\Section;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
+use Filament\Forms\Components\Split;
+use Filament\Forms\Components\TextInput;
+use Filament\Forms\Components\Toggle;
+use Filament\Forms\Form;
+use Filament\Resources\Resource;
+use Filament\Tables;
+use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
+use Filament\Tables\Columns\TextColumn;
+use Filament\Tables\Columns\ToggleColumn;
+use Filament\Tables\Table;
 
 class BannerResource extends Resource
 {
@@ -55,9 +50,9 @@ class BannerResource extends Resource
                                 ->default(true)
                                 ->onColor('success')
                                 ->offColor('danger'),
-                        ])->grow(false)
+                        ])->grow(false),
                     ]
-                )
+                ),
             ])->columns(1);
     }
 
@@ -75,7 +70,7 @@ class BannerResource extends Resource
                     ->offColor('danger'),
             ])
             ->reorderable('order_column')
-            ->defaultSort('order_column', 'desc')
+            ->defaultSort('order_column')
             ->filters([
                 //
             ])
