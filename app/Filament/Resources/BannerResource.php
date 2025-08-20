@@ -41,8 +41,10 @@ class BannerResource extends Resource
                                 ->image()
                                 ->collection('banner_mobile'),
                             TextInput::make('title')
+                                ->maxLength(255)
                                 ->helperText(__('optional')),
                             TextInput::make('link')
+                                ->maxLength(255)
                                 ->helperText(__('optional')),
                         ]),
                         Section::make([

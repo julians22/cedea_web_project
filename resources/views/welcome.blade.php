@@ -76,9 +76,9 @@
                                     'logo' => asset('img/marketplace/blibli.png'),
                                 ],
                                 [
-                                    'name' => 'indomaret',
-                                    'url' => 'https://www.klikindomaret.com/search/?key=Cedea',
-                                    'logo' => asset('img/marketplace/indomaret.png'),
+                                    'name' => 'astro',
+                                    'url' => 'https://www.astronauts.id/',
+                                    'logo' => asset('img/marketplace/astro-2.png'),
                                 ],
                                 [
                                     'name' => 'sayurbox',

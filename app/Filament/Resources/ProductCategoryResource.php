@@ -3,11 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductCategoryResource\Pages;
-use App\Filament\Resources\ProductCategoryResource\RelationManagers;
-use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -15,9 +12,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
-use Spatie\Tags\Tag;
 
 class ProductCategoryResource extends Resource
 {
@@ -38,15 +32,15 @@ class ProductCategoryResource extends Resource
                     ->translatable(true, null, [
                         'id' => [
                             'required',
-                            fn(Get $get) => UniqueTranslationRule::for('categories', 'name')->ignore($get('id')),
+                            fn (Get $get) => UniqueTranslationRule::for('product_categories', 'name')->ignore($get('id')),
                             'string',
-                            'max:255'
+                            'max:255',
                         ],
                         'en' => [
                             'nullable',
-                            fn(Get $get) => UniqueTranslationRule::for('categories', 'name')->ignore($get('id')),
+                            fn (Get $get) => UniqueTranslationRule::for('product_categories', 'name')->ignore($get('id')),
                             'string',
-                            'max:255'
+                            'max:255',
                         ],
                     ]),
             ]);
@@ -57,14 +51,14 @@ class ProductCategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('slug')
+                TextColumn::make('slug'),
             ])
             ->filters([
                 //
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),
-                Tables\Actions\DeleteAction::make()
+                Tables\Actions\DeleteAction::make(),
             ])
             ->bulkActions([
                 Tables\Actions\BulkActionGroup::make([

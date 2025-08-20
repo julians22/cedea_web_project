@@ -64,8 +64,8 @@
                         ],
                         [
                             'name' => 'astro',
-                            'url' => '#',
-                            'logo' => asset('img/marketplace/astro.png'),
+                            'url' => 'https://www.astronauts.id/',
+                            'logo' => asset('img/marketplace/astro-2.png'),
                         ],
                         [
                             'name' => 'grab mart',
@@ -77,11 +77,7 @@
                             'url' => '#',
                             'logo' => asset('img/marketplace/pasarnow.png'),
                         ],
-                        [
-                            'name' => 'indomaret',
-                            'url' => 'https://www.klikindomaret.com/search/?key=Cedea',
-                            'logo' => asset('img/marketplace/indomaret.png'),
-                        ],
+
                         [
                             'name' => 'segari',
                             'url' => '#',
@@ -92,11 +88,7 @@
                             'url' => 'https://www.sayurbox.com/search?q=cedea',
                             'logo' => asset('img/marketplace/sayurbox.png'),
                         ],
-                        [
-                            'name' => null,
-                            'url' => null,
-                            'logo' => null,
-                        ],
+
                         [
                             'name' => 'allofresh',
                             'url' => 'https://allofresh.onelink.me/31rm/3gllsbfi',

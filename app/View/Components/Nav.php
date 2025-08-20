@@ -9,13 +9,15 @@ use Closure;
 use Illuminate\Contracts\View\View;
 use Illuminate\Support\Facades\App;
 use Illuminate\View\Component;
-use Spatie\Sitemap\Tags\News;
 
 class Nav extends Component
 {
     public $nav_items;
+
     public $locale;
+
     public $brands;
+
     /**
      * Create a new component instance.
      */
@@ -28,24 +30,24 @@ class Nav extends Component
                 return [
                     'label' => $brand->name,
                     'route' => route('product', [
-                        'brand' => $brand->slug
+                        'brand' => $brand->slug,
                     ]),
-                    'submenu' => []
+                    'submenu' => [],
                 ];
             })->toArray();
 
-        //* TYPE DOC
-        //* [label : string
-        //*     route : string | route
-        //*     submenu: [
-        //*         label : string
-        //*         route : string | route
-        //*         submenu: [
-        //*             label : string
-        //*             route : string | route
-        //*         ][]
-        //*     ][]
-        //* ][]
+        // * TYPE DOC
+        // * [label : string
+        // *     route : string | route
+        // *     submenu: [
+        // *         label : string
+        // *         route : string | route
+        // *         submenu: [
+        // *             label : string
+        // *             route : string | route
+        // *         ][]
+        // *     ][]
+        // * ][]
         $this->nav_items = [
             [
                 'label' => __('nav.company'),
@@ -55,24 +57,24 @@ class Nav extends Component
                     [
                         'label' => __('nav.company.brief'),
                         'route' => route('about', ['#sekilas-perusahaan']),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
                     [
                         'label' => __('nav.company.history'),
                         'route' => route('about', ['#sejarah']),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
                     [
                         'label' => __('nav.company.value'),
-                        'route' =>  route('about', ['#visi-misi']),
-                        'submenu' => []
+                        'route' => route('about', ['#visi-misi']),
+                        'submenu' => [],
                     ],
                     [
                         'label' => __('nav.company.area'),
                         'route' => route('about', ['#wilayah']),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
-                ]
+                ],
             ],
             [
                 'label' => __('nav.product'),
@@ -84,19 +86,22 @@ class Nav extends Component
                     [
                         'label' => 'Video',
                         'route' => route('videos'),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
-                    [
-                        'label' => __('nav.product.marketplace'),
-                        'route' => route('marketplace'),
-                        'submenu' => []
-                    ],
+
                     // [
                     //     'label' => 'Royalti Point',
                     //     'route' => '#',
                     //     'submenu' => []
                     // ],
-                ]
+                ],
+            ],
+
+            [
+                'label' => __('nav.product.marketplace'),
+                'route' => route('marketplace'),
+                'disable' => false,
+                'submenu' => [],
             ],
 
             [
@@ -121,7 +126,7 @@ class Nav extends Component
                         'label' => __('meal.snack'),
                         'route' => route('recipe', ['type' => RecipeType::SNACK->value]),
                     ],
-                ]
+                ],
             ],
 
             [
@@ -132,21 +137,21 @@ class Nav extends Component
                     [
                         'label' => __('nav.news.activity'),
                         'route' => route('news', ['type' => NewsType::ACTIVITY->value]),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
                     [
                         'label' => __('nav.news.Artikel'),
                         'route' => route('news', ['type' => NewsType::ARTICLE->value]),
-                        'submenu' => []
+                        'submenu' => [],
                     ],
-                ]
+                ],
             ],
             [
                 'label' => __('nav.contact'),
                 'route' => route('contact'),
                 'disable' => false,
-                'submenu' => []
-            ]
+                'submenu' => [],
+            ],
         ];
     }
 
