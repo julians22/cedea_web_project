@@ -39,6 +39,7 @@ class Nav extends Component
         // * TYPE DOC
         // * [label : string
         // *     route : string | route
+        // *     disable : boolean
         // *     submenu: [
         // *         label : string
         // *         route : string | route

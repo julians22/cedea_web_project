@@ -33,7 +33,7 @@
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-D0EzTus7.css",
+    "file": "assets/theme-BwVKO8vW.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
@@ -43,13 +43,13 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-b_MHJutN.js",
+    "file": "assets/app-B2SY3rMz.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/tiptap/extensions.js": {
-    "file": "assets/extensions-BffK_jsS.js",
+    "file": "assets/extensions-DJTADUEV.js",
     "name": "extensions",
     "src": "resources/js/tiptap/extensions.js",
     "isEntry": true

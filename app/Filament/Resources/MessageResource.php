@@ -3,16 +3,16 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Exports\MessageExporter;
-use Filament\Tables;
+use App\Filament\Resources\MessageResource\Pages;
 use App\Models\Message;
-use Filament\Infolists;
-use Filament\Tables\Table;
+use Filament\Infolists\Components\TextEntry;
 use Filament\Infolists\Infolist;
 use Filament\Resources\Resource;
-use App\Filament\Resources\MessageResource\Pages;
-use Filament\Infolists\Components\TextEntry;
+use Filament\Tables;
 use Filament\Tables\Actions\ExportAction;
+use Filament\Tables\Table;
 use Illuminate\Database\Eloquent\Model;
+use Malzariey\FilamentDaterangepickerFilter\Filters\DateRangeFilter;
 
 class MessageResource extends Resource
 {
@@ -29,6 +29,7 @@ class MessageResource extends Resource
     {
         return false;
     }
+
     public static function infolist(Infolist $infolist): Infolist
     {
         return $infolist
@@ -64,7 +65,7 @@ class MessageResource extends Resource
                 Tables\Columns\TextColumn::make('type'),
             ])
             ->filters([
-                //
+                DateRangeFilter::make('created_at'),
             ])
             ->actions([
                 Tables\Actions\ViewAction::make(),
@@ -77,8 +78,8 @@ class MessageResource extends Resource
             ])
             ->headerActions([
                 ExportAction::make()
-                    ->exporter(MessageExporter::class)
-            ]);;
+                    ->exporter(MessageExporter::class),
+            ]);
     }
 
     public static function getRelations(): array
