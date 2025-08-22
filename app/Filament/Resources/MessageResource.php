@@ -36,6 +36,7 @@ class MessageResource extends Resource
             ->schema([
                 TextEntry::make('email'),
                 TextEntry::make('type'),
+                TextEntry::make('purpose'),
                 TextEntry::make('address')
                     ->columnSpanFull(),
                 TextEntry::make('phone'),
@@ -60,6 +61,7 @@ class MessageResource extends Resource
                 Tables\Columns\TextColumn::make('name'),
                 Tables\Columns\TextColumn::make('email'),
                 Tables\Columns\TextColumn::make('subject'),
+                Tables\Columns\TextColumn::make('purpose'),
                 Tables\Columns\TextColumn::make('created_at')
                     ->label('Submitted at'),
                 Tables\Columns\TextColumn::make('type'),
@@ -78,7 +80,8 @@ class MessageResource extends Resource
             ])
             ->headerActions([
                 ExportAction::make()
-                    ->exporter(MessageExporter::class),
+                    ->exporter(MessageExporter::class)
+                    ->columnMapping(false),
             ]);
     }
 

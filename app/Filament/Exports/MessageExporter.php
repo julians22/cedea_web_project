@@ -19,9 +19,9 @@ class MessageExporter extends Exporter
             ExportColumn::make('name'),
             ExportColumn::make('email'),
             ExportColumn::make('subject'),
+            ExportColumn::make('purpose'),
             ExportColumn::make('message'),
             ExportColumn::make('created_at'),
-            ExportColumn::make('updated_at'),
             ExportColumn::make('type'),
             ExportColumn::make('address'),
             ExportColumn::make('phone'),
@@ -36,10 +36,10 @@ class MessageExporter extends Exporter
 
     public static function getCompletedNotificationBody(Export $export): string
     {
-        $body = 'Your message export has completed and ' . number_format($export->successful_rows) . ' ' . str('row')->plural($export->successful_rows) . ' exported.';
+        $body = 'Your message export has completed and '.number_format($export->successful_rows).' '.str('row')->plural($export->successful_rows).' exported.';
 
         if ($failedRowsCount = $export->getFailedRowsCount()) {
-            $body .= ' ' . number_format($failedRowsCount) . ' ' . str('row')->plural($failedRowsCount) . ' failed to export.';
+            $body .= ' '.number_format($failedRowsCount).' '.str('row')->plural($failedRowsCount).' failed to export.';
         }
 
         return $body;
