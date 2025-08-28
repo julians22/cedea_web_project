@@ -32,7 +32,7 @@
     </x-section-banner>
 
     {{-- News Section --}}
-    {{-- <livewire:news-section /> --}}
+    <livewire:news-section />
 
     {{-- marketplace Section --}}
     <div class="container my-12 flex justify-center gap-2 px-4 lg:px-0">

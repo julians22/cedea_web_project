@@ -59,7 +59,7 @@
                     <div class="flex overflow-hidden rounded-xl shadow-top max-md:flex-col">
                         <div
                             class="grid max-h-80 items-center justify-center overflow-hidden md:aspect-[6/2] md:max-h-40 md:w-52 md:max-w-28">
-                            <img class="object-cover object-center"
+                            <img class="size-full object-cover object-center"
                                 src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
                         </div>
                         <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white font-semibold ~p-2/4">
