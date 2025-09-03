@@ -2,34 +2,32 @@
 
 namespace App\Models;
 
-use Illuminate\Support\Str;
+use App\Observers\NewsObserver;
 use App\Traits\Searchable;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Support\Carbon;
-use LakM\Comments\Concerns\Commentable;
-use LakM\Comments\Contracts\CommentableContract;
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
+use Illuminate\Support\Str;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
-class PostNews extends Model implements
-    HasMedia,
-    Sitemapable
+#[ObservedBy([NewsObserver::class])]
+class PostNews extends Model implements HasMedia, Sitemapable
 {
     use HasFactory,
         HasSlug,
-        InteractsWithMedia,
-        HasTranslations,
         HasTags,
+        HasTranslations,
+        InteractsWithMedia,
         Searchable;
 
     public $translatable = ['title', 'content', 'excerpt', 'featured_image_caption'];
@@ -50,7 +48,6 @@ class PostNews extends Model implements
         'published' => 'boolean',
     ];
 
-
     /**
      * Get the excerpt.
      *
@@ -63,11 +60,11 @@ class PostNews extends Model implements
                 if (empty($value)) {
                     return Str::limit(strip_tags((string) $this->content), 200);
                 }
+
                 return $value;
             },
         );
     }
-
 
     /**
      * Get the options for generating the slug.
@@ -89,7 +86,6 @@ class PostNews extends Model implements
      *
      * @return string The generated slug.
      */
-
     protected function generateNonUniqueSlug(): string
     {
         $slugField = $this->slugOptions->slugField;
@@ -111,10 +107,8 @@ class PostNews extends Model implements
 
     /**
      * Get the sitemap tag for the resource.
-     *
-     * @return \Spatie\Sitemap\Tags\Url|string|array
      */
-    public function toSitemapTag(): Url | string | array
+    public function toSitemapTag(): Url|string|array
     {
         return Url::create(route('news.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
@@ -124,8 +118,6 @@ class PostNews extends Model implements
 
     /**
      * The categories that belong to the PostNews
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(): BelongsToMany
     {

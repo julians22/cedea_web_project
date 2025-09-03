@@ -2,27 +2,27 @@
 
 namespace App\Models;
 
+use App\Observers\VideoObserver;
 use App\Traits\Searchable;
-
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
-use Spatie\Sitemap\Tags\Url;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
+#[ObservedBy([VideoObserver::class])]
 class Video extends Model implements HasMedia
 {
     use HasFactory,
         HasSlug,
-        InteractsWithMedia,
-        HasTranslations,
         HasTags,
+        HasTranslations,
+        InteractsWithMedia,
         Searchable;
 
     public $translatable = ['title', 'description'];

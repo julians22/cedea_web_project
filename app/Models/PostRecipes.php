@@ -3,29 +3,29 @@
 namespace App\Models;
 
 use App\Models\Products\Product;
+use App\Observers\RecipeObserver;
 use App\Traits\Searchable;
-
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
-use Illuminate\Database\Eloquent\Relations\HasOne;
 use Illuminate\Support\Carbon;
-
-use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\SlugOptions;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\Sitemap\Tags\Url;
+use Spatie\Sluggable\HasSlug;
+use Spatie\Sluggable\SlugOptions;
 use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
+#[ObservedBy([RecipeObserver::class])]
 class PostRecipes extends Model implements HasMedia
 {
     use HasFactory,
         HasSlug,
-        InteractsWithMedia,
-        HasTranslations,
         HasTags,
+        HasTranslations,
+        InteractsWithMedia,
         Searchable;
 
     public $translatable = ['title', 'content', 'ingredients', 'description'];
@@ -39,7 +39,7 @@ class PostRecipes extends Model implements HasMedia
 
     protected $casts = [
         'published' => 'boolean',
-        'video' => 'array'
+        'video' => 'array',
     ];
 
     /**
@@ -63,8 +63,6 @@ class PostRecipes extends Model implements HasMedia
 
     /**
      * Get the product that owns the PostRecipes
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function product(): BelongsTo
     {
@@ -73,10 +71,8 @@ class PostRecipes extends Model implements HasMedia
 
     /**
      * Get the sitemap tag for the resource.
-     *
-     * @return \Spatie\Sitemap\Tags\Url|string|array
      */
-    public function toSitemapTag(): Url | string | array
+    public function toSitemapTag(): Url|string|array
     {
         return Url::create(route('recipe.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
@@ -87,13 +83,8 @@ class PostRecipes extends Model implements HasMedia
     /**
      * Filter out empty or disallowed translations
      * Modified to filter out empty array
-     *
-     * @param mixed $value
-     * @param string|null $locale
-     * @param array|null $allowedLocales
-     * @return bool
      */
-    protected function filterTranslations(mixed $value = null, string $locale = null, array $allowedLocales = null): bool
+    protected function filterTranslations(mixed $value = null, ?string $locale = null, ?array $allowedLocales = null): bool
     {
         if ($value === null) {
             return false;

@@ -3,32 +3,32 @@
 namespace App\Models\Products;
 
 use App\Models\PostRecipes;
+use App\Observers\ProductObserver;
 use App\Traits\Searchable;
-use Exception;
+use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
-use Spatie\Image\Manipulations;
+use Spatie\EloquentSortable\Sortable;
+use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
-use Spatie\Translatable\Translatable;
-use Illuminate\Database\Eloquent\Casts\Attribute;
-use Spatie\EloquentSortable\Sortable;
-use Spatie\EloquentSortable\SortableTrait;
 
+#[ObservedBy([ProductObserver::class])]
 class Product extends Model implements HasMedia, Sortable
 {
-    use SortableTrait,
+    use HasFactory,
         HasSlug,
-        InteractsWithMedia,
-        HasFactory,
         HasTranslations,
-        Searchable;
+        InteractsWithMedia,
+        Searchable,
+        SortableTrait;
 
     public $translatable = ['name', 'size', 'description', 'packaging', 'fullname'];
 
@@ -47,7 +47,7 @@ class Product extends Model implements HasMedia, Sortable
     protected $casts = [
         'packaging' => 'array',
         'have_video' => 'boolean',
-        'video' => 'array'
+        'video' => 'array',
     ];
 
     /**
@@ -56,7 +56,7 @@ class Product extends Model implements HasMedia, Sortable
     protected function fullname(): Attribute
     {
         return Attribute::make(
-            get: fn(mixed $value, array $attributes) => trim($this->name . ' ' . $this->size),
+            get: fn (mixed $value, array $attributes) => trim($this->name.' '.$this->size),
         );
     }
 
@@ -99,8 +99,6 @@ class Product extends Model implements HasMedia, Sortable
 
     /**
      * The category that belong to the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
     public function categories(): BelongsToMany
     {
@@ -109,8 +107,6 @@ class Product extends Model implements HasMedia, Sortable
 
     /**
      * Get all of the recipes for the Product
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
      */
     public function recipes(): HasMany
     {
@@ -120,13 +116,8 @@ class Product extends Model implements HasMedia, Sortable
     /**
      * Filter out empty or disallowed translations
      * Modified to filter out empty array
-     *
-     * @param mixed $value
-     * @param string|null $locale
-     * @param array|null $allowedLocales
-     * @return bool
      */
-    protected function filterTranslations(mixed $value = null, string $locale = null, array $allowedLocales = null): bool
+    protected function filterTranslations(mixed $value = null, ?string $locale = null, ?array $allowedLocales = null): bool
     {
         if ($value === null) {
             return false;
