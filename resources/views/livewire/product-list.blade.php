@@ -353,10 +353,7 @@
         }
         }))
 
-        Livewire.hook('morph.updated', ({
-            el,
-            component
-        }) => {
+        $wire.on('animate-product-list', () => {
             animate("#product-grid li", {
                 opacity: [0, 1],
                 y: [50, 0]
@@ -365,6 +362,12 @@
                     ease: "easeIn"
                 })
             })
-        })
+        });
+
+        $wire.on('update-page-title', ({
+            title
+        }) => {
+            document.title = title;
+        });
     </script>
 @endscript

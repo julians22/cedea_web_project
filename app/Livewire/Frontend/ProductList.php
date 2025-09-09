@@ -2,26 +2,28 @@
 
 namespace App\Livewire\Frontend;
 
-use Livewire\Component;
-use Livewire\Attributes\On;
-use Livewire\Attributes\Url;
-use Livewire\WithPagination;
 use App\Models\Products\Brand;
 use App\Models\Products\Product;
-use App\Models\Products\Category;
 use App\Models\Products\ProductCategory;
-use Livewire\Attributes\Computed;
-use Illuminate\Database\Eloquent\Builder;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use Illuminate\Database\Eloquent\Builder;
+use Livewire\Attributes\Computed;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class ProductList extends Component
 {
     use WithPagination;
 
     public $brands;
+
     public $allCategories;
+
+    public $activeBrandName;
+
     public $activeProduct = null;
 
     #[Url(as: 'brand', except: null, keep: true)]
@@ -33,9 +35,21 @@ class ProductList extends Component
     #[Url(except: '')]
     public string $keyword = '';
 
+    public function updating($property)
+    {
+        if (in_array($property, ['activeBrand', 'activeCategory', 'keyword'])) {
+            $this->animateProductList();
+        }
+    }
+
+    public function updatedPage($page)
+    {
+        $this->animateProductList();
+    }
+
     private function handleArrayDiffing(string $value, array &$array)
     {
-        if (!in_array($value, $array)) {
+        if (! in_array($value, $array)) {
             $array = array_merge($array, [$value]);
         } else {
             $array = array_diff($array, [$value]);
@@ -43,13 +57,14 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    public function mount()
+    private function setMetaData()
     {
-
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'Products - ' . env('APP_NAME');
+        $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
+
+        $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
         $description = 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood!';
         $url = route('product');
         $image = asset('img/mutu.jpg');
@@ -57,7 +72,7 @@ class ProductList extends Component
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle('Products');
+        Meta::prependTitle('Products '.$this->activeBrandName);
 
         $og
             ->setType('website')
@@ -77,28 +92,50 @@ class ProductList extends Component
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
 
+    }
+
+    private function updateTitle()
+    {
+        $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
+        $this->dispatch('update-page-title', title: $title);
+    }
+
+    private function animateProductList()
+    {
+        $this->dispatch('animate-product-list');
+    }
+
+    public function mount()
+    {
+
         $this->allCategories = ProductCategory::all();
-        $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();;
+        $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();
 
         if (! request('brand')) {
             if ($this->brands->first()) {
                 $this->activeBrand = $this->brands->first()->slug;
             }
         }
+
+        $this->setMetaData();
+        $this->updateTitle();
     }
 
     public function handleChangeActiveBrand($slug)
     {
         $this->activeBrand = $slug;
-
+        $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
         $this->reset('activeCategory');
         $this->reset('activeProduct');
+        $this->updateTitle();
+        $this->animateProductList();
+
         $this->resetPage();
     }
 
     public function handleChangeActiveProduct(string $slug = '')
     {
-        if (!$slug) {
+        if (! $slug) {
             $this->reset('activeProduct');
         } else {
             $this->activeProduct = Product::where('slug', $slug)->first();
@@ -146,7 +183,7 @@ class ProductList extends Component
                 ->when(
                     $this->keyword,
                     function ($q) {
-                        return $q->whereRaw('LOWER(name) like "%' . strtolower($this->keyword) . '%"');
+                        return $q->whereRaw('LOWER(name) like "%'.strtolower($this->keyword).'%"');
                     }
                 )
                 ->orderBy('order_column', 'asc')
