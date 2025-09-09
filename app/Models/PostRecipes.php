@@ -12,6 +12,7 @@ use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\Sitemap\Contracts\Sitemapable;
 use Spatie\Sitemap\Tags\Url;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
@@ -19,7 +20,7 @@ use Spatie\Tags\HasTags;
 use Spatie\Translatable\HasTranslations;
 
 #[ObservedBy([RecipeObserver::class])]
-class PostRecipes extends Model implements HasMedia
+class PostRecipes extends Model implements HasMedia, Sitemapable
 {
     use HasFactory,
         HasSlug,
@@ -76,7 +77,7 @@ class PostRecipes extends Model implements HasMedia
     {
         return Url::create(route('recipe.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
     }
 

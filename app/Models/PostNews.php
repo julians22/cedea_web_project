@@ -112,7 +112,7 @@ class PostNews extends Model implements HasMedia, Sitemapable
     {
         return Url::create(route('news.show', $this))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
     }
 

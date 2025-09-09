@@ -5,6 +5,7 @@ namespace App\Models\Products;
 use App\Models\PostRecipes;
 use App\Observers\ProductObserver;
 use App\Traits\Searchable;
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
@@ -16,12 +17,14 @@ use Spatie\EloquentSortable\SortableTrait;
 use Spatie\MediaLibrary\HasMedia;
 use Spatie\MediaLibrary\InteractsWithMedia;
 use Spatie\MediaLibrary\MediaCollections\Models\Media;
+use Spatie\Sitemap\Contracts\Sitemapable;
+use Spatie\Sitemap\Tags\Url;
 use Spatie\Sluggable\HasSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
 #[ObservedBy([ProductObserver::class])]
-class Product extends Model implements HasMedia, Sortable
+class Product extends Model implements HasMedia, Sitemapable, Sortable
 {
     use HasFactory,
         HasSlug,
@@ -111,6 +114,14 @@ class Product extends Model implements HasMedia, Sortable
     public function recipes(): HasMany
     {
         return $this->hasMany(PostRecipes::class);
+    }
+
+    public function toSitemapTag(): Url|string|array
+    {
+        return Url::create(route('product', $this))
+            ->setLastModificationDate(Carbon::create($this->updated_at))
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
+            ->setPriority(0.1);
     }
 
     /**
