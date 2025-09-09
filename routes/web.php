@@ -108,7 +108,7 @@ if (app()->environment('local')) {
     });
 }
 
-Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
-    ->name('locale.switch');
+// Route::post('locale-switcher', [LocaleController::class, 'localeSwitch'])
+//     ->name('locale.switch');
 
 /** OTHER PAGES THAT SHOULD NOT BE LOCALIZED **/
