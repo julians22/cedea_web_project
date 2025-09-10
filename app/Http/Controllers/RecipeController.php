@@ -3,25 +3,22 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostRecipes;
-use Illuminate\Http\Request;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
 
 class RecipeController extends Controller
 {
-
     public function show(PostRecipes $recipe)
     {
-
-        if (!$recipe->published) {
+        if (! $recipe->published) {
             abort(404);
         }
 
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = strip_tags((string) $recipe->title) . ' - ' . env('APP_NAME');
+        $title = strip_tags((string) $recipe->title).' - '.env('APP_NAME');
         $description = strip_tags((string) $recipe->description);
         $url = route('news.show', ['post' => $recipe->slug]);
         $image = $recipe->getFirstMediaUrl('featured_image');
@@ -29,14 +26,15 @@ class RecipeController extends Controller
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle(strip_tags((string)$recipe->title));
+        Meta::prependTitle(strip_tags((string) $recipe->title))
+            ->setCanonical(env('APP_URL').'/recipe/'.$recipe->slug);
 
         $og
             ->setType('website')
             ->setSiteName(env('APP_NAME'))
             ->setTitle($title)
             ->setDescription($description)
-            ->setUrl($url)
+            ->setUrl(env('APP_URL').'/recipe/'.$recipe->slug)
             ->addImage($image)
             ->setLocale($locale)
             ->addAlternateLocale($alternateLocale);
@@ -48,7 +46,6 @@ class RecipeController extends Controller
 
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
-
 
         return view(
             'recipe.show',

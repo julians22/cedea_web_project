@@ -3,13 +3,12 @@
 namespace App\Livewire;
 
 use App\Models\PostRecipes;
-use Livewire\Component;
-use Livewire\Attributes\Url;
-use Filament\Forms\Components\Builder;
-use Livewire\WithPagination;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use Livewire\Attributes\Url;
+use Livewire\Component;
+use Livewire\WithPagination;
 
 class RecipeList extends Component
 {
@@ -29,7 +28,7 @@ class RecipeList extends Component
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'Recipe - ' . env('APP_NAME');
+        $title = 'Recipe - '.env('APP_NAME');
         $description = 'Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood! Mulai dari sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.';
         $url = route('recipe');
         $image = asset('img/mutu.jpg');
@@ -58,7 +57,7 @@ class RecipeList extends Component
         Meta::registerPackage($twitter_card);
     }
 
-    function handleChangeActiveRecipeType(string $slug)
+    public function handleChangeActiveRecipeType(string $slug)
     {
         if ($this->activeRecipeType == $slug) {
             $this->reset('activeRecipeType');
@@ -67,7 +66,7 @@ class RecipeList extends Component
         }
     }
 
-    function handleChangeActiveProduct(string $slug)
+    public function handleChangeActiveProduct(string $slug)
     {
         if ($this->activeProduct == $slug) {
             $this->reset('activeProduct');
@@ -76,7 +75,7 @@ class RecipeList extends Component
         }
     }
 
-    function resetFilter(string $name)
+    public function resetFilter(string $name)
     {
         $this->reset($name);
     }

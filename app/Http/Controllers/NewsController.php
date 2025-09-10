@@ -3,7 +3,6 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostNews;
-use Illuminate\Http\Request;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
@@ -15,7 +14,7 @@ class NewsController extends Controller
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'News - ' . env('APP_NAME');
+        $title = 'News - '.env('APP_NAME');
         $description = 'Temukan berita terbaru dan update kegiatan perusahaan kami di sini. Ikuti perkembangan terbaru dan berita penting dari CEDEA Seafood.';
         $url = config('app.env') === 'production' ? 'https://cedeaseafood.com' : 'https://cedea.democube.id';
         $image = asset('img/mutu.jpg');
@@ -44,6 +43,7 @@ class NewsController extends Controller
         Meta::registerPackage($twitter_card);
 
         $banners = PostNews::where('published', 1)->orderBy('published_at', 'desc')->take(3)->get();
+
         return view('news', compact(
             'banners'
         ));
@@ -58,14 +58,14 @@ class NewsController extends Controller
     public function show(PostNews $post)
     {
 
-        if (!$post->published) {
+        if (! $post->published) {
             abort(404);
         }
 
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = strip_tags((string) $post->title) . ' - ' . env('APP_NAME');
+        $title = strip_tags((string) $post->title).' - '.env('APP_NAME');
         $description = strip_tags($post->excerpt);
         $url = route('news.show', ['post' => $post->slug]);
         $image = $post->getFirstMediaUrl('featured_image');
@@ -73,14 +73,15 @@ class NewsController extends Controller
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle(strip_tags((string)$post->title));
+        Meta::prependTitle(strip_tags((string) $post->title))
+            ->setCanonical(env('APP_URL').'/news/'.$post->slug);
 
         $og
             ->setType('website')
             ->setSiteName(env('APP_NAME'))
             ->setTitle($title)
             ->setDescription($description)
-            ->setUrl($url)
+            ->setUrl(env('APP_URL').'/news/'.$post->slug)
             ->addImage($image)
             ->setLocale($locale)
             ->addAlternateLocale($alternateLocale);
