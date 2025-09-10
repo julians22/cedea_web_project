@@ -17,11 +17,18 @@ class BuildSitemap
     public function build(): void
     {
         Sitemap::create()
+            ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+            ->add(Url::create('/about')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+            ->add(Url::create('/product')->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create('/videos')->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create('/marketplace')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+            ->add(Url::create('/recipe')->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY))
+            ->add(Url::create('/contact')->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
             ->add($this->build_index(PostRecipes::all(), 'sitemap_recipes.xml'))
             ->add($this->build_index(PostNews::all(), 'sitemap_news.xml'))
             ->add($this->build_index(Video::all(), 'sitemap_videos.xml'))
             ->add($this->build_index(Product::all(), 'sitemap_products.xml'))
-            ->add(Url::create('/')->setPriority(1)->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY))
+
             ->writeToFile(public_path('sitemap.xml'));
     }
 
