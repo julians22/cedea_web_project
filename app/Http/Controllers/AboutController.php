@@ -2,10 +2,10 @@
 
 namespace App\Http\Controllers;
 
-use Illuminate\Http\Request;
 use Butschster\Head\Facades\Meta;
 use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use Illuminate\Http\Request;
 
 class AboutController extends Controller
 {
@@ -17,7 +17,7 @@ class AboutController extends Controller
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = 'About - ' . env('APP_NAME');
+        $title = 'TENTANG CEDEA - '.env('APP_NAME');
         $description = 'PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Majalengka, Medan & Semarang.';
         $url = route('about');
         $image = asset('img/mutu.jpg');

@@ -15,7 +15,8 @@
         </x-slot:button>
     </x-section-banner>
 
-    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')" :title="__('home.quality.title')">
+    <x-section-banner :gradient=false :imageUrl="asset('img/mutu.jpg')"
+        imageAlt="Mutu produk seafood Cedea Seafood - kualitas terjamin dan segar" :title="__('home.quality.title')">
 
         <x-slot:desc>
             <p>
@@ -38,7 +39,8 @@
     <div class="container my-12 flex justify-center gap-2 px-4 lg:px-0">
 
         <div class="shrink basis-96 max-md:hidden">
-            <img class="w-full" src="{{ asset('img/marketplace-phone_2.png') }}" alt="">
+            <img class="w-full" src="{{ asset('img/marketplace-phone_2.png') }}"
+                alt="Aplikasi mobile marketplace Cedea Seafood - kemudahan berbelanja produk seafood berkualitas">
         </div>
 
         <div class="col-span-5 lg:col-span-3">
@@ -49,7 +51,8 @@
 
                 <div class="mt-4 flex items-center justify-center gap-4 max-sm:flex-wrap lg:mt-8">
                     <div class="shrink basis-44 md:hidden">
-                        <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}" alt="">
+                        <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}"
+                            alt="Tampilan aplikasi mobile Cedea Seafood - belanja produk seafood segar dan berkualitas">
                     </div>
                     <div class="flex flex-wrap items-end justify-center ~gap-2/8">
                         @php

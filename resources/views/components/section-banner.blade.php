@@ -1,4 +1,13 @@
-@props(['title', 'desc', 'imageUrl', 'id' => null, 'button' => null, 'gradient' => true, 'imageLeft' => true])
+@props([
+    'title',
+    'desc',
+    'imageUrl',
+    'imageAlt' => null,
+    'id' => null,
+    'button' => null,
+    'gradient' => true,
+    'imageLeft' => true,
+])
 <section
     {{ $attributes->withoutTwMergeClasses()->twMerge('relative grid grid-cols-1 ~scroll-mt-12/14 md:grid-cols-2 md:~scroll-mt-16/20 lg:~scroll-mt-12/20') }}
     {{ $id ? 'id=' . $id : '' }}>
@@ -47,7 +56,7 @@
         'md:col-start-2' => !$imageLeft,
         '~min-h-72/96 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
     ])>
-        <img class="w-full" src="{{ $imageUrl }}" alt="">
+        <img class="w-full" src="{{ $imageUrl }}" alt="{{ $imageAlt }}">
     </div>
 
 </section>

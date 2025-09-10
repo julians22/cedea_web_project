@@ -1,5 +1,6 @@
 <x-layouts.app>
-    <x-section-banner id="sekilas-perusahaan" :imageLeft="false" :imageUrl="asset('img/sosis-salmon.jpg')" :title="__('about.brief.title')">
+    <x-section-banner id="sekilas-perusahaan" :imageLeft="false" :imageUrl="asset('img/sosis-salmon.jpg')"
+        imageAlt="Sosis salmon Cedea Seafood - produk olahan seafood berkualitas tinggi" :title="__('about.brief.title')">
         <x-slot:desc>
             <p>
                 {{ __('about.brief.detail') }}
@@ -9,7 +10,8 @@
 
     {{-- sejarah --}}
     <x-section-banner class:content="from-cedea-red via-cedea-red" class:title="text-white" class:desc="text-white"
-        id="sejarah" :imageLeft="false" :imageUrl="asset('img/cedea-industrial.jpg')" :title="__('about.history.title')">
+        id="sejarah" :imageLeft="false" :imageUrl="asset('img/cedea-industrial.jpg')"
+        imageAlt="Pabrik Cedea Seafood - fasilitas produksi modern untuk produk seafood berkualitas" :title="__('about.history.title')">
         <x-slot:desc>
             <p>
                 {{ __('about.history.detail') }}
@@ -234,19 +236,23 @@
 
         <div class="flex justify-between gap-x-2">
             <div class="~max-w-20/32">
-                <img class="invert" src="{{ asset('img/achieve-04.png') }}" alt="">
+                <img class="invert" src="{{ asset('img/achieve-04.png') }}"
+                    alt="Penghargaan Cedea Seafood - sertifikasi dan pencapaian kualitas produk seafood">
             </div>
 
             <div class="~max-w-20/32">
-                <img class="" src="{{ asset('img/achieve-03.png') }}" alt="">
+                <img class="" src="{{ asset('img/achieve-03.png') }}"
+                    alt="Penghargaan ISO Cedea Seafood - sertifikasi manajemen kualitas internasional">
             </div>
 
             <div class="~max-w-20/32">
-                <img class="" src="{{ asset('img/achieve-01.png') }}" alt="">
+                <img class="" src="{{ asset('img/achieve-01.png') }}"
+                    alt="Penghargaan halal Cedea Seafood - jaminan produk seafood halal dan berkualitas">
             </div>
 
             <div class="~max-w-20/32">
-                <img class="" src="{{ asset('img/achieve-02.png') }}" alt="">
+                <img class="" src="{{ asset('img/achieve-02.png') }}"
+                    alt="Penghargaan BPOM Cedea Seafood - jaminan keamanan dan kualitas produk seafood">
             </div>
         </div>
     </section>
@@ -255,7 +261,8 @@
     <section class="group container my-16 pt-2 ~scroll-mt-24/36" id="wilayah">
         <h2 class="section-title transition-all ~pt-0/4">{{ __('about.area.title') }}</h2>
         <div class="md:mx-auto md:w-3/4">
-            <img src="{{ asset('img/map.svg') }}" alt="">
+            <img src="{{ asset('img/map.svg') }}"
+                alt="Peta distribusi Cedea Seafood - jaringan pemasaran produk seafood di Indonesia">
         </div>
 
         <div>

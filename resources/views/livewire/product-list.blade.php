@@ -14,7 +14,7 @@
                     media="(min-width: 1024px)" />
 
                 <img class="w-full" draggable="false" src="{{ asset('img/product-section-bg-mobile.jpg') }}"
-                    alt="">
+                    alt="Latar belakang bagian produk Cedea Seafood - menampilkan koleksi produk seafood berkualitas">
             </picture>
 
             <div class="container absolute ~top-4/8 md:top-1/4 lg:left-[10%] lg:top-1/2 lg:w-1/3 lg:-translate-y-1/2">
@@ -27,7 +27,7 @@
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
                             <img class="w-full object-contain" src="{{ $brand->getFirstMediaUrl('logo') }}"
-                                alt="">
+                                alt="{{ $brand->desc }} logo">
                         </div>
                     @endforeach
                 </div>

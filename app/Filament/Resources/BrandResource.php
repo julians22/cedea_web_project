@@ -3,10 +3,8 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrandResource\Pages;
-use App\Filament\Resources\BrandResource\RelationManagers;
 use App\Models\Products\Brand;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
-use Filament\Forms;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
@@ -17,8 +15,6 @@ use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class BrandResource extends Resource
 {
@@ -43,20 +39,23 @@ class BrandResource extends Resource
                         [
                             'id' => [
                                 'required',
-                                fn(Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
+                                fn (Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
                                 'string',
-                                'max:255'
+                                'max:255',
                             ],
                             'en' => [
                                 'nullable',
-                                fn(Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
+                                fn (Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
                                 'string',
-                                'max:255'
+                                'max:255',
                             ],
                         ]
                     ),
+                TextInput::make('desc')
+                    ->label(__('description')),
                 SpatieMediaLibraryFileUpload::make('image')
                     ->required()
+                    ->columnSpanFull()
                     ->collection('logo')
                     ->maxFiles(1)
                     ->image()
@@ -66,8 +65,9 @@ class BrandResource extends Resource
                         '1:1',
                     ])
                     ->imageEditorEmptyFillColor('#fff'),
-                Toggle::make('in_nav')
-            ]);
+                Toggle::make('in_nav'),
+            ])
+            ->columns(1);
     }
 
     public static function table(Table $table): Table
@@ -76,7 +76,7 @@ class BrandResource extends Resource
             ->columns([
                 TextColumn::make('name'),
                 SpatieMediaLibraryImageColumn::make('image')
-                    ->collection('logo')
+                    ->collection('logo'),
             ])
             ->reorderable('order_column')
             ->defaultSort('order_column')
