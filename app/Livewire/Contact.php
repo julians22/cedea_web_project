@@ -107,9 +107,11 @@ class Contact extends Component
         $this->resetExcept(
             ['tab_index'],
         );
+
         $this->resetErrorBag();
         $this->resetValidation();
 
+        $this->tab_index = $index;
     }
 
     public function rules()
