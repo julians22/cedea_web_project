@@ -104,11 +104,12 @@ class Contact extends Component
             return;
         }
 
-        $this->reset();
+        $this->resetExcept(
+            ['tab_index'],
+        );
         $this->resetErrorBag();
         $this->resetValidation();
 
-        $this->tab_index = $index;
     }
 
     public function rules()
@@ -212,6 +213,10 @@ class Contact extends Component
         }
 
         $message = Message::create($this->except(['tab_index']));
+
+        $this->resetExcept(
+            ['tab_index'],
+        );
 
         try {
             dispatch(new SendMailJob($message));

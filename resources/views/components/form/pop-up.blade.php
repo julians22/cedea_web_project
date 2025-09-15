@@ -1,7 +1,7 @@
 @props(['show'])
 
-<div class="container pointer-events-none grid bg-white lg:grid-cols-2" x-show="{{ $show }}" x-cloak>
-    <div class="pointer-events-auto relative lg:col-start-2">
+<div class="container pointer-events-none grid lg:grid-cols-2" x-show="{{ $show }}" x-cloak>
+    <div class="pointer-events-auto relative bg-white lg:col-start-2">
         <x-lucide-circle-x class="absolute right-4 top-6 size-12 cursor-pointer rounded-full"
             @click="{{ $show }}=false" />
 
