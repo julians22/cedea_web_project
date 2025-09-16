@@ -28,7 +28,9 @@
     dialog {
         opacity: 0;
         transform: scale(0.95);
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out,
+        transition:
+            opacity 0.3s ease-in-out,
+            transform 0.3s ease-in-out,
             overlay 0.3s ease-in-out allow-discrete,
             display 0.3s ease-in-out allow-discrete;
         /* Equivalent to
@@ -48,7 +50,9 @@
     /* Transition the :backdrop when the dialog modal is promoted to the top layer */
     dialog::backdrop {
         background-color: rgb(0 0 0 / 0%);
-        transition: display 0.3s allow-discrete, overlay 0.3s allow-discrete,
+        transition:
+            display 0.3s allow-discrete,
+            overlay 0.3s allow-discrete,
             background-color 0.3s;
         /* Equivalent to
     transition: all 0.3s allow-discrete; */
@@ -65,6 +69,10 @@
         dialog[open]::backdrop {
             background-color: rgb(0 0 0 / 0%);
         }
+    }
+
+    .prose p.text-center img {
+        @apply mx-auto;
     }
 }
 
@@ -83,20 +91,12 @@
     :after = ribbon line
     */
     .gyatt-ribbon {
-        @apply after:absolute before:border-white before:bg-cedea-red after:border-y-4 before:border-4 before:rotate-45 before:rounded-sm before:sm:rounded-md after:border-white after:bg-cedea-red before:[&:last-child]:hidden after:[&:last-child]:hidden
-
-        before:~min-[20rem]/sm:~size-[0.65rem]/[2.3rem] before:absolute before:~min-[20rem]/sm:~left-[3.2rem]/[6.3rem] before:~min-[20rem]/sm:~top-[2.3rem]/[4.35rem]
-
-        after:~min-[20rem]/sm:~left-6/20 after:~min-[20rem]/sm:~top-9/16 after:~min-[20rem]/sm:~h-3/[3rem] after:~min-[20rem]/sm:~w-8/10;
+        @apply before:absolute before:rotate-45 before:rounded-sm before:border-4 before:border-white before:bg-cedea-red after:absolute after:border-y-4 after:border-white after:bg-cedea-red before:~min-[20rem]/sm:~top-[2.3rem]/[4.35rem] before:~min-[20rem]/sm:~left-[3.2rem]/[6.3rem] before:~min-[20rem]/sm:~size-[0.65rem]/[2.3rem] after:~min-[20rem]/sm:~top-9/16 after:~min-[20rem]/sm:~left-6/20 after:~min-[20rem]/sm:~h-3/[3rem] after:~min-[20rem]/sm:~w-8/10 before:sm:rounded-md before:[&:last-child]:hidden after:[&:last-child]:hidden;
     }
 
     @media screen(sm) {
         .gyatt-ribbon {
-            @apply after:border-y-8 before:border-8 before:rounded-lg
-
-            before:sm:~size-10/[4.6rem] before:absolute before:sm:~left-[5.7rem]/[14.7rem] before:sm:~top-[2.75rem]/[6.7rem]
-
-            after:sm:~left-14/20 after:sm:~top-10/24 after:sm:~h-12/[6.1rem] after:sm:~w-14/48;
+            @apply before:absolute before:rounded-lg before:border-8 after:border-y-8 before:sm:~top-[2.75rem]/[6.7rem] before:sm:~left-[5.7rem]/[14.7rem] before:sm:~size-10/[4.6rem] after:sm:~top-10/24 after:sm:~left-14/20 after:sm:~h-12/[6.1rem] after:sm:~w-14/48;
         }
     }
 
@@ -131,7 +131,7 @@
         .swiper-button-next {
             --swiper-navigation-top-offset: 70%;
             --swiper-navigation-sides-offset: 50px;
-            @apply bg-cedea-red text-white rounded-full after:content-['next'] after:~text-xl/4xl ~p-4/8 ~size-4/8 z-10;
+            @apply z-10 rounded-full bg-cedea-red text-white ~size-4/8 ~p-4/8 after:content-['next'] after:~text-xl/4xl;
         }
 
         @media screen(sm) {
@@ -167,29 +167,29 @@
                 color: transparent;
                 background: transparent;
             }
-            @apply border-2 text-black border-gray-500/50 placeholder:text-gray-500/50 pl-4 py-1 font-normal;
+            @apply border-2 border-gray-500/50 py-1 pl-4 font-normal text-black placeholder:text-gray-500/50;
         }
     }
 
     figure.polaroid {
-        @apply bg-[#eaeaea] rotate-6 p-3;
+        @apply rotate-6 bg-[#eaeaea] p-3;
 
         img {
-            @apply w-full h-full;
+            @apply h-full w-full;
         }
 
         figcaption {
-            @apply pt-6 -rotate-6;
+            @apply -rotate-6 pt-6;
         }
 
         &::before,
         &::after {
             content: "";
-            @apply absolute h-[12%] w-[45%] bg-[rgba(142,142,142,0.6)] -rotate-[40deg];
+            @apply absolute h-[12%] w-[45%] -rotate-[40deg] bg-[rgba(142,142,142,0.6)];
         }
 
         &::before {
-            @apply top-[3px] left-[-30px];
+            @apply left-[-30px] top-[3px];
         }
 
         &::after {
