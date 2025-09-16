@@ -71,7 +71,7 @@
         }
     }
 
-    .prose p.text-center img {
+    .prose p[style*="text-align: center;"] img {
         @apply mx-auto;
     }
 }
