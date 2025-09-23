@@ -24,12 +24,13 @@ class ProductList extends Component
 
     public $activeBrandName;
 
-    public $activeProduct = null;
+    #[Url(as: 'product', except: null)]
+    public ?string $productSlug = null;
 
     #[Url(as: 'brand', except: null, keep: true)]
     public ?string $activeBrand = null;
 
-    #[Url(as: 'category', except: ['all', null, ''], keep: true)]
+    #[Url(as: 'category', except: ['all', null, ''])]
     public ?string $activeCategory = 'all';
 
     #[Url(except: '')]
@@ -126,7 +127,6 @@ class ProductList extends Component
         $this->activeBrand = $slug;
         $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
         $this->reset('activeCategory');
-        $this->reset('activeProduct');
         $this->updateTitle();
         $this->animateProductList();
 
@@ -136,9 +136,9 @@ class ProductList extends Component
     public function handleChangeActiveProduct(string $slug = '')
     {
         if (! $slug) {
-            $this->reset('activeProduct');
+            $this->reset('productSlug');
         } else {
-            $this->activeProduct = Product::where('slug', $slug)->first();
+            $this->productSlug = $slug;
         }
     }
 
@@ -147,7 +147,7 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    #[Computed(persist: true, seconds: 120)]
+    #[Computed()]
     public function brandWithUniqueCategories()
     {
         foreach ($this->brands as $brand) {
@@ -188,6 +188,9 @@ class ProductList extends Component
                 )
                 ->orderBy('order_column', 'asc')
                 ->paginate(6),
+
+            'activeProduct' => Product::findBySlug($this->productSlug ?? ''),
+
         ]);
     }
 }

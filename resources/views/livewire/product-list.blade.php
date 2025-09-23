@@ -4,7 +4,12 @@
         <x-video-player :autoplay="false" :loop="true" source_mp4="{{ asset('video/product_promo.mp4') }}" />
     </div>
 
-    <section class="space-y-8 pb-8" x-data="{ modalOpen: false, }" x-resize="width = $width; height = $height">
+    <section class="space-y-8 pb-8" x-init="$nextTick(() => {
+        if ({{ $productSlug ? 'true' : 'false' }}) {
+            document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' })
+        }
+    })" x-data="{ modalOpen: {{ $productSlug ? 'true' : 'false' }}, }"
+        x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
         <div class="bg-products minh relative min-h-72 object-contain transition-all max-md:mb-4 lg:min-h-[450px]">
@@ -34,7 +39,8 @@
             </div>
         </div>
 
-        <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~gap-8/20 lg:grid" id="product-list">
+        <div class="container my-8 flex grid-cols-[25%_1fr] flex-col ~scroll-mt-24/36 ~gap-8/20 lg:grid"
+            id="product-list">
             {{-- category side nav --}}
             <div class="top-28 flex h-fit flex-col gap-y-8 rounded-3xl bg-[#ebebec] ~p-4/8 lg:sticky">
                 {{-- search form --}}
