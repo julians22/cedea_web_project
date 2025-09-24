@@ -33,6 +33,7 @@
         "outerweb/filament-translatable-fields": "^2.0.0",
         "spatie/eloquent-sortable": "^4.4",
         "spatie/laravel-data": "^4.11",
+        "spatie/laravel-missing-page-redirector": "^2.11",
         "spatie/laravel-settings": "^3.4",
         "spatie/laravel-sitemap": "^7.0",
         "spatie/laravel-sluggable": "^3.6",
