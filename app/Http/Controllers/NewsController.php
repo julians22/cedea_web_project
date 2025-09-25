@@ -16,7 +16,9 @@ class NewsController extends Controller
 
         $title = 'News - '.env('APP_NAME');
         $description = 'Temukan berita terbaru dan update kegiatan perusahaan kami di sini. Ikuti perkembangan terbaru dan berita penting dari CEDEA Seafood.';
-        $url = config('app.env') === 'production' ? 'https://cedeaseafood.com' : 'https://cedea.democube.id';
+        $url = route('news');
+
+        // $url = config('app.env') === 'production' ? 'https://cedeaseafood.com' : 'https://cedea.democube.id';
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';
         $alternateLocale = 'en_US';
