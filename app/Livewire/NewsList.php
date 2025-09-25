@@ -4,7 +4,6 @@ namespace App\Livewire;
 
 use App\Enums\NewsType;
 use App\Models\PostNews;
-use Filament\Forms\Components\Builder;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -13,7 +12,7 @@ class NewsList extends Component
 {
     use WithPagination;
 
-    #[Url(except: '', as: 'type', keep: true)]
+    #[Url(except: '', as: 'type')]
     public $currentType = 'all';
 
     #[Url(except: '')]
@@ -24,7 +23,7 @@ class NewsList extends Component
         if ($this->currentType == $type) {
             $this->reset('currentType');
         } else {
-            if (!enum_exists(NewsType::class, $type)) {
+            if (! enum_exists(NewsType::class, $type)) {
                 return;
             }
             $this->currentType = $type;

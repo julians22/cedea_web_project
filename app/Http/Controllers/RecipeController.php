@@ -20,7 +20,7 @@ class RecipeController extends Controller
 
         $title = strip_tags((string) $recipe->title).' - '.env('APP_NAME');
         $description = strip_tags((string) $recipe->description);
-        $url = route('recipe.show', ['post' => $recipe->slug]);
+        $url = route('recipe.show', ['recipe' => $recipe->slug]);
         $image = $recipe->getFirstMediaUrl('featured_image');
         $locale = 'id_ID';
         $alternateLocale = 'en_US';
