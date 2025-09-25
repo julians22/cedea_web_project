@@ -66,7 +66,7 @@ class ProductList extends Component
         $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
 
         $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
-        $description = 'Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood!';
+        $description = 'Temukan beragam olahan ikan frozen food halal di Cedea Seafood. Produk berkualitas tinggi yang praktis dan lezat untuk menu harian Anda.';
         $url = route('product');
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';

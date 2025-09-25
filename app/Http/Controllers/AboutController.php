@@ -18,7 +18,7 @@ class AboutController extends Controller
         $twitter_card = new TwitterCardPackage('twitter');
 
         $title = 'TENTANG CEDEA - '.env('APP_NAME');
-        $description = 'PT CitraDimensi Arthali merupakan salah satu perusahaan di Indonesia yang bergerak di bidang pengolahan hasil perikanan dan manufaktur frozen seafood dengan brand CEDEA yang berlokasi di Muara Baru, Majalengka, Medan & Semarang.';
+        $description = 'Cedea Seafood menghadirkan olahan ikan frozen food halal berkualitas tinggi, menyediakan produk lezat yang praktis dan sehat untuk keluarga Indonesia.';
         $url = route('about');
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';
