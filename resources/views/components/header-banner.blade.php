@@ -18,7 +18,7 @@ types: default, news, parallax.v1, parallax.v2
             @foreach ($banners as $banner)
                 <div class="swiper-slide h-auto cursor-grab">
                     <x-dynamic-component class="mt-4"
-                        component="{{ 'banner.' . (isset($banner->banner_type) ? ($banner->banner_type->value !== \App\Enums\BannerType::DEFAULT->value ? $banner->banner_type->value : $type) : $type) }}"
+                        component="{{ 'banner.' . (isset($banner->banner_type) ? (str_contains($banner->banner_type->value, 'parallax') ? 'parallax' : $banner->banner_type->value) : (str_contains($type, 'parallax') ? 'parallax' : $type)) }}"
                         :item='$banner' />
                 </div>
             @endforeach
