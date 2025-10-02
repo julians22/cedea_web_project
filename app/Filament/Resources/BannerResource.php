@@ -72,6 +72,7 @@ class BannerResource extends Resource
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_product'),
+
                             SpatieMediaLibraryFileUpload::make('particle_back')
                                 ->hidden(
                                     fn (Get $get): bool => $get('type') === BannerType::DEFAULT
@@ -80,6 +81,7 @@ class BannerResource extends Resource
                                 ->multiple()
                                 ->image()
                                 ->collection('banner_particle_back'),
+
                             SpatieMediaLibraryFileUpload::make('particle_front')
                                 ->hidden(
                                     fn (Get $get): bool => $get('type') === BannerType::DEFAULT
@@ -88,6 +90,7 @@ class BannerResource extends Resource
                                 ->multiple()
                                 ->image()
                                 ->collection('banner_particle_front'),
+
                             TextInput::make('title')
                                 ->maxLength(255)
                                 ->required(

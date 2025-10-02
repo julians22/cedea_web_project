@@ -21,11 +21,14 @@
             <div class="atropos-inner">
                 <div class="grid grid-cols-2">
                     <img class="mx-auto block h-full w-full object-cover"
-                        src="{{ $item->getFirstMediaUrl('banner_desktop') }}"
-                        alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_desktop')->name }}" />
+                        src="{{ $item->getFirstMediaUrl('particle_back') }}"
+                        alt="{{ $item->title ? $item->title : $item->getFirstMedia('particle_back')->name }}" />
                     <img class="mx-auto block h-full w-full object-cover"
-                        src="{{ $item->getFirstMediaUrl('banner_mobile') }}"
-                        alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_mobile')->name }}" />
+                        src="{{ $item->getFirstMediaUrl('banner_product') }}"
+                        alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_product')->name }}" />
+                    <img class="mx-auto block h-full w-full object-cover"
+                        src="{{ $item->getFirstMediaUrl('particle_front') }}"
+                        alt="{{ $item->title ? $item->title : $item->getFirstMedia('particle_front')->name }}" />
                 </div>
             </div>
         </div>
