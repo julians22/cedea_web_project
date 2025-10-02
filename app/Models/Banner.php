@@ -2,18 +2,20 @@
 
 namespace App\Models;
 
-use Spatie\MediaLibrary\HasMedia;
-use Spatie\EloquentSortable\Sortable;
+use App\Enums\BannerType;
 use Illuminate\Database\Eloquent\Model;
-use Spatie\MediaLibrary\InteractsWithMedia;
+use Spatie\EloquentSortable\Sortable;
 use Spatie\EloquentSortable\SortableTrait;
+use Spatie\MediaLibrary\HasMedia;
+use Spatie\MediaLibrary\InteractsWithMedia;
 
 class Banner extends Model implements HasMedia, Sortable
 {
-    use SortableTrait, InteractsWithMedia;
+    use InteractsWithMedia, SortableTrait;
 
     protected $casts = [
         'enable' => 'boolean',
+        'type' => BannerType::class,
     ];
 
     /**

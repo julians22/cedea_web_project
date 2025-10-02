@@ -35,16 +35,17 @@ const headerBanner = new Swiper("#header-banner", {
     console.log(swiper);
 
     if (swiper.previousIndex !== swiper.activeIndex) {
-        Motion.animate(
-            activeSlide.querySelector("img"),
-            {
-                rotate: [0, 360],
-            },
-            {
-                duration: 1,
-                type: "spring",
-                bounce: 0.25,
-            },
-        );
+        Motion
+            .animate
+            // activeSlide.querySelector("img"),
+            // {
+            //     rotate: [0, 360],
+            // },
+            // {
+            //     duration: 1,
+            //     type: "spring",
+            //     bounce: 0.25,
+            // },
+            ();
     }
 });

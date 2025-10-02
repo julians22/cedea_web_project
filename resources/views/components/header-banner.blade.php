@@ -10,12 +10,16 @@ types: default, news, parallax.v1, parallax.v2
 <!-- Slider main container -->
 <section>
     <!-- Additional required wrapper -->
+
+    {{-- @dd($banners) --}}
     <div id="header-banner" {{ $attributes->twMerge('swiper h-full bg-cedea-red-500') }}>
         <div {{ $attributes->twMergeFor('wrapper', 'swiper-wrapper') }}>
             <!-- Slides -->
             @foreach ($banners as $banner)
                 <div class="swiper-slide h-auto cursor-grab">
-                    <x-dynamic-component class="mt-4" component='{{ "banner.{$type}" }}' :item='$banner' />
+                    <x-dynamic-component class="mt-4"
+                        component="{{ 'banner.' . ($banner->type->value === \App\Enums\BannerType::DEFAULT->value ? $banner->type->value : $type) }}"
+                        :item='$banner' />
                 </div>
             @endforeach
         </div>

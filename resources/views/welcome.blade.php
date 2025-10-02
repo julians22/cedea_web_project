@@ -1,9 +1,7 @@
 <x-layouts.app>
 
     {{-- Banner Section --}}
-    <x-header-banner :banners="$banners" type='parallax.v1' />
-
-    <x-banner.parallax.v1 :item="$banners->first()" />
+    <x-header-banner :banners="$banners" />
 
     {{-- About Section --}}
 

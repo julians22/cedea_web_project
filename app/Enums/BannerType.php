@@ -7,8 +7,8 @@ use Filament\Support\Contracts\HasLabel;
 enum BannerType: string implements HasLabel
 {
     case DEFAULT = 'default';
-    case PARALLAX1 = 'parallax1';
-    case PARALLAX2 = 'parallax2';
+    case PARALLAX1 = 'parallax.v1';
+    case PARALLAX2 = 'parallax.v2';
 
     public function getLabel(): ?string
     {
