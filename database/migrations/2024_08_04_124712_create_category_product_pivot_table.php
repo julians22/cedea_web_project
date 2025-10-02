@@ -1,7 +1,7 @@
 <?php
 
-use App\Models\Products\Category;
 use App\Models\Products\Product;
+use App\Models\Products\ProductCategory;
 use Illuminate\Database\Migrations\Migration;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Support\Facades\Schema;
@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('category_product', function (Blueprint $table) {
             $table->id();
             $table->foreignIdFor(Product::class);
-            $table->foreignIdFor(Category::class);
+            $table->foreignIdFor(ProductCategory::class);
             $table->timestamps();
         });
     }

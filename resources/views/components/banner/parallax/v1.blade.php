@@ -6,47 +6,80 @@
             ? $item->link
             : 'https://' . $item->link)
         : null;
+
+    $banner_uid = Str::uuid();
 @endphp
 
-@if ($url)
-    <a href="{{ $url }}" target="_blank">
-@endif
+<div class="h-full max-h-full bg-white bg-brick-2 bg-cover bg-no-repeat">
+    <div class="grid h-full max-h-full grid-cols-2 bg-paralax-1 bg-cover bg-[25%_max(25dvw,_130%)] bg-no-repeat">
 
-<div class="grid max-h-[500px] grid-cols-2 lg:max-h-[600px]">
-    <div>
-        <p>
-            {{ $item->title }}
-        </p>
-        <p>
-            {{ $item->subtitle }}
-        </p>
-    </div>
-    @php
-        $banner_uid = Str::uuid();
-    @endphp
-    <div class="atropos my-atropos" id="atropos-banner-{{ $banner_uid }}">
-        <!-- scale container (required) -->
-        <div class="atropos-scale">
-            <!-- rotate container (required) -->
-            <div class="atropos-rotate">
-                <!-- inner container (required) -->
-                <div class="atropos-inner">
-                    <div class="relative grid h-full p-4">
-                        <img class="absolute size-1/3" src="{{ $item->getFirstMediaUrl('banner_particle_back') }}"
-                            alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_particle_back')->name }}" />
-                        <img class="max-h-96" src="{{ $item->getFirstMediaUrl('banner_product') }}"
-                            alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_product')->name }}" />
-                        <img class="absolute size-1/3" src="{{ $item->getFirstMediaUrl('banner_particle_front') }}"
-                            alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_particle_front')->name }}" />
+        <div class="flex flex-col items-start justify-center gap-4 p-8 lg:p-16">
+            <p class="text-8xl font-bold text-cedea-red drop-shadow-lg">
+                {{ $item->title }}
+            </p>
+            <p>
+                {{ $item->subtitle }}
+            </p>
+        </div>
+
+        <div class="atropos my-atropos" id="atropos-banner-{{ $banner_uid }}">
+            <!-- scale container (required) -->
+            <div class="atropos-scale">
+                <!-- rotate container (required) -->
+                <div class="atropos-rotate">
+                    <!-- inner container (required) -->
+                    <div class="atropos-inner overflow-visible">
+                        <div class="relative h-full p-4">
+                            <div>
+                                @foreach ($item->getMedia('banner_particle_back') as $particle_back)
+                                    @php
+                                        $top_1 = rand(15, 35);
+                                        $top_2 = rand(65, 70);
+                                        $top_array = [$top_1, $top_2];
+                                        $top = $top_array[array_rand($top_array)];
+
+                                        $left_1 = rand(-25, 2);
+                                        $left_2 = rand(25, 55);
+                                        $left_array = [$left_1, $left_2];
+                                        $left = $left_array[array_rand($left_array)];
+                                    @endphp
+
+                                    <img class="absolute h-auto max-w-40 drop-shadow-md"
+                                        data-atropos-offset="{{ rand(-80, 0) }}"
+                                        style="top: {{ $top }}%; left: {{ $left }}%; width: {{ rand(50, 90) }}px; rotate: {{ rand(-30, 30) }}deg; filter: blur({{ rand(1, 3) }}px);"
+                                        src="{{ $particle_back->getUrl() }}" alt="{{ $particle_back->name }}" />
+                                @endforeach
+                            </div>
+                            <img class="absolute left-1/2 top-1/2 h-3/5 max-h-full w-auto -translate-x-full -translate-y-1/2 -rotate-12"
+                                src="{{ $item->getFirstMediaUrl('banner_product') }}"
+                                alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_product')->name }}" />
+                            <div>
+                                @foreach ($item->getMedia('banner_particle_front') as $particle_front)
+                                    @php
+                                        $top_1 = rand(15, 35);
+                                        $top_2 = rand(65, 70);
+                                        $top_array = [$top_1, $top_2];
+                                        $top = $top_array[array_rand($top_array)];
+
+                                        $left_1 = rand(-25, 2);
+                                        $left_2 = rand(45, 55);
+                                        $left_array = [$left_1, $left_2];
+                                        $left = $left_array[array_rand($left_array)];
+                                    @endphp
+                                    <img class="absolute h-auto max-w-40 drop-shadow-lg"
+                                        data-atropos-offset="{{ rand(0, 80) }}"
+                                        style="top: {{ $top }}%; left: {{ $left }}%; width: {{ rand(80, 160) }}px; rotate: {{ rand(-30, 30) }}deg; filter: blur({{ rand(0, 1.5) }}px);"
+                                        src="{{ $particle_front->getUrl() }}" alt="{{ $particle_front->name }}" />
+                                @endforeach
+                            </div>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-@if ($url)
-    </a>
-@endif
+
 
 @push('after-scripts')
     <script>
@@ -55,10 +88,18 @@
                 el: "{{ '#atropos-banner-' . $banner_uid }}",
                 highlight: false,
                 shadow: false,
-                // rotateXMax: 5,
-                // rotateYMax: 5,
+                rotateXMax: 10,
+                rotateYMax: 10,
                 easing: "cubic-bezier(0.03, 0.98, 0.52, 0.99)",
-                // rest of parameters
+                onEnter() {
+                    console.log('Enter');
+                },
+                onLeave() {
+                    console.log('Leave');
+                },
+                onRotate(x, y) {
+                    console.log('Rotate', x, y);
+                }
             });
         });
     </script>

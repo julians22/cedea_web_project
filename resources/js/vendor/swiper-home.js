@@ -13,7 +13,7 @@ const headerBanner = new Swiper("#header-banner", {
     modules: [Pagination, Autoplay],
 
     // Optional parameters
-    loop: true,
+    // loop: true,
 
     // If we need pagination
     pagination: {
@@ -26,10 +26,10 @@ const headerBanner = new Swiper("#header-banner", {
     updateOnWindowResize: true,
     // height: vh - headerHeight,
     // autoHeight: true,
-    autoplay: {
-        delay: 10000,
-        pauseOnMouseEnter: true,
-    },
+    // autoplay: {
+    //     delay: 10000,
+    //     pauseOnMouseEnter: true,
+    // },
 }).on("slideChange", function (swiper) {
     // const activeSlide = swiper.slides[swiper.activeIndex];
     // console.log(swiper);

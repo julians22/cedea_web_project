@@ -79,6 +79,8 @@ class BannerResource extends Resource
                                 )
                                 ->panelLayout('grid')
                                 ->multiple()
+                                ->reorderable()
+                                ->appendFiles()
                                 ->image()
                                 ->collection('banner_particle_back'),
 
@@ -88,6 +90,8 @@ class BannerResource extends Resource
                                 )
                                 ->panelLayout('grid')
                                 ->multiple()
+                                ->reorderable()
+                                ->appendFiles()
                                 ->image()
                                 ->collection('banner_particle_front'),
 

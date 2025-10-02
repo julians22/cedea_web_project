@@ -27,6 +27,9 @@ export default {
             backgroundImage: {
                 "gradient-radial": "radial-gradient(var(--tw-gradient-stops))",
                 brick: "url('/resources/assets/brick-pattern.webp')",
+                "brick-2": "url('/resources/assets/brick-pattern-2.png')",
+                "paralax-1":
+                    "url('/resources/assets/red-ribbon-rectangle.png')",
                 shippo: "url('/resources/assets/shippo-pattern.png')",
                 "marketplace-footer":
                     "url('/resources/assets/market-footer.png')",
