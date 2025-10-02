@@ -15,7 +15,7 @@ class Banner extends Model implements HasMedia, Sortable
 
     protected $casts = [
         'enable' => 'boolean',
-        'type' => BannerType::class,
+        'banner_type' => BannerType::class,
     ];
 
     /**
