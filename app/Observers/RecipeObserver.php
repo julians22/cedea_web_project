@@ -3,6 +3,7 @@
 namespace App\Observers;
 
 use App\Models\PostRecipes;
+use Illuminate\Support\Facades\Artisan;
 
 class RecipeObserver
 {
@@ -11,7 +12,7 @@ class RecipeObserver
      */
     public function created(PostRecipes $postRecipes): void
     {
-        //
+        Artisan::call('app:generate-sitemap');
     }
 
     /**
@@ -19,7 +20,7 @@ class RecipeObserver
      */
     public function updated(PostRecipes $postRecipes): void
     {
-        //
+        Artisan::call('app:generate-sitemap');
     }
 
     /**
@@ -27,7 +28,7 @@ class RecipeObserver
      */
     public function deleted(PostRecipes $postRecipes): void
     {
-        //
+        Artisan::call('app:generate-sitemap');
     }
 
     /**
@@ -35,7 +36,7 @@ class RecipeObserver
      */
     public function restored(PostRecipes $postRecipes): void
     {
-        //
+        Artisan::call('app:generate-sitemap');
     }
 
     /**
@@ -43,6 +44,6 @@ class RecipeObserver
      */
     public function forceDeleted(PostRecipes $postRecipes): void
     {
-        //
+        Artisan::call('app:generate-sitemap');
     }
 }

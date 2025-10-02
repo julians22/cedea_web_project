@@ -28,7 +28,6 @@ class BuildSitemap
             ->add($this->build_index(PostNews::all(), 'sitemap_news.xml'))
             ->add($this->build_index(Video::all(), 'sitemap_videos.xml'))
             ->add($this->build_index(Product::all(), 'sitemap_products.xml'))
-
             ->writeToFile(public_path('sitemap.xml'));
     }
 
