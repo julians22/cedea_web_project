@@ -31,6 +31,7 @@
         "@tiptap/starter-kit": "^2.11.0",
         "alpinejs": "^3.13.7",
         "aos": "^3.0.0-beta.6",
+        "atropos": "^2.0.2",
         "lottie-web": "^5.12.2",
         "motion": "^12.4.7",
         "swiper": "^11.0.7"

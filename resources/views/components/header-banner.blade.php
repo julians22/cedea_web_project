@@ -1,9 +1,11 @@
 {{--
 banners: array, Collection
-types: default, news
+types: default, news, parallax.v1, parallax.v2
 --}}
 
 @props(['banners' => [], 'type' => 'default'])
+
+
 
 <!-- Slider main container -->
 <section>

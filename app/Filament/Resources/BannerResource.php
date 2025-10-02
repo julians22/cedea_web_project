@@ -2,14 +2,18 @@
 
 namespace App\Filament\Resources;
 
+use App\Enums\BannerType;
 use App\Filament\Resources\BannerResource\Pages;
 use App\Models\Banner;
 use Filament\Forms\Components\Section;
+use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\Split;
+use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
@@ -30,19 +34,76 @@ class BannerResource extends Resource
                 Split::make(
                     [
                         Section::make([
-                            SpatieMediaLibraryFileUpload::make('desktop')
+                            Select::make('type')
+                                ->options(BannerType::class)
+                                ->default(BannerType::DEFAULT)
+                                ->live()
                                 ->required()
+                                ->selectablePlaceholder(false),
+                            SpatieMediaLibraryFileUpload::make('desktop')
+                                ->required(
+                                    fn (Get $get): bool => $get('type') ===
+                                    BannerType::DEFAULT
+                                )
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') !== BannerType::DEFAULT
+                                )
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_desktop'),
                             SpatieMediaLibraryFileUpload::make('mobile')
-                                ->required()
+                                ->required(
+                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                )
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') !== BannerType::DEFAULT
+                                )
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_mobile'),
+                            SpatieMediaLibraryFileUpload::make('product')
+                                ->required(
+                                    fn (Get $get): bool => $get('type') !==
+                                    BannerType::DEFAULT
+                                )
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                )
+                                ->maxFiles(1)
+                                ->image()
+                                ->collection('banner_product'),
+                            SpatieMediaLibraryFileUpload::make('particle_back')
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                )
+                                ->panelLayout('grid')
+                                ->multiple()
+                                ->image()
+                                ->collection('banner_particle_back'),
+                            SpatieMediaLibraryFileUpload::make('particle_front')
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                )
+                                ->panelLayout('grid')
+                                ->multiple()
+                                ->image()
+                                ->collection('banner_particle_front'),
                             TextInput::make('title')
                                 ->maxLength(255)
+                                ->required(
+                                    fn (Get $get): bool => $get('type') !==
+                                    BannerType::DEFAULT
+                                )
                                 ->helperText(__('optional')),
+                            Textarea::make('desc')
+                                ->rows(3)
+                                ->maxLength(65535)
+                                ->columnSpanFull()
+                                ->hidden(
+                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                )
+                                ->helperText(__('optional')),
+
                             TextInput::make('link')
                                 ->maxLength(255)
                                 ->helperText(__('optional')),

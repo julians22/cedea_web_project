@@ -1,7 +1,11 @@
 <x-layouts.app>
 
     {{-- Banner Section --}}
-    <x-header-banner :banners="$banners" />
+    <x-header-banner :banners="$banners" type='parallax.v1' />
+
+    <x-banner.parallax.v1 :item="$banners->first()" />
+
+    {{-- About Section --}}
 
     <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :imageLeft="false" :title="__('home.closer.title')">
         <x-slot:desc>
