@@ -34,7 +34,7 @@ class BannerResource extends Resource
                 Split::make(
                     [
                         Section::make([
-                            Select::make('type')
+                            Select::make('banner_type')
                                 ->options(BannerType::class)
                                 ->default(BannerType::DEFAULT)
                                 ->live()
@@ -42,32 +42,32 @@ class BannerResource extends Resource
                                 ->selectablePlaceholder(false),
                             SpatieMediaLibraryFileUpload::make('desktop')
                                 ->required(
-                                    fn (Get $get): bool => $get('type') ===
+                                    fn (Get $get): bool => $get('banner_type') ===
                                     BannerType::DEFAULT
                                 )
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') !== BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') !== BannerType::DEFAULT
                                 )
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_desktop'),
                             SpatieMediaLibraryFileUpload::make('mobile')
                                 ->required(
-                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') === BannerType::DEFAULT
                                 )
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') !== BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') !== BannerType::DEFAULT
                                 )
                                 ->maxFiles(1)
                                 ->image()
                                 ->collection('banner_mobile'),
                             SpatieMediaLibraryFileUpload::make('product')
                                 ->required(
-                                    fn (Get $get): bool => $get('type') !==
+                                    fn (Get $get): bool => $get('banner_type') !==
                                     BannerType::DEFAULT
                                 )
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') === BannerType::DEFAULT
                                 )
                                 ->maxFiles(1)
                                 ->image()
@@ -75,7 +75,7 @@ class BannerResource extends Resource
 
                             SpatieMediaLibraryFileUpload::make('particle_back')
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') === BannerType::DEFAULT
                                 )
                                 ->panelLayout('grid')
                                 ->multiple()
@@ -84,7 +84,7 @@ class BannerResource extends Resource
 
                             SpatieMediaLibraryFileUpload::make('particle_front')
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') === BannerType::DEFAULT
                                 )
                                 ->panelLayout('grid')
                                 ->multiple()
@@ -94,7 +94,7 @@ class BannerResource extends Resource
                             TextInput::make('title')
                                 ->maxLength(255)
                                 ->required(
-                                    fn (Get $get): bool => $get('type') !==
+                                    fn (Get $get): bool => $get('banner_type') !==
                                     BannerType::DEFAULT
                                 )
                                 ->helperText(__('optional')),
@@ -103,7 +103,7 @@ class BannerResource extends Resource
                                 ->maxLength(65535)
                                 ->columnSpanFull()
                                 ->hidden(
-                                    fn (Get $get): bool => $get('type') === BannerType::DEFAULT
+                                    fn (Get $get): bool => $get('banner_type') === BannerType::DEFAULT
                                 )
                                 ->helperText(__('optional')),
 

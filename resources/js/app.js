@@ -9,12 +9,7 @@ import { Alpine } from "../../vendor/livewire/livewire/dist/livewire.esm";
 import "./bootstrap";
 
 window.Motion = { animate, stagger };
-
-// Initialize
-const myAtropos = Atropos({
-    el: ".my-atropos",
-    // rest of parameters
-});
+window.Atropos = Atropos;
 
 Alpine.plugin(focus);
 Alpine.plugin(resize);
