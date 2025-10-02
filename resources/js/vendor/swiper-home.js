@@ -1,3 +1,4 @@
+import { delay } from "motion";
 import Swiper from "swiper";
 import { Autoplay, Pagination } from "swiper/modules";
 
@@ -13,7 +14,7 @@ const headerBanner = new Swiper("#header-banner", {
     modules: [Pagination, Autoplay],
 
     // Optional parameters
-    // loop: true,
+    loop: true,
 
     // If we need pagination
     pagination: {
@@ -26,24 +27,82 @@ const headerBanner = new Swiper("#header-banner", {
     updateOnWindowResize: true,
     // height: vh - headerHeight,
     // autoHeight: true,
-    // autoplay: {
-    //     delay: 10000,
-    //     pauseOnMouseEnter: true,
-    // },
+    autoplay: {
+        delay: 10000,
+        pauseOnMouseEnter: true,
+    },
+    on: {
+        init: function (swiper) {
+            const activeSlide = swiper.slides[swiper.activeIndex];
+
+            const productImage = activeSlide.querySelector("img.product");
+            console.log(productImage);
+
+            if (productImage) {
+                Motion.animate(
+                    activeSlide.querySelector("img.product"),
+                    {
+                        scale: [0.7, 1],
+                        opacity: [0, 1],
+                    },
+                    {
+                        duration: 1,
+                        delay: 0.4,
+                        type: "spring",
+                        bounce: 0.7,
+                    },
+                );
+
+                Motion.animate(
+                    activeSlide.querySelectorAll("img.banner-particle"),
+                    {
+                        scale: [0.7, 1],
+                        opacity: [0, 1],
+                    },
+                    {
+                        delay: Motion.stagger(0.05),
+                        duration: 2,
+                        type: "spring",
+                        bounce: 0.7,
+                    },
+                );
+            }
+        },
+    },
 }).on("slideChange", function (swiper) {
-    // const activeSlide = swiper.slides[swiper.activeIndex];
+    const activeSlide = swiper.slides[swiper.activeIndex];
     // console.log(swiper);
-    // if (swiper.previousIndex !== swiper.activeIndex) {
-    //     Motion.animate(
-    //         // activeSlide.querySelector("img"),
-    //         // {
-    //         //     rotate: [0, 360],
-    //         // },
-    //         // {
-    //         //     duration: 1,
-    //         //     type: "spring",
-    //         //     bounce: 0.25,
-    //         // },
-    //     );
-    // }
+    const productImage = activeSlide.querySelector("img.product");
+
+    if (swiper.activeIndex !== swiper.previousIndex) {
+        if (productImage) {
+            Motion.animate(
+                activeSlide.querySelector("img.product"),
+                {
+                    scale: [0.7, 1],
+                    opacity: [0, 1],
+                },
+                {
+                    duration: 1,
+                    delay: 0.4,
+                    type: "spring",
+                    bounce: 0.7,
+                },
+            );
+
+            Motion.animate(
+                activeSlide.querySelectorAll("img.banner-particle"),
+                {
+                    scale: [0.7, 1],
+                    opacity: [0, 1],
+                },
+                {
+                    delay: Motion.stagger(0.05),
+                    duration: 2,
+                    type: "spring",
+                    bounce: 0.7,
+                },
+            );
+        }
+    }
 });
