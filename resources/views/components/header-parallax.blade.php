@@ -3,7 +3,7 @@
     $banner_uid = Str::uuid();
 @endphp
 <div @class([
-    'md:h-[90dvh] h-[70dvh] bg-white overflow-clip',
+    'md:h-[92dvh] h-[70dvh] bg-white overflow-clip',
     'bg-brick-2 bg-cover bg-no-repeat',
 ])>
     <div @class([
