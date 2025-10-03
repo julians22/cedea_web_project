@@ -47,7 +47,8 @@
                                                 <div class="absolute h-auto max-w-40 drop-shadow-md"
                                                     data-atropos-offset="{{ rand(-80, 0) }}"
                                                     style="top: {{ $top }}%; left: {{ $left }}%; width: {{ rand(50, 90) }}px; rotate: {{ rand(-30, 30) }}deg; filter: blur({{ rand(1, 3) }}px);">
-                                                    <img class="banner-particle" src="{{ $particle_back->getUrl() }}"
+                                                    <img class="banner-particle scale-0 opacity-0"
+                                                        src="{{ $particle_back->getUrl() }}"
                                                         alt="{{ $particle_back->name }}" />
                                                 </div>
                                             @endfor
