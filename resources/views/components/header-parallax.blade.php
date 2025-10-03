@@ -8,10 +8,10 @@
 ])>
     <div @class([
         'h-full max-h-full bg-no-repeat',
-        'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(25dvw,_130%)]',
+        'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(30dvw,_130%)]',
     ])>
         <div class="mx-auto grid h-full max-h-full max-w-[145rem] px-8 md:grid-cols-2">
-            <div class="flex flex-col items-start gap-4 p-8 !~pt-12/40 md:p-16">
+            <div class="flex flex-col items-start gap-4 !~pt-12/40">
                 <p class="font-bold text-cedea-red drop-shadow-lg ~text-5xl/8xl">
                     Ikan Olahan Bermutu
                 </p>
