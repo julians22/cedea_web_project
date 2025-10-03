@@ -1,7 +1,9 @@
 <x-layouts.app>
 
+    <x-header-parallax :products="$banners->where('banner_type', '!==', \App\Enums\BannerType::DEFAULT)"/>
+
     {{-- Banner Section --}}
-    <x-header-banner :banners="$banners" />
+    <x-header-banner :banners="$banners->where('banner_type', \App\Enums\BannerType::DEFAULT)" />
 
     {{-- About Section --}}
 

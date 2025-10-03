@@ -15,6 +15,7 @@ const headerBanner = new Swiper("#header-banner", {
 
     // Optional parameters
     loop: true,
+    effect: "fade",
 
     // If we need pagination
     pagination: {
@@ -27,38 +28,23 @@ const headerBanner = new Swiper("#header-banner", {
     updateOnWindowResize: true,
     // height: vh - headerHeight,
     // autoHeight: true,
-    autoplay: {
-        delay: 10000,
-        pauseOnMouseEnter: true,
-    },
+    autoplay: { delay: 10000, pauseOnMouseEnter: true },
     on: {
         init: function (swiper) {
             const activeSlide = swiper.slides[swiper.activeIndex];
 
             const productImage = activeSlide.querySelector("img.product");
-            console.log(productImage);
 
             if (productImage) {
                 Motion.animate(
                     activeSlide.querySelector("img.product"),
-                    {
-                        scale: [0.7, 1],
-                        opacity: [0, 1],
-                    },
-                    {
-                        duration: 1,
-                        delay: 0.4,
-                        type: "spring",
-                        bounce: 0.7,
-                    },
+                    { scale: [0.7, 1], opacity: [0, 1] },
+                    { duration: 1, delay: 0.4, type: "spring", bounce: 0.7 },
                 );
 
                 Motion.animate(
                     activeSlide.querySelectorAll("img.banner-particle"),
-                    {
-                        scale: [0.7, 1],
-                        opacity: [0, 1],
-                    },
+                    { scale: [0.7, 1], opacity: [0, 1] },
                     {
                         delay: Motion.stagger(0.05),
                         duration: 2,
@@ -71,31 +57,19 @@ const headerBanner = new Swiper("#header-banner", {
     },
 }).on("slideChange", function (swiper) {
     const activeSlide = swiper.slides[swiper.activeIndex];
-    // console.log(swiper);
     const productImage = activeSlide.querySelector("img.product");
 
     if (swiper.activeIndex !== swiper.previousIndex) {
         if (productImage) {
             Motion.animate(
                 activeSlide.querySelector("img.product"),
-                {
-                    scale: [0.7, 1],
-                    opacity: [0, 1],
-                },
-                {
-                    duration: 1,
-                    delay: 0.4,
-                    type: "spring",
-                    bounce: 0.7,
-                },
+                { scale: [0.7, 1], opacity: [0, 1] },
+                { duration: 1, delay: 0.4, type: "spring", bounce: 0.7 },
             );
 
             Motion.animate(
                 activeSlide.querySelectorAll("img.banner-particle"),
-                {
-                    scale: [0.7, 1],
-                    opacity: [0, 1],
-                },
+                { scale: [0.7, 1], opacity: [0, 1] },
                 {
                     delay: Motion.stagger(0.05),
                     duration: 2,
