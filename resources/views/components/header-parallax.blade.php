@@ -8,7 +8,7 @@
 ])>
     <div @class([
         'h-full  max-h-full bg-no-repeat',
-        'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(30dvw,_130%)]',
+        'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(30dvw,60dvh)]',
     ])>
 
         <div class="relative mx-auto grid h-full max-h-full max-w-[95rem] ~px-8/16 md:grid-cols-2">
