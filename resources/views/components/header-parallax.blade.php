@@ -39,7 +39,7 @@
                                                     $top_array = [$top_1, $top_2];
                                                     $top = $top_array[array_rand($top_array)];
                                                     $left_1 = rand(5, 25);
-                                                    $left_2 = rand(65, 85);
+                                                    $left_2 = rand(60, 80);
                                                     $left_array = [$left_1, $left_2];
                                                     $left = $left_array[array_rand($left_array)];
                                                 @endphp
@@ -70,7 +70,7 @@
                                                     $top_array = [$top_1, $top_2];
                                                     $top = $top_array[array_rand($top_array)];
                                                     $left_1 = rand(5, 25);
-                                                    $left_2 = rand(65, 85);
+                                                    $left_2 = rand(60, 80);
                                                     $left_array = [$left_1, $left_2];
                                                     $left = $left_array[array_rand($left_array)];
                                                 @endphp
