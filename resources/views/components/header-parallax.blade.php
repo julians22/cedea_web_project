@@ -10,7 +10,7 @@
         'h-full max-h-full bg-no-repeat',
         'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(30dvw,_130%)]',
     ])>
-        <div class="mx-auto grid h-full max-h-full max-w-[145rem] ~px-8/16 md:grid-cols-2">
+        <div class="mx-auto grid h-full max-h-full max-w-[95rem] ~px-8/16 md:grid-cols-2">
             <div class="flex flex-col items-start gap-4 ~pt-12/40">
                 <p class="font-bold text-cedea-red drop-shadow-lg ~text-5xl/8xl">
                     Ikan Olahan Bermutu
@@ -29,14 +29,13 @@
                         <!-- inner container (required) -->
                         <div class="atropos-inner relative overflow-visible">
                             @foreach ($products as $product)
-                                <div
-                                    class="product-wrapper absolute left-1/2 top-1/2 size-full h-full -translate-x-1/2 -translate-y-1/2 p-4">
-                                    <div class="max-md:hidden">
+                                <div class="product-wrapper p-4">
+                                    <div class="">
                                         @foreach ($product->getMedia('banner_particle_back') as $particle_back)
                                             @for ($i = 1; $i <= rand(1, 3); $i++)
                                                 @php
-                                                    $top_1 = rand(15, 45);
-                                                    $top_2 = rand(65, 70);
+                                                    $top_1 = rand(5, 25);
+                                                    $top_2 = rand(45, 55);
                                                     $top_array = [$top_1, $top_2];
                                                     $top = $top_array[array_rand($top_array)];
                                                     $left_1 = rand(5, 25);
@@ -47,25 +46,27 @@
                                                 <div class="absolute h-auto max-w-40 drop-shadow-md"
                                                     data-atropos-offset="{{ rand(-80, 0) }}"
                                                     style="top: {{ $top }}%; left: {{ $left }}%; width: {{ rand(50, 90) }}px; rotate: {{ rand(-30, 30) }}deg; filter: blur({{ rand(1, 3) }}px);">
-                                                    <img class="banner-particle scale-0 opacity-0"
+                                                    <img class="banner-particle scale-0 opacity-0 max-md:w-1/2"
                                                         src="{{ $particle_back->getUrl() }}"
                                                         alt="{{ $particle_back->name }}" />
                                                 </div>
                                             @endfor
                                         @endforeach
                                     </div>
+
                                     <div
-                                        class="absolute -top-1/2 left-1/2 inline-block h-auto max-h-full w-3/5 -translate-x-1/2 -translate-y-1/2 -rotate-12 drop-shadow-2xl md:top-1/2">
+                                        class="absolute left-1/2 top-2/3 inline-block h-auto max-h-full w-3/5 -translate-x-1/2 -translate-y-1/2 -rotate-12 drop-shadow-2xl md:top-1/3">
                                         <img class="product scale-0 opacity-0"
                                             src="{{ $product->getFirstMediaUrl('banner_product') }}"
                                             alt="{{ $product->title ? $product->title : $product->getFirstMedia('banner_product')->name }}" />
                                     </div>
-                                    <div class="max-md:hidden">
+
+                                    <div class="">
                                         @foreach ($product->getMedia('banner_particle_front') as $particle_front)
                                             @for ($i = 1; $i <= rand(1, 3); $i++)
                                                 @php
-                                                    $top_1 = rand(15, 35);
-                                                    $top_2 = rand(65, 70);
+                                                    $top_1 = rand(5, 25);
+                                                    $top_2 = rand(45, 55);
                                                     $top_array = [$top_1, $top_2];
                                                     $top = $top_array[array_rand($top_array)];
                                                     $left_1 = rand(5, 25);
@@ -76,7 +77,7 @@
                                                 <div class="absolute h-auto max-w-40 drop-shadow-lg"
                                                     data-atropos-offset="{{ rand(0, 80) }}"
                                                     style="top: {{ $top }}%; left: {{ $left }}%; width: {{ rand(80, 160) }}px; rotate: {{ rand(-30, 30) }}deg; filter: blur({{ rand(0, 1.5) }}px);">
-                                                    <img class="banner-particle scale-0 opacity-0"
+                                                    <img class="banner-particle scale-0 opacity-0 max-md:w-1/2"
                                                         src="{{ $particle_front->getUrl() }}"
                                                         alt="{{ $particle_front->name }}" />
                                                 </div>
