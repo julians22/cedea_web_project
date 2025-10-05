@@ -7,10 +7,14 @@
     'bg-brick-2 bg-cover bg-no-repeat',
 ])>
     <div @class([
-        'h-full max-h-full bg-no-repeat',
+        'h-full  max-h-full bg-no-repeat',
         'bg-paralax-1 bg-cover bg-[25%_50dvh] md:bg-[25%_max(30dvw,_130%)]',
     ])>
-        <div class="mx-auto grid h-full max-h-full max-w-[95rem] ~px-8/16 md:grid-cols-2">
+
+        <div class="relative mx-auto grid h-full max-h-full max-w-[95rem] ~px-8/16 md:grid-cols-2">
+            <img class="absolute -z-0 max-h-full w-auto ~top-4/8 ~right-4/24 ~h-16/24" src="{{ asset('img/halal.png') }}"
+                alt="logo halal" />
+
             <div class="flex flex-col items-start gap-4 ~pt-12/40">
                 <p class="font-bold text-cedea-red drop-shadow-lg ~text-5xl/8xl">
                     Ikan Olahan Bermutu
@@ -96,8 +100,7 @@
                     </div>
                 </div>
             </div>
-            <img class="absolute max-h-full w-auto ~top-20/28 ~right-8/24 ~h-16/32" src="{{ asset('img/halal.png') }}"
-                alt="logo halal" />
+
         </div>
     </div>
 </div>
