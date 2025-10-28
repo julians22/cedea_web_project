@@ -216,17 +216,13 @@ class Contact extends Component
 
         $message = Message::create($this->except(['tab_index']));
 
-        $this->resetExcept(
-            ['tab_index'],
-        );
+        $this->dispatch('message-sent');
+        $this->resetExcept('tab_index');
 
         try {
             dispatch(new SendMailJob($message));
         } catch (Throwable $e) {
             Log::error('Failed to send contact email: '.$e->getMessage());
-        } finally {
-            $this->dispatch('message-sent');
-            $this->resetExcept('tab_index');
         }
     }
 
