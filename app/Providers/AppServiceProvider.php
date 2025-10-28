@@ -30,7 +30,7 @@ class AppServiceProvider extends ServiceProvider
                 ]); // also accepts a closure
         });
 
-        DateTimePicker::configureUsing(fn(DateTimePicker $component) => $component->format("Y-m-d H:i:s"));
-        DateTimePicker::configureUsing(fn(DateTimePicker $component) => $component->native(false));
+        DateTimePicker::configureUsing(fn (DateTimePicker $component) => $component->format('Y-m-d H:i:s'));
+        DateTimePicker::configureUsing(fn (DateTimePicker $component) => $component->native(false));
     }
 }
