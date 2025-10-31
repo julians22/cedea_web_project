@@ -2,10 +2,8 @@
 
 <div class="container pointer-events-none grid lg:grid-cols-2" x-show="{{ $show }}" x-cloak>
     <div class="pointer-events-auto relative bg-white lg:col-start-2">
-        <x-lucide-circle-x class="absolute right-4 top-6 size-12 cursor-pointer rounded-full"
-            @click="{{ $show }}=false" />
 
-        <div class="flex flex-col items-start justify-center gap-12 rounded-md px-10 py-14 font-medium">
+        <div class="top-12 flex flex-col items-start justify-center gap-12 rounded-md px-10 py-14 font-medium lg:sticky">
 
             <h2 class="section-title">
                 Terima kasih sudah menghubungi kami, pesan anda sedang kami proses.

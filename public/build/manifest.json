@@ -1,6 +1,6 @@
 {
-  "_autoplay-Cx6ypbJf.js": {
-    "file": "assets/autoplay-Cx6ypbJf.js",
+  "_autoplay-C8V78xdu.js": {
+    "file": "assets/autoplay-C8V78xdu.js",
     "name": "autoplay"
   },
   "resources/assets/asia-pattern.png": {
@@ -28,12 +28,12 @@
     "src": "resources/assets/shippo-pattern.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-CHEr85BE.css",
+    "file": "assets/app-Di9DmQ64.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
   "resources/css/filament/admin/theme.css": {
-    "file": "assets/theme-C-sUwiH2.css",
+    "file": "assets/theme-BRo0yjF6.css",
     "src": "resources/css/filament/admin/theme.css",
     "isEntry": true
   },
@@ -43,33 +43,33 @@
     "isEntry": true
   },
   "resources/js/app.js": {
-    "file": "assets/app-B2SY3rMz.js",
+    "file": "assets/app-C_bo-eU1.js",
     "name": "app",
     "src": "resources/js/app.js",
     "isEntry": true
   },
   "resources/js/tiptap/extensions.js": {
-    "file": "assets/extensions-DJTADUEV.js",
+    "file": "assets/extensions-8ITrsiyf.js",
     "name": "extensions",
     "src": "resources/js/tiptap/extensions.js",
     "isEntry": true
   },
   "resources/js/vendor/swiper-home.js": {
-    "file": "assets/swiper-home-oIxAgAz5.js",
+    "file": "assets/swiper-home-t05O6TwJ.js",
     "name": "swiper-home",
     "src": "resources/js/vendor/swiper-home.js",
     "isEntry": true,
     "imports": [
-      "_autoplay-Cx6ypbJf.js"
+      "_autoplay-C8V78xdu.js"
     ]
   },
   "resources/js/vendor/swiper-recipe.js": {
-    "file": "assets/swiper-recipe-DfxyTlQb.js",
+    "file": "assets/swiper-recipe-eNIeKwmi.js",
     "name": "swiper-recipe",
     "src": "resources/js/vendor/swiper-recipe.js",
     "isEntry": true,
     "imports": [
-      "_autoplay-Cx6ypbJf.js"
+      "_autoplay-C8V78xdu.js"
     ]
   }
 }
