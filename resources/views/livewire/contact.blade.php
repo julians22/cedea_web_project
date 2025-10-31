@@ -78,23 +78,25 @@
         </div>
 
         {{-- form --}}
-        <form class="grid-overlay pointer-events-none order-1 grid" @submit.prevent="doCaptcha" x-data="{
-            loading: false,
-            siteKey: @js(config('services.recaptcha.public_key')),
-            init() {
-                // load our recaptcha.
-                if (!window.recaptcha) {
-                    const script = document.createElement('script');
-                    script.src = 'https://www.google.com/recaptcha/api.js?render=' + this.siteKey;
-                    document.body.append(script);
-                }
-            },
-            doCaptcha() {
-                grecaptcha.execute(this.siteKey, { action: 'submit' }).then(token => {
-                    Livewire.dispatch('formSubmitted', { token: token });
-                });
-            },
-        }">
+        <form class="grid-overlay pointer-events-none order-1 grid" @submit.prevent="doCaptcha"
+            x-on:message-sent.window="loading = false" x-data="{
+                loading: false,
+                siteKey: @js(config('services.recaptcha.public_key')),
+                init() {
+                    // load our recaptcha.
+                    if (!window.recaptcha) {
+                        const script = document.createElement('script');
+                        script.src = 'https://www.google.com/recaptcha/api.js?render=' + this.siteKey;
+                        document.body.append(script);
+                    }
+                },
+                doCaptcha() {
+                    this.loading = true;
+                    grecaptcha.execute(this.siteKey, { action: 'submit' }).then(token => {
+                        Livewire.dispatch('formSubmitted', { token: token });
+                    });
+                },
+            }">
             <span class="pointer-events-none grid after:col-start-2 after:bg-white max-lg:hidden lg:grid-cols-2"></span>
 
             <div class="container pointer-events-none grid text-cedea-red-500 lg:grid-cols-2" x-show="!messageSent"
@@ -138,25 +140,7 @@
                             @endif
 
                             {{-- loading button state --}}
-                            <div class="flex w-fit cursor-progress items-center justify-center rounded-full border-2 border-cedea-red-500 bg-cedea-red-500 px-4 text-white"
-                                wire:loading>
-                                <span
-                                    class="pointer-events-none inline-flex items-center justify-center gap-2 opacity-50">
-                                    <svg class="h-5 w-5 animate-spin text-white" data-motion-id="svg 2"
-                                        xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
-                                        <circle class="opacity-25" cx="12" cy="12" r="10"
-                                            stroke="currentColor" stroke-width="4">
-                                        </circle>
-                                        <path class="opacity-75" fill="currentColor"
-                                            d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
-                                        </path>
-                                    </svg>
-                                    <span>Processing...</span>
-                                </span>
-                            </div>
-
-                            <button type="submit" wire:loading.remove wire:loading.attr="disabled"
-                                :disabled="loading"
+                            <button type="submit" :disabled="loading"
                                 :class="{
                                     'px-4 rounded-full w-fit border-2 flex items-center justify-center border-cedea-red-500': true,
                                     'bg-cedea-red-500 cursor-progress text-white': loading
@@ -175,8 +159,8 @@
                                             d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z">
                                         </path>
                                     </svg>
-                                    <span x-show="!loading" wire:loading.remove>{{ __('contact.submit') }}</span>
-                                    <span x-show="loading" wire:loading>Processing...</span>
+                                    <span x-show="!loading">{{ __('contact.submit') }}</span>
+                                    <span x-show="loading">Processing...</span>
                                 </span>
                             </button>
 
