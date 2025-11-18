@@ -16,6 +16,7 @@ use App\Models\Message;
 use Embed\Embed;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
+use Livewire\Livewire;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
@@ -94,6 +95,10 @@ Route::group([
     //     // return $info->image;
     //     dd($info);
     // });
+
+    Livewire::setUpdateRoute(function ($handle) {
+        return Route::post('/livewire/update', $handle);
+    });
 });
 
 if (app()->environment('local')) {
