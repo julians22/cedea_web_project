@@ -30,7 +30,7 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 if (env('RTE_CAMPAIGN', false)) {
-    Route::redirect('eomuk-bar-chill-in-seoul', 'https://eomuk-bar-rte.cedeaseafood.com')->name('redirect-eomuk-bar-chill-in-seoul');
+    Route::redirect('eomuk-bar-chill-in-seoul?source=packaging', 'https://eomuk-bar-rte.cedeaseafood.com')->name('redirect-eomuk-bar-chill-in-seoul');
 }
 
 /*
