@@ -31,19 +31,8 @@ use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 */
 
 if (env('RTE_CAMPAIGN', false)) {
-    Route::redirect('eomuk-bar-chill-in-seoul', 'https://eomuk-bar-rte.cedeaseafood.com')->name('redirect-eomuk-bar-chill-in-seoul');
+    Route::redirect('eomuk-bar-chill-in-seoul', 'https://eomuk-bar-rte.cedeaseafood.com?source=packaging')->name('redirect-eomuk-bar-chill-in-seoul');
 }
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
 
 Route::group([
     'prefix' => LaravelLocalization::setLocale(),
@@ -96,9 +85,9 @@ Route::group([
     //     dd($info);
     // });
 
-    Livewire::setUpdateRoute(function ($handle) {
-        return Route::post('/livewire/update', $handle);
-    });
+    // Livewire::setUpdateRoute(function ($handle) {
+    //     return Route::post('/livewire/update', $handle);
+    // });
 });
 
 if (app()->environment('local')) {
