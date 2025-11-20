@@ -103,4 +103,6 @@
         </div>
     </div>
 
+    <x-pop-up-banner />
+
 </x-layouts.app>
