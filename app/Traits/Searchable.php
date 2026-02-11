@@ -24,8 +24,8 @@ trait Searchable
         }
 
         foreach ($fields as $field) {
-            $field = '"' . str_replace('.', '"."', $field) . '"';
-            $query->orWhereRaw('LOWER(' . $field . ') LIKE ?', ['%' . $keyword . '%']);
+            $field = '"'.str_replace('.', '"."', $field).'"';
+            $query->orWhereRaw('LOWER('.$field.') LIKE ?', ['%'.$keyword.'%']);
         }
 
         return $query;
@@ -34,13 +34,10 @@ trait Searchable
     /**
      * Apply a case-insensitive search to a query builder, using translations.
      *
-     * @param  Builder  $query
-     * @param  string|array  $fields
      * @param  string  $keyword
-     * @param  string  $locale
      * @return Builder
      */
-    public static function scopeSearchTranslated(Builder $query, string|array $fields, $keyword, string $locale = null)
+    public static function scopeSearchTranslated(Builder $query, string|array $fields, $keyword, ?string $locale = null)
     {
         $locale = $locale ?? App::getLocale();
 
@@ -51,9 +48,9 @@ trait Searchable
         }
 
         foreach ($fields as $field) {
-            $field = 'LOWER(JSON_EXTRACT(' . $field . ', "$.' . $locale . '"))';
+            $field = 'LOWER(JSON_EXTRACT('.$field.', "$.'.$locale.'"))';
 
-            $query->orWhereRaw($field . ' LIKE ?', ['%' . $keyword . '%']);
+            $query->orWhereRaw($field.' LIKE ?', ['%'.$keyword.'%']);
         }
 
         return $query;

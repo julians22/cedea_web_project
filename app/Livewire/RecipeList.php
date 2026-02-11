@@ -17,7 +17,7 @@ class RecipeList extends Component
     #[Url(except: '')]
     public string $keyword = '';
 
-    #[Url(as: 'type', except: ['all', null, ''], keep: true)]
+    #[Url(as: 'type', except: ['all', null, ''])]
     public string $activeRecipeType = 'all';
 
     #[Url(as: 'product', except: '')]

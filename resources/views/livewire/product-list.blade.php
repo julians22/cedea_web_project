@@ -53,7 +53,7 @@
 
                         <input
                             class="block w-full rounded-full border border-black p-4 ps-10 text-sm placeholder:text-black"
-                            id="product-search" wire:model.live='keyword' type="search"
+                            id="product-search" wire:model.live.debounce.750ms='keyword' type="search"
                             placeholder="{{ __('Search product here') }}" />
                     </div>
                 </div>

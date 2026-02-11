@@ -1,6 +1,6 @@
 {{--
-banners: array, Collection
-types: default, news
+    banners: array, Collection
+    types: default, news
 --}}
 
 @props(['banners' => [], 'type' => 'default'])
