@@ -47,7 +47,6 @@ export default {
                 xxs: ["0.5rem", "1rem"],
             },
             fontFamily: {
-                androgyne: "Androgyne",
                 montserrat: "Montserrat",
                 ...defaultTheme.fontFamily.sans,
                 poppins: "Poppins",

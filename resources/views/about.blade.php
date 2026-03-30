@@ -82,7 +82,7 @@
                                         </svg>
                                     </div>
                                     <div>
-                                        <p class="font-androgyne ~text-sm/base">{{ $item['title'] }}</p>
+                                        <p class="font-lobster ~text-sm/base">{{ $item['title'] }}</p>
                                         <p class="mt-1 text-justify text-xs">{{ $item['desc'] }}</p>
                                     </div>
                                 </div>
@@ -112,7 +112,7 @@
             {{-- visi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Visi.title') }}</h2>
+                <h2 class="mb-4 text-center font-lobster ~text-2xl/5xl">{{ __('about.Visi.title') }}</h2>
                 <p class="text-last-center text-justify">
                     {{ __('about.Visi.detail') }}
                 </p>
@@ -120,7 +120,7 @@
             {{-- misi --}}
             <div
                 class="visi-misi-gradient header-padding-safe-area header-padding-safe-area-b flex h-full w-full flex-col justify-start ~p-4/10 md:bg-none">
-                <h2 class="mb-4 text-center font-androgyne ~text-2xl/5xl">{{ __('about.Misi.title') }}</h2>
+                <h2 class="mb-4 text-center font-lobster ~text-2xl/5xl">{{ __('about.Misi.title') }}</h2>
                 <p class="text-last-center text-justify">{{ __('about.Misi.detail') }}</p>
             </div>
         </div>

@@ -12,7 +12,7 @@
         <div class="font-semibold drop-shadow-md ~text-xl/5xl">
             {!! $item->title !!}
         </div>
-        <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-androgyne"
+        <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-lobster"
             href="{{ route('news.show', ['post' => $item->slug]) }}">{{ __('news.read.header') }}</a>
     </div>
 </div>

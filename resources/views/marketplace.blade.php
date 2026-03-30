@@ -14,7 +14,7 @@
                 <h1 class="section-title text-inherit drop-shadow-lg">
                     {!! __('marketplace.title') !!}
                 </h1>
-                <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-androgyne shadow-lg ~text-sm/xl"
+                <a class="w-fit rounded-full bg-cedea-red px-4 py-2 font-lobster shadow-lg ~text-sm/xl"
                     href="#marketplace">{!! __('marketplace.cta') !!}</a>
             </div>
         </div>
