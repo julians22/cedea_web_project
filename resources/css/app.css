@@ -1,4 +1,4 @@
-@import "font.css";
+/* @import "font.css"; */
 @import "swiper/css";
 @import "swiper/css/navigation";
 @import "swiper/css/pagination";
@@ -82,7 +82,7 @@
     }
 
     .font-title {
-        @apply font-androgyne;
+        @apply font-lobster;
     }
 
     /* Base layout Component */

@@ -30,6 +30,7 @@
             }
             gtag('js', new Date());
             gtag('config', 'G-57ZD2ZE0ME');
+            gtag('set', 'allow_google_signals', true);
         </script>
         <!-- Google Tag Manager -->
 

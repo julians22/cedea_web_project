@@ -11,14 +11,6 @@
     "file": "assets/brick-pattern-CdwqVlwB.webp",
     "src": "resources/assets/brick-pattern.webp"
   },
-  "resources/assets/fonts/AndrogyneMedium.woff": {
-    "file": "assets/AndrogyneMedium-NRPhK5F7.woff",
-    "src": "resources/assets/fonts/AndrogyneMedium.woff"
-  },
-  "resources/assets/fonts/AndrogyneMedium.woff2": {
-    "file": "assets/AndrogyneMedium-UYHeEU_L.woff2",
-    "src": "resources/assets/fonts/AndrogyneMedium.woff2"
-  },
   "resources/assets/market-footer.png": {
     "file": "assets/market-footer-DwCXxfHH.png",
     "src": "resources/assets/market-footer.png"
@@ -28,7 +20,7 @@
     "src": "resources/assets/shippo-pattern.png"
   },
   "resources/css/app.css": {
-    "file": "assets/app-DB0VXJ2p.css",
+    "file": "assets/app-Cwt-mdjq.css",
     "src": "resources/css/app.css",
     "isEntry": true
   },
