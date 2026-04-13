@@ -54,7 +54,7 @@
                         <img class="w-full" src="{{ asset('img/marketplace-phone.png') }}"
                             alt="Tampilan aplikasi mobile Cedea Seafood - belanja produk seafood segar dan berkualitas">
                     </div>
-                    <div class="flex flex-wrap items-end justify-center ~gap-2/8">
+                    <div class="flex grid-cols-7 flex-wrap items-end justify-center ~gap-2/8 xl:grid">
                         @php
                             $marketplaces = [
                                 [
@@ -88,11 +88,17 @@
                                     'url' => 'https://www.sayurbox.com/search?q=cedea',
                                     'logo' => asset('img/marketplace/sayurbox.png'),
                                 ],
+
+                                [
+                                    'name' => 'allofresh',
+                                    'url' => 'https://allofresh.onelink.me/31rm/3gllsbfi',
+                                    'logo' => asset('img/marketplace/allofresh_logo_2.png'),
+                                ],
                             ];
                         @endphp
 
                         @foreach ($marketplaces as $marketplace)
-                            <a class="flex items-center justify-center rounded-xl bg-white text-center shadow-top-hover transition duration-700 ease-in-out ~size-16/28 ~p-2/4 hover:scale-110 hover:shadow-lg md:shadow-top md:hover:shadow-top-hover"
+                            <a class="flex items-center justify-center rounded-xl bg-white text-center shadow-top-hover transition duration-700 ease-in-out ~size-14/28 ~p-2/4 hover:scale-110 hover:shadow-lg md:shadow-top md:hover:shadow-top-hover"
                                 href="{{ $marketplace['url'] }}" target="_blank">
                                 <img src="{{ $marketplace['logo'] }}" alt="{{ $marketplace['name'] }} logo">
                             </a>
