@@ -94,6 +94,11 @@
                                     'url' => 'https://allofresh.onelink.me/31rm/3gllsbfi',
                                     'logo' => asset('img/marketplace/allofresh_logo_2.png'),
                                 ],
+                                [
+                                    'name' => 'segari',
+                                    'url' => '#',
+                                    'logo' => asset('img/marketplace/segari.png'),
+                                ],
                             ];
                         @endphp
 
