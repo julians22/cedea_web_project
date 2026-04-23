@@ -80,7 +80,7 @@
 
                         [
                             'name' => 'segari',
-                            'url' => '#',
+                            'url' => 'https://segari.id/discovery/Cedea-apr-promo',
                             'logo' => asset('img/marketplace/segari.png'),
                         ],
                         [
