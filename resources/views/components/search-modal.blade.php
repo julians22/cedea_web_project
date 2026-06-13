@@ -20,7 +20,8 @@
         method="GET" @keyup.enter="$event.target.submit(); seachModalOpen=false">
 
         <input class="p-0.5 text-cedea-red-500 outline-none placeholder:text-cedea-red-500/50 max-sm:w-full"
-            id="query" name="query" type="text" placeholder="{{ __('search.placeholder') }}">
+            id="query" name="query" type="search" maxlength="100" required
+            placeholder="{{ __('search.placeholder') }}">
 
         <button type="submit">
             <x-icon.magnifying-glass class="text-cedea-red-500" />

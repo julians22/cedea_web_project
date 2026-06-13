@@ -13,46 +13,63 @@ trait Searchable
      *
      * @param  string|array  $field
      * @param  string  $keyword
-     * @return Builder
      */
-    public static function scopeSearch(Builder $query, string|array $fields, $keyword)
+    public function scopeSearch(Builder $query, string|array $fields, mixed $keyword): Builder
     {
-        $keyword = strtolower($keyword);
+        $keyword = trim((string) $keyword);
 
-        if (is_string($fields)) {
-            $fields = Arr::wrap($fields);
+        if ($keyword === '') {
+            return $query;
         }
 
-        foreach ($fields as $field) {
-            $field = '"'.str_replace('.', '"."', $field).'"';
-            $query->orWhereRaw('LOWER('.$field.') LIKE ?', ['%'.$keyword.'%']);
-        }
+        $keyword = mb_strtolower($keyword);
 
-        return $query;
+        return $query->where(function (Builder $searchQuery) use ($fields, $keyword): void {
+            foreach (Arr::wrap($fields) as $field) {
+                $column = collect(explode('.', $field))
+                    ->map(fn (string $segment) => '`'.str_replace('`', '``', $segment).'`')
+                    ->implode('.');
+
+                $searchQuery->orWhereRaw("LOWER({$column}) LIKE ?", ["%{$keyword}%"]);
+            }
+        });
     }
 
     /**
      * Apply a case-insensitive search to a query builder, using translations.
      *
      * @param  string  $keyword
-     * @return Builder
      */
-    public static function scopeSearchTranslated(Builder $query, string|array $fields, $keyword, ?string $locale = null)
-    {
-        $locale = $locale ?? App::getLocale();
+    public function scopeSearchTranslated(
+        Builder $query,
+        string|array $fields,
+        mixed $keyword,
+        ?string $locale = null,
+    ): Builder {
+        $keyword = trim((string) $keyword);
 
-        $keyword = strtolower($keyword);
-
-        if (is_string($fields)) {
-            $fields = Arr::wrap($fields);
+        if ($keyword === '') {
+            return $query;
         }
 
-        foreach ($fields as $field) {
-            $field = 'LOWER(JSON_EXTRACT('.$field.', "$.'.$locale.'"))';
+        $locales = $locale === '*'
+            ? config('localizer.supported_locales', [App::getLocale()])
+            : [$locale ?? App::getLocale()];
+        $keyword = mb_strtolower($keyword);
 
-            $query->orWhereRaw($field.' LIKE ?', ['%'.$keyword.'%']);
-        }
+        return $query->where(function (Builder $searchQuery) use ($fields, $keyword, $locales): void {
+            foreach (Arr::wrap($fields) as $field) {
+                $column = collect(explode('.', $field))
+                    ->map(fn (string $segment) => '`'.str_replace('`', '``', $segment).'`')
+                    ->implode('.');
 
-        return $query;
+                foreach ($locales as $searchLocale) {
+                    $searchQuery->orWhereRaw(
+                        "LOWER(JSON_UNQUOTE(JSON_EXTRACT({$column}, ?))) LIKE ?",
+                        ['$."'.str_replace('"', '\"', $searchLocale).'"', "%{$keyword}%"],
+                    );
+                }
+            }
+        });
     }
 }

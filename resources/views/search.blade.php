@@ -14,13 +14,13 @@
 
                         <input
                             class="block h-10 w-full px-2 py-1 text-cedea-red-500 outline-none placeholder:text-cedea-red-500"
-                            id="query" name="query" type="search" value="{{ request()->query('query') }}"
+                            id="query" name="query" type="search" value="{{ $query }}" maxlength="100"
                             placeholder="{{ __('search.placeholder') }}" />
 
                     </div>
                 </form>
                 <p class="pt-4 text-center text-white">
-                    {{ __('search.desc') }}: <span class="font-semibold">{{ request()->query('query') }}</span>
+                    {{ __('search.desc') }}: <span class="font-semibold">{{ $query }}</span>
                 </p>
             </div>
         </div>
@@ -41,18 +41,18 @@
                         'bg-cedea-red-500 text-white' => $lang == $localeCode,
                         'bg-white border-2 text-black' => $lang != $localeCode,
                     ])
-                        href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }} ">{{ $localeName }}</a>
+                        href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }}">{{ $localeName }}</a>
                 @endforeach
             </div>
 
 
             {{-- Recipe --}}
-            <x-search.item-group class="mt-4" title="{{ __('nav.recipe') }}" :showReadmore="count($recipes) > 3"
-                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+            <x-search.item-group class="mt-4" title="{{ __('nav.recipe') }}" :showReadmore="$hasMoreRecipes"
+                readmoreRoute="{{ route('recipe', ['locale' => $resultLocale, 'keyword' => $query]) }}">
 
                 @forelse ($recipes as $item)
-                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="$item->excerpt"
-                        :url="route('recipe.show', ['recipe' => $item->slug])" />
+                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')?->name ?? strip_tags((string) $item->title)" :title="$item->title" :desc="$item->description"
+                        :url="route('recipe.show', ['locale' => $resultLocale, 'recipe' => $item->slug])" />
                 @empty
                     <x-placeholder.empty class:text="~text-lg/2xl" class:icon="~size-14/24"
                         text="{{ __('status.empty') }}" />
@@ -63,12 +63,12 @@
             </x-search.item-group>
 
             {{-- news --}}
-            <x-search.item-group title="{{ __('nav.news') }}" :showReadmore="count($news) > 3"
-                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+            <x-search.item-group title="{{ __('nav.news') }}" :showReadmore="$hasMoreNews"
+                readmoreRoute="{{ route('news', ['locale' => $resultLocale, 'keyword' => $query]) }}">
 
                 @forelse ($news as $item)
-                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')->name" :title="$item->title" :desc="strip_tags($item->excerpt)"
-                        :url="route('news.show', ['post' => $item->slug])" />
+                    <x-search.item :imageurl="$item->getFirstMediaUrl('featured_image')" :alt="$item->getFirstMedia('featured_image')?->name ?? strip_tags((string) $item->title)" :title="$item->title" :desc="strip_tags($item->excerpt)"
+                        :url="route('news.show', ['locale' => $resultLocale, 'post' => $item->slug])" />
                 @empty
                     <x-placeholder.empty class:text="~text-lg/2xl" class:icon="~size-14/24"
                         text="{{ __('status.empty') }}" />
@@ -78,16 +78,12 @@
             </x-search.item-group>
 
             {{-- product --}}
-            <x-search.item-group title="{{ __('nav.product') }}" :showReadmore="count($products) > 3"
-                readmoreRoute="{{ route('news', ['keyword' => request('query')]) }}">
+            <x-search.item-group title="{{ __('nav.product') }}" :showReadmore="$hasMoreProducts"
+                readmoreRoute="{{ route('product', ['locale' => $resultLocale, 'keyword' => $query]) }}#product-grid">
 
                 @forelse ($products as $item)
-                    <x-search.item class:image="h-full" :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')->name" :title="$item->name"
-                        :desc="$item->description" :url="route('product', [
-                            '#product-grid',
-                            'keyword' => $item->name,
-                            'brand' => $item->brand->slug,
-                        ])" />
+                    <x-search.item class:image="h-full" :imageurl="$item->getFirstMediaUrl('packaging')" :alt="$item->getFirstMedia('packaging')?->name ?? $item->fullname" :title="$item->name"
+                        :desc="$item->description" :url="route('product', ['locale' => $resultLocale, 'product' => $item->slug]) . '#product-grid'" />
                 @empty
                     <x-placeholder.empty class:text="~text-lg/2xl" class:icon="~size-14/24"
                         text="{{ __('status.empty') }}" />
