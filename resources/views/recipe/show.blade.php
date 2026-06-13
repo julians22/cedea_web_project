@@ -34,7 +34,8 @@
     ])>
         @if ($recipe->product)
             <div class="flex w-full flex-col items-center gap-y-4">
-                <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}" alt="">
+                <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}"
+                    alt="{{ $recipe->product->fullname }} untuk resep {{ strip_tags((string) $recipe->title) }}">
                 <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
                     target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
 

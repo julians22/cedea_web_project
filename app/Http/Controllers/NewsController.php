@@ -75,15 +75,14 @@ class NewsController extends Controller
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle(strip_tags((string) $post->title))
-            ->setCanonical(env('APP_URL').'/news/'.$post->slug);
+        Meta::prependTitle(strip_tags((string) $post->title));
 
         $og
             ->setType('website')
             ->setSiteName(env('APP_NAME'))
             ->setTitle($title)
             ->setDescription($description)
-            ->setUrl(env('APP_URL').'/news/'.$post->slug)
+            ->setUrl($url)
             ->addImage($image)
             ->setLocale($locale)
             ->addAlternateLocale($alternateLocale);

@@ -118,10 +118,10 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
 
     public function toSitemapTag(): Url|string|array
     {
-        return Url::create(route('product', $this))
+        return Url::create(route('product', ['product' => $this->slug]))
             ->setLastModificationDate(Carbon::create($this->updated_at))
-            ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
-            ->setPriority(0.1);
+            ->setChangeFrequency(Url::CHANGE_FREQUENCY_MONTHLY)
+            ->setPriority(0.7);
     }
 
     /**

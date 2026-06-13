@@ -26,15 +26,14 @@ class RecipeController extends Controller
         $alternateLocale = 'en_US';
 
         Meta::setDescription($description);
-        Meta::prependTitle(strip_tags((string) $recipe->title))
-            ->setCanonical(env('APP_URL').'/recipe/'.$recipe->slug);
+        Meta::prependTitle(strip_tags((string) $recipe->title));
 
         $og
             ->setType('website')
             ->setSiteName(env('APP_NAME'))
             ->setTitle($title)
             ->setDescription($description)
-            ->setUrl(env('APP_URL').'/recipe/'.$recipe->slug)
+            ->setUrl($url)
             ->addImage($image)
             ->setLocale($locale)
             ->addAlternateLocale($alternateLocale);

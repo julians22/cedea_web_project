@@ -1,0 +1,35 @@
+@php
+    $currentRoute = request()->route();
+    $routeName = $currentRoute?->baseName();
+
+    if ($routeName) {
+        $routeParameters = collect($currentRoute->parameters())
+            ->except('locale')
+            ->all();
+
+        if ($routeName === 'product' && request()->filled('product')) {
+            $routeParameters['product'] = request()->string('product')->toString();
+        }
+
+        $localizedUrls = collect(\NielsNumbers\LaravelLocalizer\Facades\Localizer::supportedLocales())
+            ->mapWithKeys(fn (string $locale) => [
+                $locale => route($routeName, [...$routeParameters, 'locale' => $locale]),
+            ]);
+
+        $canonicalUrl = $localizedUrls->get(app()->getLocale(), url()->current());
+
+        \Butschster\Head\Facades\Meta::setCanonical($canonicalUrl);
+
+        if ($routeName === 'search') {
+            \Butschster\Head\Facades\Meta::setRobots('noindex, follow');
+        }
+
+        foreach ($localizedUrls as $locale => $url) {
+            \Butschster\Head\Facades\Meta::setHrefLang($locale, $url);
+        }
+
+        if ($defaultUrl = $localizedUrls->get(config('app.locale'))) {
+            \Butschster\Head\Facades\Meta::setHrefLang('x-default', $defaultUrl);
+        }
+    }
+@endphp

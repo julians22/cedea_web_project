@@ -122,6 +122,7 @@
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-ful aspect-square object-contain object-center lg:cursor-pointer"
                                         src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
+                                        alt="{{ $item->fullname }} - produk {{ $item->brand->name }}"
                                         @click="()=>{
                                             if(width<=1024) return
                                             modalOpen=true;
@@ -143,7 +144,7 @@
                                     class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
                                     <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
-                                        alt="">
+                                        alt="Logo {{ $item->brand->name }}">
 
                                     <div class="text-pretty text-cedea-red-dark">
                                         {{ $item->fullname }}
@@ -191,7 +192,8 @@
 
                     <div class="mt-8 flex gap-6 max-lg:flex-col">
                         <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
-                            <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}" alt="">
+                            <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}"
+                                alt="{{ $activeProduct->fullname }} - produk {{ $activeProduct->brand->name }}">
                             <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
                                 target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                         </div>

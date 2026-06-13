@@ -2,7 +2,8 @@
     <section class="bg-cedea-red text-white">
         <div class="container py-12">
             <figure class="mb-8">
-                <img src="{{ $post->getFirstMediaUrl('featured_image') }}" alt="">
+                <img src="{{ $post->getFirstMediaUrl('featured_image') }}"
+                    alt="{{ strip_tags((string) $post->title) }}">
                 <figcaption class="caption leading-loose ~text-xxs/xs ~pt-2/4">
                     {{ $post->featured_image_caption }}
                 </figcaption>

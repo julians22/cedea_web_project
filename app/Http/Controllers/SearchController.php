@@ -13,7 +13,6 @@ use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Route;
 use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
-use Symfony\Component\DomCrawler\Crawler;
 
 class SearchController extends Controller
 {
@@ -24,12 +23,7 @@ class SearchController extends Controller
         $response = Http::withOptions([
             'verify' => false,
         ])->get($url);
-        $html_content = $response->getBody()->getContents();
-
-        $crawler = new Crawler($html_content);
-
-        // Extract specific text using XPath or CSS selector
-        $title = $crawler->filter('title')->text();
+        $html_content = $response->body();
         // Remove <header> tags and their contents from the HTML content
         $html_content = preg_replace('/<header.*?>.*?<\/header>/s', '', $html_content);
         // Remove <script> tags and their contents from the HTML content
@@ -37,10 +31,8 @@ class SearchController extends Controller
         // Remove <style> tags and their contents from the HTML content
         $html_content = preg_replace('/<style.*?>.*?<\/style>/s', '', $html_content);
         $html_content = strip_tags($html_content);
-        $crawler = new Crawler($html_content);
-        $articleText = $crawler->filter('body')->text();
 
-        return $articleText;
+        return trim(preg_replace('/\s+/', ' ', $html_content));
     }
 
     private function scrapeRoutesAndFind($lang, $keyword)

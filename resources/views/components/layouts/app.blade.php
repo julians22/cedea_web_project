@@ -3,6 +3,7 @@
 
 <head>
 
+    <x-seo-meta />
     @meta_tags
 
     <!-- Fonts -->
