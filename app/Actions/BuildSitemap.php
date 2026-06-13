@@ -8,17 +8,45 @@ use App\Models\Products\Product;
 use Illuminate\Support\Carbon;
 use NielsNumbers\LaravelLocalizer\Facades\Localizer;
 use Spatie\Sitemap\Sitemap;
+use Spatie\Sitemap\SitemapIndex;
 use Spatie\Sitemap\Tags\Url;
 
 class BuildSitemap
 {
+    private const SITEMAP_FILES = [
+        'pages' => 'sitemap_pages.xml',
+        'products' => 'sitemap_products.xml',
+        'news' => 'sitemap_news.xml',
+        'recipes' => 'sitemap_recipes.xml',
+    ];
+
     /**
      * Build the sitemap.
      */
     public function build(): void
     {
-        $sitemap = Sitemap::create();
+        $sitemaps = [
+            'pages' => $this->buildPagesSitemap(),
+            'products' => $this->buildProductsSitemap(),
+            'news' => $this->buildNewsSitemap(),
+            'recipes' => $this->buildRecipesSitemap(),
+        ];
 
+        $index = SitemapIndex::create();
+
+        foreach ($sitemaps as $type => $sitemap) {
+            $filename = self::SITEMAP_FILES[$type];
+
+            $sitemap->writeToFile(public_path($filename));
+            $index->add(url($filename));
+        }
+
+        $index->writeToFile(public_path('sitemap.xml'));
+    }
+
+    private function buildPagesSitemap(): Sitemap
+    {
+        $sitemap = Sitemap::create();
         $staticRoutes = [
             ['home', Url::CHANGE_FREQUENCY_YEARLY, 1.0],
             ['about', Url::CHANGE_FREQUENCY_YEARLY, 0.8],
@@ -34,16 +62,29 @@ class BuildSitemap
             $this->addLocalizedRoute($sitemap, $routeName, [], null, $changeFrequency, $priority);
         }
 
-        PostRecipes::query()
-            ->where('published', true)
-            ->eachById(fn (PostRecipes $recipe) => $this->addLocalizedRoute(
+        return $sitemap;
+    }
+
+    private function buildProductsSitemap(): Sitemap
+    {
+        $sitemap = Sitemap::create();
+
+        Product::query()
+            ->eachById(fn (Product $product) => $this->addLocalizedRoute(
                 $sitemap,
-                'recipe.show',
-                ['recipe' => $recipe->slug],
-                $recipe->updated_at,
-                Url::CHANGE_FREQUENCY_YEARLY,
+                'product',
+                ['product' => $product->slug],
+                $product->updated_at,
+                Url::CHANGE_FREQUENCY_MONTHLY,
                 0.7,
             ));
+
+        return $sitemap;
+    }
+
+    private function buildNewsSitemap(): Sitemap
+    {
+        $sitemap = Sitemap::create();
 
         PostNews::query()
             ->where('published', true)
@@ -56,17 +97,25 @@ class BuildSitemap
                 0.7,
             ));
 
-        Product::query()
-            ->eachById(fn (Product $product) => $this->addLocalizedRoute(
+        return $sitemap;
+    }
+
+    private function buildRecipesSitemap(): Sitemap
+    {
+        $sitemap = Sitemap::create();
+
+        PostRecipes::query()
+            ->where('published', true)
+            ->eachById(fn (PostRecipes $recipe) => $this->addLocalizedRoute(
                 $sitemap,
-                'product',
-                ['product' => $product->slug],
-                $product->updated_at,
-                Url::CHANGE_FREQUENCY_MONTHLY,
+                'recipe.show',
+                ['recipe' => $recipe->slug],
+                $recipe->updated_at,
+                Url::CHANGE_FREQUENCY_YEARLY,
                 0.7,
             ));
 
-        $sitemap->writeToFile(public_path('sitemap.xml'));
+        return $sitemap;
     }
 
     /**

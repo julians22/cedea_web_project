@@ -41,27 +41,43 @@ it('prevents search result pages from being indexed', function () {
         ->assertSee('name="robots" content="noindex, follow"', false);
 });
 
-it('builds a multilingual sitemap with only published editorial content', function () {
+it('builds a multilingual sitemap index with separated sitemap files', function () {
     (new BuildSitemap)->build();
 
-    $sitemap = file_get_contents(public_path('sitemap.xml'));
+    $index = file_get_contents(public_path('sitemap.xml'));
+    $pages = file_get_contents(public_path('sitemap_pages.xml'));
+    $products = file_get_contents(public_path('sitemap_products.xml'));
+    $news = file_get_contents(public_path('sitemap_news.xml'));
+    $recipes = file_get_contents(public_path('sitemap_recipes.xml'));
 
-    expect($sitemap)
+    expect($index)
+        ->toContain('<sitemapindex')
+        ->toContain(url('sitemap_pages.xml'))
+        ->toContain(url('sitemap_products.xml'))
+        ->toContain(url('sitemap_news.xml'))
+        ->toContain(url('sitemap_recipes.xml'))
+        ->not->toContain('<urlset');
+
+    expect($pages)
         ->toContain(route('about'))
         ->toContain(route('about', ['locale' => 'en']))
         ->toContain(route('news'))
-        ->toContain('hreflang="x-default"')
-        ->not->toContain('sitemap_news.xml')
-        ->not->toContain('sitemap_recipes.xml');
+        ->toContain('hreflang="x-default"');
+
+    expect($products)
+        ->toContain(route('product', [
+            'product' => \App\Models\Products\Product::query()->firstOrFail()->slug,
+        ]))
+        ->toContain('hreflang="en"');
 
     PostNews::query()->where('published', false)->each(
-        fn (PostNews $post) => expect($sitemap)->not->toContain(
+        fn (PostNews $post) => expect($news)->not->toContain(
             route('news.show', ['post' => $post->slug]),
         ),
     );
 
     PostRecipes::query()->where('published', false)->each(
-        fn (PostRecipes $recipe) => expect($sitemap)->not->toContain(
+        fn (PostRecipes $recipe) => expect($recipes)->not->toContain(
             route('recipe.show', ['recipe' => $recipe->slug]),
         ),
     );
