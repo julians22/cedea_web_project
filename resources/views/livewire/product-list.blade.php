@@ -8,7 +8,7 @@
         if ({{ $productSlug ? 'true' : 'false' }}) {
             document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' })
         }
-    })" x-data="{ modalOpen: {{ $productSlug ? 'true' : 'false' }}, }"
+    })" x-data="productCatalog({{ $productSlug ? 'true' : 'false' }})"
         x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
@@ -114,7 +114,11 @@
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <li class="relative flex flex-col gap-8" data-product-item x-data="hover"
+                        <li class="relative flex flex-col gap-8" data-product-item
+                            data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
+                            data-item-brand="{{ $item->brand->name }}"
+                            data-item-category="{{ $item->categories->first()?->name }}"
+                            data-item-index="{{ ($products->firstItem() ?? 1) + $loop->index - 1 }}" x-data="hover"
                             @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()">
                             <div class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
                                 wire:key='{{ $item->slug }}'>
@@ -126,7 +130,7 @@
                                         @click="()=>{
                                             if(width<=1024) return
                                             modalOpen=true;
-                                            handleProductClick('{{ $item->fullname }}');
+                                            trackProductSelection($el.closest('[data-product-item]').dataset);
                                             $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                             }">
                                 </div>
@@ -137,7 +141,7 @@
                                 x-show="hoverCardHovered" x-transition x-cloak
                                 @click="()=>{
                                     modalOpen=true;
-                                    handleProductClick('{{ $item->fullname }}');
+                                    trackProductSelection($el.closest('[data-product-item]').dataset);
                                     $wire.handleChangeActiveProduct('{{ $item->slug }}');
                                     }">
                                 <div
@@ -186,65 +190,71 @@
 
             <div class="pr-2 text-white" wire:loading.remove wire:target='handleChangeActiveProduct'>
                 @if ($activeProduct)
-                    <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
-                    <h2 class="mt-2 uppercase ~text-xl/4xl">
-                        {{ implode(' ', [$activeProduct->name, $activeProduct->size]) }}</h2>
+                    <div data-active-product data-item-id="{{ $activeProduct->slug }}"
+                        data-item-name="{{ $activeProduct->fullname }}"
+                        data-item-brand="{{ $activeProduct->brand->name }}"
+                        data-item-category="{{ $activeProduct->categories->first()?->name }}"
+                        x-init="$nextTick(() => trackProductView($el.dataset))">
+                        <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
+                        <h2 class="mt-2 uppercase ~text-xl/4xl">
+                            {{ implode(' ', [$activeProduct->name, $activeProduct->size]) }}</h2>
 
-                    <div class="mt-8 flex gap-6 max-lg:flex-col">
-                        <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
-                            <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}"
-                                alt="{{ $activeProduct->fullname }} - produk {{ $activeProduct->brand->name }}">
-                            <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
-                        </div>
-
-                        <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
-                            <div>{!! $activeProduct->description !!}</div>
-
-                            <div>
-                                {{ $activeProduct->no_bpom }}
+                        <div class="mt-8 flex gap-6 max-lg:flex-col">
+                            <div class="flex basis-1/5 flex-col items-center justify-center gap-y-4">
+                                <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}"
+                                    alt="{{ $activeProduct->fullname }} - produk {{ $activeProduct->brand->name }}">
+                                <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
+                                    target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                             </div>
 
-                            @if ($activeProduct->packaging)
-                                <div class="overflow-x-auto">
-                                    <table class="table">
-                                        {{-- <thead class="invisible">
+                            <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
+                                <div>{!! $activeProduct->description !!}</div>
+
+                                <div>
+                                    {{ $activeProduct->no_bpom }}
+                                </div>
+
+                                @if ($activeProduct->packaging)
+                                    <div class="overflow-x-auto">
+                                        <table class="table">
+                                            {{-- <thead class="invisible">
                                                 <tr>
                                                     <th>Unit</th>
                                                     <th>size</th>
                                                 </tr>
                                             </thead> --}}
 
-                                        <tbody>
-                                            @foreach ($activeProduct->packaging as $package)
-                                                <tr class="table-row">
-                                                    <td>{{ $package['unit'] }}&nbsp;</td>
-                                                    <td>:&nbsp;{{ $package['size'] }}</td>
-                                                </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
+                                            <tbody>
+                                                @foreach ($activeProduct->packaging as $package)
+                                                    <tr class="table-row">
+                                                        <td>{{ $package['unit'] }}&nbsp;</td>
+                                                        <td>:&nbsp;{{ $package['size'] }}</td>
+                                                    </tr>
+                                                @endforeach
+                                            </tbody>
+                                        </table>
+                                    </div>
+                                @endif
+
+                                <div>
+                                    {{ __('product.froze') }}
+                                </div>
+
+                            </div>
+
+                            @if ($activeProduct->have_video)
+                                <div class="flex basis-2/5 flex-col items-center gap-y-4">
+                                    <template x-if="modalOpen">
+                                        <div class="relative aspect-video w-full overflow-hidden rounded-lg">
+                                            <x-matinee::embed :data="$activeProduct->video" />
+                                        </div>
+                                    </template>
+                                    <a class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black"
+                                        target="_blank" href="{{ $activeProduct->video['url'] }}">Tonton
+                                        videonya</a>
                                 </div>
                             @endif
-
-                            <div>
-                                {{ __('product.froze') }}
-                            </div>
-
                         </div>
-
-                        @if ($activeProduct->have_video)
-                            <div class="flex basis-2/5 flex-col items-center gap-y-4">
-                                <template x-if="modalOpen">
-                                    <div class="relative aspect-video w-full overflow-hidden rounded-lg">
-                                        <x-matinee::embed :data="$activeProduct->video" />
-                                    </div>
-                                </template>
-                                <a class="w-fit rounded-full bg-white bg-gradient-radial from-[#fdd000] to-[#fdb400] to-50% px-8 py-1 text-sm font-semibold uppercase text-black"
-                                    target="_blank" href="{{ $activeProduct->video['url'] }}">Tonton
-                                    videonya</a>
-                            </div>
-                        @endif
                     </div>
                 @endif
             </div>
@@ -328,6 +338,53 @@
         } = window.Motion
 
 
+        Alpine.data('productCatalog', (initialModalOpen) => ({
+            modalOpen: initialModalOpen,
+            viewedProductId: null,
+            width: window.innerWidth,
+            height: window.innerHeight,
+            analyticsItem(product) {
+                const item = {
+                    item_id: product.itemId,
+                    item_name: product.itemName,
+                    item_list_id: 'product_catalog',
+                    item_list_name: 'Product Catalog',
+                };
+
+                if (product.itemBrand) item.item_brand = product.itemBrand;
+                if (product.itemCategory) item.item_category = product.itemCategory;
+
+                const index = Number(product.itemIndex);
+                if (Number.isFinite(index)) item.index = index;
+
+                return item;
+            },
+            trackProductSelection(product) {
+                if (typeof window.gtag !== 'function') return;
+
+                const item = this.analyticsItem(product);
+
+                window.gtag('event', 'select_item', {
+                    item_list_id: item.item_list_id,
+                    item_list_name: item.item_list_name,
+                    items: [item],
+                });
+            },
+            trackProductView(product) {
+                if (this.viewedProductId === product.itemId || typeof window.gtag !== 'function') return;
+
+                this.viewedProductId = product.itemId;
+
+                window.gtag('event', 'view_item', {
+                    items: [this.analyticsItem(product)],
+                });
+            },
+            closeProductModal() {
+                this.modalOpen = false;
+                this.viewedProductId = null;
+            },
+        }))
+
         Alpine.data('hover', () => ({
             hoverCardHovered: false,
             hoverCardDelay: 100,
@@ -349,16 +406,7 @@
                 this.hoverCardLeaveTimeout = setTimeout(() => {
                     this.hoverCardHovered = false;
                 }, this.hoverCardLeaveDelay);
-            },
-            handleProductClick(name) {
-                @production
-                gtag('event', 'product_show', {
-                    'event_category': 'Product',
-                    'event_label': 'Product Popup',
-                    'value': name
-                });
-            @endproduction
-        }
+            }
         }))
 
         $wire.on('animate-product-list', () => {
