@@ -3,7 +3,7 @@
 }">
 
     <button class="flex items-center gap-1 uppercase" @click="dropdownOpen=true">
-        {{ LaravelLocalization::getCurrentLocale() }}
+        {{ app()->getLocale() }}
         <span class="size-4 flex gap-2 transition-transform duration-700" :class="{ '-rotate-180': dropdownOpen }">
             <x-lucide-chevron-down />
         </span>
@@ -16,10 +16,10 @@
 
         <ul class="mt-1 rounded-md border border-neutral-200/70 bg-white p-1 text-sm text-neutral-700 shadow-md">
 
-            @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+            @foreach (config('localizer.locale_names') as $localeCode => $localeName)
                 <a class="group relative flex w-full select-none items-center justify-between rounded px-2 py-1.5 uppercase outline-none hover:bg-neutral-100 hover:text-neutral-900 data-[disabled]:pointer-events-none data-[disabled]:opacity-50"
                     rel="alternate" hreflang="{{ $localeCode }}"
-                    href="{{ LaravelLocalization::getLocalizedURL($localeCode, null, [], true) }}">
+                    href="{{ Route::localizedSwitcherUrl($localeCode) }}">
                     <span>{{ $localeCode }}</span>
                     {{-- <span
                         class="ml-auto text-xs tracking-widest text-neutral-400 group-hover:text-neutral-600">⌘T</span> --}}

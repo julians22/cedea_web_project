@@ -15,6 +15,13 @@ $app = new Illuminate\Foundation\Application(
     $_ENV['APP_BASE_PATH'] ?? dirname(__DIR__)
 );
 
+$app->beforeBootstrapping(
+    Illuminate\Foundation\Bootstrap\RegisterProviders::class,
+    function (Illuminate\Foundation\Application $app): void {
+        $app->register(NielsNumbers\LaravelLocalizer\ServiceProvider::class);
+    }
+);
+
 /*
 |--------------------------------------------------------------------------
 | Bind Important Interfaces

@@ -1,7 +1,6 @@
 <?php
 
 use App\Http\Controllers\AboutController;
-use App\Http\Controllers\LocaleController;
 use App\Http\Controllers\MarketplaceController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\Pages\HomeController;
@@ -13,11 +12,8 @@ use App\Livewire\Frontend\ProductList;
 use App\Livewire\RecipeList;
 use App\Mail\ContactMail;
 use App\Models\Message;
-use Embed\Embed;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Support\Facades\Route;
-use Livewire\Livewire;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
 
 /*
 |--------------------------------------------------------------------------
@@ -34,10 +30,7 @@ if (env('RTE_CAMPAIGN', false)) {
     Route::redirect('eomuk-bar-chill-in-seoul', 'https://eomuk-bar-rte.cedeaseafood.com?source=packaging')->name('redirect-eomuk-bar-chill-in-seoul');
 }
 
-Route::group([
-    'prefix' => LaravelLocalization::setLocale(),
-    'middleware' => ['localeSessionRedirect', 'localizationRedirect', 'localeViewPath'],
-], function () {
+Route::localize(function () {
     Route::get('/', HomeController::class)
         ->name('home');
 

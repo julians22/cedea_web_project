@@ -5,6 +5,7 @@ namespace App\Providers;
 use BezhanSalleh\FilamentLanguageSwitch\LanguageSwitch;
 use Filament\Forms\Components\DateTimePicker;
 use Illuminate\Support\ServiceProvider;
+use NielsNumbers\LaravelLocalizer\Facades\Localizer;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -21,6 +22,8 @@ class AppServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
+        Localizer::setActiveDefaultLocale(config('app.locale'));
+
         LanguageSwitch::configureUsing(function (LanguageSwitch $switch) {
             $switch
                 ->locales([

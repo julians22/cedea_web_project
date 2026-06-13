@@ -10,13 +10,10 @@ use Butschster\Head\Packages\Entities\OpenGraphPackage;
 use Butschster\Head\Packages\Entities\TwitterCardPackage;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Http;
-use Illuminate\Support\Facades\Route;
-use Mcamara\LaravelLocalization\Facades\LaravelLocalization;
-use Mcamara\LaravelLocalization\LaravelLocalization as LaravelLocalizationLaravelLocalization;
+use NielsNumbers\LaravelLocalizer\Facades\Localizer;
 
 class SearchController extends Controller
 {
-
     private function scrapePageContent($url)
     {
         // temp fix
@@ -24,6 +21,7 @@ class SearchController extends Controller
             'verify' => false,
         ])->get($url);
         $html_content = $response->body();
+
         // Remove <header> tags and their contents from the HTML content
         $html_content = preg_replace('/<header.*?>.*?<\/header>/s', '', $html_content);
         // Remove <script> tags and their contents from the HTML content
@@ -47,11 +45,12 @@ class SearchController extends Controller
         ];
 
         foreach ($route_name_list as $name) {
-            $locales = ($lang === '*') ? LaravelLocalization::getSupportedLanguagesKeys() : [$lang];
+            $locales = ($lang === '*') ? Localizer::supportedLocales() : [$lang];
             foreach ($locales as $locale) {
-                if (!array_key_exists($name, $scrape_results)) {
+                if (! array_key_exists($name, $scrape_results)) {
                     $route = route($name);
-                    $result = $this->scrapePageContent(LaravelLocalization::getLocalizedURL($locale, $route));
+                    $localizedRoute = route($name, ['locale' => $locale]);
+                    $result = $this->scrapePageContent($localizedRoute);
                     if (stripos($result, $keyword) !== false) {
                         $scrape_results = array_merge($scrape_results, [$name => $route]);
                     }
@@ -62,15 +61,12 @@ class SearchController extends Controller
         return $scrape_results;
     }
 
-
     public function __invoke(Request $request)
     {
 
-
-
         // Determine the language to use based on the request input
         // If the requested language is supported, use it; otherwise, use the default '*'
-        $lang = array_key_exists($request->input('lang'), LaravelLocalization::getSupportedLocales())
+        $lang = Localizer::isSupported($request->input('lang'))
             ? $request->input('lang')
             : '*';
 
@@ -80,8 +76,8 @@ class SearchController extends Controller
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $title = strip_tags($query) . ' - ' . env('APP_NAME');
-        $description = 'search result for: ' . strip_tags($query);
+        $title = strip_tags($query).' - '.env('APP_NAME');
+        $description = 'search result for: '.strip_tags($query);
         $url = route('search', ['query' => $query]);
         $image = asset('img/mutu.jpg');
         $locale = 'id_ID';
@@ -107,7 +103,6 @@ class SearchController extends Controller
 
         Meta::registerPackage($og);
         Meta::registerPackage($twitter_card);
-
 
         $news = PostNews::search('slug', $query)->searchTranslated('title', $query, $lang)->limit(3)->with(['media'])->get();
         $recipes = PostRecipes::searchTranslated('title', $query, $lang)->limit(3)->with(['media'])->get();

@@ -35,13 +35,13 @@
                     'bg-cedea-red-500 text-white' => $lang == '*',
                     'bg-white border-2 text-black' => $lang != '*',
                 ]) href="{{ request()->fullUrlWithQuery(['lang' => null]) }}">All</a>
-                @foreach (LaravelLocalization::getSupportedLocales() as $localeCode => $properties)
+                @foreach (config('localizer.locale_names') as $localeCode => $localeName)
                     <a @class([
                         'rounded-full px-3 py-1 flex items-center justify-center',
                         'bg-cedea-red-500 text-white' => $lang == $localeCode,
                         'bg-white border-2 text-black' => $lang != $localeCode,
                     ])
-                        href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }} ">{{ $properties['native'] }}</a>
+                        href="{{ request()->fullUrlWithQuery(['lang' => $localeCode]) }} ">{{ $localeName }}</a>
                 @endforeach
             </div>
 
