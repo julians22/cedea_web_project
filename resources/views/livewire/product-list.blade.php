@@ -27,7 +27,7 @@
 
                 <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
-                    @foreach ($this->brandWithUniqueCategories as $brand)
+                    @foreach ($this->brands as $brand)
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~border-4/2 ~p-2/5"
                             type="button" wire:key='{{ $brand->slug }}'
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
@@ -59,7 +59,7 @@
                 </div>
 
                 <div class="flex flex-col gap-y-4 uppercase">
-                    @foreach ($this->brandWithUniqueCategories as $brand)
+                    @foreach ($this->brands as $brand)
                         <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
                             <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')"
                                 @class([

@@ -2,18 +2,17 @@
 
 namespace App\Models\Products;
 
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
-use Illuminate\Database\Eloquent\Relations\HasManyThrough;
 use Spatie\Sluggable\HasSlug;
-use Spatie\Sluggable\HasTranslatableSlug;
 use Spatie\Sluggable\SlugOptions;
 use Spatie\Translatable\HasTranslations;
 
 class ProductCategory extends Model
 {
-    use HasFactory, HasTranslations, HasSlug;
+    use HasFactory, HasSlug, HasTranslations;
 
     public $translatable = ['name'];
 
@@ -50,13 +49,24 @@ class ProductCategory extends Model
         return $this->belongsToMany(Product::class);
     }
 
-    /**
-     * Get all of the brands for the Category
-     *
-     * @return \Illuminate\Database\Eloquent\Relations\HasManyThrough
-     */
-    public function brands(): HasManyThrough
+    public function scopeForProductCatalog(Builder $query): Builder
     {
-        return $this->hasManyThrough(Brand::class, Product::class);
+        return $query
+            ->select([
+                'product_categories.id',
+                'product_categories.name',
+                'product_categories.slug',
+                'product_categories.order_column',
+                'products.brand_id',
+            ])
+            ->join(
+                'product_product_category',
+                'product_categories.id',
+                '=',
+                'product_product_category.product_category_id',
+            )
+            ->join('products', 'products.id', '=', 'product_product_category.product_id')
+            ->distinct()
+            ->orderBy('product_categories.order_column');
     }
 }

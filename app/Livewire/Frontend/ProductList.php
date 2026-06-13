@@ -18,11 +18,7 @@ class ProductList extends Component
 {
     use WithPagination;
 
-    public $brands;
-
-    public $allCategories;
-
-    public $activeBrandName;
+    public string $activeBrandName = '';
 
     #[Url(as: 'product', except: null)]
     public ?string $productSlug = null;
@@ -39,6 +35,7 @@ class ProductList extends Component
     public function updating($property)
     {
         if (in_array($property, ['activeBrand', 'activeCategory', 'keyword'])) {
+            $this->resetPage();
             $this->animateProductList();
         }
     }
@@ -48,22 +45,12 @@ class ProductList extends Component
         $this->animateProductList();
     }
 
-    private function handleArrayDiffing(string $value, array &$array)
-    {
-        if (! in_array($value, $array)) {
-            $array = array_merge($array, [$value]);
-        } else {
-            $array = array_diff($array, [$value]);
-        }
-        $this->resetPage();
-    }
-
     private function setMetaData()
     {
         $og = new OpenGraphPackage('open graph');
         $twitter_card = new TwitterCardPackage('twitter');
 
-        $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
+        $this->activeBrandName = $this->activeBrandModel()?->name ?? '';
 
         $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
         $description = 'Temukan beragam olahan ikan frozen food halal di Cedea Seafood. Produk berkualitas tinggi yang praktis dan lezat untuk menu harian Anda.';
@@ -108,14 +95,10 @@ class ProductList extends Component
 
     public function mount()
     {
+        $firstBrand = $this->brands->first();
 
-        $this->allCategories = ProductCategory::all();
-        $this->brands = Brand::orderBy('order_column')->with(['products.categories', 'media'])->get();
-
-        if (! request('brand')) {
-            if ($this->brands->first()) {
-                $this->activeBrand = $this->brands->first()->slug;
-            }
+        if (! request('brand') && $firstBrand) {
+            $this->activeBrand = $firstBrand->slug;
         }
 
         $this->setMetaData();
@@ -125,7 +108,7 @@ class ProductList extends Component
     public function handleChangeActiveBrand($slug)
     {
         $this->activeBrand = $slug;
-        $this->activeBrandName = $this->brands->firstWhere('slug', $this->activeBrand)->name ?? '';
+        $this->activeBrandName = $this->activeBrandModel()?->name ?? '';
         $this->reset('activeCategory');
         $this->updateTitle();
         $this->animateProductList();
@@ -147,50 +130,83 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    #[Computed()]
-    public function brandWithUniqueCategories()
+    #[Computed]
+    public function brands()
     {
-        foreach ($this->brands as $brand) {
-            // Flatten the categories collections and get unique categories
-            $uniqueCategories = $brand->products->pluck('categories')->flatten()->unique('id');
+        $brands = Brand::query()
+            ->forProductCatalog()
+            ->get();
 
-            // Now you have unique categories for the brand
-            // You can assign it to the brand or use it as needed
-            $brand->uniqueCategories = $uniqueCategories->sortBy('name');
-        }
+        $categoriesByBrand = ProductCategory::query()
+            ->forProductCatalog()
+            ->get()
+            ->groupBy('brand_id');
 
-        return $this->brands;
+        return $brands->each(function (Brand $brand) use ($categoriesByBrand): void {
+            $brand->setRelation('uniqueCategories', $categoriesByBrand
+                ->get($brand->id, collect())
+                ->unique('id')
+                ->values());
+        });
     }
 
     public function render()
     {
+        $activeBrand = $this->activeBrandModel();
+        $keyword = trim($this->keyword);
+
+        $products = Product::query()
+            ->forCatalogListing()
+            ->when(
+                $this->activeBrand,
+                fn (Builder $query) => $query->forBrand($activeBrand?->id),
+            )
+            ->when(
+                $this->activeCategory !== 'all',
+                fn (Builder $query) => $query->whereHas(
+                    'categories',
+                    fn (Builder $categoryQuery) => $categoryQuery->where('slug', $this->activeCategory),
+                ),
+            )
+            ->searchCatalogName($keyword)
+            ->orderBy('order_column')
+            ->paginate(6);
+
+        if ($activeBrand) {
+            $products->getCollection()->each(
+                fn (Product $product) => $product->setRelation('brand', $activeBrand),
+            );
+        }
+
         return view('livewire.product-list', [
-            'products' => Product::with(['media', 'brand', 'categories'])
-                ->when(
-                    $this->activeBrand,
-                    function ($q) {
-                        return $q->whereRelation('brand', 'slug', $this->activeBrand);
-                    }
-                )
-                ->when(
-                    $this->activeCategory !== 'all',
-                    function ($q) {
-                        return $q->whereHas('categories', function (Builder $query) {
-                            $query->where('slug', $this->activeCategory);
-                        });
-                    }
-                )
-                ->when(
-                    $this->keyword,
-                    function ($q) {
-                        return $q->whereRaw('LOWER(name) like "%'.strtolower($this->keyword).'%"');
-                    }
-                )
-                ->orderBy('order_column', 'asc')
-                ->paginate(6),
-
-            'activeProduct' => Product::findBySlug($this->productSlug ?? ''),
-
+            'products' => $products,
+            'activeProduct' => $this->activeProduct(),
         ]);
+    }
+
+    private function activeBrandModel(): ?Brand
+    {
+        return $this->brands->firstWhere('slug', $this->activeBrand);
+    }
+
+    private function activeProduct(): ?Product
+    {
+        if (! $this->productSlug) {
+            return null;
+        }
+
+        $product = Product::findBySlug(
+            $this->productSlug,
+            additionalQuery: fn (Builder $query) => $query->with([
+                'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
+                'categories:id,name,slug',
+            ]),
+        );
+
+        if ($product && $brand = $this->brands->firstWhere('id', $product->brand_id)) {
+            $product->setRelation('brand', $brand);
+        }
+
+        return $product;
     }
 }

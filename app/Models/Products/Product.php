@@ -7,9 +7,11 @@ use App\Observers\ProductObserver;
 use App\Traits\Searchable;
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Attributes\ObservedBy;
+use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Database\Eloquent\Casts\Attribute;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Spatie\EloquentSortable\Sortable;
@@ -95,7 +97,7 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
             ->format('webp');
     }
 
-    public function brand()
+    public function brand(): BelongsTo
     {
         return $this->belongsTo(Brand::class);
     }
@@ -114,6 +116,37 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
     public function recipes(): HasMany
     {
         return $this->hasMany(PostRecipes::class);
+    }
+
+    public function scopeForCatalogListing(Builder $query): Builder
+    {
+        return $query
+            ->select(['id', 'name', 'size', 'slug', 'brand_id', 'order_column'])
+            ->with([
+                'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
+                'categories:id,name,slug',
+            ]);
+    }
+
+    public function scopeForBrand(Builder $query, ?int $brandId): Builder
+    {
+        return $query->where('brand_id', $brandId ?? 0);
+    }
+
+    public function scopeSearchCatalogName(
+        Builder $query,
+        string $keyword,
+        ?string $locale = null,
+    ): Builder {
+        $keyword = trim($keyword);
+
+        if ($keyword === '') {
+            return $query;
+        }
+
+        $locale ??= app()->getLocale();
+
+        return $query->where("name->{$locale}", 'like', "%{$keyword}%");
     }
 
     public function toSitemapTag(): Url|string|array

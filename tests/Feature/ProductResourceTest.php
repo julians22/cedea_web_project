@@ -2,6 +2,7 @@
 
 use App\Livewire\Frontend\ProductList;
 use App\Models\Products\Product;
+use Illuminate\Support\Facades\DB;
 
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
@@ -42,4 +43,61 @@ it('tracks product views opened from a direct link', function () {
         ->assertSee('x-data="productCatalog(true)"', false)
         ->assertSee('data-active-product', false)
         ->assertSee('data-item-id="'.$product->slug.'"', false);
+});
+
+it('uses lightweight queries for the initial product catalog', function () {
+    DB::flushQueryLog();
+    DB::enableQueryLog();
+
+    get(route('product'), ['Accept-Language' => 'id'])
+        ->assertOk();
+
+    $queries = collect(DB::getQueryLog());
+
+    expect($queries->contains(
+        fn (array $query) => str_contains($query['query'], 'where exists')
+            && str_contains($query['query'], 'from `brands`'),
+    ))->toBeFalse()
+        ->and($queries->contains(
+            fn (array $query) => $query['query'] === 'select * from `products` where `slug` = ? limit 1',
+        ))->toBeFalse()
+        ->and($queries->contains(
+            fn (array $query) => str_contains(
+                $query['query'],
+                'select `id`, `name`, `size`, `slug`, `brand_id`, `order_column` from `products`',
+            ),
+        ))->toBeTrue();
+});
+
+it('binds product search terms instead of interpolating raw input', function () {
+    $keyword = "fish%' OR 1=1 --";
+
+    DB::flushQueryLog();
+    DB::enableQueryLog();
+
+    livewire(ProductList::class)
+        ->set('keyword', $keyword)
+        ->assertSuccessful();
+
+    $searchQuery = collect(DB::getQueryLog())->first(
+        fn (array $query) => str_contains($query['query'], 'json_extract')
+            && collect($query['bindings'])->contains("%{$keyword}%"),
+    );
+
+    expect($searchQuery)
+        ->not->toBeNull()
+        ->and($searchQuery['query'])->not->toContain($keyword);
+});
+
+it('keeps brand category and keyword filters working together', function () {
+    $product = Product::query()
+        ->with(['brand', 'categories'])
+        ->whereHas('categories')
+        ->firstOrFail();
+
+    livewire(ProductList::class)
+        ->call('handleChangeActiveBrand', $product->brand->slug)
+        ->set('activeCategory', $product->categories->first()->slug)
+        ->set('keyword', $product->name)
+        ->assertSee($product->fullname);
 });
