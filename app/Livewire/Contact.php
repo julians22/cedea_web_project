@@ -6,9 +6,7 @@ use App\Enums\ContactPurposes;
 use App\Jobs\SendMailJob;
 use App\Models\Message;
 use App\Settings\ContactSettings;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use App\Support\SeoMetadata;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Validation\Rule;
@@ -51,38 +49,14 @@ class Contact extends Component
 
     public $type = null;
 
-    public function mount()
+    public function mount(): void
     {
-        $og = new OpenGraphPackage('open graph');
-        $twitter_card = new TwitterCardPackage('twitter');
-
-        $title = 'Contact - '.env('APP_NAME');
-        $description = 'Tinggalkan Pesan';
-        $url = route('contact');
-        $image = asset('img/mutu.jpg');
-        $locale = 'id_ID';
-        $alternateLocale = 'en_US';
-
-        Meta::setDescription($description);
-        Meta::prependTitle('Contact');
-
-        $og
-            ->setType('website')
-            ->setSiteName(env('APP_NAME'))
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setUrl($url)
-            ->addImage($image)
-            ->setLocale($locale)
-            ->addAlternateLocale($alternateLocale);
-
-        $twitter_card
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setImage($image);
-
-        Meta::registerPackage($og);
-        Meta::registerPackage($twitter_card);
+        SeoMetadata::register(
+            title: __('seo.contact.title'),
+            description: __('seo.contact.description'),
+            url: route('contact'),
+            image: asset('img/mutu.jpg'),
+        );
 
         $this->handleTabChange(app(ContactSettings::class)->enable_inquiry_form ? 0 : 1);
     }
@@ -114,18 +88,15 @@ class Contact extends Component
         $this->tab_index = $index;
     }
 
-    public function rules()
+    public function rules(): array
     {
         $base = [
-            'name' => ['required', 'max:255'],
-            'email' => ['required', 'email', 'max:255'],
-            'phone' => ['required'],
+            'name' => ['required', 'string', 'max:255', 'not_regex:/[\r\n]/'],
+            'email' => ['required', 'string', 'email', 'max:255', 'not_regex:/[\r\n]/'],
+            'phone' => ['required', 'string', 'max:30'],
             'city' => ['required', 'max:255'],
-
-            // TODO: ADD TAG VALIDATION OR SANITIZATION
-            'message' => ['required', 'min:3'],
-
-            'type' => ['required'],
+            'message' => ['required', 'string', 'min:3', 'max:5000'],
+            'type' => ['required', Rule::in(['inquiry', 'visit'])],
         ];
 
         // inquiry
@@ -136,15 +107,15 @@ class Contact extends Component
                 'age' => ['required', Rule::notIn(['0'])],
                 'city' => ['required'],
                 'purpose' => ['required', Rule::enum(ContactPurposes::class)],
-                'subject' => ['required', 'max:255'],
+                'subject' => ['required', 'string', 'max:255', 'not_regex:/[\r\n]/'],
             ]);
         }
         // visit
         else {
             $base = array_merge($base, [
-                'visitor_size' => ['required'],
-                'institution' => ['required'],
-                'proposed_date' => ['required'],
+                'visitor_size' => ['required', 'integer', 'min:1'],
+                'institution' => ['required', 'string', 'max:255'],
+                'proposed_date' => ['required', 'date', 'after_or_equal:today'],
             ]);
         }
 

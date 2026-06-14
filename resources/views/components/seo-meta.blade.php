@@ -11,9 +11,13 @@
             $routeParameters['product'] = request()->string('product')->toString();
         }
 
+        $defaultLocale = \NielsNumbers\LaravelLocalizer\Facades\Localizer::defaultLocale();
+        $hideDefaultLocale = \NielsNumbers\LaravelLocalizer\Facades\Localizer::hideDefaultLocale();
         $localizedUrls = collect(\NielsNumbers\LaravelLocalizer\Facades\Localizer::supportedLocales())
             ->mapWithKeys(fn (string $locale) => [
-                $locale => route($routeName, [...$routeParameters, 'locale' => $locale]),
+                $locale => $locale === $defaultLocale && $hideDefaultLocale
+                    ? route("without_locale.{$routeName}", $routeParameters)
+                    : route($routeName, [...$routeParameters, 'locale' => $locale]),
             ]);
 
         $canonicalUrl = $localizedUrls->get(app()->getLocale(), url()->current());
@@ -28,7 +32,7 @@
             \Butschster\Head\Facades\Meta::setHrefLang($locale, $url);
         }
 
-        if ($defaultUrl = $localizedUrls->get(config('app.locale'))) {
+        if ($defaultUrl = $localizedUrls->get($defaultLocale)) {
             \Butschster\Head\Facades\Meta::setHrefLang('x-default', $defaultUrl);
         }
     }

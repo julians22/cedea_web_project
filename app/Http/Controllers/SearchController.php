@@ -5,9 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
 use App\Models\Products\Product;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use App\Support\SeoMetadata;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Client\ConnectionException;
 use Illuminate\Http\Request;
@@ -97,41 +95,24 @@ class SearchController extends Controller
             ? []
             : $this->scrapeRoutesAndFind($locales, $query);
 
-        $og = new OpenGraphPackage('open graph');
-        $twitter_card = new TwitterCardPackage('twitter');
-
-        $title = ($query !== '' ? strip_tags($query).' - ' : '').config('app.name');
+        $safeQuery = strip_tags($query);
+        $title = $query !== ''
+            ? __('seo.search.title_with_query', ['query' => $safeQuery])
+            : __('seo.search.title');
         $description = $query !== ''
-            ? 'Search results for: '.strip_tags($query)
-            : 'Search '.config('app.name');
+            ? __('seo.search.description_with_query', ['query' => $safeQuery])
+            : __('seo.search.description');
         $url = route('search', array_filter([
             'query' => $query,
             'lang' => $lang !== '*' ? $lang : null,
         ]));
-        $image = asset('img/mutu.jpg');
-        $locale = app()->getLocale() === 'en' ? 'en_US' : 'id_ID';
-        $alternateLocale = app()->getLocale() === 'en' ? 'id_ID' : 'en_US';
 
-        Meta::setDescription($description);
-        Meta::prependTitle('Search Page');
-
-        $og
-            ->setType('website')
-            ->setSiteName(config('app.name'))
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setUrl($url)
-            ->addImage($image)
-            ->setLocale($locale)
-            ->addAlternateLocale($alternateLocale);
-
-        $twitter_card
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setImage($image);
-
-        Meta::registerPackage($og);
-        Meta::registerPackage($twitter_card);
+        SeoMetadata::register(
+            title: $title,
+            description: $description,
+            url: $url,
+            image: asset('img/mutu.jpg'),
+        );
 
         $news = collect();
         $recipes = collect();

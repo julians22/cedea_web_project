@@ -3,6 +3,7 @@
 namespace App\Jobs;
 
 use App\Mail\ContactMail;
+use App\Models\Message;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Foundation\Bus\Dispatchable;
@@ -14,25 +15,10 @@ class SendMailJob implements ShouldQueue
 {
     use Dispatchable, InteractsWithQueue, Queueable, SerializesModels;
 
-    public $data;
+    public function __construct(public Message $data) {}
 
-    /**
-     * Create a new job instance.
-     *
-     * @return void
-     */
-    public function __construct($data)
+    public function handle(): void
     {
-        $this->data = $data;
-    }
-
-    /**
-     * Execute the job.
-     *
-     * @return void
-     */
-    public function handle()
-    {
-        Mail::to(env('MAIL_TO_ADDRESS', 'info@cedeaseafood.com'))->send(new ContactMail($this->data));
+        Mail::to(config('mail.to.address'))->send(new ContactMail($this->data));
     }
 }

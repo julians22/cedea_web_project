@@ -59,6 +59,10 @@ return [
 
     'asset_url' => env('ASSET_URL'),
 
+    'rte_campaign' => (bool) env('RTE_CAMPAIGN', false),
+
+    'show_popup' => (bool) env('SHOW_POPUP', false),
+
     /*
     |--------------------------------------------------------------------------
     | Application Timezone
@@ -96,7 +100,7 @@ return [
     |
     */
 
-    'fallback_locale' => 'en',
+    'fallback_locale' => 'id',
 
     /*
     |--------------------------------------------------------------------------

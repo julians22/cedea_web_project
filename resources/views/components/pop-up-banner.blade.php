@@ -1,4 +1,4 @@
-@if (env('SHOW_POPUP', false))
+@if (config('app.show_popup'))
     <div class="fixed left-0 top-0 z-50 size-full bg-black/50" x-show="visible" x-transition style="display: none;"
         x-data="{
             visible: true,

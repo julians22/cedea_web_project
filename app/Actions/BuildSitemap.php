@@ -129,9 +129,13 @@ class BuildSitemap
         string $changeFrequency = Url::CHANGE_FREQUENCY_MONTHLY,
         float $priority = 0.8,
     ): void {
+        $defaultLocale = Localizer::defaultLocale();
+        $hideDefaultLocale = Localizer::hideDefaultLocale();
         $localizedUrls = collect(Localizer::supportedLocales())
             ->mapWithKeys(fn (string $locale) => [
-                $locale => route($routeName, [...$parameters, 'locale' => $locale]),
+                $locale => $locale === $defaultLocale && $hideDefaultLocale
+                    ? route("without_locale.{$routeName}", $parameters)
+                    : route($routeName, [...$parameters, 'locale' => $locale]),
             ]);
 
         foreach ($localizedUrls as $url) {
@@ -147,7 +151,7 @@ class BuildSitemap
                 $tag->addAlternate($alternateUrl, $alternateLocale);
             }
 
-            if ($defaultUrl = $localizedUrls->get(config('app.locale'))) {
+            if ($defaultUrl = $localizedUrls->get($defaultLocale)) {
                 $tag->addAlternate($defaultUrl, 'x-default');
             }
 

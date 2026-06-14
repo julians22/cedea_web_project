@@ -3,48 +3,24 @@
 namespace App\Http\Controllers;
 
 use App\Models\PostRecipes;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use App\Support\SeoMetadata;
+use Illuminate\Contracts\View\View;
 
 class RecipeController extends Controller
 {
-    public function show(PostRecipes $recipe)
+    public function show(PostRecipes $recipe): View
     {
         if (! $recipe->published) {
             abort(404);
         }
 
-        $og = new OpenGraphPackage('open graph');
-        $twitter_card = new TwitterCardPackage('twitter');
-
-        $title = strip_tags((string) $recipe->title).' - '.env('APP_NAME');
-        $description = strip_tags((string) $recipe->description);
-        $url = route('recipe.show', ['recipe' => $recipe->slug]);
-        $image = $recipe->getFirstMediaUrl('featured_image');
-        $locale = 'id_ID';
-        $alternateLocale = 'en_US';
-
-        Meta::setDescription($description);
-        Meta::prependTitle(strip_tags((string) $recipe->title));
-
-        $og
-            ->setType('website')
-            ->setSiteName(env('APP_NAME'))
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setUrl($url)
-            ->addImage($image)
-            ->setLocale($locale)
-            ->addAlternateLocale($alternateLocale);
-
-        $twitter_card
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setImage($image);
-
-        Meta::registerPackage($og);
-        Meta::registerPackage($twitter_card);
+        SeoMetadata::register(
+            title: (string) $recipe->title,
+            description: (string) $recipe->description,
+            url: route('recipe.show', ['recipe' => $recipe->slug]),
+            image: $recipe->getFirstMediaUrl('featured_image') ?: asset('img/mutu.jpg'),
+            type: 'article',
+        );
 
         return view(
             'recipe.show',

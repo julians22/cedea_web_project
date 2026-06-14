@@ -3,9 +3,7 @@
 namespace App\Livewire;
 
 use App\Models\PostRecipes;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use App\Support\SeoMetadata;
 use Livewire\Attributes\Url;
 use Livewire\Component;
 use Livewire\WithPagination;
@@ -23,38 +21,14 @@ class RecipeList extends Component
     #[Url(as: 'product', except: '')]
     public string $activeProduct = '';
 
-    public function mount()
+    public function mount(): void
     {
-        $og = new OpenGraphPackage('open graph');
-        $twitter_card = new TwitterCardPackage('twitter');
-
-        $title = 'Recipe - '.env('APP_NAME');
-        $description = 'Menghadirkan kesegaran laut dalam setiap gigitan. Jelajahi kekayaan laut dengan rangkaian produk terbaik dari CEDEA Seafood! Mulai dari sarapan pagi hingga malam, temukan tips-tips kuliner yang memikat di setiap sajian.';
-        $url = route('recipe');
-        $image = asset('img/mutu.jpg');
-        $locale = 'id_ID';
-        $alternateLocale = 'en_US';
-
-        Meta::setDescription($description);
-        Meta::prependTitle('Recipe');
-
-        $og
-            ->setType('website')
-            ->setSiteName(env('APP_NAME'))
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setUrl($url)
-            ->addImage($image)
-            ->setLocale($locale)
-            ->addAlternateLocale($alternateLocale);
-
-        $twitter_card
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setImage($image);
-
-        Meta::registerPackage($og);
-        Meta::registerPackage($twitter_card);
+        SeoMetadata::register(
+            title: __('seo.recipes.title'),
+            description: __('seo.recipes.description'),
+            url: route('recipe'),
+            image: asset('img/mutu.jpg'),
+        );
     }
 
     public function handleChangeActiveRecipeType(string $slug)

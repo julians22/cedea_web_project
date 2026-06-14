@@ -5,9 +5,7 @@ namespace App\Livewire\Frontend;
 use App\Models\Products\Brand;
 use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
-use Butschster\Head\Facades\Meta;
-use Butschster\Head\Packages\Entities\OpenGraphPackage;
-use Butschster\Head\Packages\Entities\TwitterCardPackage;
+use App\Support\SeoMetadata;
 use Illuminate\Database\Eloquent\Builder;
 use Livewire\Attributes\Computed;
 use Livewire\Attributes\Url;
@@ -45,46 +43,22 @@ class ProductList extends Component
         $this->animateProductList();
     }
 
-    private function setMetaData()
+    private function setMetaData(): void
     {
-        $og = new OpenGraphPackage('open graph');
-        $twitter_card = new TwitterCardPackage('twitter');
-
         $this->activeBrandName = $this->activeBrandModel()?->name ?? '';
+        $title = trim(__('seo.products.title').' '.$this->activeBrandName);
 
-        $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
-        $description = 'Temukan beragam olahan ikan frozen food halal di Cedea Seafood. Produk berkualitas tinggi yang praktis dan lezat untuk menu harian Anda.';
-        $url = route('product');
-        $image = asset('img/mutu.jpg');
-        $locale = 'id_ID';
-        $alternateLocale = 'en_US';
-
-        Meta::setDescription($description);
-        Meta::prependTitle('Products '.$this->activeBrandName);
-
-        $og
-            ->setType('website')
-            ->setSiteName(env('APP_NAME'))
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setUrl($url)
-            ->addImage($image)
-            ->setLocale($locale)
-            ->addAlternateLocale($alternateLocale);
-
-        $twitter_card
-            ->setTitle($title)
-            ->setDescription($description)
-            ->setImage($image);
-
-        Meta::registerPackage($og);
-        Meta::registerPackage($twitter_card);
-
+        SeoMetadata::register(
+            title: $title,
+            description: __('seo.products.description'),
+            url: route('product', array_filter(['product' => $this->productSlug])),
+            image: asset('img/mutu.jpg'),
+        );
     }
 
-    private function updateTitle()
+    private function updateTitle(): void
     {
-        $title = 'Products '.$this->activeBrandName.' - '.env('APP_NAME');
+        $title = trim(__('seo.products.title').' '.$this->activeBrandName).' - '.config('app.name');
         $this->dispatch('update-page-title', title: $title);
     }
 
@@ -93,7 +67,7 @@ class ProductList extends Component
         $this->dispatch('animate-product-list');
     }
 
-    public function mount()
+    public function mount(): void
     {
         $firstBrand = $this->brands->first();
 

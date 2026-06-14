@@ -20,6 +20,22 @@ it('renders canonical and hreflang links for localized pages', function () {
         ->assertSee('rel="canonical" href="'.url('/en/about').'"', false);
 });
 
+it('renders Indonesian marketplace metadata', function () {
+    get('/marketplace', ['Accept-Language' => 'id'])
+        ->assertOk()
+        ->assertSee(__('seo.marketplace.description'), false)
+        ->assertSee('property="og:locale" content="id_ID"', false);
+});
+
+it('renders English marketplace metadata', function () {
+    get('/en/marketplace')
+        ->assertOk()
+        ->assertSee(trans('seo.marketplace.description', locale: 'en'), false)
+        ->assertSee('property="og:locale" content="en_US"', false)
+        ->assertSee('property="og:locale:alternate" content="id_ID"', false)
+        ->assertSee('hreflang="x-default" href="'.url('/marketplace').'"', false);
+});
+
 it('uses the product detail query as its canonical url', function () {
     $product = \App\Models\Products\Product::query()->firstOrFail();
 
@@ -62,7 +78,8 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
         ->toContain(route('about'))
         ->toContain(route('about', ['locale' => 'en']))
         ->toContain(route('news'))
-        ->toContain('hreflang="x-default"');
+        ->toContain('hreflang="x-default"')
+        ->not->toContain(url('/id/about'));
 
     expect($products)
         ->toContain(route('product', [

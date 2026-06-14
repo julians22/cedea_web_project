@@ -26,7 +26,7 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-if (env('RTE_CAMPAIGN', false)) {
+if (config('app.rte_campaign')) {
     Route::redirect('eomuk-bar-chill-in-seoul', 'https://eomuk-bar-rte.cedeaseafood.com?source=packaging')->name('redirect-eomuk-bar-chill-in-seoul');
 }
 

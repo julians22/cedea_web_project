@@ -106,7 +106,8 @@
                             href="{{ $logo['url'] }}" rel="noopener noreferrer" data-marketplace-track
                             data-marketplace-name="{{ $logo['name'] }}" data-marketplace-type="online"
                             data-marketplace-position="{{ $loop->iteration }}">
-                            <img class="" src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
+                                data-marketplace-logo>
                         </a>
                     @endif
                 @endforeach
@@ -188,7 +189,8 @@
                             target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer"
                             data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
                             data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration }}">
-                            <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
+                                data-marketplace-logo>
                         </a>
                     @endforeach
                 </div>
@@ -199,7 +201,8 @@
                             target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer"
                             data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
                             data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration + 2 }}">
-                            <img src="{{ asset($logo['logo']) }}" alt="logo {{ $logo['name'] }}">
+                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
+                                data-marketplace-logo>
                         </a>
                     @endforeach
                 </div>
@@ -251,7 +254,8 @@
     @push('after-scripts')
         <script>
             document.addEventListener('click', (event) => {
-                const marketplace = event.target.closest('[data-marketplace-track]');
+                const logo = event.target.closest('[data-marketplace-logo]');
+                const marketplace = logo?.closest('[data-marketplace-track]');
 
                 if (!marketplace || typeof window.gtag !== 'function') return;
 

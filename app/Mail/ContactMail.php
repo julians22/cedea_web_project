@@ -25,7 +25,13 @@ class ContactMail extends Mailable
     public function envelope(): Envelope
     {
         return new Envelope(
-            from: new Address($this->data->email, $this->data->name),
+            from: new Address(
+                (string) config('mail.from.address'),
+                (string) config('mail.from.name'),
+            ),
+            replyTo: [
+                new Address($this->data->email, $this->data->name),
+            ],
             subject: '[Website contact] '.$this->data->subject,
         );
     }
