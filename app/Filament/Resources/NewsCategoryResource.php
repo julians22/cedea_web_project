@@ -3,10 +3,9 @@
 namespace App\Filament\Resources;
 
 use App\Filament\Resources\NewsCategoryResource\Pages;
-use App\Filament\Resources\NewsCategoryResource\RelationManagers;
 use App\Models\NewsCategory;
+use App\Support\Localization;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
-use Filament\Forms;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
 use Filament\Forms\Get;
@@ -14,8 +13,6 @@ use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Table;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsCategoryResource extends Resource
 {
@@ -28,20 +25,18 @@ class NewsCategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->translatable(true, null, [
-                        'id' => [
-                            'required',
-                            fn(Get $get) => UniqueTranslationRule::for('news_categories', 'name')->ignore($get('id')),
-                            'string',
-                            'max:255'
-                        ],
-                        'en' => [
-                            'nullable',
-                            fn(Get $get) => UniqueTranslationRule::for('news_categories', 'name')->ignore($get('id')),
-                            'string',
-                            'max:255'
-                        ],
-                    ]),
+                    ->translatable(
+                        true,
+                        null,
+                        Localization::rules(
+                            fn (): array => [
+                                fn (Get $get) => UniqueTranslationRule::for('news_categories', 'name')->ignore($get('id')),
+                                'string',
+                                'max:255',
+                            ],
+                            required: true,
+                        ),
+                    ),
             ]);
     }
 
@@ -50,7 +45,7 @@ class NewsCategoryResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('name'),
-                TextColumn::make('slug')
+                TextColumn::make('slug'),
             ])
             ->filters([
                 //

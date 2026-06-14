@@ -4,15 +4,14 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductResource\Pages;
 use App\Models\Products\Brand;
-use App\Models\Products\Category;
 use App\Models\Products\Product;
 use App\Models\Products\ProductCategory;
+use App\Support\Localization;
 use Awcodes\Matinee\Matinee;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms\Components\Actions\Action;
-use Filament\Forms\Components\Repeater;
 use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
@@ -32,9 +31,6 @@ use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\TextColumn\TextColumnSize;
 use Filament\Tables\Filters\SelectFilter;
 use Filament\Tables\Table;
-use Illuminate\Support\Facades\App;
-use Illuminate\Database\Eloquent\Builder;
-
 
 class ProductResource extends Resource
 {
@@ -42,7 +38,7 @@ class ProductResource extends Resource
 
     public static function getTranslatableLocales(): array
     {
-        return ['id', 'en'];
+        return Localization::locales();
     }
 
     protected static ?string $model = Product::class;
@@ -54,7 +50,7 @@ class ProductResource extends Resource
      *
      * Example [1, 2, 3] => "1, 2 and 3"
      *
-     * @param array $values
+     * @param  array  $values
      * @return string | array
      */
     protected static function verboseImplode($values, $prefix = null)
@@ -63,14 +59,15 @@ class ProductResource extends Resource
             return [];
         }
 
-        $prefix = $prefix ? $prefix . ' : ' : '';
+        $prefix = $prefix ? $prefix.' : ' : '';
 
         if (count($values) > 1) {
             $last = array_pop($values);
-            return $prefix . implode(', ', $values) . ' & ' . $last;
+
+            return $prefix.implode(', ', $values).' & '.$last;
         }
 
-        return $prefix . implode($values);
+        return $prefix.implode($values);
     }
 
     public static function getNavigationGroup(): ?string
@@ -102,35 +99,38 @@ class ProductResource extends Resource
                                 ->live(),
 
                             Matinee::make('video')
-                                ->hidden(fn(Get $get): bool => ! $get('have_video')),
+                                ->hidden(fn (Get $get): bool => ! $get('have_video')),
 
                             Split::make([
                                 TextInput::make('name')
                                     ->label(__('name'))
-                                    ->translatable(true, null, [
-                                        'id' => ['required', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
-                                    ]),
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(['string', 'max:255'], required: true),
+                                    ),
                                 TextInput::make('size')
                                     ->label(__('size'))
-                                    ->translatable(true, null, [
-                                        'id' => ['nullable', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
-                                    ])->grow(false),
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(['string', 'max:255']),
+                                    )
+                                    ->grow(false),
                             ])->from('md'),
 
                             RichEditor::make('description')
                                 ->label(__('description'))
-                                ->translatable(true, null, [
-                                    'id' => ['required', 'string'],
-                                    'en' => ['nullable', 'string'],
-                                ]),
+                                ->translatable(
+                                    true,
+                                    null,
+                                    Localization::rules(['string'], required: true),
+                                ),
 
                             TextInput::make('buy_link')
                                 ->url()
                                 ->suffixAction(
-                                    fn(?string $state): Action =>
-                                    Action::make('visit')
+                                    fn (?string $state): Action => Action::make('visit')
                                         ->icon('heroicon-m-globe-alt')
                                         ->url(
                                             filled($state) ? "{$state}" : null,
@@ -168,13 +168,17 @@ class ProductResource extends Resource
                                         ->translatable(
                                             true,
                                             null,
-                                            [
-                                                'id' => ['required', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
-                                                'en' => ['nullable', UniqueTranslationRule::for('product_categories', 'name'), 'string', 'max:255'],
-                                            ]
+                                            Localization::rules(
+                                                fn (): array => [
+                                                    UniqueTranslationRule::for('product_categories', 'name'),
+                                                    'string',
+                                                    'max:255',
+                                                ],
+                                                required: true,
+                                            ),
                                         ),
                                 ])
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->name)
                                 ->label(__('category'))
                                 ->multiple()
                                 ->translatable(false)
@@ -184,7 +188,7 @@ class ProductResource extends Resource
                                 ->required()
                                 ->label(__('brand'))
                                 ->relationship(name: 'brand', titleAttribute: 'name')
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->name),
                         ])->grow(false),
                     ],
                 )->from('xl')]
@@ -223,8 +227,8 @@ class ProductResource extends Resource
                     ->relationship('brand', 'name')
                     ->searchable()
                     ->multiple()
-                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
-                    ->indicateUsing(function (array $data): array | string {
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->name)
+                    ->indicateUsing(function (array $data): array|string {
                         return self::verboseImplode(
                             Brand::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray(),
                             'Brands'
@@ -235,14 +239,14 @@ class ProductResource extends Resource
                     ->relationship('categories', 'name')
                     ->searchable()
                     ->multiple()
-                    ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
-                    ->indicateUsing(function (array $data): array | string {
+                    ->getOptionLabelFromRecordUsing(fn ($record) => $record->name)
+                    ->indicateUsing(function (array $data): array|string {
                         return implode(
                             ' & ',
                             ProductCategory::select('id', 'name')->whereIn('id', $data['values'])->get()->pluck('name', 'id')->toArray()
                         );
                     })
-                    ->preload()
+                    ->preload(),
             ])
             ->actions([
                 Tables\Actions\EditAction::make(),

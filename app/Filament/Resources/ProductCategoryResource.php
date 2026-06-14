@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\ProductCategoryResource\Pages;
 use App\Models\Products\ProductCategory;
+use App\Support\Localization;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Form;
@@ -29,20 +30,18 @@ class ProductCategoryResource extends Resource
         return $form
             ->schema([
                 TextInput::make('name')
-                    ->translatable(true, null, [
-                        'id' => [
-                            'required',
-                            fn (Get $get) => UniqueTranslationRule::for('product_categories', 'name')->ignore($get('id')),
-                            'string',
-                            'max:255',
-                        ],
-                        'en' => [
-                            'nullable',
-                            fn (Get $get) => UniqueTranslationRule::for('product_categories', 'name')->ignore($get('id')),
-                            'string',
-                            'max:255',
-                        ],
-                    ]),
+                    ->translatable(
+                        true,
+                        null,
+                        Localization::rules(
+                            fn (): array => [
+                                fn (Get $get) => UniqueTranslationRule::for('product_categories', 'name')->ignore($get('id')),
+                                'string',
+                                'max:255',
+                            ],
+                            required: true,
+                        ),
+                    ),
             ]);
     }
 

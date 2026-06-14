@@ -4,15 +4,12 @@ namespace App\Filament\Resources;
 
 use App\Enums\RecipeType;
 use App\Filament\Resources\RecipeResource\Pages;
-use App\Filament\Resources\RecipeResource\RelationManagers;
 use App\Models\PostRecipes;
-use App\Models\Recipe;
+use App\Support\Localization;
 use Awcodes\Matinee\Matinee;
 use Awcodes\TableRepeater\Components\TableRepeater;
 use Awcodes\TableRepeater\Header;
-use Filament\Forms;
 use Filament\Forms\Components\Repeater;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -22,15 +19,12 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
 use FilamentTiptapEditor\TiptapEditor;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class RecipeResource extends Resource
 {
@@ -53,20 +47,20 @@ class RecipeResource extends Resource
                             [
                                 TextInput::make('title')
                                     ->label(__('title'))
-                                    ->translatable(true, null, [
-                                        'id' => ['required', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
-                                        // 'ko' => ['nullable', 'string', 'max:255'],
-                                    ]),
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(['string', 'max:255'], required: true),
+                                    ),
 
                                 Textarea::make('description')
-                                    ->translatable(true, null, [
-                                        'id' => ['nullable', 'string', 'max:255'],
-                                        'en' => ['nullable', 'string', 'max:255'],
-                                        // 'ko' => ['nullable', 'string', 'max:255'],
-                                    ]),
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(['string', 'max:255']),
+                                    ),
 
-                                //? we probably won't need this but let's keep it for now
+                                // ? we probably won't need this but let's keep it for now
                                 Repeater::make('ingredients')
                                     ->schema([
                                         TextInput::make('title'),
@@ -104,7 +98,7 @@ class RecipeResource extends Resource
 
                             Select::make('product')
                                 ->relationship('product')
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->name)
                                 ->searchable(['name'])
                                 ->nullable(),
 
@@ -116,18 +110,18 @@ class RecipeResource extends Resource
                                 ->onColor('success')
                                 ->offColor('danger'),
 
-
                         ]),
                     ]
                 )->from('md'),
 
                 TiptapEditor::make('content')
                     ->profile('default')
-                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp',])
-                    ->translatable(true, null, [
-                        'id' => ['required',],
-                        'en' => ['nullable',],
-                    ]),
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->translatable(
+                        true,
+                        null,
+                        Localization::rules(required: true),
+                    ),
             ])->columns(1);
     }
 
@@ -136,7 +130,7 @@ class RecipeResource extends Resource
         return $table
             ->columns([
                 TextColumn::make('title'),
-                ToggleColumn::make('published')
+                ToggleColumn::make('published'),
             ])
             ->filters([
                 //

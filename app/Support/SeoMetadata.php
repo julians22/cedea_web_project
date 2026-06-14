@@ -30,11 +30,11 @@ final class SeoMetadata
             ->setDescription($description)
             ->setUrl($url)
             ->addImage($image)
-            ->setLocale(self::openGraphLocale(app()->getLocale()));
+            ->setLocale(Localization::openGraphLocale(app()->getLocale()));
 
-        foreach (config('localizer.supported_locales', []) as $locale) {
+        foreach (Localization::locales() as $locale) {
             if ($locale !== app()->getLocale()) {
-                $openGraph->addAlternateLocale(self::openGraphLocale($locale));
+                $openGraph->addAlternateLocale(Localization::openGraphLocale($locale));
             }
         }
 
@@ -45,14 +45,5 @@ final class SeoMetadata
 
         Meta::replacePackage($openGraph);
         Meta::replacePackage($twitterCard);
-    }
-
-    private static function openGraphLocale(string $locale): string
-    {
-        return match ($locale) {
-            'id' => 'id_ID',
-            'en' => 'en_US',
-            default => str_replace('-', '_', $locale),
-        };
     }
 }

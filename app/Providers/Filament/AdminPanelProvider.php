@@ -2,6 +2,7 @@
 
 namespace App\Providers\Filament;
 
+use App\Support\Localization;
 use Filament\Http\Middleware\Authenticate;
 use Filament\Http\Middleware\DisableBladeIconComponents;
 use Filament\Http\Middleware\DispatchServingFilamentEvent;
@@ -59,13 +60,9 @@ class AdminPanelProvider extends PanelProvider
             ->viteTheme('resources/css/filament/admin/theme.css')
             ->plugins([
                 SpatieLaravelTranslatablePlugin::make()
-                    ->defaultLocales(['id', 'en']),
+                    ->defaultLocales(Localization::locales()),
                 FilamentTranslatableFieldsPlugin::make()
-                    ->supportedLocales([
-                        'id' => 'Indonesia',
-                        'en' => 'English',
-                        // 'kr' => 'Korean',
-                    ]),
+                    ->supportedLocales(Localization::labels()),
             ]);
     }
 }

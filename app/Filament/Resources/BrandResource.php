@@ -4,6 +4,7 @@ namespace App\Filament\Resources;
 
 use App\Filament\Resources\BrandResource\Pages;
 use App\Models\Products\Brand;
+use App\Support\Localization;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
 use Filament\Forms\Components\TextInput;
@@ -36,20 +37,14 @@ class BrandResource extends Resource
                     ->translatable(
                         true,
                         null,
-                        [
-                            'id' => [
-                                'required',
+                        Localization::rules(
+                            fn (): array => [
                                 fn (Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
                                 'string',
                                 'max:255',
                             ],
-                            'en' => [
-                                'nullable',
-                                fn (Get $get) => UniqueTranslationRule::for('brands', 'name')->ignore($get('id')),
-                                'string',
-                                'max:255',
-                            ],
-                        ]
+                            required: true,
+                        ),
                     ),
                 TextInput::make('desc')
                     ->label(__('description')),

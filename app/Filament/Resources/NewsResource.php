@@ -4,14 +4,10 @@ namespace App\Filament\Resources;
 
 use App\Enums\NewsType;
 use App\Filament\Resources\NewsResource\Pages;
-use App\Filament\Resources\NewsResource\RelationManagers;
-use App\Models\News;
 use App\Models\PostNews;
+use App\Support\Localization;
 use CodeZero\UniqueTranslation\UniqueTranslationRule;
-use Filament\Forms;
-use Filament\Forms\Components\DatePicker;
 use Filament\Forms\Components\DateTimePicker;
-use Filament\Forms\Components\RichEditor;
 use Filament\Forms\Components\Section;
 use Filament\Forms\Components\Select;
 use Filament\Forms\Components\SpatieMediaLibraryFileUpload;
@@ -21,17 +17,13 @@ use Filament\Forms\Components\Textarea;
 use Filament\Forms\Components\TextInput;
 use Filament\Forms\Components\Toggle;
 use Filament\Forms\Form;
-use Filament\Resources\Concerns\Translatable;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Columns\SpatieMediaLibraryImageColumn;
 use Filament\Tables\Columns\TextColumn;
 use Filament\Tables\Columns\ToggleColumn;
 use Filament\Tables\Table;
-use FilamentTiptapEditor\Enums\TiptapOutput;
 use FilamentTiptapEditor\TiptapEditor;
-use Illuminate\Database\Eloquent\Builder;
-use Illuminate\Database\Eloquent\SoftDeletingScope;
 
 class NewsResource extends Resource
 {
@@ -46,7 +38,7 @@ class NewsResource extends Resource
 
     public static function getTranslatableLocales(): array
     {
-        return ['id', 'en'];
+        return Localization::locales();
     }
 
     public static function form(Form $form): Form
@@ -59,17 +51,19 @@ class NewsResource extends Resource
                             [
                                 TiptapEditor::make('title')
                                     ->profile('minimal')
-                                    ->translatable(true, null, [
-                                        'id' => ['required',],
-                                        'en' => ['nullable',],
-                                    ]),
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(required: true),
+                                    ),
 
                                 Textarea::make('excerpt')
                                     ->autosize()
-                                    ->translatable(true, null, [
-                                        'id' => ['nullable', 'string'],
-                                        'en' => ['nullable', 'string'],
-                                    ])
+                                    ->translatable(
+                                        true,
+                                        null,
+                                        Localization::rules(['string']),
+                                    ),
                             ]
                         ),
                         Section::make([
@@ -79,10 +73,11 @@ class NewsResource extends Resource
                                 ->collection('featured_image'),
 
                             Textarea::make('featured_image_caption')
-                                ->translatable(true, null, [
-                                    'id' => ['nullable', 'string'],
-                                    'en' => ['nullable', 'string'],
-                                ]),
+                                ->translatable(
+                                    true,
+                                    null,
+                                    Localization::rules(['string']),
+                                ),
                             Select::make('type')
                                 ->options(
                                     NewsType::class
@@ -105,13 +100,17 @@ class NewsResource extends Resource
                                         ->translatable(
                                             true,
                                             null,
-                                            [
-                                                'id' => ['required', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
-                                                'en' => ['nullable', UniqueTranslationRule::for('news_categories', 'name'), 'string', 'max:255'],
-                                            ]
+                                            Localization::rules(
+                                                fn (): array => [
+                                                    UniqueTranslationRule::for('news_categories', 'name'),
+                                                    'string',
+                                                    'max:255',
+                                                ],
+                                                required: true,
+                                            ),
                                         ),
                                 ])
-                                ->getOptionLabelFromRecordUsing(fn($record) => $record->name)
+                                ->getOptionLabelFromRecordUsing(fn ($record) => $record->name)
                                 ->label(__('category'))
                                 ->multiple()
                                 ->translatable(false)
@@ -122,7 +121,7 @@ class NewsResource extends Resource
 
                             DateTimePicker::make('published_at')
                                 ->required()
-                                ->default(now()) // Set the default value to the current datetime
+                                ->default(now()), // Set the default value to the current datetime
                             // ->format('Y-m-d H:i:s')  // Set the datetime format if needed
 
                         ]),
@@ -133,10 +132,11 @@ class NewsResource extends Resource
                     ->profile('default')
                     ->disk('public')
                     ->acceptedFileTypes(['image/*'])
-                    ->translatable(true, null, [
-                        'id' => ['required',],
-                        'en' => ['nullable',],
-                    ]),
+                    ->translatable(
+                        true,
+                        null,
+                        Localization::rules(required: true),
+                    ),
             ])->columns(1);
     }
 
@@ -151,7 +151,7 @@ class NewsResource extends Resource
                 // TextColumn::make('excerpt'),
                 ToggleColumn::make('published'),
                 TextColumn::make('published_at')
-                    ->dateTime()
+                    ->dateTime(),
             ])
             ->filters([
                 //
