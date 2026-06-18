@@ -5,6 +5,7 @@ namespace App\Actions;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
 use App\Models\Products\Product;
+use App\Models\Video;
 use Illuminate\Support\Carbon;
 use NielsNumbers\LaravelLocalizer\Facades\Localizer;
 use Spatie\Sitemap\Sitemap;
@@ -18,6 +19,7 @@ class BuildSitemap
         'products' => 'sitemap_products.xml',
         'news' => 'sitemap_news.xml',
         'recipes' => 'sitemap_recipes.xml',
+        'videos' => 'sitemap_videos.xml',
     ];
 
     /**
@@ -30,6 +32,7 @@ class BuildSitemap
             'products' => $this->buildProductsSitemap(),
             'news' => $this->buildNewsSitemap(),
             'recipes' => $this->buildRecipesSitemap(),
+            'videos' => $this->buildVideosSitemap(),
         ];
 
         $index = SitemapIndex::create();
@@ -113,6 +116,23 @@ class BuildSitemap
                 $recipe->updated_at,
                 Url::CHANGE_FREQUENCY_YEARLY,
                 0.7,
+            ));
+
+        return $sitemap;
+    }
+
+    private function buildVideosSitemap(): Sitemap
+    {
+        $sitemap = Sitemap::create();
+
+        Video::query()
+            ->eachById(fn (Video $video) => $this->addLocalizedRoute(
+                $sitemap,
+                'videos',
+                ['video' => $video->slug],
+                $video->updated_at,
+                Url::CHANGE_FREQUENCY_YEARLY,
+                0.6,
             ));
 
         return $sitemap;

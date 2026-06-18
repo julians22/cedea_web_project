@@ -7,8 +7,13 @@
             ->except('locale')
             ->all();
 
-        if ($routeName === 'product' && request()->filled('product')) {
-            $routeParameters['product'] = request()->string('product')->toString();
+        $queryParameters = [
+            'product' => 'product',
+            'videos' => 'video',
+        ];
+
+        if (isset($queryParameters[$routeName]) && request()->filled($queryParameters[$routeName])) {
+            $routeParameters[$queryParameters[$routeName]] = request()->string($queryParameters[$routeName])->toString();
         }
 
         $defaultLocale = \NielsNumbers\LaravelLocalizer\Facades\Localizer::defaultLocale();

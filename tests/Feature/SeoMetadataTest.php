@@ -3,6 +3,7 @@
 use App\Actions\BuildSitemap;
 use App\Models\PostNews;
 use App\Models\PostRecipes;
+use App\Models\Video;
 use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\get;
@@ -65,6 +66,7 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
     $products = file_get_contents(public_path('sitemap_products.xml'));
     $news = file_get_contents(public_path('sitemap_news.xml'));
     $recipes = file_get_contents(public_path('sitemap_recipes.xml'));
+    $videos = file_get_contents(public_path('sitemap_videos.xml'));
 
     expect($index)
         ->toContain('<sitemapindex')
@@ -72,6 +74,7 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
         ->toContain(url('sitemap_products.xml'))
         ->toContain(url('sitemap_news.xml'))
         ->toContain(url('sitemap_recipes.xml'))
+        ->toContain(url('sitemap_videos.xml'))
         ->not->toContain('<urlset');
 
     expect($pages)
@@ -98,4 +101,8 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
             route('recipe.show', ['recipe' => $recipe->slug]),
         ),
     );
+
+    expect($videos)
+        ->toContain(route('videos', ['video' => Video::query()->firstOrFail()->slug]))
+        ->toContain('hreflang="en"');
 });

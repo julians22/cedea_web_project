@@ -81,7 +81,7 @@ class Video extends Model implements HasMedia, Sitemapable
      */
     public function toSitemapTag(): Url|string|array
     {
-        return Url::create(route('videos', $this))
+        return Url::create(route('videos', ['video' => $this->slug]))
             ->setLastModificationDate(Carbon::create($this->updated_at))
             ->setChangeFrequency(Url::CHANGE_FREQUENCY_YEARLY)
             ->setPriority(0.1);
