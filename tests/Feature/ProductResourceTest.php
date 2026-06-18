@@ -20,9 +20,18 @@ it('tracks product selections and views in Google Analytics', function () {
     expect($template)
         ->toContain("window.gtag('event', 'select_item'")
         ->toContain("window.gtag('event', 'view_item'")
-        ->toContain('trackProductSelection($el.closest')
+        ->toContain('openProductModal($el.closest')
+        ->toContain('this.trackProductSelection(product);')
         ->toContain('x-init="$nextTick(() => trackProductView($el.dataset))"')
         ->not->toContain('handleProductClick');
+});
+
+it('keys product cards at the loop root for reliable category filtering', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('wire:key="product-card-{{ $item->id }}"')
+        ->not->toContain('wire:key=\'{{ $item->slug }}\'');
 });
 
 it('renders analytics metadata when a product detail is active', function () {

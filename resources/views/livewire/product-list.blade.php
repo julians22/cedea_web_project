@@ -114,36 +114,36 @@
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <li class="relative flex flex-col gap-8" data-product-item
-                            data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
+                        <li class="relative z-0 flex flex-col gap-8" wire:key="product-card-{{ $item->id }}"
+                            data-product-item data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
                             data-item-brand="{{ $item->brand->name }}"
                             data-item-category="{{ $item->categories->first()?->name }}"
                             data-item-index="{{ ($products->firstItem() ?? 1) + $loop->index - 1 }}" x-data="hover"
-                            @mouseover="hoverCardEnter()" @mouseleave="hoverCardLeave()">
-                            <div class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg"
-                                wire:key='{{ $item->slug }}'>
+                            :class="{ 'z-20': hoverCardHovered }" @mouseover="hoverCardEnter()"
+                            @mouseleave="hoverCardLeave()">
+                            <div
+                                class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg">
                                 <div
                                     class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
                                     <img class="size-ful aspect-square object-contain object-center lg:cursor-pointer"
                                         src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
                                         alt="{{ $item->fullname }} - produk {{ $item->brand->name }}"
-                                        @click="()=>{
-                                            if(width<=1024) return
-                                            modalOpen=true;
-                                            trackProductSelection($el.closest('[data-product-item]').dataset);
-                                            $wire.handleChangeActiveProduct('{{ $item->slug }}');
-                                            }">
+                                        @click="
+                                            if (width > 1024) {
+                                                openProductModal($el.closest('[data-product-item]').dataset);
+                                                $wire.handleChangeActiveProduct('{{ $item->slug }}');
+                                            }
+                                        ">
                                 </div>
 
                             </div>
                             {{-- hover content --}}
                             <div class="absolute top-full isolate z-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
                                 x-show="hoverCardHovered" x-transition x-cloak
-                                @click="()=>{
-                                    modalOpen=true;
-                                    trackProductSelection($el.closest('[data-product-item]').dataset);
+                                @click="
+                                    openProductModal($el.closest('[data-product-item]').dataset);
                                     $wire.handleChangeActiveProduct('{{ $item->slug }}');
-                                    }">
+                                ">
                                 <div
                                     class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
@@ -378,6 +378,10 @@
                 window.gtag('event', 'view_item', {
                     items: [this.analyticsItem(product)],
                 });
+            },
+            openProductModal(product) {
+                this.modalOpen = true;
+                this.trackProductSelection(product);
             },
             closeProductModal() {
                 this.modalOpen = false;
