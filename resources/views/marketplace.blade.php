@@ -102,12 +102,11 @@
                         <div class="flex items-center justify-center ~size-32/36 max-md:hidden">
                         </div>
                     @else
-                        <a class="flex items-center justify-center ~size-32/36" target="_blank"
-                            href="{{ $logo['url'] }}" rel="noopener noreferrer" data-marketplace-track
+                        <a class="flex items-center justify-center ~size-32/36" data-marketplace-track
                             data-marketplace-name="{{ $logo['name'] }}" data-marketplace-type="online"
-                            data-marketplace-position="{{ $loop->iteration }}">
-                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
-                                data-marketplace-logo>
+                            data-marketplace-position="{{ $loop->iteration }}" target="_blank"
+                            href="{{ $logo['url'] }}" rel="noopener noreferrer">
+                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
                         </a>
                     @endif
                 @endforeach
@@ -142,6 +141,18 @@
                             'name' => 'alfamidi',
                             'url' => '#',
                             'logo' => asset('img/marketplace/alfamidi.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'alfamart',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/alfamart.png'),
+                            'class' => 'p-4',
+                        ],
+                        [
+                            'name' => 'Hari-Hari',
+                            'url' => '#',
+                            'logo' => asset('img/marketplace/hari-hari.png'),
                             'class' => 'p-4',
                         ],
                         [
@@ -183,26 +194,25 @@
                     ];
                 @endphp
 
-                <div class="flex flex-wrap items-center justify-center gap-6">
+                {{-- <div class="flex flex-wrap items-center justify-center gap-6">
                     @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
                         <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
-                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer"
                             data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
-                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration }}">
-                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
-                                data-marketplace-logo>
+                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration }}"
+                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer">
+                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
                         </a>
                     @endforeach
-                </div>
+                </div> --}}
 
                 <div class="flex flex-wrap items-center justify-center gap-6">
-                    @foreach (array_slice($marketplace_logos_2, 2) as $logo)
+                    {{-- @foreach (array_slice($marketplace_logos_2, 2) as $logo) --}}
+                    @foreach ($marketplace_logos_2 as $logo)
                         <a class="{{ TailwindMerge\Laravel\Facades\TailwindMerge::merge('inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center', $logo['class']) }}"
-                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer"
                             data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
-                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration + 2 }}">
-                            <img src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}"
-                                data-marketplace-logo>
+                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration + 2 }}"
+                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer">
+                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
                         </a>
                     @endforeach
                 </div>
