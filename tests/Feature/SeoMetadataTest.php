@@ -70,6 +70,7 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
 
     expect($index)
         ->toContain('<sitemapindex')
+        ->toContain('<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>')
         ->toContain(url('sitemap_pages.xml'))
         ->toContain(url('sitemap_products.xml'))
         ->toContain(url('sitemap_news.xml'))
@@ -78,6 +79,7 @@ it('builds a multilingual sitemap index with separated sitemap files', function 
         ->not->toContain('<urlset');
 
     expect($pages)
+        ->toContain('<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>')
         ->toContain(route('about'))
         ->toContain(route('about', ['locale' => 'en']))
         ->toContain(route('news'))

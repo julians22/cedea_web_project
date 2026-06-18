@@ -14,6 +14,10 @@ use Spatie\Sitemap\Tags\Url;
 
 class BuildSitemap
 {
+    private const XML_DECLARATION = '<?xml version="1.0" encoding="UTF-8"?>';
+
+    private const STYLESHEET_HREF = '/sitemap.xsl';
+
     private const SITEMAP_FILES = [
         'pages' => 'sitemap_pages.xml',
         'products' => 'sitemap_products.xml',
@@ -40,11 +44,11 @@ class BuildSitemap
         foreach ($sitemaps as $type => $sitemap) {
             $filename = self::SITEMAP_FILES[$type];
 
-            $sitemap->writeToFile(public_path($filename));
+            $this->writeSitemapFile($sitemap, public_path($filename));
             $index->add(url($filename));
         }
 
-        $index->writeToFile(public_path('sitemap.xml'));
+        $this->writeSitemapFile($index, public_path('sitemap.xml'));
     }
 
     private function buildPagesSitemap(): Sitemap
@@ -136,6 +140,31 @@ class BuildSitemap
             ));
 
         return $sitemap;
+    }
+
+    private function writeSitemapFile(Sitemap|SitemapIndex $sitemap, string $path): void
+    {
+        $sitemap->writeToFile($path);
+        $this->addStylesheetInstruction($path);
+    }
+
+    private function addStylesheetInstruction(string $path): void
+    {
+        $contents = file_get_contents($path);
+
+        if ($contents === false || str_contains($contents, 'xml-stylesheet')) {
+            return;
+        }
+
+        $stylesheet = '<?xml-stylesheet type="text/xsl" href="'.self::STYLESHEET_HREF.'"?>';
+        $contents = preg_replace(
+            '/^'.preg_quote(self::XML_DECLARATION, '/').'\R?/',
+            self::XML_DECLARATION.PHP_EOL.$stylesheet.PHP_EOL,
+            $contents,
+            1,
+        ) ?? $contents;
+
+        file_put_contents($path, $contents);
     }
 
     /**
