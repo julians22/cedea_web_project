@@ -1,6 +1,7 @@
 <?php
 
 use App\Livewire\Frontend\ProductList;
+use App\Models\Products\Brand;
 use App\Models\Products\Product;
 use Illuminate\Support\Facades\DB;
 
@@ -20,10 +21,47 @@ it('tracks product selections and views in Google Analytics', function () {
     expect($template)
         ->toContain("window.gtag('event', 'select_item'")
         ->toContain("window.gtag('event', 'view_item'")
-        ->toContain('openProductModal($el.closest')
+        ->toContain('@click="handleProductTrigger($event, $wire)"')
+        ->toContain('data-product-modal-trigger')
+        ->toContain('wire.handleChangeActiveProduct(product.dataset.itemId);')
         ->toContain('this.trackProductSelection(product);')
         ->toContain('x-init="$nextTick(() => trackProductView($el.dataset))"')
+        ->not->toContain('data-product-modal-trigger="desktop"')
         ->not->toContain('handleProductClick');
+});
+
+it('can close the Alpine product modal from Livewire filter changes', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('x-data="productCatalog({{ $productSlug ? \'true\' : \'false\' }})"')
+        ->toContain('@close-product-modal.window="closeProductModal()"')
+        ->toContain('this.modalOpen = true;')
+        ->toContain('this.modalOpen = false;');
+});
+
+it('delegates product modal clicks from the catalog root', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('handleProductTrigger(event, wire)')
+        ->toContain("event.target.closest('[data-product-modal-trigger]')")
+        ->toContain("trigger.closest('[data-product-item]')")
+        ->toContain('this.openProductModal(product.dataset);')
+        ->not->toContain('$wire.handleChangeActiveProduct(\'{{ $item->slug }}\')');
+});
+
+it('uses css hover states for product cards after Livewire filtering', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('group/product')
+        ->toContain('hidden h-auto')
+        ->toContain('lg:block')
+        ->toContain('group-hover/product:opacity-100')
+        ->toContain('group-hover/product:pointer-events-auto')
+        ->not->toContain('x-data="hover"')
+        ->not->toContain("Alpine.data('hover'");
 });
 
 it('keys product cards at the loop root for reliable category filtering', function () {
@@ -32,6 +70,25 @@ it('keys product cards at the loop root for reliable category filtering', functi
     expect($template)
         ->toContain('wire:key="product-card-{{ $item->id }}"')
         ->not->toContain('wire:key=\'{{ $item->slug }}\'');
+});
+
+it('uses unique brand and category keys across catalog filters', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('wire:key="brand-logo-{{ $brand->id }}"')
+        ->toContain('wire:key="brand-filter-{{ $brand->id }}"')
+        ->toContain('wire:key="brand-filter-{{ $brand->id }}-category-{{ $category->id }}"')
+        ->not->toContain('wire:key=\'{{ $brand->slug }}\'')
+        ->not->toContain('wire:key=\'{{ $category->slug }}\'');
+});
+
+it('clamps brand logo alt fallback text to two lines', function () {
+    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+
+    expect($template)
+        ->toContain('line-clamp-2 w-full object-contain text-center text-xs leading-tight')
+        ->toContain('alt="{{ $brand->desc }} logo"');
 });
 
 it('renders analytics metadata when a product detail is active', function () {
@@ -52,6 +109,48 @@ it('tracks product views opened from a direct link', function () {
         ->assertSee('x-data="productCatalog(true)"', false)
         ->assertSee('data-active-product', false)
         ->assertSee('data-item-id="'.$product->slug.'"', false);
+});
+
+it('opens product details after brand and category filters change', function () {
+    $product = Product::query()
+        ->with(['brand', 'categories'])
+        ->whereHas('categories')
+        ->firstOrFail();
+
+    livewire(ProductList::class)
+        ->call('handleChangeActiveBrand', $product->brand->slug)
+        ->set('activeCategory', $product->categories->first()->slug)
+        ->call('handleChangeActiveProduct', $product->slug)
+        ->assertSet('productSlug', $product->slug)
+        ->assertSeeHtml('data-active-product')
+        ->assertSeeHtml('data-item-id="'.$product->slug.'"');
+});
+
+it('closes stale product details when brand changes', function () {
+    $product = Product::query()->with('brand')->firstOrFail();
+    $brand = Brand::query()
+        ->whereKeyNot($product->brand_id)
+        ->firstOrFail();
+
+    livewire(ProductList::class)
+        ->call('handleChangeActiveProduct', $product->slug)
+        ->assertSet('productSlug', $product->slug)
+        ->call('handleChangeActiveBrand', $brand->slug)
+        ->assertSet('productSlug', null);
+});
+
+it('closes stale product details when category changes', function () {
+    $product = Product::query()
+        ->with(['brand', 'categories'])
+        ->whereHas('categories')
+        ->firstOrFail();
+
+    livewire(ProductList::class)
+        ->call('handleChangeActiveBrand', $product->brand->slug)
+        ->call('handleChangeActiveProduct', $product->slug)
+        ->assertSet('productSlug', $product->slug)
+        ->set('activeCategory', $product->categories->first()->slug)
+        ->assertSet('productSlug', null);
 });
 
 it('uses lightweight queries for the initial product catalog', function () {

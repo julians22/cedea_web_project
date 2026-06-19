@@ -30,15 +30,16 @@ class ProductList extends Component
     #[Url(except: '')]
     public string $keyword = '';
 
-    public function updating($property)
+    public function updating($property): void
     {
         if (in_array($property, ['activeBrand', 'activeCategory', 'keyword'])) {
+            $this->closeProductModal();
             $this->resetPage();
             $this->animateProductList();
         }
     }
 
-    public function updatedPage($page)
+    public function updatedPage($page): void
     {
         $this->animateProductList();
     }
@@ -62,7 +63,7 @@ class ProductList extends Component
         $this->dispatch('update-page-title', title: $title);
     }
 
-    private function animateProductList()
+    private function animateProductList(): void
     {
         $this->dispatch('animate-product-list');
     }
@@ -79,8 +80,9 @@ class ProductList extends Component
         $this->updateTitle();
     }
 
-    public function handleChangeActiveBrand($slug)
+    public function handleChangeActiveBrand(string $slug): void
     {
+        $this->closeProductModal();
         $this->activeBrand = $slug;
         $this->activeBrandName = $this->activeBrandModel()?->name ?? '';
         $this->reset('activeCategory');
@@ -90,18 +92,25 @@ class ProductList extends Component
         $this->resetPage();
     }
 
-    public function handleChangeActiveProduct(string $slug = '')
+    public function handleChangeActiveProduct(string $slug = ''): void
     {
         if (! $slug) {
-            $this->reset('productSlug');
+            $this->closeProductModal();
         } else {
             $this->productSlug = $slug;
         }
     }
 
-    public function updatedActiveCategory()
+    public function updatedActiveCategory(): void
     {
+        $this->closeProductModal();
         $this->resetPage();
+    }
+
+    private function closeProductModal(): void
+    {
+        $this->reset('productSlug');
+        $this->dispatch('close-product-modal');
     }
 
     #[Computed]

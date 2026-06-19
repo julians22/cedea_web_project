@@ -9,6 +9,7 @@
             document.getElementById('product-list').scrollIntoView({ behavior: 'smooth' })
         }
     })" x-data="productCatalog({{ $productSlug ? 'true' : 'false' }})"
+        @click="handleProductTrigger($event, $wire)" @close-product-modal.window="closeProductModal()"
         x-resize="width = $width; height = $height">
 
         {{-- Brand --}}
@@ -29,10 +30,10 @@
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brands as $brand)
                         <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~border-4/2 ~p-2/5"
-                            type="button" wire:key='{{ $brand->slug }}'
+                            type="button" wire:key="brand-logo-{{ $brand->id }}"
                             wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
-                            <img class="w-full object-contain" src="{{ $brand->getFirstMediaUrl('logo') }}"
-                                alt="{{ $brand->desc }} logo">
+                            <img class="line-clamp-4 w-full object-contain text-center text-xs leading-tight"
+                                src="{{ $brand->getFirstMediaUrl('logo') }}" alt="{{ $brand->desc }} logo">
                         </div>
                     @endforeach
                 </div>
@@ -60,7 +61,7 @@
 
                 <div class="flex flex-col gap-y-4 uppercase">
                     @foreach ($this->brands as $brand)
-                        <div class="cursor-pointer" wire:key='{{ $brand->slug }}'>
+                        <div class="cursor-pointer" wire:key="brand-filter-{{ $brand->id }}">
                             <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')"
                                 @class([
                                     '~text-lg/2xl',
@@ -85,7 +86,7 @@
                                 </label>
 
                                 @foreach ($brand->uniqueCategories as $category)
-                                    <label wire:key='{{ $category->slug }}'
+                                    <label wire:key="brand-filter-{{ $brand->id }}-category-{{ $category->id }}"
                                         for="{{ $brand->slug }}-{{ $category->slug }}">
                                         <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
                                             type="radio" value="{{ $category->slug }}" wire:loading.attr="disabled"
@@ -114,36 +115,26 @@
                     {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
                         {{-- hover trigger --}}
-                        <li class="relative z-0 flex flex-col gap-8" wire:key="product-card-{{ $item->id }}"
-                            data-product-item data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
+                        <li class="group/product relative z-0 flex flex-col gap-8 hover:z-20" data-product-item
+                            data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
                             data-item-brand="{{ $item->brand->name }}"
                             data-item-category="{{ $item->categories->first()?->name }}"
-                            data-item-index="{{ ($products->firstItem() ?? 1) + $loop->index - 1 }}" x-data="hover"
-                            :class="{ 'z-20': hoverCardHovered }" @mouseover="hoverCardEnter()"
-                            @mouseleave="hoverCardLeave()">
+                            data-item-index="{{ ($products->firstItem() ?? 1) + $loop->index - 1 }}"
+                            wire:key="product-card-{{ $item->id }}">
                             <div
-                                class="group flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg">
+                                class="group/image flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg">
                                 <div
-                                    class="aspect-square transition-transform duration-500 ease-in-out group-hover:-rotate-6 group-hover:scale-105">
-                                    <img class="size-ful aspect-square object-contain object-center lg:cursor-pointer"
+                                    class="aspect-square transition-transform duration-500 ease-in-out group-hover/image:-rotate-6 group-hover/image:scale-105">
+                                    <img class="size-ful aspect-square cursor-pointer object-contain object-center"
+                                        data-product-modal-trigger
                                         src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
-                                        alt="{{ $item->fullname }} - produk {{ $item->brand->name }}"
-                                        @click="
-                                            if (width > 1024) {
-                                                openProductModal($el.closest('[data-product-item]').dataset);
-                                                $wire.handleChangeActiveProduct('{{ $item->slug }}');
-                                            }
-                                        ">
+                                        alt="{{ $item->fullname }} - produk {{ $item->brand->name }}">
                                 </div>
 
                             </div>
                             {{-- hover content --}}
-                            <div class="absolute top-full isolate z-10 h-auto w-full cursor-pointer items-center drop-shadow-top before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700"
-                                x-show="hoverCardHovered" x-transition x-cloak
-                                @click="
-                                    openProductModal($el.closest('[data-product-item]').dataset);
-                                    $wire.handleChangeActiveProduct('{{ $item->slug }}');
-                                ">
+                            <div class="pointer-events-none absolute top-full isolate z-10 hidden h-auto w-full cursor-pointer items-center opacity-0 drop-shadow-top transition duration-200 before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700 group-hover/product:pointer-events-auto group-hover/product:opacity-100 lg:block"
+                                data-product-modal-trigger>
                                 <div
                                     class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
 
@@ -204,7 +195,8 @@
                                 <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}"
                                     alt="{{ $activeProduct->fullname }} - produk {{ $activeProduct->brand->name }}">
                                 <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                    target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
+                                    target="_blank"
+                                    href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                             </div>
 
                             <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
@@ -379,6 +371,20 @@
                     items: [this.analyticsItem(product)],
                 });
             },
+            handleProductTrigger(event, wire) {
+                const trigger = event.target.closest('[data-product-modal-trigger]');
+
+                if (!trigger || !this.$root.contains(trigger)) return;
+
+                const product = trigger.closest('[data-product-item]');
+
+                if (!product) return;
+
+                event.preventDefault();
+
+                this.openProductModal(product.dataset);
+                wire.handleChangeActiveProduct(product.dataset.itemId);
+            },
             openProductModal(product) {
                 this.modalOpen = true;
                 this.trackProductSelection(product);
@@ -387,30 +393,6 @@
                 this.modalOpen = false;
                 this.viewedProductId = null;
             },
-        }))
-
-        Alpine.data('hover', () => ({
-            hoverCardHovered: false,
-            hoverCardDelay: 100,
-            hoverCardLeaveDelay: 200,
-            hoverCardTimeout: null,
-            hoverCardLeaveTimeout: null,
-            hoverCardEnter() {
-                clearTimeout(this.hoverCardLeaveTimeout);
-                if (this.hoverCardHovered) return;
-                clearTimeout(this.hoverCardTimeout);
-                this.hoverCardTimeout = setTimeout(() => {
-                    this.hoverCardHovered = true;
-                }, this.hoverCardDelay);
-            },
-            hoverCardLeave() {
-                clearTimeout(this.hoverCardTimeout);
-                if (!this.hoverCardHovered) return;
-                clearTimeout(this.hoverCardLeaveTimeout);
-                this.hoverCardLeaveTimeout = setTimeout(() => {
-                    this.hoverCardHovered = false;
-                }, this.hoverCardLeaveDelay);
-            }
         }))
 
         $wire.on('animate-product-list', () => {
