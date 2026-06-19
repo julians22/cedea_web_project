@@ -29,12 +29,7 @@
                 <p class="~text-sm/base">{{ __('product.product.detail') }}</p>
                 <div class="my-4 mt-8 grid grid-cols-3 ~gap-x-2/8" type="button">
                     @foreach ($this->brands as $brand)
-                        <div class="{{ $brand->slug == $activeBrand ? 'lg:scale-110 border shadow-md' : 'shadow-lg' }} flex cursor-pointer items-center justify-center border-cedea-red bg-white transition duration-700 ~rounded-lg/2xl ~border-4/2 ~p-2/5"
-                            type="button" wire:key="brand-logo-{{ $brand->id }}"
-                            wire:click="handleChangeActiveBrand('{{ $brand->slug }}')">
-                            <img class="line-clamp-4 w-full object-contain text-center text-xs leading-tight"
-                                src="{{ $brand->getFirstMediaUrl('logo') }}" alt="{{ $brand->desc }} logo">
-                        </div>
+                        <x-product.brand-logo :brand="$brand" :active="$brand->slug == $activeBrand" />
                     @endforeach
                 </div>
             </div>
@@ -61,47 +56,7 @@
 
                 <div class="flex flex-col gap-y-4 uppercase">
                     @foreach ($this->brands as $brand)
-                        <div class="cursor-pointer" wire:key="brand-filter-{{ $brand->id }}">
-                            <p wire:click="handleChangeActiveBrand('{{ $brand->slug }}')"
-                                @class([
-                                    '~text-lg/2xl',
-                                    'text-cedea-red-dark' => $brand->slug == $activeBrand,
-                                ])>
-                                {{ $brand->name }}</p>
-                            <div @class([
-                                'flex flex-col gap-1 overflow-auto transition-all duration-1000',
-                                'max-h-40 mt-2' => $brand->slug == $activeBrand,
-                                'max-h-0' => $brand->slug != $activeBrand,
-                            ])>
-                                <label for="{{ $brand->slug }}-all">
-                                    <input class="peer hidden" id="{{ $brand->slug }}-all" type="radio"
-                                        value="all" wire:loading.attr="disabled" wire:model.live="activeCategory">
-                                    <div wire:loading.class='cursor-wait' @class([
-                                        'cursor-pointer ~text-sm/base transition-all select-none',
-                                        'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
-                                        'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
-                                    ])>
-                                        {{ __('All') }}
-                                    </div>
-                                </label>
-
-                                @foreach ($brand->uniqueCategories as $category)
-                                    <label wire:key="brand-filter-{{ $brand->id }}-category-{{ $category->id }}"
-                                        for="{{ $brand->slug }}-{{ $category->slug }}">
-                                        <input class="peer hidden" id="{{ $brand->slug }}-{{ $category->slug }}"
-                                            type="radio" value="{{ $category->slug }}" wire:loading.attr="disabled"
-                                            wire:model.live="activeCategory">
-                                        <div wire:loading.class='cursor-wait' @class([
-                                            'cursor-pointer ~text-sm/base transition-all select-none',
-                                            'peer-checked:text-cedea-red-dark peer-checked:border-l-4 peer-checked:border-cedea-red-dark peer-checked:pl-2 peer-checked:font-bold',
-                                            'hover:border-l-4 hover:pl-2 border-black border-opacity-0 hover:border-opacity-100',
-                                        ])>
-                                            {{ $category->name }}
-                                        </div>
-                                    </label>
-                                @endforeach
-                            </div>
-                        </div>
+                        <x-product.brand-filter :brand="$brand" :active-brand="$activeBrand" />
                         <div class="mx-auto h-0.5 w-full bg-black last:hidden"></div>
                     @endforeach
                 </div>
@@ -112,56 +67,8 @@
                 <ul class="inline-grid grid-cols-2 content-center items-start ~gap-4/12 md:grid-cols-3"
                     wire:loading.delay.long.remove wire:target.except="handleChangeActiveProduct">
 
-                    {{-- TODO: Refactor to component --}}
                     @forelse ($products as $item)
-                        {{-- hover trigger --}}
-                        <li class="group/product relative z-0 flex flex-col gap-8 hover:z-20" data-product-item
-                            data-item-id="{{ $item->slug }}" data-item-name="{{ $item->fullname }}"
-                            data-item-brand="{{ $item->brand->name }}"
-                            data-item-category="{{ $item->categories->first()?->name }}"
-                            data-item-index="{{ ($products->firstItem() ?? 1) + $loop->index - 1 }}"
-                            wire:key="product-card-{{ $item->id }}">
-                            <div
-                                class="group/image flex h-full flex-col justify-between drop-shadow-xl transition hover:drop-shadow-lg">
-                                <div
-                                    class="aspect-square transition-transform duration-500 ease-in-out group-hover/image:-rotate-6 group-hover/image:scale-105">
-                                    <img class="size-ful aspect-square cursor-pointer object-contain object-center"
-                                        data-product-modal-trigger
-                                        src="{{ $item->getFirstMediaUrl('packaging', 'preview_cropped') }}"
-                                        alt="{{ $item->fullname }} - produk {{ $item->brand->name }}">
-                                </div>
-
-                            </div>
-                            {{-- hover content --}}
-                            <div class="pointer-events-none absolute top-full isolate z-10 hidden h-auto w-full cursor-pointer items-center opacity-0 drop-shadow-top transition duration-200 before:absolute before:left-1/2 before:-z-1 before:size-8 before:-translate-x-1/2 before:-translate-y-1/2 before:rotate-45 before:rounded-tl-lg before:bg-white before:duration-700 group-hover/product:pointer-events-auto group-hover/product:opacity-100 lg:block"
-                                data-product-modal-trigger>
-                                <div
-                                    class="flex items-center justify-between gap-2 rounded-xl bg-gradient-to-r from-[#ededed] via-white to-[#ededed] ~px-3/4 ~py-2/3 max-md:flex-col">
-
-                                    <img class="w-16" src="{{ $item->brand->getFirstMediaUrl('logo') }}"
-                                        alt="Logo {{ $item->brand->name }}">
-
-                                    <div class="text-pretty text-cedea-red-dark">
-                                        {{ $item->fullname }}
-                                        {{-- <x-arrow-right class="inline-block lg:hidden" /> --}}
-                                    </div>
-
-                                    <div class="cursor-pointer text-cedea-red max-md:hidden">
-                                        <svg class="h-5" xmlns="http://www.w3.org/2000/svg"
-                                            xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 17.78 32.83">
-                                            <g>
-                                                <g style="fill: none; filter: url(#d);">
-                                                    <polyline class="fill-none stroke-cedea-red"
-                                                        points="1.36 .75 16.72 16.11 .75 32.07"
-                                                        style="fill: none; stroke-linecap: round; stroke-miterlimit: 10; stroke-width: 2px;" />
-                                                </g>
-                                            </g>
-                                        </svg>
-                                    </div>
-
-                                </div>
-                            </div>
-                        </li>
+                        <x-product.card :item="$item" :index="($products->firstItem() ?? 1) + $loop->index - 1" />
                     @empty
                         <x-placeholder.empty label="{{ __('status.empty') }}" />
                     @endforelse

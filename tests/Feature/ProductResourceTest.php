@@ -8,6 +8,16 @@ use Illuminate\Support\Facades\DB;
 use function Pest\Laravel\get;
 use function Pest\Livewire\livewire;
 
+function productCatalogTemplates(): string
+{
+    return collect([
+        resource_path('views/livewire/product-list.blade.php'),
+        resource_path('views/components/product/brand-filter.blade.php'),
+        resource_path('views/components/product/brand-logo.blade.php'),
+        resource_path('views/components/product/card.blade.php'),
+    ])->map(fn (string $path): string => file_get_contents($path))->implode("\n");
+}
+
 it('can render page', function () {
     livewire(ProductList::class)
         ->assertSuccessful()
@@ -16,7 +26,7 @@ it('can render page', function () {
 });
 
 it('tracks product selections and views in Google Analytics', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain("window.gtag('event', 'select_item'")
@@ -31,7 +41,7 @@ it('tracks product selections and views in Google Analytics', function () {
 });
 
 it('can close the Alpine product modal from Livewire filter changes', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain('x-data="productCatalog({{ $productSlug ? \'true\' : \'false\' }})"')
@@ -41,7 +51,7 @@ it('can close the Alpine product modal from Livewire filter changes', function (
 });
 
 it('delegates product modal clicks from the catalog root', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain('handleProductTrigger(event, wire)')
@@ -52,7 +62,7 @@ it('delegates product modal clicks from the catalog root', function () {
 });
 
 it('uses css hover states for product cards after Livewire filtering', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain('group/product')
@@ -65,7 +75,7 @@ it('uses css hover states for product cards after Livewire filtering', function 
 });
 
 it('keys product cards at the loop root for reliable category filtering', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain('wire:key="product-card-{{ $item->id }}"')
@@ -73,7 +83,7 @@ it('keys product cards at the loop root for reliable category filtering', functi
 });
 
 it('uses unique brand and category keys across catalog filters', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+    $template = productCatalogTemplates();
 
     expect($template)
         ->toContain('wire:key="brand-logo-{{ $brand->id }}"')
@@ -83,11 +93,11 @@ it('uses unique brand and category keys across catalog filters', function () {
         ->not->toContain('wire:key=\'{{ $category->slug }}\'');
 });
 
-it('clamps brand logo alt fallback text to two lines', function () {
-    $template = file_get_contents(resource_path('views/livewire/product-list.blade.php'));
+it('clamps brand logo alt fallback text', function () {
+    $template = productCatalogTemplates();
 
     expect($template)
-        ->toContain('line-clamp-2 w-full object-contain text-center text-xs leading-tight')
+        ->toContain('line-clamp-4 w-full object-contain text-center text-xs leading-tight')
         ->toContain('alt="{{ $brand->desc }} logo"');
 });
 
