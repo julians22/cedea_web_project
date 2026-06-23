@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'home' => [
-        'title' => 'Home',
-        'description' => 'Enjoy halal frozen seafood from CEDEA Seafood. Discover high-quality products for practical and delicious everyday meals.',
+        'title' => 'Premium Halal Frozen Seafood Supplier',
+        'description' => 'Enjoy halal frozen seafood from CEDEA Seafood. Discover high-quality products for practical, delicious meals and trusted business supply.',
     ],
     'about' => [
         'title' => 'About CEDEA',

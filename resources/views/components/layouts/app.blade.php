@@ -5,6 +5,11 @@
 
     <x-seo-meta />
     @meta_tags
+    @if ($structuredData = \App\Support\SeoMetadata::structuredData())
+        <script type="application/ld+json">
+            {!! $structuredData !!}
+        </script>
+    @endif
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">

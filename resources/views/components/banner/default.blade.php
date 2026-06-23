@@ -14,7 +14,7 @@
 <picture>
     <source class="block w-full" srcset="{{ $item->getFirstMediaUrl('banner_desktop') }}" media="(min-width: 1024px)" />
     <img class="mx-auto block h-full w-full object-cover" src="{{ $item->getFirstMediaUrl('banner_mobile') }}"
-        alt="{{ $item->title ? $item->title : $item->getFirstMedia('banner_mobile')->name }}" />
+        alt="{{ $item->title ? strip_tags((string) $item->title) : $item->getFirstMedia('banner_mobile')?->name }}" />
 </picture>
 @if ($url)
     </a>

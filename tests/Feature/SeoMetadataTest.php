@@ -8,6 +8,33 @@ use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\get;
 
+it('renders homepage seo content schema and image alt text', function () {
+    $response = get(route('home'), ['Accept-Language' => 'id'])
+        ->assertOk()
+        ->assertSee('<h1', false)
+        ->assertSee(__('home.hero.title'), false)
+        ->assertSee(__('seo.home.title'), false)
+        ->assertSee('type="application/ld+json"', false)
+        ->assertSee('"@type": "Organization"', false)
+        ->assertSee('"@type": "LocalBusiness"', false);
+
+    $document = new DOMDocument;
+    libxml_use_internal_errors(true);
+    $document->loadHTML($response->getContent());
+    libxml_clear_errors();
+
+    $missingAltText = [];
+
+    foreach ($document->getElementsByTagName('img') as $image) {
+        if (trim($image->getAttribute('alt')) === '') {
+            $missingAltText[] = $image->getAttribute('src');
+        }
+    }
+
+    expect($document->getElementsByTagName('img')->length)->toBeGreaterThan(0);
+    expect($missingAltText)->toBeEmpty();
+});
+
 it('renders canonical and hreflang links for localized pages', function () {
     get('/about', ['Accept-Language' => 'id'])
         ->assertOk()

@@ -3,7 +3,15 @@
     {{-- Banner Section --}}
     <x-header-banner :banners="$banners" />
 
-    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :imageLeft="false" :title="__('home.closer.title')">
+    <div class="sr-only">
+        <h1>{{ __('home.hero.title') }}</h1>
+        <p>{{ __('home.hero.detail') }}</p>
+        <p>{{ __('home.hero.support') }}</p>
+    </div>
+
+    <x-section-banner :imageUrl="asset('img/sosis-salmon.jpg')" :imageLeft="false"
+        imageAlt="Produk olahan ikan CEDEA Seafood untuk sajian keluarga dan bisnis kuliner"
+        :title="__('home.closer.title')">
         <x-slot:desc>
             <p>{{ __('home.closer.detail') }}</p>
         </x-slot:desc>
@@ -105,7 +113,8 @@
                         @foreach ($marketplaces as $marketplace)
                             <a class="flex items-center justify-center rounded-xl bg-white text-center shadow-top-hover transition duration-700 ease-in-out ~size-14/28 ~p-2/4 hover:scale-110 hover:shadow-lg md:shadow-top md:hover:shadow-top-hover"
                                 href="{{ $marketplace['url'] }}" target="_blank">
-                                <img src="{{ $marketplace['logo'] }}" alt="{{ $marketplace['name'] }} logo">
+                                <img src="{{ $marketplace['logo'] }}"
+                                    alt="Logo {{ $marketplace['name'] }} marketplace CEDEA Seafood">
                             </a>
                         @endforeach
                     </div>

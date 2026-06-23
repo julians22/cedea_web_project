@@ -15,7 +15,8 @@
                 <a class="inline-flex h-full w-auto items-center justify-center"
                     href="https://eomuk-bar-rte.cedeaseafood.com?source=pop-up-banner" target="_blank"
                     @click.outside="visible=false">
-                    <img class="h-fit max-h-full w-auto" src="{{ asset('img/pop/eomuk.png') }}" alt="">
+                    <img class="h-fit max-h-full w-auto" src="{{ asset('img/pop/eomuk.png') }}"
+                        alt="CEDEA Eomuk Bar Chill in Seoul campaign banner">
                 </a>
 
                 <button

@@ -5,7 +5,8 @@
         @foreach ($products as $product)
             <div class="swiper-slide cursor-pointer" :class="{ 'hidden': activeProduct == '{{ $product->slug }}' }"
                 wire:click="handleChangeActiveProduct('{{ $product->slug }}')">
-                <img class="" src="{{ $product->getFirstMediaUrl('packaging') }}">
+                <img class="" src="{{ $product->getFirstMediaUrl('packaging') }}"
+                    alt="{{ $product->fullname }} packaging">
             </div>
         @endforeach
     </div>

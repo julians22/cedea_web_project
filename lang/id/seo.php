@@ -4,8 +4,8 @@ declare(strict_types=1);
 
 return [
     'home' => [
-        'title' => 'Beranda',
-        'description' => 'Nikmati olahan ikan segar dengan frozen food halal dari CEDEA Seafood. Produk berkualitas tinggi untuk sajian praktis dan lezat setiap hari.',
+        'title' => 'Olahan Ikan Frozen Food Halal',
+        'description' => 'Nikmati olahan ikan segar dengan frozen food halal dari CEDEA Seafood. Produk berkualitas tinggi untuk sajian praktis, lezat, dan terpercaya.',
     ],
     'about' => [
         'title' => 'Tentang CEDEA',

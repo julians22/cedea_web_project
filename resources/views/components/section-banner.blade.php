@@ -56,7 +56,7 @@
         'md:col-start-2' => !$imageLeft,
         '~min-h-72/96 object-cover max-md:-mb-28 md:size-full object-center' => $gradient,
     ])>
-        <img class="w-full" src="{{ $imageUrl }}" alt="{{ $imageAlt }}">
+        <img class="w-full" src="{{ $imageUrl }}" alt="{{ $imageAlt ?? strip_tags((string) $title) }}">
     </div>
 
 </section>

@@ -5,7 +5,8 @@
         class="h-full overflow-hidden after:absolute after:bottom-0 after:block after:size-full after:bg-gradient-to-t after:from-black/70 after:via-black/35 after:to-50%">
         <source class="h-full w-full" srcset="{{ $item->getFirstMediaUrl('featured_image') }}"
             media="(min-width: 1024px)" />
-        <img class="mx-auto block h-full w-full object-cover" src="{{ $item->getFirstMediaUrl('featured_image') }}" />
+        <img class="mx-auto block h-full w-full object-cover" src="{{ $item->getFirstMediaUrl('featured_image') }}"
+            alt="{{ strip_tags((string) $item->title) }}" />
     </picture>
 
     <div class="container z-1 flex max-h-[90%] flex-col justify-end gap-4 text-white md:max-h-[80%]">
