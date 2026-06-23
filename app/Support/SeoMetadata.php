@@ -49,6 +49,7 @@ final class SeoMetadata
         }
 
         $twitterCard = (new TwitterCardPackage('twitter'))
+            ->setType(TwitterCardPackage::CARD_SUMMARY_LARGE_IMAGE)
             ->setTitle($fullTitle)
             ->setDescription($description)
             ->setImage($image);

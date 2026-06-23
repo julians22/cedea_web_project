@@ -42,7 +42,10 @@ it('renders homepage seo content schema and image alt text', function () {
         ->assertSee(__('seo.home.title'), false)
         ->assertSee('type="application/ld+json"', false)
         ->assertSee('"@type": "Organization"', false)
-        ->assertSee('"@type": "LocalBusiness"', false);
+        ->assertSee('"@type": "LocalBusiness"', false)
+        ->assertSee('name="twitter:card" content="summary_large_image"', false)
+        ->assertSee('name="twitter:title"', false)
+        ->assertSee('name="twitter:description"', false);
 
     $document = htmlDocument($response->getContent());
 
