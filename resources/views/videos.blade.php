@@ -1,4 +1,5 @@
 <x-layouts.app>
+    <h1 class="sr-only">{!! __('videos.explore.title') !!}</h1>
 
     <x-video-player :autoplay="false" :loop="true" source_mp4="{{ asset('video/product.mp4') }}" />
 
@@ -13,7 +14,7 @@
             </x-slot:desc>
             <x-slot:button>
                 <a class="w-fit rounded-full bg-white px-4 py-2 text-cedea-red" target="_blank"
-                    href="https://www.youtube.com/@CedeaSeafood">
+                    href="https://www.youtube.com/@CedeaSeafood" rel="noopener noreferrer">
                     {{ __('videos.visit_now') }}
                 </a>
             </x-slot>
@@ -49,19 +50,20 @@
 
             @foreach ($footerIcons as $icon)
                 <div class="flex flex-col items-center justify-between gap-2">
-                    <img class="w-auto max-w-32" src="{{ $icon['icon'] }}" alt="icon">
+                    <img class="w-auto max-w-32" src="{{ $icon['icon'] }}" alt="{{ $icon['title'] }} icon">
                     <a class="block w-full rounded-full bg-cedea-red px-3 py-1 text-center text-lg font-bold text-white"
-                        href="{{ $icon['href'] }}" target="_blank">
+                        href="{{ $icon['href'] }}" target="_blank" rel="noopener noreferrer">
                         {{ $icon['title'] }}
                     </a>
                 </div>
             @endforeach
 
             <div class="flex flex-col items-center justify-between gap-2">
-                <img class="w-auto max-w-32" src="{{ asset('img/videos/footer/cedea.png') }}" alt="icon">
+                <img class="w-auto max-w-32" src="{{ asset('img/videos/footer/cedea.png') }}"
+                    alt="CEDEA Seafood YouTube channel icon">
                 <p>CEDEA Seafood</p>
                 <a class="block w-full rounded-full bg-black px-3 py-1 text-center text-lg font-bold text-white"
-                    href="https://www.youtube.com/c/cedeaseafood" target="_blank">
+                    href="https://www.youtube.com/c/cedeaseafood" target="_blank" rel="noopener noreferrer">
                     Subscribe
                 </a>
             </div>

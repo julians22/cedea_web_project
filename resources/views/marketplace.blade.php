@@ -5,7 +5,8 @@
         <picture class="overflow-hidden">
             <source class="h-full w-full object-cover" srcset="{{ asset('img/marketplace/header.jpg') }}"
                 media="(min-width: 1024px)" />
-            <img class="h-full w-full object-cover" src="{{ asset('img/marketplace/header.jpg') }}" alt="">
+            <img class="h-full w-full object-cover" src="{{ asset('img/marketplace/header.jpg') }}"
+                alt="CEDEA Seafood marketplace ordering banner">
         </picture>
 
         <div
@@ -33,7 +34,8 @@
 
     <section class="container grid grid-cols-1 lg:grid-cols-2">
         <div class="self-center max-lg:hidden">
-            <img src="{{ asset('img/marketplace/phonev2.png') }}" alt="">
+            <img src="{{ asset('img/marketplace/phonev2.png') }}"
+                alt="Mobile shopping display for CEDEA Seafood marketplace products">
         </div>
 
         {{-- marketplace --}}
@@ -106,7 +108,8 @@
                             data-marketplace-name="{{ $logo['name'] }}" data-marketplace-type="online"
                             data-marketplace-position="{{ $loop->iteration }}" target="_blank"
                             href="{{ $logo['url'] }}" rel="noopener noreferrer">
-                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
+                            <img data-marketplace-logo src="{{ $logo['logo'] }}"
+                                alt="Logo {{ $logo['name'] }} marketplace CEDEA Seafood">
                         </a>
                     @endif
                 @endforeach
@@ -212,7 +215,8 @@
                             data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
                             data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration + 2 }}"
                             target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer">
-                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
+                            <img data-marketplace-logo src="{{ $logo['logo'] }}"
+                                alt="Logo {{ $logo['name'] }} retail partner CEDEA Seafood">
                         </a>
                     @endforeach
                 </div>
@@ -239,7 +243,8 @@
                     <div class="grid grid-cols-2 gap-2 ~py-2/8 md:grid-cols-4">
                         @for ($i = 1; $i < 21; $i++)
                             <div class="rounded-xl border-4 border-white">
-                                <img src="{{ asset('img/marketplace/places/place-' . $i . '.png') }}" alt="">
+                                <img src="{{ asset('img/marketplace/places/place-' . $i . '.png') }}"
+                                    alt="CEDEA Seafood product display at retail location {{ $i }}">
                             </div>
                         @endfor
                     </div>
@@ -254,7 +259,8 @@
                         <h2 class="whitespace-nowrap font-lobster ~text-5xl/8xl">{!! __('marketplace.daebak') !!}</h2>
                     </div>
                     <div>
-                        <img src="{{ asset('img/marketplace/packages.png') }}" alt="packages">
+                        <img src="{{ asset('img/marketplace/packages.png') }}"
+                            alt="CEDEA Seafood product packages available online and in retail stores">
                     </div>
                 </div>
             </div>

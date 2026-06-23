@@ -8,6 +8,32 @@ use Illuminate\Support\Facades\Http;
 
 use function Pest\Laravel\get;
 
+function htmlDocument(string $html): DOMDocument
+{
+    $document = new DOMDocument;
+    libxml_use_internal_errors(true);
+    $document->loadHTML($html);
+    libxml_clear_errors();
+
+    return $document;
+}
+
+/**
+ * @return array<int, string>
+ */
+function missingImageAltText(DOMDocument $document): array
+{
+    $missingAltText = [];
+
+    foreach ($document->getElementsByTagName('img') as $image) {
+        if (trim($image->getAttribute('alt')) === '') {
+            $missingAltText[] = $image->getAttribute('src');
+        }
+    }
+
+    return $missingAltText;
+}
+
 it('renders homepage seo content schema and image alt text', function () {
     $response = get(route('home'), ['Accept-Language' => 'id'])
         ->assertOk()
@@ -18,21 +44,33 @@ it('renders homepage seo content schema and image alt text', function () {
         ->assertSee('"@type": "Organization"', false)
         ->assertSee('"@type": "LocalBusiness"', false);
 
-    $document = new DOMDocument;
-    libxml_use_internal_errors(true);
-    $document->loadHTML($response->getContent());
-    libxml_clear_errors();
-
-    $missingAltText = [];
-
-    foreach ($document->getElementsByTagName('img') as $image) {
-        if (trim($image->getAttribute('alt')) === '') {
-            $missingAltText[] = $image->getAttribute('src');
-        }
-    }
+    $document = htmlDocument($response->getContent());
 
     expect($document->getElementsByTagName('img')->length)->toBeGreaterThan(0);
-    expect($missingAltText)->toBeEmpty();
+    expect(missingImageAltText($document))->toBeEmpty();
+});
+
+it('renders primary headings on key listing pages', function (string $routeName) {
+    $response = get(route($routeName), ['Accept-Language' => 'id'])
+        ->assertOk();
+
+    $document = htmlDocument($response->getContent());
+
+    expect($document->getElementsByTagName('h1')->length)->toBeGreaterThanOrEqual(1);
+})->with([
+    'about',
+    'news',
+    'videos',
+]);
+
+it('renders marketplace image alt text', function () {
+    $response = get(route('marketplace'), ['Accept-Language' => 'id'])
+        ->assertOk();
+
+    $document = htmlDocument($response->getContent());
+
+    expect($document->getElementsByTagName('img')->length)->toBeGreaterThan(0);
+    expect(missingImageAltText($document))->toBeEmpty();
 });
 
 it('renders canonical and hreflang links for localized pages', function () {

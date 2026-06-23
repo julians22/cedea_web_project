@@ -2,6 +2,9 @@
 
     <div class="container">
         <div class="mx-auto mb-12 text-center md:w-1/2">
+            <h1 class="sr-only">
+                {!! __('news.heading') !!}
+            </h1>
             <h2 class="section-title mb-4 text-cedea-red-500">
                 {!! __('news.heading') !!}
             </h2>
@@ -44,7 +47,8 @@
                     <div
                         class="col-span-1 row-span-1 overflow-hidden rounded-xl shadow-top md:col-span-2 md:row-span-1 lg:row-span-3 2xl:[&:not(:only-child)]:mr-8">
                         <img class="max-h-64 w-full object-cover max-md:max-h-52"
-                            src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
+                            src="{{ $item->getFirstMediaUrl('featured_image') }}"
+                            alt="{{ strip_tags((string) $item->title) }}">
                         <div class="flex h-full w-full flex-col gap-y-4 bg-white font-semibold ~p-4/8">
                             <p class="text-[#919497]">{{ $item->published_at }}</p>
                             <h2 class="line-clamp-3 ~text-lg/2xl"> {!! $item->title !!}</h2>
@@ -60,7 +64,8 @@
                         <div
                             class="grid max-h-80 items-center justify-center overflow-hidden md:aspect-[6/2] md:max-h-40 md:w-52 md:max-w-28">
                             <img class="size-full object-cover object-center"
-                                src="{{ $item->getFirstMediaUrl('featured_image') }}" alt="">
+                                src="{{ $item->getFirstMediaUrl('featured_image') }}"
+                                alt="{{ strip_tags((string) $item->title) }}">
                         </div>
                         <div class="flex h-full w-full flex-col justify-center gap-y-4 bg-white font-semibold ~p-2/4">
                             <p class="cursor-pointer text-[#919497] ~text-xs/xs">{{ $item->published_at }}</p>

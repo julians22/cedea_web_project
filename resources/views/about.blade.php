@@ -1,4 +1,6 @@
 <x-layouts.app>
+    <h1 class="sr-only">{{ __('about.brief.title') }}</h1>
+
     <x-section-banner id="sekilas-perusahaan" :imageLeft="false" :imageUrl="asset('img/sosis-salmon.jpg')"
         imageAlt="Sosis salmon Cedea Seafood - produk olahan seafood berkualitas tinggi" :title="__('about.brief.title')">
         <x-slot:desc>
