@@ -123,6 +123,16 @@ class ProductList extends Component
         $categoriesByBrand = ProductCategory::query()
             ->forProductCatalog()
             ->get()
+            ->sort(function (ProductCategory $a, ProductCategory $b) {
+                $aIsOther = $this->isOtherCategory($a);
+                $bIsOther = $this->isOtherCategory($b);
+
+                if ($aIsOther !== $bIsOther) {
+                    return $aIsOther ? 1 : -1;
+                }
+
+                return strcmp(mb_strtolower($a->name), mb_strtolower($b->name));
+            })
             ->groupBy('brand_id');
 
         return $brands->each(function (Brand $brand) use ($categoriesByBrand): void {
@@ -165,6 +175,12 @@ class ProductList extends Component
             'products' => $products,
             'activeProduct' => $this->activeProduct(),
         ]);
+    }
+
+    private function isOtherCategory(ProductCategory $category): bool
+    {
+        return in_array($category->slug, ['lainnya', 'other', 'others'])
+            || in_array(mb_strtolower($category->name), ['lainnya', 'other', 'others']);
     }
 
     private function activeBrandModel(): ?Brand

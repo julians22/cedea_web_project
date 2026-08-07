@@ -74,8 +74,7 @@
                     @endforelse
                 </ul>
 
-                {{--  TODO: exclude activeProductChange --}}
-                <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
+                <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct, activeProductChange">
                     <x-product-list-skeleton />
                 </div>
                 {{ $products->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
