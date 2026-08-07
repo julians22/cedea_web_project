@@ -74,7 +74,7 @@
                     @endforelse
                 </ul>
 
-                <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct, activeProductChange">
+                <div wire:loading.delay.long wire:target.except="handleChangeActiveProduct">
                     <x-product-list-skeleton />
                 </div>
                 {{ $products->links('vendor.livewire.cedea', data: ['scrollTo' => false]) }}
@@ -90,8 +90,7 @@
                     <div data-active-product data-item-id="{{ $activeProduct->slug }}"
                         data-item-name="{{ $activeProduct->fullname }}"
                         data-item-brand="{{ $activeProduct->brand->name }}"
-                        data-item-category="{{ $activeProduct->categories->first()?->name }}"
-                        x-init="$nextTick(() => trackProductView($el.dataset))">
+                        data-item-category="{{ $activeProduct->categories->first()?->name }}" x-init="$nextTick(() => trackProductView($el.dataset))">
                         <p class="uppercase ~text-lg/xl">{{ $activeProduct->brand->name }}</p>
                         <h2 class="mt-2 uppercase ~text-xl/4xl">
                             {{ implode(' ', [$activeProduct->name, $activeProduct->size]) }}</h2>
@@ -101,8 +100,7 @@
                                 <img src="{{ $activeProduct->getFirstMediaUrl('packaging') }}"
                                     alt="{{ $activeProduct->fullname }} - produk {{ $activeProduct->brand->name }}">
                                 <a class="w-max rounded-full bg-white px-6 py-1 text-sm font-semibold uppercase text-black"
-                                    target="_blank"
-                                    href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
+                                    target="_blank" href="{{ $activeProduct->buy_link }}">{{ __('product.buy') }}</a>
                             </div>
 
                             <div class="flex flex-col gap-y-4 text-justify md:grow md:basis-2/5">
