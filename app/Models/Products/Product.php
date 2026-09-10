@@ -138,15 +138,7 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
         string $keyword,
         ?string $locale = null,
     ): Builder {
-        $keyword = trim($keyword);
-
-        if ($keyword === '') {
-            return $query;
-        }
-
-        $locale ??= app()->getLocale();
-
-        return $query->where("name->{$locale}", 'like', "%{$keyword}%");
+        return $query->whereRaw('LOWER(name) like "%'.strtolower($keyword).'%"');
     }
 
     public function toSitemapTag(): Url|string|array
