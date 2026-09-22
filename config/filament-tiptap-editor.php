@@ -55,7 +55,10 @@ return [
         ],
         'simple' => ['heading', 'hr', 'bullet-list', 'ordered-list', 'checked-list', '|', 'bold', 'italic', 'lead', 'small', '|', 'link', 'media'],
         'source',
-        'minimal' => ['bold', 'italic', 'no-break', 'source'],
+        'minimal' => [
+            'align-left', 'align-center', 'align-right', 'align-justify',
+            '|',
+            'bold', 'italic', 'no-break', 'source'],
         'none' => [],
     ],
 
