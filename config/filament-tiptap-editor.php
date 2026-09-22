@@ -38,6 +38,7 @@ return [
             'align-left',
             'align-center',
             'align-right',
+            'align-justify',
             '|',
             'link',
             'media',
