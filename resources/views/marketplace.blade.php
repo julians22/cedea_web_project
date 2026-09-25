@@ -99,18 +99,17 @@
                     ];
                 @endphp
 
-                @foreach ($marketplace_logos_1 as $logo)
-                    @if (!$logo['logo'])
+                @foreach ($marketplace_logos_1 as $marketplace)
+                    @if (!$marketplace['logo'])
                         <div class="flex items-center justify-center ~size-32/36 max-md:hidden">
                         </div>
                     @else
-                        <a class="flex items-center justify-center ~size-32/36" data-marketplace-track
-                            data-marketplace-name="{{ $logo['name'] }}" data-marketplace-type="online"
-                            data-marketplace-position="{{ $loop->iteration }}" target="_blank"
-                            href="{{ $logo['url'] }}" rel="noopener noreferrer">
-                            <img data-marketplace-logo src="{{ $logo['logo'] }}"
-                                alt="Logo {{ $logo['name'] }} marketplace CEDEA Seafood">
-                        </a>
+                        <x-marketplace.logo
+                            :name="$marketplace['name']"
+                            :logo="$marketplace['logo']"
+                            :url="$marketplace['url'] ?? null"
+                            type="online"
+                            :position="$loop->iteration" />
                     @endif
                 @endforeach
             </div>
@@ -197,27 +196,15 @@
                     ];
                 @endphp
 
-                {{-- <div class="flex flex-wrap items-center justify-center gap-6">
-                    @foreach (array_slice($marketplace_logos_2, 0, 2) as $logo)
-                        <a class="inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center"
-                            data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
-                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration }}"
-                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer">
-                            <img data-marketplace-logo src="{{ $logo['logo'] }}" alt="Logo {{ $logo['name'] }}">
-                        </a>
-                    @endforeach
-                </div> --}}
-
                 <div class="flex flex-wrap items-center justify-center gap-6">
-                    {{-- @foreach (array_slice($marketplace_logos_2, 2) as $logo) --}}
-                    @foreach ($marketplace_logos_2 as $logo)
-                        <a class="{{ TailwindMerge\Laravel\Facades\TailwindMerge::merge('inline-grid h-20 max-w-40 flex-initial content-center justify-center text-center', $logo['class']) }}"
-                            data-marketplace-track data-marketplace-name="{{ $logo['name'] }}"
-                            data-marketplace-type="offline" data-marketplace-position="{{ $loop->iteration + 2 }}"
-                            target="_blank" href="{{ $logo['url'] }}" rel="noopener noreferrer">
-                            <img data-marketplace-logo src="{{ $logo['logo'] }}"
-                                alt="Logo {{ $logo['name'] }} retail partner CEDEA Seafood">
-                        </a>
+                    @foreach ($marketplace_logos_2 as $marketplace)
+                        <x-marketplace.logo
+                            :name="$marketplace['name']"
+                            :logo="$marketplace['logo']"
+                            :url="$marketplace['url'] ?? null"
+                            type="offline"
+                            :position="$loop->iteration + 2"
+                            :class="$marketplace['class'] ?? ''" />
                     @endforeach
                 </div>
 
@@ -269,18 +256,17 @@
 
     @push('after-scripts')
         <script>
-            document.addEventListener('click', (event) => {
-                const logo = event.target.closest('[data-marketplace-logo]');
-                const marketplace = logo?.closest('[data-marketplace-track]');
+            document.querySelectorAll('[data-marketplace-logo]').forEach((logo) => {
+                logo.addEventListener('click', () => {
+                    if (typeof window.gtag !== 'function' || !logo.dataset.marketplaceName) return;
 
-                if (!marketplace || typeof window.gtag !== 'function') return;
-
-                window.gtag('event', 'marketplace_click', {
-                    marketplace_name: marketplace.dataset.marketplaceName,
-                    marketplace_type: marketplace.dataset.marketplaceType,
-                    marketplace_position: Number(marketplace.dataset.marketplacePosition),
-                    link_url: marketplace.href,
-                    outbound: marketplace.getAttribute('href') !== '#',
+                    window.gtag('event', 'marketplace_click', {
+                        marketplace_name: logo.dataset.marketplaceName,
+                        marketplace_type: logo.dataset.marketplaceType,
+                        marketplace_position: Number(logo.dataset.marketplacePosition),
+                        link_url: logo.dataset.marketplaceUrl || null,
+                        outbound: Boolean(logo.dataset.marketplaceUrl),
+                    });
                 });
             });
         </script>
