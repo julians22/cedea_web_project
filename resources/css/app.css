@@ -78,6 +78,11 @@
     .prose p img:has(+ sub) {
         @apply my-auto;
     }
+
+    .prose sub,
+    .prose sup {
+        font-size: 80%;
+    }
 }
 
 @layer components {
