@@ -74,6 +74,10 @@
     .prose p[style*="text-align: center;"] img {
         @apply mx-auto;
     }
+
+    .prose p img:has(+ sub) {
+        @apply my-auto;
+    }
 }
 
 @layer components {
