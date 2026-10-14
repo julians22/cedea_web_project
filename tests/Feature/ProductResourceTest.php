@@ -219,3 +219,13 @@ it('keeps brand category and keyword filters working together', function () {
         ->set('keyword', $product->name)
         ->assertSee($product->fullname);
 });
+
+it('scopes the product query to enabled products only', function () {
+    expect(Product::query()->enabled()->toSql())
+        ->toContain('`enable` = ?')
+        ->and(Product::query()->enabled()->getBindings())
+        ->toContain(true);
+
+    expect(Product::query()->toSql())
+        ->not->toContain('`enable` = ?');
+});

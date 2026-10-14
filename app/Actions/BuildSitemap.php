@@ -77,6 +77,7 @@ class BuildSitemap
         $sitemap = Sitemap::create();
 
         Product::query()
+            ->enabled()
             ->eachById(fn (Product $product) => $this->addLocalizedRoute(
                 $sitemap,
                 'product',

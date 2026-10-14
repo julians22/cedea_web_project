@@ -51,6 +51,7 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
      */
     protected $casts = [
         'packaging' => 'array',
+        'enable' => 'boolean',
         'have_video' => 'boolean',
         'video' => 'array',
     ];
@@ -126,6 +127,14 @@ class Product extends Model implements HasMedia, Sitemapable, Sortable
                 'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
                 'categories:id,name,slug',
             ]);
+    }
+
+    /**
+     * Limit the query to products that are enabled for the public site.
+     */
+    public function scopeEnabled(Builder $query): Builder
+    {
+        return $query->where('enable', true);
     }
 
     public function scopeForBrand(Builder $query, ?int $brandId): Builder

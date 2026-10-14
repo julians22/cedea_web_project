@@ -9,15 +9,15 @@ use Illuminate\View\Component;
 
 class RecipeListProductSlider extends Component
 {
-
     public $products;
+
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
-        $this->products = Product::inRandomOrder()->limit(20)->with('media')->get();
-        if (!$this->products) {
+        $this->products = Product::query()->enabled()->inRandomOrder()->limit(20)->with('media')->get();
+        if (! $this->products) {
             $this->products == collect();
         }
     }

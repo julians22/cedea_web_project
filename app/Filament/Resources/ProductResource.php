@@ -95,6 +95,9 @@ class ProductResource extends Resource
                                 ->conversion('thumb')
                                 ->collection('featured_packaging'),
 
+                            Toggle::make('enable')
+                                ->live(),
+
                             Toggle::make('have_video')
                                 ->live(),
 

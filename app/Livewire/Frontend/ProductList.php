@@ -149,6 +149,7 @@ class ProductList extends Component
         $keyword = trim($this->keyword);
 
         $products = Product::query()
+            ->enabled()
             ->forCatalogListing()
             ->when(
                 $this->activeBrand,
@@ -196,10 +197,12 @@ class ProductList extends Component
 
         $product = Product::findBySlug(
             $this->productSlug,
-            additionalQuery: fn (Builder $query) => $query->with([
-                'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
-                'categories:id,name,slug',
-            ]),
+            additionalQuery: fn (Builder $query) => $query
+                ->enabled()
+                ->with([
+                    'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
+                    'categories:id,name,slug',
+                ]),
         );
 
         if ($product && $brand = $this->brands->firstWhere('id', $product->brand_id)) {

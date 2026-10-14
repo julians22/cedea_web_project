@@ -148,6 +148,7 @@ class SearchController extends Controller
                 ->get();
 
             $products = Product::query()
+                ->enabled()
                 ->searchTranslated('name', $query, $lang)
                 ->with([
                     'media' => fn ($mediaQuery) => $mediaQuery->where('collection_name', 'packaging'),
