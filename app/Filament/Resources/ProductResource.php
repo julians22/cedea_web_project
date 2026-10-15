@@ -96,7 +96,7 @@ class ProductResource extends Resource
                                 ->collection('featured_packaging'),
 
                             Toggle::make('enable')
-                                ->live(),
+                                ->default(true),
 
                             Toggle::make('have_video')
                                 ->live(),
