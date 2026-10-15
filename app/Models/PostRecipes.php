@@ -71,6 +71,14 @@ class PostRecipes extends Model implements HasMedia, Sitemapable
     }
 
     /**
+     * Get the enabled product referenced by the recipe.
+     */
+    public function enabledProduct(): BelongsTo
+    {
+        return $this->belongsTo(Product::class, 'product_id')->enabled();
+    }
+
+    /**
      * Get the sitemap tag for the resource.
      */
     public function toSitemapTag(): Url|string|array

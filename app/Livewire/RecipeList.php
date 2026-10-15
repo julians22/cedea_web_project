@@ -57,7 +57,7 @@ class RecipeList extends Component
     public function render()
     {
         return view('livewire.recipe-list', [
-            'recipes' => PostRecipes::with(['media', 'product'])
+            'recipes' => PostRecipes::with(['media', 'enabledProduct'])
                 ->when(
                     $this->activeProduct,
                     function ($q) {

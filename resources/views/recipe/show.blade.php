@@ -29,15 +29,15 @@
 
     <section @class([
         'container my-8',
-        'grid gap-x-4 gap-y-8  md:grid-cols-[30%_1fr]' => $recipe->product,
+        'grid gap-x-4 gap-y-8  md:grid-cols-[30%_1fr]' => $recipe->enabledProduct,
         'mt-20' => !$recipe->video['url'],
     ])>
-        @if ($recipe->product)
+        @if ($recipe->enabledProduct)
             <div class="flex w-full flex-col items-center gap-y-4">
-                <img src="{{ $recipe->product->getFirstMediaUrl('packaging') }}"
-                    alt="{{ $recipe->product->fullname }} untuk resep {{ strip_tags((string) $recipe->title) }}">
+                <img src="{{ $recipe->enabledProduct->getFirstMediaUrl('packaging') }}"
+                    alt="{{ $recipe->enabledProduct->fullname }} untuk resep {{ strip_tags((string) $recipe->title) }}">
                 <a class="w-max rounded-full bg-cedea-red-400 px-8 py-2 uppercase text-white ~text-sm/base"
-                    target="_blank" href="{{ $recipe->product->buy_link }}">{{ __('product.buy') }}</a>
+                    target="_blank" href="{{ $recipe->enabledProduct->buy_link }}">{{ __('product.buy') }}</a>
 
             </div>
         @endif
@@ -45,8 +45,8 @@
             <div class="flex flex-col gap-2">
                 <div class="w-fit rounded-full border-2 border-cedea-red px-2 text-cedea-red">
                     {{ Str::title($recipe->recipe_type) }}</div>
-                @if ($recipe->product)
-                    <p class="mt-1 uppercase ~text-base/2xl">{{ $recipe->product->fullname }}</p>
+                @if ($recipe->enabledProduct)
+                    <p class="mt-1 uppercase ~text-base/2xl">{{ $recipe->enabledProduct->fullname }}</p>
                 @endif
                 <h1 class="~text-2xl/5xl">{{ $recipe->title }}</h1>
             </div>
