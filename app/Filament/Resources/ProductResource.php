@@ -130,6 +130,7 @@ class ProductResource extends Resource
                                     Localization::rules(['string'], required: true),
                                 ),
 
+                            TextInput::make('temperature_override'),
                             TextInput::make('buy_link')
                                 ->url()
                                 ->suffixAction(
@@ -217,6 +218,10 @@ class ProductResource extends Resource
                         ->listWithLineBreaks()
                         ->limitList(2)
                         ->expandableLimitedList(),
+                    TextColumn::make('enable')
+                        ->badge()
+                        ->formatStateUsing(fn (bool $state): string => $state ? __('Enabled') : __('Disabled'))
+                        ->color(fn (bool $state): string => $state ? 'success' : 'danger'),
                 ]),
             ])
             ->reorderable('order_column')

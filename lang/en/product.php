@@ -3,7 +3,7 @@
 declare(strict_types=1);
 
 return [
-    'froze' => 'KEEP FROZEN: -18 °C',
+    'froze' => 'KEEP FROZEN: ',
     'buy' => 'Buy Now',
     'product.title' => 'Product',
     'product.detail' => 'Explore the richness of the sea with the best product range from CEDEA Seafood!',

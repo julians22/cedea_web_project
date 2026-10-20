@@ -133,7 +133,13 @@
                                 @endif
 
                                 <div>
-                                    {{ __('product.froze') }}
+
+                                    @if (@empty($activeProduct->temperature_override))
+                                        {{ __('product.froze') }} -18 °C
+                                    @else
+                                        {{ __('product.froze') . $activeProduct->temperature_override }}
+                                    @endif
+
                                 </div>
 
                             </div>
